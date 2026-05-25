@@ -1,98 +1,76 @@
 'use client';
-
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRight, Mail, Phone } from 'lucide-react';
 
+const ease = [.22,1,.36,1];
+
 export default function ContactCTA() {
   return (
-    <section className="py-24 md:py-32 bg-[#0e0e0e] overflow-hidden relative">
-      {/* Grid overlay */}
-      <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
-        style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)', backgroundSize: '60px 60px' }}
-      />
+    <section className="relative py-28 md:py-40 overflow-hidden bg-[#07080C]">
+      {/* Background faint image */}
+      <div className="absolute inset-0 z-0">
+        <Image src="/images/page-header-bg.jpg" alt="" fill className="object-cover opacity-[.06]"/>
+      </div>
 
-      {/* Gradient blobs */}
-      <div className="absolute top-0 left-0 w-80 h-80 bg-brand-orange/10 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-brand-orange/8 rounded-full blur-[120px] translate-x-1/2 translate-y-1/2 pointer-events-none" />
+      {/* Grid */}
+      <div className="absolute inset-0 bg-grid z-[1] pointer-events-none opacity-70"/>
 
-      <div className="container mx-auto px-4 md:px-8 max-w-screen-xl relative z-10">
+      {/* Flame glow — centered large */}
+      <div className="absolute inset-0 z-[1] pointer-events-none"
+        style={{background:'radial-gradient(ellipse 900px 600px at 50% 60%,rgba(227,81,15,.09),transparent 70%)'}}/>
+
+      {/* Corner accents */}
+      <div className="absolute top-0 left-0 w-48 h-48 pointer-events-none z-[2]"
+        style={{background:'linear-gradient(135deg,rgba(227,81,15,.06) 0%,transparent 70%)'}}/>
+      <div className="absolute bottom-0 right-0 w-64 h-64 pointer-events-none z-[2]"
+        style={{background:'linear-gradient(315deg,rgba(227,81,15,.05) 0%,transparent 70%)'}}/>
+
+      {/* Top rule */}
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#E3510F]/30 to-transparent z-[2]"/>
+
+      <div className="max-w-screen-xl mx-auto px-5 md:px-10 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            {/* Tag */}
-            <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 px-5 py-2 rounded-full mb-10">
-              <span className="w-1.5 h-1.5 rounded-full bg-brand-orange inline-block" />
-              <span
-                className="text-white/60 text-[11px] font-bold uppercase tracking-[0.2em]"
-                style={{ fontFamily: 'var(--font-label)' }}
-              >
-                Ready to Start?
-              </span>
+          <motion.div initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:.85,ease}}>
+            {/* Pill label */}
+            <div className="inline-flex items-center gap-2.5 bg-[#E3510F]/10 border border-[#E3510F]/18 px-5 py-2 rounded-full mb-12">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E3510F] animate-pulse"/>
+              <span className="text-[#E3510F] text-[.6rem] font-mono font-medium uppercase tracking-[.22em]">Ready to Start?</span>
             </div>
 
-            <h2
-              className="font-extrabold text-white mb-8 leading-tight"
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(2rem, 5vw, 4rem)',
-                letterSpacing: '-0.03em',
-              }}
-            >
-              Have a Project in Mind?{' '}
-              <br className="hidden md:block" />
-              <span className="text-brand-orange">Let's Build It Together.</span>
+            {/* Mega headline */}
+            <h2 className="display-lg mb-10">
+              Have a Project<br/>in Mind?{' '}
+              <span style={{color:'#E3510F'}}>Let&apos;s Build.</span>
             </h2>
 
-            <p className="text-white/45 text-base md:text-lg mb-14 max-w-2xl mx-auto leading-relaxed">
-              Our team of expert engineers is ready to provide you with the most efficient and high-performance industrial solutions.
+            <p className="text-[#9BA5B4] text-[1rem] md:text-[1.1rem] leading-relaxed max-w-2xl mx-auto mb-16">
+              Our engineering team is ready to provide high-performance industrial solutions tailored to your exact specifications — from first consultation to final delivery.
             </p>
 
+            {/* CTA buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
-              <Link href="/contact" className="btn-premium group flex items-center gap-3 px-10 py-4">
+              <Link href="/contact" className="btn-flame group px-10 py-4 flex items-center gap-3">
                 <span>Get a Free Quote</span>
-                <span className="w-8 h-8 rounded-full bg-white/15 flex items-center justify-center group-hover:bg-white/25 transition-colors">
-                  <ArrowRight size={16} />
-                </span>
+                <div className="w-7 h-7 rounded-full bg-white/15 flex items-center justify-center group-hover:bg-white/25 transition-colors">
+                  <ArrowRight size={13}/>
+                </div>
               </Link>
-
-              <a
-                href="mailto:Info@andhitech.in"
-                className="flex items-center gap-3 text-white/70 hover:text-white transition-colors group"
-              >
-                <div className="w-12 h-12 rounded-full border border-white/15 flex items-center justify-center group-hover:border-brand-orange group-hover:bg-brand-orange/10 transition-all">
-                  <Mail size={18} />
-                </div>
-                <span
-                  className="font-bold text-sm tracking-wide"
-                  style={{ fontFamily: 'var(--font-label)' }}
-                >
-                  Info@andhitech.in
-                </span>
+              <a href="mailto:Info@andhitech.in" className="btn-wire group flex items-center gap-2.5">
+                <Mail size={15}/>
+                <span>Info@andhitech.in</span>
               </a>
-
-              <a
-                href="tel:01125710064"
-                className="flex items-center gap-3 text-white/70 hover:text-white transition-colors group"
-              >
-                <div className="w-12 h-12 rounded-full border border-white/15 flex items-center justify-center group-hover:border-brand-orange group-hover:bg-brand-orange/10 transition-all">
-                  <Phone size={18} />
-                </div>
-                <span
-                  className="font-bold text-sm tracking-wide"
-                  style={{ fontFamily: 'var(--font-label)' }}
-                >
-                  011-25710064
-                </span>
+              <a href="tel:01125710064" className="btn-wire group flex items-center gap-2.5">
+                <Phone size={15}/>
+                <span>011-25710064</span>
               </a>
             </div>
           </motion.div>
         </div>
+
+        {/* Bottom divider */}
+        <div className="mt-24 divider"/>
       </div>
     </section>
   );

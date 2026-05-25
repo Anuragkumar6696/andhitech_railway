@@ -1,87 +1,66 @@
 'use client';
-
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
-import { Users, Briefcase, Award, Globe } from 'lucide-react';
 
-function AnimatedNumber({ target, suffix = '', duration = 1800 }) {
-  const [count, setCount] = useState(0);
+function AnimCounter({ end, suffix='', duration=1800 }) {
+  const [val, setVal] = useState(0);
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-60px' });
 
   useEffect(() => {
     if (!inView) return;
-    const num = parseInt(target.replace(/\D/g, ''), 10);
-    let start = 0;
-    const step = Math.ceil(num / (duration / 16));
-    const interval = setInterval(() => {
-      start += step;
-      if (start >= num) {
-        setCount(num);
-        clearInterval(interval);
-      } else {
-        setCount(start);
-      }
+    const n = parseInt(String(end).replace(/\D/g,''), 10);
+    let v = 0;
+    const step = Math.max(1, Math.ceil(n / (duration / 16)));
+    const id = setInterval(() => {
+      v = Math.min(v + step, n);
+      setVal(v);
+      if (v >= n) clearInterval(id);
     }, 16);
-    return () => clearInterval(interval);
-  }, [inView, target, duration]);
+    return () => clearInterval(id);
+  }, [inView, end, duration]);
 
-  return (
-    <span ref={ref}>
-      {count}{suffix}
-    </span>
-  );
+  return <span ref={ref}>{val}{suffix}</span>;
 }
 
 const stats = [
-  { icon: Users, value: '500', suffix: '+', label: 'Happy Clients', desc: 'Trusted partnerships built on quality' },
-  { icon: Briefcase, value: '250', suffix: '+', label: 'Projects Completed', desc: 'Delivered on time, every time' },
-  { icon: Award, value: '15', suffix: '+', label: 'Industry Awards', desc: 'Recognized for excellence' },
-  { icon: Globe, value: '10', suffix: '+', label: 'Global Partners', desc: 'Collaborative global network' },
+  { n:'500', sfx:'+', label:'Satisfied Clients',     sub:'Railway, Metro & Industrial' },
+  { n:'250', sfx:'+', label:'Projects Delivered',    sub:'On time, every time' },
+  { n:'10',  sfx:'+', label:'Years of Excellence',   sub:'Founded 2013' },
+  { n:'100', sfx:'+', label:'Skilled Engineers',     sub:'In-house team' },
 ];
 
 export default function Statistics() {
   return (
-    <section className="relative py-20 bg-brand-orange overflow-hidden">
-      {/* Geometric pattern */}
-      <div className="absolute inset-0 opacity-[0.06] pointer-events-none"
-        style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)', backgroundSize: '48px 48px' }}
-      />
-      {/* Diagonal accent */}
-      <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-white/5 skew-x-[-8deg] translate-x-20 pointer-events-none" />
+    <section className="relative overflow-hidden bg-[#07080C]">
+      {/* Background photo */}
+      <div className="absolute inset-0 z-0">
+        <Image src="/images/ourprocess.jpg" alt="Manufacturing" fill className="object-cover opacity-[.12]"/>
+        <div className="absolute inset-0" style={{background:'linear-gradient(90deg,#07080C 0%,rgba(7,8,12,.85) 50%,#07080C 100%)'}}/>
+      </div>
 
-      <div className="container mx-auto px-4 md:px-8 max-w-screen-xl relative z-10">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-6">
-          {stats.map((stat, idx) => {
-            const Icon = stat.icon;
-            return (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.12, duration: 0.6 }}
-                className="text-center text-white group"
-              >
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/15 mb-5 group-hover:bg-white/25 transition-colors">
-                  <Icon size={22} className="text-white" />
-                </div>
-                <div
-                  className="text-4xl md:text-5xl font-extrabold mb-2 tracking-tight leading-none"
-                  style={{ fontFamily: 'var(--font-display, "Montserrat", sans-serif)' }}
-                >
-                  <AnimatedNumber target={`${stat.value}${stat.suffix}`} suffix={stat.suffix} duration={1600 + idx * 150} />
-                </div>
-                <div
-                  className="text-[11px] uppercase tracking-[0.2em] font-bold text-white/90 mb-1"
-                  style={{ fontFamily: 'var(--font-label, "Barlow Condensed", sans-serif)' }}
-                >
-                  {stat.label}
-                </div>
-                <div className="text-white/55 text-xs hidden md:block">{stat.desc}</div>
-              </motion.div>
-            );
-          })}
+      {/* Flame top + bottom */}
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#E3510F]/45 to-transparent"/>
+      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/[.05] to-transparent"/>
+      <div className="absolute inset-0 glow-center pointer-events-none z-[1]"/>
+
+      <div className="relative z-10 max-w-screen-xl mx-auto px-5 md:px-10 py-20 md:py-28">
+        {/* Grid — full bleed, no outer border */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/[.05]">
+          {stats.map(({ n, sfx, label, sub }, i) => (
+            <motion.div key={i} initial={{opacity:0,y:22}} whileInView={{opacity:1,y:0}} viewport={{once:true}}
+              transition={{delay:i*.1,duration:.7}}
+              className="px-6 md:px-10 py-12 text-center group">
+              <div className="metric text-[#F0F2F5] mb-2 group-hover:text-[#E3510F] transition-colors duration-400">
+                <AnimCounter end={n} suffix={sfx} duration={1800 + i*150}/>
+              </div>
+              <div className="text-[.62rem] uppercase tracking-[.22em] text-[#E3510F] font-mono font-medium mb-1">{label}</div>
+              <div className="text-[#4A5568] text-[.75rem] hidden md:block">{sub}</div>
+              {/* Underline hover */}
+              <div className="mt-5 h-px w-0 group-hover:w-12 bg-[#E3510F] mx-auto transition-all duration-500 rounded-full"/>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

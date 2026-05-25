@@ -1,201 +1,139 @@
 'use client';
-
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Mail, Phone, MapPin, Linkedin, Facebook, Instagram, Twitter, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Mail, Phone, MapPin, Linkedin, Facebook, Instagram, Twitter, ArrowRight } from 'lucide-react';
 
 export default function Footer({ initialData }) {
-  const [siteSettings, setSiteSettings] = useState(initialData || null);
-
+  const [s, setS] = useState(initialData || null);
   useEffect(() => {
     if (initialData) return;
-    const fetchSiteSettings = async () => {
-      try {
-        const response = await fetch('/api/proxy/site-settings');
-        const data = await response.json();
-        setSiteSettings(data);
-      } catch (error) {
-        console.error('Failed to fetch site settings:', error);
-      }
-    };
-    fetchSiteSettings();
+    fetch('/api/proxy/site-settings').then(r=>r.json()).then(setS).catch(()=>{});
   }, []);
 
-  const currentYear = new Date().getFullYear();
+  const year = new Date().getFullYear();
 
-  const navLinks = [
-    { name: 'Home', href: '/' },
-    { name: 'About Us', href: '/about-us' },
-    { name: 'Products', href: '/products' },
-    { name: 'Industries', href: '/industries' },
-    { name: 'Infrastructure', href: '/infrastructure' },
-    { name: 'Career', href: '/career' },
-    { name: 'News & Media', href: '/news-media' },
+  const cols = [
+    { head:'Navigation', links:[['Home','/'],['About Us','/about-us'],['Products','/products'],['Industries','/industries'],['Infrastructure','/infrastructure'],['Career','/career'],['News & Media','/news-media']] },
   ];
 
   const socials = [
-    { icon: Linkedin, href: siteSettings?.linkedin || '#', label: 'LinkedIn' },
-    { icon: Facebook, href: siteSettings?.facebook || '#', label: 'Facebook' },
-    { icon: Instagram, href: siteSettings?.instagram || '#', label: 'Instagram' },
-    { icon: Twitter, href: siteSettings?.twitter || '#', label: 'Twitter' },
+    { Icon:Linkedin,  href:s?.linkedin  || '#' },
+    { Icon:Facebook,  href:s?.facebook  || '#' },
+    { Icon:Instagram, href:s?.instagram || '#' },
+    { Icon:Twitter,   href:s?.twitter   || '#' },
   ];
 
   return (
-    <footer className="bg-[#0e0e0e] text-white overflow-hidden relative">
-      {/* Top border accent */}
-      <div className="h-[3px] w-full bg-brand-orange" />
+    <footer className="bg-[#07080C] relative overflow-hidden">
+      {/* Flame top stripe */}
+      <div className="h-[2px] bg-gradient-to-r from-transparent via-[#E3510F] to-transparent opacity-65"/>
+      <div className="absolute inset-0 bg-grid opacity-25 pointer-events-none"/>
 
-      {/* Grid background */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)', backgroundSize: '60px 60px' }}
-      />
+      <div className="max-w-screen-xl mx-auto px-5 md:px-10 relative z-10">
 
-      {/* Glow */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-brand-orange/6 blur-[140px] rounded-full pointer-events-none" />
-
-      <div className="container mx-auto px-4 md:px-8 max-w-screen-xl relative z-10">
-
-        {/* Main content */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 pt-16 pb-14">
+        {/* ── Main grid ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pt-16 pb-14">
 
           {/* Brand column */}
           <div className="lg:col-span-4 space-y-7">
-            <Link href="/" className="block w-44">
-              <Image
-                src={siteSettings?.logo || '/images/logo.png'}
-                alt="AND Hitech Industries"
-                width={180}
-                height={56}
-                className="h-auto w-full brightness-0 invert"
-              />
+            <Link href="/">
+              <Image src={s?.logo || '/images/logo.png'} alt="AND Hitech" width={160} height={50}
+                className="h-10 w-auto brightness-0 invert opacity-80 hover:opacity-100 transition-opacity"/>
             </Link>
-            <p className="text-white/40 text-sm leading-relaxed max-w-xs">
-              Engineering excellence and innovative industrial solutions. We drive the future of transportation technology with precision and trustworthiness.
+            <p className="text-[#5A6478] text-[.85rem] leading-relaxed max-w-xs">
+              Engineering excellence and innovative industrial solutions for railways, metros, and critical infrastructure worldwide.
             </p>
-            <div className="flex items-center gap-3">
-              {socials.map(({ icon: Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  className="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:bg-brand-orange hover:border-brand-orange transition-all duration-300"
-                >
-                  <Icon size={15} />
+            {/* Socials */}
+            <div className="flex gap-2.5">
+              {socials.map(({ Icon, href }, i) => (
+                <a key={i} href={href} className="w-9 h-9 rounded-lg border border-white/8 flex items-center justify-center text-[#5A6478]
+                  hover:text-white hover:bg-[#E3510F] hover:border-[#E3510F] transition-all duration-300">
+                  <Icon size={14}/>
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Nav column */}
           <div className="lg:col-span-2 space-y-5">
-            <h3
-              className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-orange"
-              style={{ fontFamily: 'var(--font-label)' }}
-            >
-              Quick Links
-            </h3>
+            <p className="text-[.6rem] font-mono font-medium uppercase tracking-[.22em] text-[#E3510F]">Navigation</p>
             <ul className="space-y-3">
-              {navLinks.map((item) => (
-                <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="text-white/40 hover:text-white text-sm font-medium transition-all duration-250 flex items-center gap-2 group"
-                  >
-                    <span className="w-0 group-hover:w-3 h-[1px] bg-brand-orange transition-all duration-300 overflow-hidden block" />
-                    {item.name}
+              {[['Home','/'],['About Us','/about-us'],['Products','/products'],['Industries','/industries'],['Infrastructure','/infrastructure'],['Career','/career'],['News & Media','/news-media']].map(([l,h]) => (
+                <li key={h}>
+                  <Link href={h}
+                    className="text-[#5A6478] hover:text-[#F0F2F5] text-[.84rem] transition-colors flex items-center gap-2 group">
+                    <span className="w-0 group-hover:w-3 h-px bg-[#E3510F] overflow-hidden transition-all duration-300"/>
+                    {l}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Contact column */}
           <div className="lg:col-span-3 space-y-5">
-            <h3
-              className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-orange"
-              style={{ fontFamily: 'var(--font-label)' }}
-            >
-              Contact Us
-            </h3>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-brand-orange/10 flex items-center justify-center mt-0.5">
-                  <Mail size={14} className="text-brand-orange" />
+            <p className="text-[.6rem] font-mono font-medium uppercase tracking-[.22em] text-[#E3510F]">Contact</p>
+            <div className="space-y-4">
+              {[
+                { Icon:Mail,  href:'mailto:Info@andhitech.in', text:'Info@andhitech.in' },
+                { Icon:Phone, href:'tel:01125710064',          text:'011-25710064' },
+              ].map(({ Icon, href, text }) => (
+                <div key={text} className="flex items-start gap-3">
+                  <div className="w-7 h-7 rounded-lg bg-[#E3510F]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Icon size={12} className="text-[#E3510F]"/>
+                  </div>
+                  <a href={href} className="text-[#5A6478] hover:text-[#F0F2F5] text-[.84rem] transition-colors">{text}</a>
                 </div>
-                <a href="mailto:Info@andhitech.in" className="text-white/45 hover:text-white transition-colors text-sm leading-relaxed">
-                  Info@andhitech.in
-                </a>
-              </li>
-              <li className="flex items-start gap-3">
-                <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-brand-orange/10 flex items-center justify-center mt-0.5">
-                  <Phone size={14} className="text-brand-orange" />
+              ))}
+              <div className="flex items-start gap-3">
+                <div className="w-7 h-7 rounded-lg bg-[#E3510F]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <MapPin size={12} className="text-[#E3510F]"/>
                 </div>
-                <a href="tel:01125710064" className="text-white/45 hover:text-white transition-colors text-sm">
-                  011-25710064
-                </a>
-              </li>
-              <li className="flex items-start gap-3">
-                <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-brand-orange/10 flex items-center justify-center mt-0.5">
-                  <MapPin size={14} className="text-brand-orange" />
-                </div>
-                <address className="text-white/40 text-sm not-italic leading-relaxed">
-                  509, 5th floor, Kirti Mahal Building 19, Rajendra Place, New Delhi – 110008, India.
+                <address className="not-italic text-[#5A6478] text-[.82rem] leading-relaxed">
+                  509, 5th Floor, Kirti Mahal Building 19,<br/>Rajendra Place, New Delhi – 110008
                 </address>
-              </li>
-            </ul>
-          </div>
-
-          {/* Get In Touch */}
-          <div className="lg:col-span-3 space-y-5">
-            <h3
-              className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-orange"
-              style={{ fontFamily: 'var(--font-label)' }}
-            >
-              Get In Touch
-            </h3>
-            <p className="text-white/40 text-sm leading-relaxed">
-              Ready to elevate your industrial operations? Let's discuss your next project.
-            </p>
-            <Link
-              href="/contact"
-              className="btn-premium inline-flex items-center gap-2 group w-full justify-center"
-            >
-              <span>Start a Project</span>
-              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
-
-            {/* Certifications badge */}
-            <div className="pt-4 border-t border-white/8 flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-brand-orange/10 flex items-center justify-center flex-shrink-0">
-                <span className="text-brand-orange text-[10px] font-bold">ISO</span>
-              </div>
-              <div>
-                <div className="text-white/60 text-xs font-semibold">ISO 9001:2015 Certified</div>
-                <div className="text-white/30 text-[11px]">Quality Management System</div>
               </div>
             </div>
           </div>
+
+          {/* CTA column */}
+          <div className="lg:col-span-3 space-y-5">
+            <p className="text-[.6rem] font-mono font-medium uppercase tracking-[.22em] text-[#E3510F]">Get in Touch</p>
+            <p className="text-[#5A6478] text-[.84rem] leading-relaxed">
+              Ready to discuss your next engineering project? Our team responds within 24 hours.
+            </p>
+            <Link href="/contact" className="btn-flame inline-flex items-center gap-2 group w-full justify-center py-4">
+              <span>Start a Project</span>
+              <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform"/>
+            </Link>
+            {/* ISO badge */}
+            <div className="pt-5 border-t border-white/[.05] flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-[#E3510F]/10 flex items-center justify-center">
+                <span className="text-[#E3510F] text-[.52rem] font-bold font-mono">ISO</span>
+              </div>
+              <div>
+                <div className="text-[#9BA5B4] text-[.78rem] font-semibold">ISO 9001:2015 Certified</div>
+                <div className="text-[#4A5568] text-[.68rem]">Quality Management System</div>
+              </div>
+            </div>
+          </div>
+
         </div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-white/8 py-7 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-white/25 text-[13px]">
-            © {currentYear} AND Hitech Industries Limited. All Rights Reserved.
+        {/* ── Bottom bar ── */}
+        <div className="border-t border-white/[.05] py-7 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-[#4A5568] text-[.75rem]">
+            © {year} AND Hitech Industries Limited. All Rights Reserved.
           </p>
-          <div className="flex items-center gap-6">
-            <Link href="/privacy-policy" className="text-white/25 hover:text-white/60 text-[13px] transition-colors">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className="text-white/25 hover:text-white/60 text-[13px] transition-colors">
-              Terms of Service
-            </Link>
-            <Link href="/online-complaint" className="text-white/25 hover:text-white/60 text-[13px] transition-colors">
-              Online Complaint
-            </Link>
+          <div className="flex items-center gap-5 flex-wrap justify-center">
+            {[['Privacy Policy','/privacy-policy'],['Terms','/terms'],['Online Complaint','/online-complaint']].map(([l,h]) => (
+              <Link key={h} href={h} className="text-[#4A5568] hover:text-[#9BA5B4] text-[.72rem] transition-colors">{l}</Link>
+            ))}
           </div>
         </div>
+
       </div>
     </footer>
   );

@@ -1,120 +1,46 @@
 'use client';
-
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 export default function OurStory() {
   return (
-    <section className="py-24 md:py-32 bg-surface overflow-hidden relative">
-      {/* Dot pattern */}
-      <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
-        style={{ backgroundImage: 'radial-gradient(rgba(0,0,0,0.8) 1.5px, transparent 1.5px)', backgroundSize: '32px 32px' }}
-      />
-
-      <div className="container mx-auto px-4 md:px-8 max-w-screen-xl relative z-10">
-
-        {/* ── Top Row: Title + Images ── */}
+    <section className="py-24 md:py-32 bg-[#0D1117] relative overflow-hidden">
+      <div className="absolute inset-0 bg-grid-fine opacity-40 pointer-events-none" />
+      <div className="max-w-screen-xl mx-auto px-5 md:px-10 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16 items-end">
-
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-          >
-            <div className="section-label mb-5">
-              <span>Our Story</span>
-            </div>
-            <h2 className="section-heading max-w-lg">
-              Transforming Industries Through{' '}
-              <span>Innovation and Precision</span>
-            </h2>
+          <motion.div initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}>
+            <span className="eyebrow mb-5 block">Our Story</span>
+            <h2 className="display-md max-w-lg">Transforming Industries Through <span style={{color:'#E3510F'}}>Innovation</span></h2>
           </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.15 }}
-            className="grid grid-cols-2 gap-4"
-          >
-            <div className="rounded-xl overflow-hidden shadow-md group">
-              <Image
-                src="/images/storytopleft.jpg"
-                alt="AND Hitech Operations"
-                width={360}
-                height={260}
-                className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-600"
-                unoptimized
-              />
-            </div>
-            <div className="rounded-xl overflow-hidden shadow-md mt-8 group">
-              <Image
-                src="/images/storytopright.jpg"
-                alt="AND Hitech Facility"
-                width={360}
-                height={260}
-                className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-600"
-                unoptimized
-              />
-            </div>
+          <motion.div initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:0.15 }}
+            className="grid grid-cols-2 gap-4">
+            {['/images/storytopleft.jpg','/images/storytopright.jpg'].map((src,i) => (
+              <div key={i} className={`rounded-xl overflow-hidden border border-white/6 group ${i===1?'mt-8':''}`}>
+                <Image src={src} alt="AND Hitech" width={360} height={260} className="w-full h-52 object-cover opacity-70 group-hover:opacity-90 group-hover:scale-[1.03] transition-all duration-600" unoptimized />
+              </div>
+            ))}
           </motion.div>
         </div>
-
-        {/* ── Bottom Row: Image + Text ── */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-
-          <motion.div
-            initial={{ opacity: 0, x: -24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="relative"
-          >
-            <div className="rounded-2xl overflow-hidden shadow-xl">
-              <Image
-                src="/images/storybottom.jpg"
-                alt="AND Hitech Railway"
-                width={680}
-                height={480}
-                className="w-full h-auto object-cover"
-                unoptimized
-              />
+          <motion.div initial={{ opacity:0, x:-24 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} className="relative">
+            <div className="rounded-2xl overflow-hidden border border-white/6">
+              <Image src="/images/storybottom.jpg" alt="AND Hitech Railway" width={680} height={480} className="w-full h-auto object-cover opacity-70" unoptimized />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0D1117]/40 to-transparent" />
             </div>
-            {/* Orange accent block */}
-            <div className="absolute -bottom-5 -left-5 w-20 h-20 bg-brand-orange rounded-xl -z-0 hidden md:block" />
+            <div className="absolute -bottom-4 -left-4 w-14 h-14 bg-[#E3510F] hidden md:block" style={{clipPath:'polygon(0 0,100% 0,100% 100%,0 100%)',opacity:0.7}} />
           </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="space-y-6"
-          >
-            <p className="text-[#3a3a3a] text-base md:text-lg leading-relaxed border-l-4 border-brand-orange pl-6">
-              Founded in 2013, AHIL has steadily built a reputation for trust, reliability, and customer-centric manufacturing. Under the visionary leadership of Mr. Angad Singh, we have grown into a dynamic organization known for delivering innovative and efficient engineering solutions.
+          <motion.div initial={{ opacity:0, x:24 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ delay:0.1 }} className="space-y-6">
+            <p className="text-[#9BA5B4] leading-relaxed border-l-2 border-[#E3510F]/40 pl-6">
+              Founded in 2013, AHIL has steadily built a reputation for trust, reliability, and customer-centric manufacturing. Under visionary leadership, we've grown into a dynamic organization known for innovative engineering solutions.
             </p>
-            <p className="text-[#5a5a5a] text-base leading-relaxed">
-              With a team of 100+ skilled professionals, we are committed to exceeding customer expectations through technical expertise, quality excellence, and responsive service. Today, AHIL proudly partners with clients — including Indian Railways, Metros, and PSUs — driving transformation through precision and innovation.
+            <p className="text-[#5A6478] leading-relaxed text-sm">
+              With a team of 100+ skilled professionals, we partner with Indian Railways, Metros, and PSUs — driving transformation through precision and innovation.
             </p>
-
-            {/* Metrics */}
-            <div className="grid grid-cols-3 gap-4 pt-4 border-t border-[#e8e4e0]">
-              {[
-                { n: '10+', l: 'Years of Excellence' },
-                { n: '100+', l: 'Skilled Professionals' },
-                { n: '500+', l: 'Projects Delivered' },
-              ].map((s, i) => (
-                <div key={i} className="text-center">
-                  <div className="text-2xl font-extrabold text-brand-orange mb-1"
-                    style={{ fontFamily: 'var(--font-display)' }}>
-                    {s.n}
-                  </div>
-                  <div className="text-[11px] text-[#888] uppercase tracking-wider font-semibold"
-                    style={{ fontFamily: 'var(--font-label)' }}>
-                    {s.l}
-                  </div>
+            <div className="grid grid-cols-3 gap-4 pt-4 border-t border-white/5">
+              {[['10+','Years'],['100+','Engineers'],['500+','Projects']].map(([n,l]) => (
+                <div key={l} className="text-center">
+                  <div className="text-2xl font-bold text-[#E3510F] mb-0.5" style={{fontFamily:'var(--font-display)'}}>{n}</div>
+                  <div className="text-[10px] text-[#4A5568] uppercase tracking-wider" style={{fontFamily:'var(--font-mono)'}}>{l}</div>
                 </div>
               ))}
             </div>

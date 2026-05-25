@@ -1,6 +1,4 @@
 'use client';
-
-import React from 'react';
 import Head from 'next/head';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -12,147 +10,82 @@ import Link from 'next/link';
 
 export default function Industries() {
   const industries = [
-    {
-      icon: Train,
-      title: 'Railways & Rolling Stock',
-      image: '/images/ind-train.jpg',
-      desc: 'Specialized components for passenger and freight trains, including braking systems, suspension, and HVAC solutions.',
-      features: ['Brake Discs & Pads', 'Air Suspension', 'Shock Absorbers', 'Coupler Components'],
-    },
-    {
-      icon: Building2,
-      title: 'Metro & Urban Transit',
-      image: '/images/gallery-5.jpg',
-      desc: 'Advanced HVAC systems and precision components tailored for modern metro networks and urban rail transit.',
-      features: ['Saloon HVAC', 'Driver Cab HVAC', 'Electronic Controls', 'Maintenance Support'],
-    },
-    {
-      icon: Factory,
-      title: 'Industrial HVAC',
-      image: '/images/gallery-9.jpg',
-      desc: 'High-efficiency thermal management solutions for large-scale industrial plants and commercial buildings.',
-      features: ['Heat Exchangers', 'Thermal Coils', 'Control Systems', 'Energy Efficiency'],
-    },
-    {
-      icon: ShieldCheck,
-      title: 'Precision Manufacturing',
-      image: '/images/aboutfront.jpg',
-      desc: 'Contract manufacturing and engineering services for critical sectors requiring high-precision metal components.',
-      features: ['CNC Machining', 'Custom Fabrication', 'Quality Assurance', 'Rapid Prototyping'],
-    },
+    { Icon:Train, title:'Railways & Rolling Stock', image:'/images/ind-train.jpg',
+      desc:'Specialized components for passenger and freight trains including braking systems, suspension, and HVAC solutions.',
+      features:['Brake Discs & Pads','Air Suspension','Shock Absorbers','Coupler Components'] },
+    { Icon:Building2, title:'Metro & Urban Transit', image:'/images/gallery-5.jpg',
+      desc:'Advanced HVAC systems and precision components tailored for modern metro networks and urban rail transit.',
+      features:['Saloon HVAC','Driver Cab HVAC','Electronic Controls','Maintenance Support'] },
+    { Icon:Factory, title:'Industrial HVAC', image:'/images/gallery-9.jpg',
+      desc:'High-efficiency thermal management solutions for large-scale industrial plants and commercial buildings.',
+      features:['Heat Exchangers','Thermal Coils','Control Systems','Energy Efficiency'] },
+    { Icon:ShieldCheck, title:'Precision Manufacturing', image:'/images/aboutfront.jpg',
+      desc:'Contract manufacturing for critical sectors requiring high-precision metal components and assemblies.',
+      features:['CNC Machining','Custom Fabrication','Quality Assurance','Rapid Prototyping'] },
   ];
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-[#07080C] min-h-screen">
       <Head>
         <title>Industries We Serve | AND Hitech</title>
-        <meta name="description" content="Explore the diverse industries AHIL serves with precision engineering." />
       </Head>
-
       <Header />
-      <PageBanner
-        title="Industries We Serve"
-        backgroundImage="/images/page-header-bg.jpg"
-        currentPage="Industries"
-      />
+      <PageBanner title="Industries We Serve" backgroundImage="/images/page-header-bg.jpg" currentPage="Industries" />
 
-      <section className="py-24 md:py-32">
-        <div className="container mx-auto px-4 md:px-8 max-w-screen-xl">
+      <section className="py-24 md:py-32 relative">
+        <div className="absolute inset-0 bg-grid-eng opacity-40 pointer-events-none" />
+        <div className="max-w-screen-xl mx-auto px-5 md:px-10 relative z-10">
+          <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} className="max-w-3xl mb-24">
+            <span className="eyebrow mb-5 block">Our Reach</span>
+            <h2 className="display-md">Driving Innovation Across<br/><span style={{color:'#E3510F'}}>Key Industrial Sectors</span></h2>
+          </motion.div>
 
-          {/* Section header */}
-          <div className="max-w-3xl mb-20 md:mb-28">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.65 }}
-            >
-              <div className="section-label mb-5"><span>Our Reach</span></div>
-              <h2 className="section-heading">
-                Driving Innovation Across <span>Key Industrial Sectors</span>
-              </h2>
-            </motion.div>
-          </div>
-
-          {/* Industries list — alternating layout */}
           <div className="space-y-28 md:space-y-36">
-            {industries.map((industry, idx) => {
-              const Icon = industry.icon;
-              const reversed = idx % 2 === 1;
+            {industries.map(({ Icon, title, image, desc, features }, idx) => {
+              const rev = idx%2===1;
               return (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-80px' }}
-                  transition={{ duration: 0.8 }}
-                  className={`flex flex-col ${reversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-14 lg:gap-20 items-center`}
-                >
+                <motion.div key={idx} initial={{ opacity:0, y:40 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true, margin:'-80px' }}
+                  transition={{ duration:0.8 }}
+                  className={`flex flex-col ${rev?'lg:flex-row-reverse':'lg:flex-row'} gap-14 lg:gap-20 items-center`}>
                   {/* Image */}
                   <div className="w-full lg:w-1/2 relative group">
-                    <div className="rounded-2xl overflow-hidden shadow-2xl">
-                      <Image
-                        src={industry.image}
-                        alt={industry.title}
-                        width={700}
-                        height={480}
-                        className="w-full h-[380px] md:h-[440px] object-cover group-hover:scale-[1.03] transition-transform duration-700"
-                      />
+                    <div className="rounded-2xl overflow-hidden border border-white/6 relative">
+                      <Image src={image} alt={title} width={700} height={460}
+                        className="w-full h-[380px] object-cover opacity-70 group-hover:opacity-90 group-hover:scale-[1.03] transition-all duration-700" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#07080C]/60 to-transparent" />
                     </div>
-
                     {/* Icon badge */}
-                    <div className={`absolute -bottom-7 ${reversed ? 'left-8' : 'right-8'} w-16 h-16 bg-brand-orange rounded-xl flex items-center justify-center text-white shadow-xl`}>
-                      <Icon size={28} />
+                    <div className={`absolute -bottom-7 ${rev?'left-8':'right-8'} w-14 h-14 bg-[#E3510F] flex items-center justify-center text-white shadow-xl`}
+                      style={{clipPath:'polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px))'}}>
+                      <Icon size={26} />
                     </div>
-
-                    {/* Index number */}
-                    <div
-                      className={`absolute -top-5 ${reversed ? 'right-8' : 'left-8'} text-[#e8e4e0] font-extrabold text-7xl leading-none select-none`}
-                      style={{ fontFamily: 'var(--font-display)' }}
-                    >
-                      0{idx + 1}
+                    {/* Big step number */}
+                    <div className={`absolute -top-5 ${rev?'right-8':'left-8'} text-[#111827] font-bold text-8xl leading-none select-none`}
+                      style={{fontFamily:'var(--font-display)'}}>
+                      0{idx+1}
                     </div>
                   </div>
 
                   {/* Content */}
                   <div className="w-full lg:w-1/2 space-y-7">
-                    <div className="section-label mb-2"><span>Industry {String(idx + 1).padStart(2, '0')}</span></div>
-                    <h3
-                      className="font-extrabold text-[#1a1a1a] leading-tight"
-                      style={{
-                        fontFamily: 'var(--font-display)',
-                        fontSize: 'clamp(1.7rem, 3vw, 2.5rem)',
-                        letterSpacing: '-0.02em',
-                      }}
-                    >
-                      {industry.title}
-                    </h3>
-                    <p className="text-[#666] text-[15px] leading-relaxed">{industry.desc}</p>
-
+                    <div>
+                      <span className="eyebrow mb-3 block">Industry 0{idx+1}</span>
+                      <h3 className="text-[#F0F2F5] font-bold leading-tight" style={{fontFamily:'var(--font-display)',fontSize:'clamp(1.8rem,3.5vw,2.8rem)'}}>{title}</h3>
+                    </div>
+                    <p className="text-[#9BA5B4] text-sm leading-relaxed">{desc}</p>
                     <div className="grid grid-cols-2 gap-3">
-                      {industry.features.map((f, fi) => (
-                        <div key={fi} className="flex items-center gap-2.5">
-                          <div className="w-5 h-5 rounded-full bg-brand-orange/10 flex items-center justify-center flex-shrink-0">
-                            <CheckCircle2 size={12} className="text-brand-orange" />
+                      {features.map((f,fi) => (
+                        <div key={fi} className="flex items-center gap-2.5 py-2 px-3 rounded-lg bg-white/[0.03] border border-white/5 hover:border-[#E3510F]/20 transition-colors">
+                          <div className="w-4 h-4 rounded-full bg-[#E3510F]/10 flex items-center justify-center flex-shrink-0">
+                            <CheckCircle2 size={11} className="text-[#E3510F]" />
                           </div>
-                          <span className="text-[#333] font-semibold text-sm">{f}</span>
+                          <span className="text-[#9BA5B4] text-xs font-medium">{f}</span>
                         </div>
                       ))}
                     </div>
-
-                    <Link
-                      href="/contact"
-                      className="inline-flex items-center gap-3 group/cta"
-                    >
-                      <span
-                        className="font-bold text-[11px] uppercase tracking-[0.18em] text-[#1a1a1a] group-hover/cta:text-brand-orange transition-colors"
-                        style={{ fontFamily: 'var(--font-label)' }}
-                      >
-                        Discuss Your Needs
-                      </span>
-                      <div className="w-9 h-9 rounded-full border border-[#e0ddd8] flex items-center justify-center group-hover/cta:bg-brand-orange group-hover/cta:border-brand-orange group-hover/cta:text-white transition-all duration-300">
-                        <ArrowRight size={15} />
-                      </div>
+                    <Link href="/contact" className="btn-wire inline-flex items-center gap-2 group">
+                      <span>Discuss Your Needs</span>
+                      <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </div>
                 </motion.div>
@@ -161,7 +94,6 @@ export default function Industries() {
           </div>
         </div>
       </section>
-
       <Footer />
     </div>
   );

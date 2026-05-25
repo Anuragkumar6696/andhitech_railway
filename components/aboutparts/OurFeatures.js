@@ -1,107 +1,54 @@
 'use client';
-
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Shield, Zap, TrendingUp, Cpu } from 'lucide-react';
+import { Shield, Cpu, TrendingUp, Zap } from 'lucide-react';
+
+const features = [
+  { Icon:Shield, title:'High Reliability & Dependability', desc:'Years of experience in railway rolling stock and HVAC systems enable us to deliver dependable products for critical applications.' },
+  { Icon:Cpu, title:'Precision Manufacturing', desc:'State-of-the-art facilities and strict quality control ensure every component meets the highest reliability and safety standards.' },
+  { Icon:TrendingUp, title:'Growth-Oriented Approach', desc:'We focus on building lasting relationships by delivering on time, supporting evolving client needs, and expanding into new markets.' },
+];
 
 export default function OurFeatures() {
-  const features = [
-    {
-      icon: <Shield className="w-8 h-8 text-brand-orange" />,
-      title: "High Reliability & Dependability",
-      desc: "Years of experience in railway rolling stock components and HVAC systems enable us to deliver high-performance, dependable products for critical applications."
-    },
-    {
-      icon: <Cpu className="w-8 h-8 text-brand-orange" />,
-      title: "Precision Manufacturing",
-      desc: "Our state-of-the-art facilities and strict quality control processes ensure every component meets the highest reliability and safety standards."
-    },
-    {
-      icon: <TrendingUp className="w-8 h-8 text-brand-orange" />,
-      title: "Growth-Oriented Approach",
-      desc: "We focus on building lasting relationships by delivering on time, supporting evolving client needs, and expanding into new markets like metros and heat exchangers."
-    }
-  ];
-
   return (
-    <section className="py-24 bg-gray-50 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6">
+    <section className="py-24 md:py-32 bg-[#07080C] relative overflow-hidden">
+      <div className="absolute inset-0 bg-grid-eng opacity-40 pointer-events-none" />
+      <div className="max-w-screen-xl mx-auto px-5 md:px-10 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-end mb-20">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="max-w-2xl"
-          >
-            <div className="flex items-center mb-4">
-              <span className="text-brand-orange uppercase tracking-widest text-sm font-bold">Our Key Strengths</span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-brand-dark leading-tight">
-              Core Strengths in <br />
-              <span className="text-brand-orange">Industrial Innovation</span>
-            </h2>
+          <motion.div initial={{ opacity:0, x:-20 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }}>
+            <span className="eyebrow mb-5 block">Our Key Strengths</span>
+            <h2 className="display-md">Core Strengths in <span style={{color:'#E3510F'}}>Industrial Innovation</span></h2>
           </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            <p className="text-gray-600 text-lg leading-relaxed border-l-4 border-brand-orange pl-6 italic">
-              &quot;At AHIL, our strength lies in combining precision engineering, ethical practices, and customer-focused manufacturing to deliver products that meet the highest standards of reliability.&quot;
-            </p>
-          </motion.div>
+          <motion.p initial={{ opacity:0, x:20 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ delay:0.2 }}
+            className="text-[#9BA5B4] leading-relaxed border-l-2 border-[#E3510F]/40 pl-6 italic text-sm">
+            &ldquo;At AHIL, our strength lies in combining precision engineering, ethical practices, and customer-focused manufacturing to deliver products that meet the highest standards.&rdquo;
+          </motion.p>
         </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-8">
-            {features.map((feature, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="bg-white p-10 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-100 group"
-              >
-                <div className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center mb-6 group-hover:bg-brand-orange group-hover:text-white transition-colors duration-500">
-                  {feature.icon}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+          <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-5">
+            {features.map(({ Icon, title, desc }, i) => (
+              <motion.div key={i} initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:i*0.1 }}
+                className="bento-cell p-9 group">
+                <div className="w-12 h-12 rounded-xl bg-[#E3510F]/10 flex items-center justify-center mb-6 group-hover:bg-[#E3510F] transition-colors duration-400">
+                  <Icon size={22} className="text-[#E3510F] group-hover:text-white transition-colors" />
                 </div>
-                <h3 className="text-xl font-bold text-brand-dark mb-4 group-hover:text-brand-orange transition-colors">{feature.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">
-                  {feature.desc}
-                </p>
+                <h3 className="text-[#F0F2F5] font-semibold text-base mb-4 group-hover:text-[#E3510F] transition-colors leading-snug">{title}</h3>
+                <p className="text-[#5A6478] text-sm leading-relaxed">{desc}</p>
               </motion.div>
             ))}
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="bg-brand-orange p-10 rounded-[2rem] text-white flex flex-col justify-center"
-            >
-              <Zap className="w-12 h-12 mb-6" />
-              <h3 className="text-2xl font-bold mb-4">Ready for Innovation?</h3>
-              <p className="text-white/80 text-sm mb-6">Let's discuss how our precision manufacturing can elevate your next project.</p>
-              <div className="h-1 w-20 bg-white/20" />
+            <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:0.3 }}
+              className="p-9 flex flex-col justify-center" style={{background:'#E3510F',borderRadius:'16px'}}>
+              <Zap size={40} className="text-white mb-5" />
+              <h3 className="text-white text-xl font-bold mb-3" style={{fontFamily:'var(--font-display)'}}>Ready for Innovation?</h3>
+              <p className="text-white/70 text-sm">Let&apos;s discuss how our precision manufacturing can elevate your next project.</p>
+              <div className="mt-5 h-px w-16 bg-white/25 rounded-full" />
             </motion.div>
           </div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="lg:col-span-5 relative"
-          >
-            <div className="relative h-full min-h-[400px] rounded-[2rem] overflow-hidden shadow-2xl">
-              <Image
-                src="/images/ourkeystegnth.png"
-                alt="Industrial Technology"
-                fill
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/60 via-transparent to-transparent" />
+          <motion.div initial={{ opacity:0, scale:0.9 }} whileInView={{ opacity:1, scale:1 }} viewport={{ once:true }}
+            className="lg:col-span-5 relative">
+            <div className="relative h-full min-h-[400px] rounded-2xl overflow-hidden border border-white/6">
+              <Image src="/images/ourkeystegnth.png" alt="Industrial Technology" fill className="object-cover opacity-70" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#07080C]/60 to-transparent" />
             </div>
           </motion.div>
         </div>

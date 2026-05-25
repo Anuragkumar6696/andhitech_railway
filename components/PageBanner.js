@@ -1,90 +1,56 @@
 'use client';
-
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { ChevronRight, Home } from 'lucide-react';
+import { Home, ChevronRight } from 'lucide-react';
 
-export default function PageBanner({ title, backgroundImage, currentPage }) {
-  const displayTitle = title?.replace(/-/g, ' ') || '';
-  const words = displayTitle.split(' ');
-  const lastWord = words.pop();
+export default function PageBanner({ title = '', backgroundImage, currentPage }) {
+  const words = title.replace(/-/g,' ').split(' ');
+  const last  = words.pop();
+  const rest  = words.join(' ');
 
   return (
-    <section className="relative h-[360px] md:h-[440px] flex items-center overflow-hidden bg-[#0e0e0e]">
-      {/* Background */}
+    <section className="relative h-[320px] md:h-[400px] flex items-center overflow-hidden bg-[#07080C]">
+      {/* Background image */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-[#0e0e0e]/65 z-10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0e] via-transparent to-[#0e0e0e]/20 z-10" />
-        <Image
-          src={backgroundImage || '/images/page-header-bg.jpg'}
-          alt={title || 'Banner'}
-          fill
-          className="object-cover scale-[1.04]"
-          priority
-        />
+        <div className="absolute inset-0 bg-[#07080C]/72 z-10"/>
+        <div className="absolute inset-0 z-10" style={{background:'linear-gradient(to top,#07080C 0%,transparent 45%,rgba(7,8,12,.4) 100%)'}}/>
+        <Image src={backgroundImage || '/images/page-header-bg.jpg'} alt={title} fill
+          className="object-cover scale-[1.04]" priority/>
       </div>
 
       {/* Grid overlay */}
-      <div className="absolute inset-0 z-[11] opacity-[0.04] pointer-events-none"
-        style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)', backgroundSize: '56px 56px' }}
-      />
+      <div className="absolute inset-0 bg-grid opacity-50 z-[11] pointer-events-none"/>
 
-      {/* Diagonal accent */}
-      <div className="absolute right-0 top-0 bottom-0 w-1/4 bg-brand-orange/8 skew-x-[-6deg] translate-x-16 pointer-events-none z-[12]" />
+      {/* Diagonal accent block */}
+      <div className="absolute right-0 top-0 bottom-0 w-1/3 z-[12] hidden lg:block pointer-events-none opacity-15"
+        style={{background:'linear-gradient(to left,rgba(227,81,15,.12),transparent)',clipPath:'polygon(25% 0,100% 0,100% 100%,0 100%)'}}/>
 
-      <div className="container mx-auto px-4 md:px-8 max-w-screen-xl relative z-20">
-        <div className="max-w-3xl">
+      {/* Right accent lines */}
+      <div className="absolute inset-y-0 w-px bg-gradient-to-b from-transparent via-[#E3510F]/20 to-transparent z-[13] hidden lg:block" style={{right:'22%'}}/>
 
-          {/* Breadcrumb */}
-          <motion.nav
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55 }}
-            className="flex items-center gap-2 mb-6"
-            aria-label="Breadcrumb"
-          >
-            <Link
-              href="/"
-              className="flex items-center gap-1.5 text-white/45 hover:text-brand-orange transition-colors text-[11px] font-bold uppercase tracking-widest"
-              style={{ fontFamily: 'var(--font-label)' }}
-            >
-              <Home size={12} />
-              <span>Home</span>
-            </Link>
-            <ChevronRight size={12} className="text-white/25" />
-            <span
-              className="text-white/60 text-[11px] font-bold uppercase tracking-widest"
-              style={{ fontFamily: 'var(--font-label)' }}
-            >
-              {currentPage?.replace(/-/g, ' ')}
-            </span>
-          </motion.nav>
+      <div className="max-w-screen-xl mx-auto px-5 md:px-10 relative z-20 w-full">
+        {/* Breadcrumb */}
+        <motion.nav initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} transition={{duration:.5}}
+          className="flex items-center gap-2 mb-7">
+          <Link href="/" className="flex items-center gap-1.5 text-[#5A6478] hover:text-[#E3510F] transition-colors text-[.6rem] uppercase tracking-[.2em] font-mono">
+            <Home size={10}/> Home
+          </Link>
+          <ChevronRight size={10} className="text-[#2D3748]"/>
+          <span className="text-[#9BA5B4] text-[.6rem] uppercase tracking-[.2em] font-mono">{(currentPage||'').replace(/-/g,' ')}</span>
+        </motion.nav>
 
-          {/* Title */}
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, delay: 0.15 }}
-            className="font-extrabold text-white leading-tight"
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(2.2rem, 6vw, 4.5rem)',
-              letterSpacing: '-0.03em',
-            }}
-          >
-            {words.join(' ')}{' '}
-            <span className="text-brand-orange">{lastWord}</span>
-          </motion.h1>
+        {/* Title */}
+        <motion.h1 initial={{opacity:0,y:26}} animate={{opacity:1,y:0}} transition={{duration:.75,delay:.12}}
+          className="display-lg">
+          {rest && <>{rest} </>}
+          <span style={{color:'#E3510F'}}>{last}</span>
+        </motion.h1>
 
-          {/* Accent line */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.75, delay: 0.45 }}
-            className="mt-6 w-16 h-[3px] bg-brand-orange rounded-full origin-left"
-          />
-        </div>
+        {/* Expanding accent line */}
+        <motion.div initial={{scaleX:0}} animate={{scaleX:1}} transition={{duration:.75,delay:.38}}
+          className="mt-5 origin-left"
+          style={{width:52,height:2,background:'linear-gradient(90deg,#E3510F,#FF6B35)'}}/>
       </div>
     </section>
   );

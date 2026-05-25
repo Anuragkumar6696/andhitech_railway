@@ -1,191 +1,163 @@
 'use client';
-
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { ArrowRight, Play, ChevronDown } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ArrowRight, ChevronDown } from 'lucide-react';
 import { getAbsoluteURL } from '@/utils/url';
+
+const ease = [.22,1,.36,1];
 
 export default function Hero({ initialData }) {
   const [banner, setBanner] = useState(initialData || null);
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  const videoRef = useRef(null);
+  const [ready, setReady] = useState(false);
+  const vidRef = useRef(null);
+  const sectionRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset:['start start','end start'] });
+  const yContent  = useTransform(scrollYProgress, [0,1], ['0%','18%']);
+  const opacity   = useTransform(scrollYProgress, [0,.7], [1, 0]);
+  const yBg       = useTransform(scrollYProgress, [0,1], ['0%','25%']);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (video) {
-      video.load();
-      const playPromise = video.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {});
-      }
-      if (video.readyState >= 2) setVideoLoaded(true);
-    }
-    const timer = setTimeout(() => setVideoLoaded(true), 3000);
-    return () => clearTimeout(timer);
+    const v = vidRef.current;
+    if (v) { v.load(); v.play().catch(()=>{}); }
+    const t = setTimeout(()=> setReady(true), 1800);
+    return ()=> clearTimeout(t);
   }, [banner]);
 
   useEffect(() => {
     if (initialData) return;
-    async function fetchBanner() {
-      try {
-        const res = await fetch('/api/proxy/home-banner');
-        const data = await res.json();
-        if (data.results && data.results.length > 0) setBanner(data.results[0]);
-      } catch (error) {
-        console.error('Failed to fetch hero banner:', error);
-      }
-    }
-    fetchBanner();
+    fetch('/api/proxy/home-banner').then(r=>r.json())
+      .then(d => { if (d.results?.[0]) setBanner(d.results[0]); })
+      .catch(()=>{});
   }, []);
 
-  const stagger = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.18, delayChildren: 0.25 } }
-  };
-  const item = {
-    hidden: { opacity: 0, y: 32 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] } }
-  };
+  const headline = banner?.title || 'AND<br/>HITECH<br/><em>INDUSTRIES</em>';
+  const subline  = banner?.content || 'Premium Railway Rolling Stock components and advanced HVAC engineering solutions — built for safety, precision and the future of transit.';
+  const btnText  = banner?.button_text || 'Explore Solutions';
+  const btnLink  = banner?.button_link || '/products';
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0e0e0e]">
+    <section ref={sectionRef} className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#07080C]">
 
-      {/* ── Background Media ── */}
-      <div className="absolute inset-0 z-0">
-        {/* Gradient overlays */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0e0e0e] via-[#0e0e0e]/70 to-transparent z-10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0e] via-transparent to-[#0e0e0e]/30 z-10" />
-        {/* Subtle noise texture */}
-        <div className="absolute inset-0 z-[11] opacity-[0.03] pointer-events-none"
-          style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\")" }}
-        />
-        <video
-          ref={videoRef}
-          key={banner?.video ? getAbsoluteURL(banner.video) : 'default-video'}
-          autoPlay muted loop playsInline preload="auto"
+      {/* ── Background layer ── */}
+      <motion.div style={{ y: yBg }} className="absolute inset-0 z-0">
+        <video ref={vidRef} autoPlay muted loop playsInline preload="auto"
           poster="/images/hero-bg.jpg"
-          onLoadedData={() => setVideoLoaded(true)}
-          onCanPlay={() => setVideoLoaded(true)}
-          onPlaying={() => setVideoLoaded(true)}
-          className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-1000 ${videoLoaded ? 'opacity-55' : 'opacity-0'}`}
-        >
+          onCanPlay={()=>setReady(true)} onPlaying={()=>setReady(true)}
+          className={`w-full h-full object-cover transition-opacity duration-[2s] ${ready?'opacity-35':'opacity-0'}`}>
           <source src={banner?.video ? getAbsoluteURL(banner.video) : '/images/andhitechvideo.mp4'} type="video/mp4" />
-          <source src="/images/andhitechvideo.mp4" type="video/mp4" />
         </video>
+        {/* Cinematic gradients */}
+        <div className="absolute inset-0" style={{background:'linear-gradient(105deg,#07080C 0%,rgba(7,8,12,.82) 45%,rgba(7,8,12,.3) 100%)'}}/>
+        <div className="absolute inset-0" style={{background:'linear-gradient(to top,#07080C 0%,transparent 40%,rgba(7,8,12,.35) 100%)'}}/>
+      </motion.div>
+
+      {/* ── Engineering grid ── */}
+      <div className="absolute inset-0 z-[1] bg-grid pointer-events-none opacity-70"/>
+
+      {/* ── Vertical accent lines ── */}
+      <div className="absolute inset-y-0 w-px bg-gradient-to-b from-transparent via-white/[.07] to-transparent z-[2] hidden xl:block" style={{left:'62%'}}/>
+      <div className="absolute inset-y-0 w-px bg-gradient-to-b from-transparent via-[#E3510F]/15 to-transparent z-[2] hidden xl:block" style={{left:'75%'}}/>
+
+      {/* ── Flame glow ── */}
+      <div className="absolute bottom-0 left-0 z-[1] w-[55vw] h-[45vh] pointer-events-none"
+        style={{background:'radial-gradient(ellipse at bottom left,rgba(227,81,15,.11) 0%,transparent 70%)'}}/>
+
+      {/* ── Scan line decoration ── */}
+      <div className="absolute inset-y-0 right-[24%] w-px z-[3] hidden xl:block overflow-hidden">
+        <motion.div animate={{y:['−100%','100vh']}} transition={{duration:4,repeat:Infinity,repeatDelay:3,ease:'linear'}}
+          className="w-full h-16 bg-gradient-to-b from-transparent via-[#E3510F]/40 to-transparent"/>
       </div>
 
-      {/* ── Main Content ── */}
-      <div className="container mx-auto px-4 md:px-8 max-w-screen-xl relative z-20 pt-36 pb-32">
-        <motion.div
-          className="max-w-3xl"
-          variants={stagger}
-          initial="hidden"
-          animate="visible"
-        >
-          {/* Label */}
-          <motion.div variants={item} className="mb-7">
-            <span className="inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.25em] text-brand-orange"
-              style={{ fontFamily: 'var(--font-label, "Barlow Condensed", sans-serif)' }}>
-              <span className="block w-8 h-[2px] bg-brand-orange" />
-              Engineering the Future
-            </span>
+      {/* ── Main content ── */}
+      <motion.div style={{ y: yContent, opacity }} className="relative z-10 max-w-screen-xl mx-auto px-5 md:px-10 pt-40 pb-36 w-full">
+
+        {/* Stagger entrance */}
+        <motion.div initial="hidden" animate="show"
+          variants={{ hidden:{}, show:{ transition:{ staggerChildren:.14, delayChildren:.2 } } }}
+          className="max-w-[860px]">
+
+          {/* Eyebrow */}
+          <motion.div variants={{ hidden:{opacity:0,y:24}, show:{opacity:1,y:0,transition:{duration:.8,ease}} }}>
+            <span className="eyebrow mb-7 block">Engineering the Future of Rail</span>
           </motion.div>
 
-          {/* Headline */}
+          {/* Display headline */}
           <motion.h1
-            variants={item}
-            className="font-extrabold text-white leading-[1.05] mb-8"
-            style={{
-              fontFamily: 'var(--font-display, "Montserrat", sans-serif)',
-              fontSize: 'clamp(2.6rem, 7vw, 5.5rem)',
-              letterSpacing: '-0.03em',
-            }}
-          >
-            <span dangerouslySetInnerHTML={{
-              __html: banner?.title || 'AND HITECH <em style="font-style:normal;color:#e3510f">INDUSTRIES</em> LTD'
-            }} />
-          </motion.h1>
+            variants={{ hidden:{opacity:0,y:40,skewX:'2deg'}, show:{opacity:1,y:0,skewX:'0deg',transition:{duration:.95,ease}} }}
+            className="display-xl mb-8"
+            style={{lineHeight:.9}}
+            dangerouslySetInnerHTML={{ __html: headline.replace('<em>','<span style="color:#E3510F;font-style:normal">').replace('</em>','</span>') }} />
 
-          {/* Body */}
-          <motion.div
-            variants={item}
-            className="text-base md:text-lg text-white/65 mb-11 leading-relaxed max-w-xl"
-            dangerouslySetInnerHTML={{
-              __html: banner?.content ||
-                'Premium Railway Rolling Stock and HVAC Engineering Solutions. We provide world-class products for sustainable infrastructure.'
-            }}
-          />
+          {/* Subline */}
+          <motion.p
+            variants={{ hidden:{opacity:0,y:24}, show:{opacity:1,y:0,transition:{duration:.85,ease}} }}
+            className="text-[#9BA5B4] text-[1.05rem] md:text-lg leading-relaxed max-w-[540px] mb-12">
+            {subline.replace(/<[^>]*>/g,'')}
+          </motion.p>
 
           {/* CTAs */}
-          <motion.div variants={item} className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
-            <Link
-              href={banner?.button_link || '/products'}
-              className="btn-premium flex items-center gap-3 group"
-            >
-              <span>{banner?.button_text || 'Explore Our Solutions'}</span>
-              <span className="w-8 h-8 rounded-full bg-white/15 flex items-center justify-center group-hover:bg-white/25 transition-colors">
-                <ArrowRight size={16} />
-              </span>
+          <motion.div
+            variants={{ hidden:{opacity:0,y:20}, show:{opacity:1,y:0,transition:{duration:.8,ease}} }}
+            className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
+            <Link href={btnLink} className="btn-flame group">
+              <span>{btnText}</span>
+              <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform"/>
             </Link>
-            <Link
-              href="/about-us"
-              className="flex items-center gap-3 text-white/80 hover:text-white transition-colors group"
-            >
-              <span className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center group-hover:border-brand-orange group-hover:bg-brand-orange/10 transition-all">
-                <Play size={14} className="fill-current ml-0.5" />
-              </span>
-              <span className="text-sm font-semibold tracking-wide" style={{ fontFamily: 'var(--font-label)' }}>Our Story</span>
+            <Link href="/about-us" className="btn-wire group">
+              <span>Our Story</span>
             </Link>
           </motion.div>
         </motion.div>
-      </div>
 
-      {/* ── Stats Panel ── */}
+        {/* ── Floating status panel ── */}
+        <motion.div
+          initial={{ opacity:0, x:40 }}
+          animate={{ opacity:1, x:0 }}
+          transition={{ delay:1.3, duration:.9, ease }}
+          className="absolute right-10 bottom-28 hidden xl:block">
+          <div className="glass p-7 w-[272px]" style={{borderTopColor:'rgba(227,81,15,.35)',borderTopWidth:'1px',borderColor:'rgba(255,255,255,.06)'}}>
+            <p className="text-[#3A4457] text-[.6rem] tracking-[.28em] uppercase font-mono mb-6">AHIL · System Status</p>
+            {[
+              {l:'Quality Certified', v:'ISO 9001:2015', ok:true },
+              {l:'RDSO Approved',     v:'Certified',     ok:true },
+              {l:'R&D Active',        v:'Running',       ok:true },
+            ].map(({l,v,ok})=>(
+              <div key={l} className="flex items-center justify-between mb-3.5">
+                <span className="text-[#5A6478] text-[.72rem]">{l}</span>
+                <div className="flex items-center gap-2">
+                  <span className={`w-1.5 h-1.5 rounded-full animate-pulse ${ok?'bg-emerald-400':'bg-red-500'}`}/>
+                  <span className="text-[#F0F2F5] text-[.72rem] font-mono">{v}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </motion.div>
+
+      {/* ── Bottom stats strip ── */}
       <motion.div
-        initial={{ opacity: 0, x: 40 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 1.2, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        className="absolute bottom-0 right-0 z-20 hidden lg:block"
-      >
-        <div className="flex divide-x divide-white/10 bg-[#0e0e0e]/50 backdrop-blur-xl border-t border-l border-white/8">
-          {[
-            { value: '10+', label: 'Years of Excellence' },
-            { value: '500+', label: 'Projects Delivered' },
-            { value: '100%', label: 'Client Satisfaction' },
-          ].map((s, i) => (
-            <div key={i} className="px-10 py-7 text-center">
-              <div className="text-3xl font-extrabold text-white mb-1 tracking-tight"
-                style={{ fontFamily: 'var(--font-display)' }}>
-                {s.value}
-              </div>
-              <div className="text-[10px] uppercase tracking-[0.18em] text-white/40 font-bold"
-                style={{ fontFamily: 'var(--font-label)' }}>
-                {s.label}
-              </div>
+        initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:1.7, duration:1 }}
+        className="absolute bottom-0 inset-x-0 z-10 border-t border-white/[.05]">
+        <div className="max-w-screen-xl mx-auto grid grid-cols-3 divide-x divide-white/[.05]">
+          {[['10+','Years of Innovation'],['500+','Projects Delivered'],['100%','Client Satisfaction']].map(([n,l],i)=>(
+            <div key={i} className="px-10 py-6 hidden md:block text-center group">
+              <div className="text-[2rem] font-bold text-[#F0F2F5] mb-0.5 group-hover:text-[#E3510F] transition-colors" style={{fontFamily:'var(--font-display)'}}>{n}</div>
+              <div className="text-[.6rem] text-[#3A4457] uppercase tracking-[.22em] font-mono">{l}</div>
             </div>
           ))}
         </div>
       </motion.div>
 
-      {/* ── Scroll Indicator ── */}
+      {/* ── Scroll cue ── */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.8, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 hidden md:flex flex-col items-center gap-2"
-      >
-        <span className="text-[9px] uppercase tracking-[0.25em] text-white/30 font-bold"
-          style={{ fontFamily: 'var(--font-label)' }}>
-          Scroll
-        </span>
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-        >
-          <ChevronDown size={18} className="text-brand-orange" />
+        initial={{opacity:0}} animate={{opacity:1}} transition={{delay:2.2}}
+        className="absolute bottom-[76px] left-1/2 -translate-x-1/2 z-10 flex-col items-center gap-1.5 hidden md:flex">
+        <motion.div animate={{y:[0,7,0]}} transition={{duration:1.8,repeat:Infinity,ease:'easeInOut'}}>
+          <ChevronDown size={16} className="text-[#E3510F]"/>
         </motion.div>
+        <span className="text-[.58rem] text-[#3A4457] uppercase tracking-[.3em] font-mono">Scroll</span>
       </motion.div>
     </section>
   );
