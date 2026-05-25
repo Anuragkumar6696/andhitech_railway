@@ -2,91 +2,99 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Award, ShieldCheck, FileCheck } from 'lucide-react';
+import { Award, ShieldCheck } from 'lucide-react';
+
+const certificates = [
+  { src: '/images/certificate1.png', title: 'ISO 9001:2015', desc: 'Quality Management System' },
+  { src: '/images/certificate2.png', title: 'ISO 14001:2015', desc: 'Environmental Management' },
+  { src: '/images/certificate3.png', title: 'RDSO Approved', desc: 'Railway Standards Organization' },
+  { src: '/images/rocertificate.png', title: 'Industry Excellence', desc: 'Certified Manufacturing' },
+];
 
 export default function Certificates() {
-  const certificates = [
-    { src: "/images/certificate1.png", title: "ISO 9001:2015", desc: "Quality Management System" },
-    { src: "/images/certificate2.png", title: "ISO 14001:2015", desc: "Environmental Management" },
-    { src: "/images/certificate3.png", title: "RDSO Approved", desc: "Railway Standards Organization" },
-    { src: "/images/rocertificate.png", title: "Industry Excellence", desc: "Certified Manufacturing" },
-  ];
-
   return (
-    <section className="py-24 bg-gray-50 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="flex flex-col lg:flex-row justify-between items-end mb-16 gap-8">
+    <section className="py-24 md:py-32 bg-[#f9f8f6] overflow-hidden">
+      <div className="container mx-auto px-4 md:px-8 max-w-screen-xl">
+
+        {/* Header */}
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 gap-8">
           <div className="max-w-2xl">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="flex items-center mb-4"
-            >
-              <span className="text-brand-orange uppercase tracking-widest text-sm font-bold">Trust & Compliance</span>
-            </motion.div>
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="text-4xl md:text-5xl font-extrabold text-brand-dark leading-tight"
-            >
-              Recognized for Excellence and <span className="text-brand-orange">Industry Leadership</span>
-            </motion.h2>
+            <div className="section-label mb-5">
+              <span>Trust &amp; Compliance</span>
+            </div>
+            <h2 className="section-heading">
+              Recognized for Excellence and{' '}
+              <span>Industry Leadership</span>
+            </h2>
           </div>
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="flex items-center space-x-4 bg-white p-4 rounded-2xl shadow-sm border border-gray-100"
+            className="flex items-center gap-4 bg-white px-5 py-4 rounded-xl shadow-sm border border-[#ede9e4]"
           >
-            <div className="w-12 h-12 rounded-full bg-brand-orange/10 flex items-center justify-center text-brand-orange">
-              <ShieldCheck size={24} />
+            <div className="w-11 h-11 rounded-xl bg-brand-orange/10 flex items-center justify-center text-brand-orange flex-shrink-0">
+              <ShieldCheck size={22} />
             </div>
             <div>
-              <div className="text-brand-dark font-bold text-sm">Fully Certified</div>
-              <div className="text-gray-500 text-xs">Compliant with global standards</div>
+              <div className="text-[#1a1a1a] font-bold text-sm"
+                style={{ fontFamily: 'var(--font-display)' }}>
+                Fully Certified
+              </div>
+              <div className="text-[#999] text-xs">Compliant with global standards</div>
             </div>
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Certificate cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {certificates.map((cert, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="group bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-100 hover:border-brand-orange/20"
+              transition={{ delay: idx * 0.1, duration: 0.65 }}
+              className="group bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-500 border border-[#ede9e4] hover:border-brand-orange/20 hover:-translate-y-1"
             >
-              <div className="relative aspect-[3/4] mb-6 rounded-xl overflow-hidden bg-gray-50 border border-gray-100">
+              {/* Certificate image */}
+              <div className="relative aspect-[3/4] mb-6 rounded-xl overflow-hidden bg-[#f9f8f6] border border-[#ede9e4]">
                 <Image
                   src={cert.src}
                   alt={cert.title}
                   fill
-                  className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
+                  className="object-contain p-5 group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-brand-dark/0 group-hover:bg-brand-dark/5 transition-colors duration-500"></div>
               </div>
               <div className="text-center">
-                <h3 className="text-lg font-bold text-brand-dark mb-1 group-hover:text-brand-orange transition-colors">{cert.title}</h3>
-                <p className="text-gray-500 text-xs uppercase tracking-wider font-semibold">{cert.desc}</p>
+                <h3
+                  className="text-base font-bold text-[#1a1a1a] mb-1 group-hover:text-brand-orange transition-colors"
+                  style={{ fontFamily: 'var(--font-display)' }}
+                >
+                  {cert.title}
+                </h3>
+                <p
+                  className="text-[#999] text-[11px] uppercase tracking-[0.14em] font-semibold"
+                  style={{ fontFamily: 'var(--font-label)' }}
+                >
+                  {cert.desc}
+                </p>
               </div>
             </motion.div>
           ))}
         </div>
 
-        <motion.div 
+        {/* Footer note */}
+        <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mt-16 text-center"
+          className="mt-14 text-center"
         >
-          <div className="inline-flex items-center space-x-2 text-gray-400 text-sm">
+          <div className="inline-flex items-center gap-3 text-[#aaa] text-sm">
             <Award size={16} className="text-brand-orange" />
-            <span>Award winning manufacturing processes and safety standards since 2013</span>
+            <span>Award-winning manufacturing processes and safety standards since 2013</span>
           </div>
         </motion.div>
       </div>

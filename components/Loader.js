@@ -4,46 +4,49 @@ import { motion } from 'framer-motion';
 
 export default function Loader() {
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-brand-dark">
-      <div className="relative">
-        {/* Animated Rings */}
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#0e0e0e]">
+      {/* Outer ring */}
+      <div className="relative flex items-center justify-center">
         <motion.div
-          animate={{
-            rotate: 360,
+          animate={{ rotate: 360 }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: 'linear' }}
+          className="w-20 h-20 rounded-full border-[2px] border-transparent"
+          style={{
+            borderTopColor: '#e3510f',
+            borderRightColor: 'rgba(227,81,15,0.3)',
           }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-          className="w-24 h-24 rounded-full border-4 border-brand-orange/20 border-t-brand-orange"
         />
-        
-        {/* Pulsing Logo or Text */}
         <motion.div
-          initial={{ opacity: 0.5, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{
-            duration: 1,
-            repeat: Infinity,
-            repeatType: "reverse"
+          animate={{ rotate: -360 }}
+          transition={{ duration: 3.5, repeat: Infinity, ease: 'linear' }}
+          className="absolute w-12 h-12 rounded-full border-[2px] border-transparent"
+          style={{
+            borderTopColor: 'rgba(227,81,15,0.5)',
+            borderLeftColor: 'rgba(227,81,15,0.15)',
           }}
-          className="absolute inset-0 flex items-center justify-center"
+        />
+
+        {/* Center brand mark */}
+        <motion.div
+          animate={{ opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute text-white font-extrabold text-sm tracking-[0.25em]"
+          style={{ fontFamily: 'var(--font-display, "Montserrat", sans-serif)' }}
         >
-          <div className="text-white font-bold text-xs uppercase tracking-[0.2em]">AHIL</div>
+          AHIL
         </motion.div>
       </div>
-      
-      {/* Background Text Overlay */}
-      <div className="absolute bottom-10 left-0 w-full text-center">
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.3 }}
-          className="text-white text-[10px] uppercase tracking-[0.5em] font-bold"
-        >
-          Engineering Excellence
-        </motion.p>
-      </div>
+
+      {/* Bottom label */}
+      <motion.p
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 0.35, y: 0 }}
+        transition={{ delay: 0.4, duration: 0.8 }}
+        className="absolute bottom-12 left-0 w-full text-center text-white text-[9px] uppercase tracking-[0.45em] font-bold"
+        style={{ fontFamily: 'var(--font-label, "Barlow Condensed", sans-serif)' }}
+      >
+        Engineering Excellence
+      </motion.p>
     </div>
   );
 }

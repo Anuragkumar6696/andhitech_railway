@@ -2,13 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Autoplay, Pagination } from 'swiper/modules';
+import { Autoplay, Pagination } from 'swiper/modules';
 import { motion } from 'framer-motion';
-import { Quote, Star, ArrowRight } from 'lucide-react';
+import { Quote, Star } from 'lucide-react';
 import Image from 'next/image';
 
 import 'swiper/css';
-import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 export default function OurTestimonial({ initialData }) {
@@ -17,157 +16,146 @@ export default function OurTestimonial({ initialData }) {
 
   useEffect(() => {
     if (initialData?.testimonials && initialData?.clientLogos) return;
-
     fetch('/api/proxy/testimonials')
-      .then((res) => res.json())
-      .then((data) => setTestimonials(data.results || []))
-      .catch((err) => console.error('Failed to fetch testimonials:', err));
-
+      .then(r => r.json())
+      .then(d => setTestimonials(d.results || []))
+      .catch(e => console.error(e));
     fetch('/api/proxy/client-logos')
-      .then((res) => res.json())
-      .then((data) => setClientLogos(data.results || []))
-      .catch((err) => console.error('Failed to fetch client logos:', err));
+      .then(r => r.json())
+      .then(d => setClientLogos(d.results || []))
+      .catch(e => console.error(e));
   }, []);
 
   return (
-    <section className="py-24 bg-white overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6">
-        
-        {/* Client Logos Section */}
-        <div className="mb-24">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <span className="text-gray-400 uppercase tracking-[0.3em] text-[10px] font-bold">Trusted by Industry Leaders</span>
-          </motion.div>
-          
-          <Swiper
-            modules={[Autoplay]}
-            autoplay={{ delay: 2500, disableOnInteraction: false }}
-            loop={true}
-            spaceBetween={50}
-            slidesPerView={2}
-            breakpoints={{
-              640: { slidesPerView: 3 },
-              1024: { slidesPerView: 5 },
-              1280: { slidesPerView: 6 },
-            }}
-            className="flex items-center"
-          >
-            {clientLogos.length > 0 ? clientLogos.map((logo) => (
-              <SwiperSlide key={logo.id}>
-                <div className="flex justify-center grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
-                  <Image src={logo.image} alt={logo.name || 'Client'} width={120} height={60} className="h-12 w-auto object-contain" />
-                </div>
-              </SwiperSlide>
-            )) : (
-              // Fallback/Mock logos if none fetched
-              [1, 2, 3, 4, 5, 6].map((i) => (
-                <SwiperSlide key={i}>
-                  <div className="flex justify-center grayscale opacity-30 hover:opacity-100 transition-all">
-                    <div className="h-8 w-24 bg-gray-200 rounded animate-pulse"></div>
+    <section className="py-24 md:py-32 bg-white overflow-hidden">
+      <div className="container mx-auto px-4 md:px-8 max-w-screen-xl">
+
+        {/* ── Client Logos ── */}
+        {clientLogos.length > 0 && (
+          <div className="mb-20 pb-16 border-b border-[#ede9e4]">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-10"
+            >
+              <span
+                className="text-[#bbb] text-[11px] uppercase tracking-[0.25em] font-bold"
+                style={{ fontFamily: 'var(--font-label)' }}
+              >
+                Trusted by Industry Leaders
+              </span>
+            </motion.div>
+            <Swiper
+              modules={[Autoplay]}
+              autoplay={{ delay: 2500, disableOnInteraction: false }}
+              loop
+              spaceBetween={48}
+              slidesPerView={2}
+              breakpoints={{
+                640: { slidesPerView: 3 },
+                1024: { slidesPerView: 5 },
+                1280: { slidesPerView: 6 },
+              }}
+              className="flex items-center"
+            >
+              {clientLogos.map((logo) => (
+                <SwiperSlide key={logo.id}>
+                  <div className="flex justify-center grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+                    <Image
+                      src={logo.image}
+                      alt={logo.name || 'Client'}
+                      width={120}
+                      height={56}
+                      className="h-10 w-auto object-contain"
+                    />
                   </div>
                 </SwiperSlide>
-              ))
-            )}
-          </Swiper>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-          
-          {/* Left: Content */}
-          <div className="lg:col-span-5">
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className="flex items-center mb-4">
-                <span className="text-brand-orange uppercase tracking-widest text-sm font-bold">Client Testimonials</span>
-              </div>
-              <h2 className="text-4xl md:text-5xl font-extrabold text-brand-dark leading-tight mb-8">
-                What Our Partners <span className="text-brand-orange">Say About Us</span>
-              </h2>
-              <p className="text-gray-600 text-lg leading-relaxed mb-10">
-                We take pride in building long-lasting relationships with our clients through consistent quality and engineering excellence.
-              </p>
-              
-              <div className="flex items-center space-x-4">
-                <div className="flex -space-x-2">
-                  {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-gray-100 overflow-hidden">
-                      <Image src={`/images/author-${i}.jpg`} alt="User" width={40} height={40} className="object-cover" />
-                    </div>
-                  ))}
-                </div>
-                <div className="text-sm">
-                  <div className="font-bold text-brand-dark">500+ Satisfied Clients</div>
-                  <div className="text-gray-500 flex items-center">
-                    <Star size={12} className="text-brand-orange fill-current" />
-                    <Star size={12} className="text-brand-orange fill-current" />
-                    <Star size={12} className="text-brand-orange fill-current" />
-                    <Star size={12} className="text-brand-orange fill-current" />
-                    <Star size={12} className="text-brand-orange fill-current" />
-                    <span className="ml-1 font-bold">4.9/5 Rating</span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+              ))}
+            </Swiper>
           </div>
+        )}
 
-          {/* Right: Testimonial Slider */}
-          <div className="lg:col-span-7 relative">
-            <div className="absolute -top-10 -right-10 w-40 h-40 bg-brand-orange/5 rounded-full blur-3xl" />
-            
-            <div className="bg-gray-50 rounded-[2rem] p-8 md:p-12 border border-gray-100 relative z-10">
-              <Quote className="text-brand-orange/20 absolute top-10 right-10" size={80} />
-              
-              <Swiper
-                modules={[Navigation, Autoplay, Pagination]}
-                pagination={{ clickable: true, el: '.testimonial-pagination' }}
-                autoplay={{ delay: 6000, disableOnInteraction: false }}
-                loop={true}
-                className="pb-12"
-              >
-                {testimonials.length > 0 ? testimonials.map((t) => (
-                  <SwiperSlide key={t.id}>
-                    <div className="space-y-6">
-                      <div className="flex space-x-1">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} size={16} className={i < (t.rating || 5) ? "text-brand-orange fill-current" : "text-gray-300"} />
-                        ))}
-                      </div>
-                      <p className="text-xl md:text-2xl text-brand-dark font-medium italic leading-relaxed">
-                        &quot;{t.message}&quot;
-                      </p>
-                      <div className="flex items-center space-x-4 pt-4">
-                        <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-brand-orange/20">
-                          <Image src={t.image || "/images/author-1.jpg"} alt={t.name} width={56} height={56} className="object-cover" />
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-brand-dark">{t.name}</h4>
-                          <p className="text-gray-500 text-sm uppercase tracking-wider">{t.designation}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </SwiperSlide>
-                )) : (
-                  <SwiperSlide>
-                    <div className="space-y-6">
-                      <p className="text-xl text-gray-400 italic">No testimonials available yet.</p>
-                    </div>
-                  </SwiperSlide>
-                )}
-              </Swiper>
-              
-              <div className="testimonial-pagination flex mt-4"></div>
+        {/* ── Testimonials ── */}
+        {testimonials.length > 0 && (
+          <div>
+            <div className="flex flex-col lg:flex-row justify-between items-end mb-14 gap-6">
+              <div>
+                <div className="section-label mb-5">
+                  <span>What Clients Say</span>
+                </div>
+                <h2 className="section-heading max-w-lg">
+                  Trusted by <span>Industry Leaders</span>
+                </h2>
+              </div>
             </div>
-          </div>
 
-        </div>
+            <Swiper
+              modules={[Autoplay, Pagination]}
+              autoplay={{ delay: 5000, disableOnInteraction: false }}
+              pagination={{ clickable: true, el: '.pagination-testimonial' }}
+              spaceBetween={24}
+              slidesPerView={1}
+              breakpoints={{
+                768: { slidesPerView: 2 },
+                1200: { slidesPerView: 3 },
+              }}
+              className="!pb-14"
+            >
+              {testimonials.map((t, idx) => (
+                <SwiperSlide key={t.id || idx}>
+                  <div className="h-full bg-[#f9f8f6] rounded-2xl p-8 border border-[#ede9e4] hover:shadow-lg hover:border-brand-orange/15 transition-all duration-400 flex flex-col group">
+                    {/* Stars */}
+                    <div className="flex gap-1 mb-5">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} size={14} className="fill-brand-orange text-brand-orange" />
+                      ))}
+                    </div>
+
+                    {/* Quote icon */}
+                    <div className="w-10 h-10 rounded-lg bg-brand-orange/10 flex items-center justify-center mb-5 group-hover:bg-brand-orange transition-colors duration-400">
+                      <Quote size={16} className="text-brand-orange group-hover:text-white transition-colors" />
+                    </div>
+
+                    <p className="text-[#555] text-sm leading-relaxed mb-7 flex-grow italic">
+                      "{t.content || t.message || t.review}"
+                    </p>
+
+                    <div className="flex items-center gap-3 pt-5 border-t border-[#ede9e4]">
+                      {t.image ? (
+                        <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-brand-orange flex-shrink-0">
+                          <Image
+                            src={t.image}
+                            alt={t.name}
+                            width={40}
+                            height={40}
+                            className="object-cover"
+                          />
+                        </div>
+                      ) : (
+                        <div className="w-10 h-10 rounded-full bg-brand-orange/15 flex items-center justify-center flex-shrink-0">
+                          <span className="text-brand-orange font-bold text-sm">
+                            {(t.name || 'C').charAt(0).toUpperCase()}
+                          </span>
+                        </div>
+                      )}
+                      <div>
+                        <div className="text-[#1a1a1a] font-bold text-sm"
+                          style={{ fontFamily: 'var(--font-display)' }}>
+                          {t.name}
+                        </div>
+                        {t.designation && (
+                          <div className="text-[#aaa] text-[12px]">{t.designation}</div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            <div className="pagination-testimonial flex justify-center gap-2 mt-2" />
+          </div>
+        )}
       </div>
     </section>
   );
