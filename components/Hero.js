@@ -1,19 +1,49 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRight, Play } from 'lucide-react';
+import { getAbsoluteURL } from '@/utils/url';
 
-export default function Hero() {
-  const [banner, setBanner] = useState(null);
+export default function Hero({ initialData }) {
+  const [banner, setBanner] = useState(initialData || null);
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const videoRef = useRef(null);
 
   useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      // Force load and play
+      video.load();
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Auto-play was prevented
+          console.log("Autoplay prevented");
+        });
+      }
+      
+      if (video.readyState >= 2) {
+        setVideoLoaded(true);
+      }
+    }
+
+    // Safety fallback: if video doesn't trigger events, show it anyway after 3s
+    const timer = setTimeout(() => {
+      setVideoLoaded(true);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [banner]);
+
+  useEffect(() => {
+    if (initialData) return; // Skip fetch if data provided via props
+
     async function fetchBanner() {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/home-banner/`);
+        const res = await fetch('/api/proxy/home-banner');
         const data = await res.json();
         if (data.results && data.results.length > 0) {
           setBanner(data.results[0]);
@@ -53,25 +83,25 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-brand-dark via-brand-dark/60 to-transparent z-10" />
         <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-brand-dark/20 z-10" />
         
-        {banner?.video ? (
+        {/* Background Video */}
+        {(banner?.video || "/images/andhitechvideo.mp4") && (
           <video
+            ref={videoRef}
+            key={banner?.video ? getAbsoluteURL(banner.video) : "default-video"}
             autoPlay
             muted
             loop
             playsInline
+            preload="auto"
+            poster="/images/hero-bg.jpg"
+            onLoadedData={() => setVideoLoaded(true)}
             onCanPlay={() => setVideoLoaded(true)}
-            className={`w-full h-full object-cover transition-opacity duration-1000 ${videoLoaded ? 'opacity-60' : 'opacity-0'}`}
+            onPlaying={() => setVideoLoaded(true)}
+            className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-700 ${videoLoaded ? 'opacity-60' : 'opacity-0'}`}
           >
-            <source src={banner.video} type="video/mp4" />
+            <source src={banner?.video ? getAbsoluteURL(banner.video) : "/images/andhitechvideo.mp4"} type="video/mp4" />
+            <source src="/images/andhitechvideo.mp4" type="video/mp4" />
           </video>
-        ) : (
-          <Image
-            src="/images/hero-bg.jpg"
-            alt="Industrial Background"
-            fill
-            className="object-cover opacity-50"
-            priority
-          />
         )}
       </div>
 
@@ -91,13 +121,14 @@ export default function Hero() {
           <motion.h1 
             variants={itemVariants}
             className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white leading-[1.1] mb-8"
-            dangerouslySetInnerHTML={{ __html: banner?.title || 'Advanced Industrial <span class="text-brand-orange">Technology</span> Solutions' }}
-          />
+          >
+            <span dangerouslySetInnerHTML={{ __html: banner?.title || 'AND HITECH <span class="text-brand-orange">INDUSTRIES</span> LTD' }} />
+          </motion.h1>
 
-          <motion.p 
+          <motion.div 
             variants={itemVariants}
             className="text-lg md:text-xl text-gray-300 mb-10 leading-relaxed max-w-2xl"
-            dangerouslySetInnerHTML={{ __html: banner?.content || 'Pioneering excellence in industrial engineering and technology. We provide world-class solutions for a sustainable and efficient future.' }}
+            dangerouslySetInnerHTML={{ __html: banner?.content || 'Premium Railway Rolling Stock and HVAC Engineering Solutions. We provide world-class products for sustainable infrastructure.' }}
           />
 
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">

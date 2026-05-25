@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 
@@ -15,10 +16,12 @@ export default function PageBanner({ title, backgroundImage, currentPage }) {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-brand-dark/60 z-10" />
         <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent z-10" />
-        <img
+        <Image
           src={backgroundImage || "/images/page-header-bg.jpg"}
-          alt={title}
-          className="w-full h-full object-cover"
+          alt={title || "Banner"}
+          fill
+          className="object-cover"
+          priority
         />
       </div>
 

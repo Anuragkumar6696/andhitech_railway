@@ -11,8 +11,8 @@ function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
 
-export default function Header() {
-  const [siteSettings, setSiteSettings] = useState(null);
+export default function Header({ initialData }) {
+  const [siteSettings, setSiteSettings] = useState(initialData || null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -22,9 +22,11 @@ export default function Header() {
     };
     window.addEventListener('scroll', handleScroll);
     
+    if (initialData) return () => window.removeEventListener('scroll', handleScroll);
+
     const fetchSiteSettings = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/site-settings/`);
+        const response = await fetch('/api/proxy/site-settings');
         const data = await response.json();
         setSiteSettings(data);
       } catch (error) {
@@ -61,7 +63,7 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="relative z-10 block w-40 md:w-48">
             <Image
-              src={siteSettings?.logo || "/images/footer-logo.svg"}
+              src={siteSettings?.logo || "/images/logo.png"}
               alt="AND Hitech"
               width={180}
               height={60}

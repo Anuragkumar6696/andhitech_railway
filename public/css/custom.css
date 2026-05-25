@@ -1,6 +1,6 @@
 /* ----------------------------------------------------------------------------------------
-* Author        : Awaiken
-* Template Name : Toplax - Factory & Industry HTML Template
+* Author        : AND Hitech
+* Template Name : AND Hitech Industries Limited
 * File          : CSS File
 * Version       : 1.0
 * ---------------------------------------------------------------------------------------- */
@@ -926,7 +926,7 @@ header.main-header .header-sticky.active{
 .hero{
 	padding: 150px 0 40px;
 	position: relative;
-	background: url('../images/hero-bg.jpg') no-repeat;
+	/* background: url('../images/hero-bg.jpg') no-repeat; */
 	background-position: center center;
 	background-size: cover;
 }

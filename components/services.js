@@ -19,14 +19,16 @@ function getExcerpt(html, wordCount = 15) {
   return text.split(" ").slice(0, wordCount).join(" ") + "...";
 }
 
-export default function Services() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+export default function Services({ initialData }) {
+  const [products, setProducts] = useState(initialData || []);
+  const [loading, setLoading] = useState(!initialData);
 
   useEffect(() => {
+    if (initialData && initialData.length > 0) return;
+
     async function fetchProducts() {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/products/`);
+        const res = await fetch('/api/proxy/products');
         const data = await res.json();
         setProducts(data.results);
       } catch (err) {

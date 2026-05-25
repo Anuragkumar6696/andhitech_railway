@@ -38,30 +38,30 @@ export default function App({ Component, pageProps }) {
       {/* Core Libraries */}
       <Script
         src="https://code.jquery.com/jquery-3.6.0.min.js"
-        strategy="beforeInteractive"
+        strategy="afterInteractive"
       />
-      <Script src="/js/bootstrap.min.js" strategy="beforeInteractive" />
-      <Script src="/js/validator.min.js" strategy="beforeInteractive" />
+      <Script src="/js/bootstrap.min.js" strategy="afterInteractive" />
+      <Script src="/js/validator.min.js" strategy="afterInteractive" />
 
-      {/* UI Effects */}
-      <Script src="/js/jquery.slicknav.js" strategy="beforeInteractive" />
-      <Script src="/js/swiper-bundle.min.js" strategy="beforeInteractive" />
-      <Script src="/js/jquery.waypoints.min.js" strategy="beforeInteractive" />
-      <Script src="/js/jquery.counterup.min.js" strategy="beforeInteractive" />
-      <Script src="/js/isotope.min.js" strategy="beforeInteractive" />
-      <Script src="/js/jquery.magnific-popup.min.js" strategy="beforeInteractive" />
-      <Script src="/js/SmoothScroll.js" strategy="beforeInteractive" />
-      <Script src="/js/parallaxie.js" strategy="beforeInteractive" />
-      <Script src="/js/gsap.min.js" strategy="beforeInteractive" />
-      <Script src="/js/magiccursor.js" strategy="beforeInteractive" />
-      <Script src="/js/SplitText.js" strategy="beforeInteractive" />
-      <Script src="/js/ScrollTrigger.min.js" strategy="beforeInteractive" />
-      <Script src="/js/jquery.mb.YTPlayer.min.js" strategy="beforeInteractive" />
-      <Script src="/js/wow.js" strategy="beforeInteractive" />
+      {/* UI Effects - Lazy Loaded for Speed */}
+      <Script src="/js/jquery.slicknav.js" strategy="lazyOnload" />
+      <Script src="/js/swiper-bundle.min.js" strategy="lazyOnload" />
+      <Script src="/js/jquery.waypoints.min.js" strategy="lazyOnload" />
+      <Script src="/js/jquery.counterup.min.js" strategy="lazyOnload" />
+      <Script src="/js/isotope.min.js" strategy="lazyOnload" />
+      <Script src="/js/jquery.magnific-popup.min.js" strategy="lazyOnload" />
+      <Script src="/js/SmoothScroll.js" strategy="lazyOnload" />
+      <Script src="/js/parallaxie.js" strategy="lazyOnload" />
+      <Script src="/js/gsap.min.js" strategy="lazyOnload" />
+      <Script src="/js/magiccursor.js" strategy="lazyOnload" />
+      <Script src="/js/SplitText.js" strategy="lazyOnload" />
+      <Script src="/js/ScrollTrigger.min.js" strategy="lazyOnload" />
+      <Script src="/js/jquery.mb.YTPlayer.min.js" strategy="lazyOnload" />
+      <Script src="/js/wow.js" strategy="lazyOnload" />
 
       {/* Site-Specific Scripts */}
-      <Script src="/js/function.js" strategy="afterInteractive" />
-      <Script src="/js/custom.js" strategy="afterInteractive" />
+      <Script src="/js/function.js" strategy="lazyOnload" />
+      <Script src="/js/custom.js" strategy="lazyOnload" />
 
       {loading && <Loader />}
       <Component {...pageProps} />

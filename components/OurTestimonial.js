@@ -11,17 +11,19 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-export default function OurTestimonial() {
-  const [testimonials, setTestimonials] = useState([]);
-  const [clientLogos, setClientLogos] = useState([]);
+export default function OurTestimonial({ initialData }) {
+  const [testimonials, setTestimonials] = useState(initialData?.testimonials || []);
+  const [clientLogos, setClientLogos] = useState(initialData?.clientLogos || []);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/testimonials/`)
+    if (initialData?.testimonials && initialData?.clientLogos) return;
+
+    fetch('/api/proxy/testimonials')
       .then((res) => res.json())
       .then((data) => setTestimonials(data.results || []))
       .catch((err) => console.error('Failed to fetch testimonials:', err));
 
-    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/client-logos/`)
+    fetch('/api/proxy/client-logos')
       .then((res) => res.json())
       .then((data) => setClientLogos(data.results || []))
       .catch((err) => console.error('Failed to fetch client logos:', err));

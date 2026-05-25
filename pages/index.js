@@ -10,7 +10,7 @@ import OurTestimonial from '@/components/OurTestimonial';
 import Statistics from '@/components/Statistics';
 import ContactCTA from '@/components/ContactCTA';
 
-export default function Home({ siteSettings }) {
+export default function Home({ siteSettings, banner, products, testimonials, clientLogos }) {
   return (
     <div className="bg-white min-h-screen">
       <Head>
@@ -19,18 +19,18 @@ export default function Home({ siteSettings }) {
         <meta name="keywords" content={siteSettings?.meta_keywords || 'railway components, HVAC systems, precision engineering, AND Hitech'} />
       </Head>
 
-      <Header />
+      <Header initialData={siteSettings} />
       <main>
-        <Hero />
+        <Hero initialData={banner} />
         <AboutUs />
         <Statistics />
-        <Services />
+        <Services initialData={products} />
         <OurProcess />
         <Certificates />
-        <OurTestimonial />
+        <OurTestimonial initialData={{ testimonials, clientLogos }} />
         <ContactCTA />
       </main>
-      <Footer />
+      <Footer initialData={siteSettings} />
     </div>
   );
 }
@@ -38,19 +38,39 @@ export default function Home({ siteSettings }) {
 export async function getStaticProps() {
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/site-settings/`);
-    const siteSettings = await res.json();
+    const [settingsRes, bannerRes, productsRes, testimonialsRes, logosRes] = await Promise.all([
+      fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/site-settings/`),
+      fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/home-banner/`),
+      fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/products/`),
+      fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/testimonials/`),
+      fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/client-logos/`)
+    ]);
+
+    const siteSettings = await settingsRes.json();
+    const bannerData = await bannerRes.json();
+    const productsData = await productsRes.json();
+    const testimonialsData = await testimonialsRes.json();
+    const logosData = await logosRes.json();
+
     return {
       props: {
         siteSettings: siteSettings || {},
+        banner: bannerData.results?.[0] || null,
+        products: productsData.results || [],
+        testimonials: testimonialsData.results || [],
+        clientLogos: logosData.results || [],
       },
       revalidate: 60,
     };
   } catch (error) {
-    console.error('Error fetching site settings:', error);
+    console.error('Error fetching data:', error);
     return {
       props: {
         siteSettings: {},
+        banner: null,
+        products: [],
+        testimonials: [],
+        clientLogos: [],
       },
     };
   }

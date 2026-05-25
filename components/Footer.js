@@ -5,13 +5,15 @@ import Image from 'next/image';
 import { Mail, Phone, MapPin, Linkedin, Facebook, Instagram, Twitter } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-export default function Footer() {
-  const [siteSettings, setSiteSettings] = useState(null);
+export default function Footer({ initialData }) {
+  const [siteSettings, setSiteSettings] = useState(initialData || null);
 
   useEffect(() => {
+    if (initialData) return; // Skip fetch if data provided via props
+
     const fetchSiteSettings = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/site-settings/`);
+        const response = await fetch('/api/proxy/site-settings');
         const data = await response.json();
         setSiteSettings(data);
       } catch (error) {
@@ -36,7 +38,7 @@ export default function Footer() {
           <div className="lg:col-span-4 space-y-8">
             <Link href="/" className="block w-48">
               <Image 
-                src={siteSettings?.logo || "/images/footer-logo.svg"} 
+                src={siteSettings?.logo || "/images/logo.png"} 
                 alt="AND Hitech" 
                 width={200} 
                 height={60} 
