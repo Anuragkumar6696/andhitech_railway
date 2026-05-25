@@ -6,28 +6,35 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { motion } from 'framer-motion';
 import { getAbsoluteURL } from '@/utils/url';
 
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 export default function ServiceContent({ product }) {
   if (!product) {
-    return <div className="flex justify-center py-20"><div className="w-12 h-12 border-4 border-brand-orange border-t-transparent rounded-full animate-spin"></div></div>;
+    return (
+      <div className="flex justify-center py-20">
+        <div className="w-10 h-10 border-2 border-brand-orange border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
   }
 
-  const images = product.images && product.images.length > 0 
-    ? product.images 
-    : (product.image ? [{ id: 'featured', image: product.image }] : []);
+  const images =
+    product.images?.length > 0
+      ? product.images
+      : product.image
+      ? [{ id: 'featured', image: product.image }]
+      : [];
 
   return (
     <div className="space-y-12">
+
       {/* Product Gallery */}
       {images.length > 0 && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative rounded-[2.5rem] overflow-hidden bg-gray-50 border border-gray-100"
+          className="relative rounded-2xl overflow-hidden bg-[#f9f8f6] border border-[#ede9e4]"
         >
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
@@ -45,7 +52,7 @@ export default function ServiceContent({ product }) {
                     src={img.image || '/images/agriculture.jpg'}
                     alt={img.alt_text || product.title}
                     fill
-                    className="object-contain p-8 md:p-12 transition-transform duration-700 group-hover:scale-105"
+                    className="object-contain p-8 md:p-12 transition-transform duration-700 group-hover:scale-[1.03]"
                     priority
                   />
                 </div>
@@ -56,30 +63,32 @@ export default function ServiceContent({ product }) {
       )}
 
       {/* Product Description */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="prose prose-lg max-w-none prose-headings:text-brand-dark prose-headings:font-bold prose-p:text-gray-600 prose-a:text-brand-orange"
+        className="space-y-6"
       >
-        <div className="flex items-center mb-6">
-          <span className="text-brand-orange uppercase tracking-widest text-sm font-bold">Product Overview</span>
-        </div>
-        <h2 className="text-3xl md:text-4xl font-extrabold text-brand-dark mb-8">
+        <div className="section-label mb-2"><span>Product Overview</span></div>
+        <h2
+          className="font-extrabold text-[#1a1a1a] leading-tight"
+          style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: 'clamp(1.7rem, 3vw, 2.6rem)',
+            letterSpacing: '-0.02em',
+          }}
+        >
           About {product.title}
         </h2>
-        <div 
-          className="leading-relaxed space-y-6"
-          dangerouslySetInnerHTML={{ __html: product.description || product.content || 'Detailed information about this product will be available soon.' }} 
+        {/* Prose content */}
+        <div
+          className="text-[#555] leading-relaxed space-y-5 text-[15px] prose prose-headings:font-bold prose-headings:text-[#1a1a1a] prose-a:text-brand-orange prose-strong:text-[#1a1a1a] max-w-none"
+          style={{ fontFamily: 'var(--font-sans)' }}
+          dangerouslySetInnerHTML={{
+            __html: product.description || product.content || 'Detailed information about this product will be available soon.',
+          }}
         />
       </motion.div>
-
-      {/* Specifications / Features Grid (if data exists) */}
-      {product.features && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Custom feature rendering logic could go here */}
-        </div>
-      )}
     </div>
   );
 }

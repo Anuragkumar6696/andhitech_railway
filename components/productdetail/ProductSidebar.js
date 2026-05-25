@@ -56,7 +56,7 @@ export default function ProductSidebar({ product, categories = [] }) {
   return (
     <div className="space-y-8">
       {/* Categories Widget */}
-      <div className="bg-gray-50 rounded-[2rem] p-8 border border-gray-100">
+      <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100">
         <h3 className="text-xl font-bold text-brand-dark mb-6 flex items-center">
           <span className="w-1.5 h-6 bg-brand-orange rounded-full mr-3"></span>
           Product Categories
@@ -82,7 +82,7 @@ export default function ProductSidebar({ product, categories = [] }) {
 
       {/* Brochure Download Widget */}
       {product?.brochure && (
-        <div className="bg-brand-dark rounded-[2rem] p-8 text-white relative overflow-hidden group">
+        <div className="bg-brand-dark rounded-2xl p-8 text-white relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-32 h-32 bg-brand-orange/10 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-110 transition-transform duration-500"></div>
           <h3 className="text-xl font-bold mb-4 relative z-10">Product Resources</h3>
           <p className="text-gray-400 text-sm mb-6 relative z-10">Get detailed technical specifications and data sheets for this product.</p>
@@ -99,7 +99,7 @@ export default function ProductSidebar({ product, categories = [] }) {
       )}
 
       {/* Enquiry Form Widget */}
-      <div className="bg-white rounded-[2rem] p-8 border border-gray-100 shadow-xl shadow-brand-dark/5">
+      <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-xl shadow-brand-dark/5">
         <h3 className="text-xl font-bold text-brand-dark mb-2">Quick Enquiry</h3>
         <p className="text-gray-500 text-sm mb-8">Interested in this product? Request a quote or more information.</p>
         
@@ -110,7 +110,7 @@ export default function ProductSidebar({ product, categories = [] }) {
             value={formData.yourname} 
             onChange={handleChange} 
             placeholder="Your Name" 
-            className="w-full px-5 py-3 rounded-xl bg-gray-50 border border-gray-100 focus:border-brand-orange focus:bg-white outline-none transition-all text-sm"
+            className="w-full input-premium"
             required 
           />
           <input 
@@ -119,7 +119,7 @@ export default function ProductSidebar({ product, categories = [] }) {
             value={formData.email} 
             onChange={handleChange} 
             placeholder="Email Address" 
-            className="w-full px-5 py-3 rounded-xl bg-gray-50 border border-gray-100 focus:border-brand-orange focus:bg-white outline-none transition-all text-sm"
+            className="w-full input-premium"
             required 
           />
           <input 
@@ -128,7 +128,7 @@ export default function ProductSidebar({ product, categories = [] }) {
             value={formData.phone} 
             onChange={handleChange} 
             placeholder="Phone Number" 
-            className="w-full px-5 py-3 rounded-xl bg-gray-50 border border-gray-100 focus:border-brand-orange focus:bg-white outline-none transition-all text-sm"
+            className="w-full input-premium"
             required 
           />
           <textarea 
@@ -158,7 +158,7 @@ export default function ProductSidebar({ product, categories = [] }) {
       </div>
 
       {/* Direct Support Widget */}
-      <div className="p-8 rounded-[2rem] bg-brand-orange/5 border border-brand-orange/10">
+      <div className="p-8 rounded-2xl bg-brand-orange/5 border border-brand-orange/10">
         <h4 className="text-brand-dark font-bold mb-4">Need Help?</h4>
         <div className="space-y-4">
           <div className="flex items-center space-x-3 text-sm">

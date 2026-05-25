@@ -3,6 +3,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Hero from '@/components/Hero';
 import AboutUs from '@/components/AboutUs';
+import WhatWeDo from '@/components/WhatWeDo';
 import Services from '@/components/services';
 import OurProcess from '@/components/OurProcess';
 import Certificates from '@/components/Certificates';
@@ -23,6 +24,7 @@ export default function Home({ siteSettings, banner, products, testimonials, cli
       <main>
         <Hero initialData={banner} />
         <AboutUs />
+        <WhatWeDo />
         <Statistics />
         <Services initialData={products} />
         <OurProcess />
@@ -36,22 +38,20 @@ export default function Home({ siteSettings, banner, products, testimonials, cli
 }
 
 export async function getStaticProps() {
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
   try {
     const [settingsRes, bannerRes, productsRes, testimonialsRes, logosRes] = await Promise.all([
       fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/site-settings/`),
       fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/home-banner/`),
       fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/products/`),
       fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/testimonials/`),
-      fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/client-logos/`)
+      fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/client-logos/`),
     ]);
-
     const siteSettings = await settingsRes.json();
     const bannerData = await bannerRes.json();
     const productsData = await productsRes.json();
     const testimonialsData = await testimonialsRes.json();
     const logosData = await logosRes.json();
-
     return {
       props: {
         siteSettings: siteSettings || {},
@@ -65,13 +65,7 @@ export async function getStaticProps() {
   } catch (error) {
     console.error('Error fetching data:', error);
     return {
-      props: {
-        siteSettings: {},
-        banner: null,
-        products: [],
-        testimonials: [],
-        clientLogos: [],
-      },
+      props: { siteSettings: {}, banner: null, products: [], testimonials: [], clientLogos: [] },
     };
   }
 }

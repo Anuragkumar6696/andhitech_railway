@@ -1,87 +1,87 @@
-'use client'
+'use client';
 
-import React, { useEffect } from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation } from 'swiper/modules'
-import Image from 'next/image'
-import 'swiper/css'
-import 'swiper/css/navigation'
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
-const InfrastructureGallerySections = ({ sections = [] }) => {
-  useEffect(() => {
-    if (typeof window !== 'undefined' && window.$) {
-      try {
-        // re-init magnific-popup if present
-        window.$('.popup-image1').magnificPopup('destroy').magnificPopup({
-          type: 'image',
-          gallery: { enabled: true }
-        })
-      } catch (e) {
-        // silently ignore if magnificPopup isn't available
-      }
-    }
-  }, [sections])
+export default function InfrastructureGallerySections({ sections = [] }) {
+  if (!sections || sections.length === 0) return null;
 
   return (
-    <>
-      {sections.map((section) => {
-        const title = (section?.title || '').trim()
-        const words = title.split(' ').filter(Boolean)
-        const lastWord = words.pop() || ''
-        const firstPart = words.join(' ')
+    <section className="py-20 bg-[#f9f8f6]">
+      <div className="container mx-auto px-4 md:px-8 max-w-screen-xl">
 
-        const imgs = Array.isArray(section?.images) ? section.images : []
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-14"
+        >
+          <div className="section-label mb-5"><span>Facility Gallery</span></div>
+          <h2 className="section-heading max-w-xl">
+            Our <span>Manufacturing Facilities</span>
+          </h2>
+        </motion.div>
 
-        return (
-          <section key={section.id} className="pt-5 pb-5">
-            <div className="container">
-              <div className="section-title text-center mb-4">
-                <h2 className="text-anime-style-2" data-cursor="-opaque">
+        <div className="space-y-16">
+          {sections.map((section, sIdx) => (
+            <motion.div
+              key={sIdx}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: sIdx * 0.1, duration: 0.7 }}
+            >
+              {section.title && (
+                <h3
+                  className="text-xl font-bold text-[#1a1a1a] mb-7 flex items-center gap-3"
+                  style={{ fontFamily: 'var(--font-display)' }}
+                >
+                  <span className="w-8 h-[2px] bg-brand-orange block" />
                   {section.title}
-                </h2>
-                {!!section.description && <p>{section.description}</p>}
-              </div>
+                </h3>
+              )}
 
-              <Swiper
-                modules={[Navigation]}
-                spaceBetween={20}
-                slidesPerView={4}
-                loop={true}
-                navigation={{
-                  nextEl: `.swiper-button-next-${section.id}`,
-                  prevEl: `.swiper-button-prev-${section.id}`
-                }}
-                breakpoints={{
-                  0: { slidesPerView: 1 },
-                  576: { slidesPerView: 2 },
-                  768: { slidesPerView: 3 },
-                  992: { slidesPerView: 4 }
-                }}
-              >
-                {imgs.map((img, index) => (
-                  <SwiperSlide key={index}>
-                    <a href={img.image} className="popup-image1">
-                      <Image
-                        src={img.image}
-                        alt={img.alt_text || 'Gallery Image'}
-                        width={600}
-                        height={400}
-                        className="img-fluid"
-                        unoptimized
-                      />
-                    </a>
-                  </SwiperSlide>
-                ))}
-
-                <div className={`swiper-button-next swiper-button-next-${section.id}`}></div>
-                <div className={`swiper-button-prev swiper-button-prev-${section.id}`}></div>
-              </Swiper>
-            </div>
-          </section>
-        )
-      })}
-    </>
-  )
+              {section.images?.length > 0 && (
+                <Swiper
+                  modules={[Navigation, Pagination, Autoplay]}
+                  autoplay={{ delay: 4000, disableOnInteraction: false }}
+                  pagination={{ clickable: true }}
+                  spaceBetween={20}
+                  slidesPerView={1}
+                  breakpoints={{
+                    640: { slidesPerView: 2 },
+                    1024: { slidesPerView: 3 },
+                  }}
+                  className="!pb-10"
+                >
+                  {section.images.map((img, iIdx) => (
+                    <SwiperSlide key={iIdx}>
+                      <div className="relative h-56 rounded-xl overflow-hidden group">
+                        <Image
+                          src={img.image}
+                          alt={img.caption || `Gallery ${iIdx + 1}`}
+                          fill
+                          className="object-cover group-hover:scale-[1.05] transition-transform duration-600"
+                          unoptimized
+                        />
+                        {img.caption && (
+                          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#0e0e0e]/70 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <p className="text-white text-xs font-semibold">{img.caption}</p>
+                          </div>
+                        )}
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              )}
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
-
-export default InfrastructureGallerySections

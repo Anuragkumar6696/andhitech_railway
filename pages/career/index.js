@@ -5,35 +5,29 @@ import JobList from '@/components/Career/JobList';
 import Benefits from '@/components/Career/Benefits';
 import JoinUs from '@/components/Career/JoinUs';
 import Head from 'next/head';
+import { motion } from 'framer-motion';
+import { Mail } from 'lucide-react';
 
 export async function getServerSideProps() {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/jobs/`);
     if (!res.ok) throw new Error('Failed to fetch jobs');
     const data = await res.json();
-
-    return {
-      props: {
-        jobs: data.results || [],
-      },
-    };
+    return { props: { jobs: data.results || [] } };
   } catch (error) {
     console.error('Error fetching jobs:', error);
-    return {
-      props: {
-        jobs: [],
-      },
-    };
+    return { props: { jobs: [] } };
   }
 }
 
 export default function CareerPage({ jobs }) {
   return (
     <>
-    <Head>
-  <title>Career</title>
-  <meta name="description" content="Explore career opportunities at our company." />
-</Head>
+      <Head>
+        <title>Career | AND Hitech</title>
+        <meta name="description" content="Explore career opportunities at AND Hitech Industries Ltd." />
+      </Head>
+
       <Header />
       <PageBanner
         title="Career"
@@ -42,25 +36,40 @@ export default function CareerPage({ jobs }) {
       />
 
       {jobs.length === 0 ? (
-        <div className="container my-5">
-  <div className="row justify-content-center">
-    <div className="col-md-8 col-lg-6">
-      <div className="p-4 p-md-5 bg-white border rounded-3 shadow-sm text-center">
-        {/* briefcase icon (inline SVG, no extra lib) */}
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" className="mb-3 text-secondary">
-          <path d="M10 2h4a2 2 0 0 1 2 2v2h3a2 2 0 0 1 2 2v3H1V8a2 2 0 0 1 2-2h3V4a2 2 0 0 1 2-2Zm4 4V4h-4v2h4Zm9 7v5a3 3 0 0 1-3 3H4a3 3 0 0 1-3-3v-5h7v1a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-1h7Z"/>
-        </svg>
-        <h5 className="mb-2">Interested in working with us? </h5>
-        <p className="text-muted mb-0">Kindly share your resume at <a href="mailto:careers@andhitech.in">careers@andhitech.in</a>.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
+        <section className="py-24 bg-[#f9f8f6]">
+          <div className="container mx-auto px-4 md:px-8 max-w-screen-xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="max-w-lg mx-auto text-center bg-white rounded-2xl border border-[#ede9e4] shadow-sm p-16"
+            >
+              <div className="w-16 h-16 rounded-xl bg-brand-orange/10 flex items-center justify-center mx-auto mb-7">
+                <Mail size={28} className="text-brand-orange" />
+              </div>
+              <h3
+                className="text-2xl font-bold text-[#1a1a1a] mb-3"
+                style={{ fontFamily: 'var(--font-display)' }}
+              >
+                Interested in Working With Us?
+              </h3>
+              <p className="text-[#777] text-sm leading-relaxed mb-8">
+                We don't have any open positions right now, but we're always looking for talented people. Share your resume and we'll be in touch.
+              </p>
+              <a
+                href="mailto:careers@andhitech.in"
+                className="btn-premium inline-flex items-center gap-2"
+              >
+                <Mail size={16} />
+                <span>careers@andhitech.in</span>
+              </a>
+            </motion.div>
+          </div>
+        </section>
       ) : (
         <JobList jobs={jobs} />
       )}
 
+      <Benefits />
       <JoinUs />
       <Footer />
     </>
