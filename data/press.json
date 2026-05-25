@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Exciting Press Title Here",
+    "excerpt": "This is a short excerpt or summary of the press release content.",
+    "image": "/images/pressrelease.jpg",
+    "link": "#"
+  },
+  {
+    "title": "Another Big Announcement",
+    "excerpt": "This is a short excerpt or summary of the press release content.",
+    "image": "/images/pressrelease.jpg",
+    "link": "#"
+  }
+]

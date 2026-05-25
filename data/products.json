@@ -1,0 +1,188 @@
+[
+ {
+  "category": "category1",
+  "slug": "custom-manufacturing-solution",
+  "title": "Custom Manufacturing Solution",
+  "icon": "/images/icon-service-1.svg",
+  "description": "Detailed description for Custom Manufacturing Solution.",
+  "brochure": "/images/project_manager_job_description.pdf",
+  "image": "/images/agriculture.jpg",
+  "features": [
+    {
+      "title": "Axle Mounted Brake Disc",
+      "icon": "/images/icon-service-6.svg",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+    },
+    {
+      "title": "Wheel mounted brake disc with Split disc",
+      "icon": "/images/icon-service-7.svg",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What industries do you serve?",
+      "answer": "We implement rigorous quality control measures at every stage of production, ensuring consistency and high standards."
+    },
+    {
+      "question": "How do you ensure product quality?",
+      "answer": "We implement rigorous quality control measures at every stage of production, ensuring consistency and high standards."
+    }
+  ],
+  "planningSection": {
+    "title": "Planning & Strategy",
+    "description": "We carefully evaluate your project needs and design a robust strategy to ensure technical, financial, and operational success.",
+    "points": [
+      "Needs assessment",
+      "Timeline and Milestones",
+      "Feasibility and ROI",
+      "Technology Selection",
+      "Process Optimization",
+      "Scalability Planning"
+    ],
+    "additionalImages": [
+    {
+      "src": "/images/Track-Maintenance.jpg",
+      "alt": "Track Maintenance"
+    },
+    {
+      "src": "/images/Tungsten-Carbide-Tamping-Tools.jpg",
+      "alt": "Tamping Tools"
+    }
+  ]
+  }
+},
+  {
+    "category": "category2",
+    "slug": "precision-tooling-dies",
+    "title": "Precision Tooling & Dies",
+    "icon": "/images/icon-service-2.svg",
+    "description": "Detailed description for Precision Tooling & Dies.",
+    "brochure": "/images/project_manager_job_description.pdf",
+    "image": "/images/agriculture.jpg",
+    "features": [],
+    "faqs": [],
+    "planningSection": {
+    "title": "Planning & Strategy",
+    "description": "We carefully evaluate your project needs and design a robust strategy to ensure technical, financial, and operational success.",
+    "points": [
+      "Needs assessment",
+      "Timeline and Milestones",
+      "Feasibility and ROI",
+      "Technology Selection",
+      "Process Optimization",
+      "Scalability Planning"
+    ],
+    "additionalImages": [
+    {
+      "src": "/images/Track-Maintenance.jpg",
+      "alt": "Track Maintenance"
+    },
+    {
+      "src": "/images/Tungsten-Carbide-Tamping-Tools.jpg",
+      "alt": "Tamping Tools"
+    }
+  ]
+  }
+  },
+  {
+    "category": "category1",
+    "slug": "advanced-materials-and-components",
+    "title": "Advanced Materials and Components",
+    "icon": "/images/icon-service-3.svg",
+    "description": "Detailed description for Advanced Materials and Components.",
+    "brochure": "/images/project_manager_job_description.pdf",
+    "image": "/images/agriculture.jpg",
+    "features": [],
+    "faqs": [],
+    "planningSection": {
+    "title": "Planning & Strategy",
+    "description": "We carefully evaluate your project needs and design a robust strategy to ensure technical, financial, and operational success.",
+    "points": [
+      "Needs assessment",
+      "Timeline and Milestones",
+      "Feasibility and ROI",
+      "Technology Selection",
+      "Process Optimization",
+      "Scalability Planning"
+    ],
+    "additionalImages": [
+    {
+      "src": "/images/Track-Maintenance.jpg",
+      "alt": "Track Maintenance"
+    },
+    {
+      "src": "/images/Tungsten-Carbide-Tamping-Tools.jpg",
+      "alt": "Tamping Tools"
+    }
+  ]
+  }
+  },
+  {
+    "category": "category2",
+    "slug": "custom-engineering-services",
+    "title": "Custom Engineering Services",
+    "icon": "/images/icon-service-4.svg",
+    "description": "Detailed description for Custom Engineering Services.",
+    "brochure": "/images/project_manager_job_description.pdf",
+    "image": "/images/agriculture.jpg",
+    "features": [],
+    "faqs": [],
+    "planningSection": {
+    "title": "Planning & Strategy",
+    "description": "We carefully evaluate your project needs and design a robust strategy to ensure technical, financial, and operational success.",
+    "points": [
+      "Needs assessment",
+      "Timeline and Milestones",
+      "Feasibility and ROI",
+      "Technology Selection",
+      "Process Optimization",
+      "Scalability Planning"
+    ],
+    "additionalImages": [
+    {
+      "src": "/images/Track-Maintenance.jpg",
+      "alt": "Track Maintenance"
+    },
+    {
+      "src": "/images/Tungsten-Carbide-Tamping-Tools.jpg",
+      "alt": "Tamping Tools"
+    }
+  ]
+  }
+  },
+  {
+    "category": "category3",
+    "slug": "mission-critical-components",
+    "title": "Mission Critical Components",
+    "icon": "/images/icon-service-5.svg",
+    "description": "Detailed description for Mission Critical Components.",
+    "brochure": "/images/project_manager_job_description.pdf",
+    "image": "/images/agriculture.jpg",
+    "features": [],
+    "faqs": [],
+    "planningSection": {
+    "title": "Planning & Strategy",
+    "description": "We carefully evaluate your project needs and design a robust strategy to ensure technical, financial, and operational success.",
+    "points": [
+      "Needs assessment",
+      "Timeline and Milestones",
+      "Feasibility and ROI",
+      "Technology Selection",
+      "Process Optimization",
+      "Scalability Planning"
+    ],
+    "additionalImages": [
+    {
+      "src": "/images/Track-Maintenance.jpg",
+      "alt": "Track Maintenance"
+    },
+    {
+      "src": "/images/Tungsten-Carbide-Tamping-Tools.jpg",
+      "alt": "Tamping Tools"
+    }
+  ]
+  }
+    
+  }
+]

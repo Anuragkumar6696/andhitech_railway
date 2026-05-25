@@ -1,0 +1,73 @@
+[
+  {
+    "id": 1,
+    "name": "Mr. Angad Singh",
+    "slug": "angad-singh",
+    "position": "Managing Director",
+    "image": "/images/andhitechmd.jpg",
+    "social": {
+      "twitter": "#",
+      "facebook": "#",
+      "instagram": "#",
+      "pinterest": "#"
+    },
+    "bio": [
+      "AND HITECH INDUSTRIES LTD is committed to sustainability. Progress is the result of ongoing efforts and evaluation of those efforts. I believe in completing milestones in a sequential manner; once one is completed, another awaits.",
+      "Our primary focus is on dependability and availability, which we achieve by developing highly innovative technological solutions to meet changing mobility needs in terms of safety, design, quality, and comfort.",
+      "We are dedicated to total customer satisfaction by identifying their unique requirements, translating them into high-quality products, and providing reliable and consistent after-sales services.",
+      "As part of our commitment to our shareholders, we strive to enhance wealth through sustained growth within the scope of the Unit's spirit, to ensure that commercial objectives and social service goals are optimally balanced.",
+      "AND Hitech Industries Ltd.'s journey is never ending. But, with the help of our team and clients, I am confident that the company will continue to reach new heights of excellence in the coming years."
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Brooklyn Simmons",
+    "slug": "brooklyn-simmons",
+    "position": "Industrial Engineer",
+    "image": "/images/team-2.jpg",
+    "social": {
+      "twitter": "#",
+      "facebook": "#",
+      "instagram": "#",
+      "pinterest": "#"
+    },
+    "bio": [
+      "Brooklyn is an experienced industrial engineer with over 10 years in process optimization and lean manufacturing. She excels at leading cross-functional teams to improve production efficiency.",
+      "Her goal is to innovate safe, sustainable, and cost-effective manufacturing practices while maintaining top-tier product quality."
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Cameron Williamson",
+    "slug": "cameron-williamson",
+    "position": "Production Supervisor",
+    "image": "/images/team-3.jpg",
+    "social": {
+      "twitter": "#",
+      "facebook": "#",
+      "instagram": "#",
+      "pinterest": "#"
+    },
+    "bio": [
+      "Cameron supervises daily manufacturing operations, ensuring production schedules are met while maintaining high safety and quality standards.",
+      "He brings over 8 years of leadership experience in industrial environments."
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Darlene Robertson",
+    "slug": "darlene-robertson",
+    "position": "Project Manager",
+    "image": "/images/team-4.jpg",
+    "social": {
+      "twitter": "#",
+      "facebook": "#",
+      "instagram": "#",
+      "pinterest": "#"
+    },
+    "bio": [
+      "Darlene is responsible for overseeing key industrial projects, ensuring they are delivered on time, within budget, and to client specifications.",
+      "She has a strong background in client relations and cross-departmental coordination."
+    ]
+  }
+]

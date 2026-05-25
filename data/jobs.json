@@ -1,0 +1,43 @@
+[
+  {
+    "slug": "support-worker",
+    "title": "Support Worker",
+    "category": "Domiciliary Care",
+    "location": "Mobile with fuel costs reimbursed",
+    "datePosted": "May 24, 2023",
+    "applicationEnds": "May 31, 2024",
+    "featuredImage": "/images/post-1.jpg",
+    "experience": "Background in any care or support work desired but not essential",
+    "qualification": "Level 2 Literacy, Numeracy, and I.T. skills",
+    "jobTitle": "Domiciliary Care",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text since the 1500s.\nContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in classical Latin literature.",
+    "responsibilityIntro": "Maximizing efficiency and productivity through...",
+    "keyResponsibilities": [
+      "Automated Task Execution for Enhanced Speed and Accuracy",
+      "Minimizing Downtime with Continuous Robotic Operation",
+      "Optimizing Resource Allocation for Cost-Effective Production",
+      "Seamless Integration with Existing Workflows for Efficiency",
+      "Streamlining Supply Chain Operations with Robotic Solutions"
+    ]
+  },
+  {
+    "slug": "project-manager",
+    "title": "Project Manager",
+    "category": "Engineering",
+    "location": "On-site in London",
+        "datePosted": "May 24, 2023",
+        "applicationEnds": "May 31, 2024",
+        "featuredImage": "/images/post-2.jpg",
+        "experience": "5+ years in project management within engineering sectors",
+        "qualification": "PMP or equivalent certification preferred",
+        "jobTitle": "Engineering Project Management",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text since the 1500s.\nContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in classical Latin literature.",
+        "responsibilityIntro": "Maximizing efficiency and productivity through...",
+        "keyResponsibilities": [
+        "Overseeing project timelines and deliverables",
+        "Coordinating with cross-functional teams for project success",
+        "Managing budgets and resource allocation effectively",
+        "Ensuring compliance with industry standards and regulations"
+        ]
+    }
+    ]
