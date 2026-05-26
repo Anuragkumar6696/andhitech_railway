@@ -1,6 +1,6 @@
 import '@/styles/globals.css';
 import '@/styles/tailwind.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import Loader from '@/components/Loader';
 import Script from 'next/script';
@@ -9,15 +9,64 @@ import Head from 'next/head';
 export default function App({ Component, pageProps }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const lenisRef = useRef(null);
 
+  /* ── Lenis smooth scrolling ── */
   useEffect(() => {
-    const handleStart = () => setLoading(true);
-    const handleStop  = () => setLoading(false);
+    let lenis = null;
+    let raf   = null;
 
+    const initLenis = async () => {
+      try {
+        const LenisModule = await import('@studio-freight/lenis');
+        const Lenis = LenisModule.default || LenisModule.Lenis;
+        lenis = new Lenis({
+          duration:     1.3,
+          easing:       (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          orientation:  'vertical',
+          smoothWheel:  true,
+          wheelMultiplier: 0.9,
+          touchMultiplier: 1.8,
+          infinite:     false,
+        });
+        lenisRef.current = lenis;
+        // Expose for GSAP ScrollTrigger
+        if (typeof window !== 'undefined') window.__lenis = lenis;
+
+        function animate(time) {
+          lenis.raf(time);
+          raf = requestAnimationFrame(animate);
+        }
+        raf = requestAnimationFrame(animate);
+      } catch (e) {
+        // Lenis unavailable – graceful fallback
+        if (typeof document !== 'undefined') {
+          document.documentElement.style.scrollBehavior = 'smooth';
+        }
+      }
+    };
+
+    initLenis();
+
+    return () => {
+      if (raf) cancelAnimationFrame(raf);
+      if (lenis) lenis.destroy();
+    };
+  }, []);
+
+  /* ── Route change → stop lenis ── */
+  useEffect(() => {
+    const handleStart = () => {
+      setLoading(true);
+      lenisRef.current?.stop();
+    };
+    const handleStop = () => {
+      setLoading(false);
+      lenisRef.current?.start();
+    };
     router.events.on('routeChangeStart',    handleStart);
     router.events.on('routeChangeComplete', handleStop);
     router.events.on('routeChangeError',    handleStop);
-
     return () => {
       router.events.off('routeChangeStart',    handleStart);
       router.events.off('routeChangeComplete', handleStop);
@@ -28,28 +77,29 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>AND Hitech Industries | Engineering the Future of Rail</title>
+        <title>AND Hitech Industries | Engineering Motion for Modern Railways</title>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        {/* Google Fonts — Bebas Neue + DM Sans + DM Mono */}
+        {/* Preconnect */}
         <link rel="preconnect" href="https://fonts.googleapis.com"/>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous"/>
+        {/* Bebas Neue (display) + DM Sans (body) + DM Mono + Barlow (sub-headlines) */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap"
           rel="stylesheet"
         />
       </Head>
 
-      {/* Core utility scripts */}
+      {/* Core scripts */}
       <Script src="https://code.jquery.com/jquery-3.6.0.min.js" strategy="afterInteractive"/>
       <Script src="/js/bootstrap.min.js"   strategy="afterInteractive"/>
       <Script src="/js/validator.min.js"   strategy="afterInteractive"/>
 
-      {/* UI enhancement scripts — lazy */}
-      <Script src="/js/swiper-bundle.min.js"           strategy="lazyOnload"/>
-      <Script src="/js/jquery.waypoints.min.js"        strategy="lazyOnload"/>
-      <Script src="/js/jquery.counterup.min.js"        strategy="lazyOnload"/>
-      <Script src="/js/isotope.min.js"                 strategy="lazyOnload"/>
-      <Script src="/js/jquery.magnific-popup.min.js"   strategy="lazyOnload"/>
+      {/* Lazy scripts */}
+      <Script src="/js/swiper-bundle.min.js"         strategy="lazyOnload"/>
+      <Script src="/js/jquery.waypoints.min.js"      strategy="lazyOnload"/>
+      <Script src="/js/jquery.counterup.min.js"      strategy="lazyOnload"/>
+      <Script src="/js/isotope.min.js"               strategy="lazyOnload"/>
+      <Script src="/js/jquery.magnific-popup.min.js" strategy="lazyOnload"/>
 
       {loading && <Loader/>}
       <Component {...pageProps}/>

@@ -1,135 +1,163 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Star, Quote } from 'lucide-react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/pagination';
+import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 import { getAbsoluteURL } from '@/utils/url';
 
-const ease = [.22, 1, .36, 1];
+const ease = [.22,1,.36,1];
+
+/* Default client logos shown when API data unavailable */
+const DEFAULT_LOGOS = [
+  { name:'Indian Railways',    image:'/images/indian railways.png' },
+  { name:'Make In India',      image:'/images/make-in-india.jpg'   },
+  { name:'Metro Rail',         image:'/images/Metro_logo.png'      },
+  { name:'Aug Group',          image:'/images/aug.png'             },
+];
 
 export default function OurTestimonial({ initialData }) {
   const [testimonials, setTestimonials] = useState(initialData?.testimonials || []);
   const [logos,        setLogos]        = useState(initialData?.clientLogos  || []);
+  const [activeIdx,    setActiveIdx]    = useState(0);
 
   useEffect(() => {
     if (initialData?.testimonials && initialData?.clientLogos) return;
-    fetch('/api/proxy/testimonials').then(r => r.json()).then(d => setTestimonials(d.results || [])).catch(() => {});
-    fetch('/api/proxy/client-logos').then(r => r.json()).then(d => setLogos(d.results || [])).catch(() => {});
+    fetch('/api/proxy/testimonials').then(r=>r.json()).then(d=>setTestimonials(d.results||[])).catch(()=>{});
+    fetch('/api/proxy/client-logos').then(r=>r.json()).then(d=>setLogos(d.results||[])).catch(()=>{});
   }, []);
 
-  const doubled = [...logos, ...logos];
+  const displayLogos  = logos.length ? logos   : DEFAULT_LOGOS;
+  const doubled       = [...displayLogos, ...displayLogos];
+
+  /* Filter out obviously placeholder/fake testimonials */
+  const realTestimonials = testimonials.filter(t =>
+    t.name && !['Brooklyn Simmons','Wade Warren','Guy Hawkins','Kristin Watson'].includes(t.name)
+  );
 
   return (
-    <section className="bg-[#0D1117] overflow-hidden relative">
-      <div className="absolute inset-0 bg-grid pointer-events-none opacity-45"/>
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#E3510F]/22 to-transparent"/>
+    <section className="relative overflow-hidden" style={{ background:'#0F1420' }}>
+      <div className="absolute inset-0 bg-grid pointer-events-none opacity-35"/>
+      <div className="absolute inset-x-0 top-0 h-px" style={{ background:'linear-gradient(90deg,transparent,rgba(227,81,15,.2),transparent)' }}/>
+      <div className="absolute inset-x-0 bottom-0 h-px divider pointer-events-none"/>
 
-      {/* ── TRUSTED BY TICKER ── */}
-      <div className="border-b border-white/[.05] py-11 relative overflow-hidden">
-        {/* Gradient fade masks */}
-        <div className="absolute left-0 inset-y-0 w-40 z-10 pointer-events-none"
-          style={{ background:'linear-gradient(90deg,#0D1117,transparent)' }}/>
-        <div className="absolute right-0 inset-y-0 w-40 z-10 pointer-events-none"
-          style={{ background:'linear-gradient(270deg,#0D1117,transparent)' }}/>
+      {/* ── TRUSTED BY MARQUEE ── */}
+      <div className="border-b border-white/[.04] py-12 relative overflow-hidden">
+        {/* Fade masks */}
+        <div className="absolute left-0 inset-y-0 w-48 z-10 pointer-events-none"
+          style={{ background:'linear-gradient(90deg,#0F1420,transparent)' }}/>
+        <div className="absolute right-0 inset-y-0 w-48 z-10 pointer-events-none"
+          style={{ background:'linear-gradient(270deg,#0F1420,transparent)' }}/>
 
-        <div className="max-w-screen-xl mx-auto px-10 mb-8 flex items-center gap-5">
+        {/* Label */}
+        <div className="max-w-screen-xl mx-auto px-10 mb-10 flex items-center gap-5 relative z-20">
           <motion.span
-            className="eyebrow text-[.62rem]"
+            className="eyebrow text-[.58rem]"
             initial={{ opacity:0 }} whileInView={{ opacity:1 }} viewport={{ once:true }}
           >
             Trusted by Industry Leaders
           </motion.span>
-          <div className="flex-1 h-px bg-gradient-to-r from-[#E3510F]/20 to-transparent"/>
+          <div className="flex-1 h-px" style={{ background:'linear-gradient(90deg,rgba(227,81,15,.18),transparent)' }}/>
         </div>
 
+        {/* Marquee */}
         <div className="overflow-hidden">
-          <div className="ticker" style={{ width:'max-content' }}>
-            {doubled.length > 0 ? doubled.map((logo, i) => (
-              <div key={i} className="flex-shrink-0 h-10 flex items-center
-                grayscale brightness-75 opacity-35
+          <div className="flex w-max ticker">
+            {doubled.map((logo, i) => (
+              <div key={i} className="flex-shrink-0 h-12 flex items-center px-2
+                grayscale brightness-60 opacity-30
                 hover:grayscale-0 hover:brightness-100 hover:opacity-100
-                transition-all duration-500 cursor-pointer">
+                transition-all duration-500 cursor-pointer"
+              >
                 <Image
-                  src={getAbsoluteURL(logo.image)}
-                  alt={logo.name || 'Partner'}
-                  width={120} height={40}
-                  className="h-9 w-auto object-contain"
+                  src={logo.image?.startsWith('http') ? logo.image : getAbsoluteURL(logo.image)}
+                  alt={logo.name||'Partner'}
+                  width={130} height={48}
+                  className="h-10 w-auto object-contain"
                   unoptimized
                 />
               </div>
-            )) : (
-              // Shimmer placeholders while loading
-              Array.from({ length: 14 }).map((_, i) => (
-                <div key={i} className="flex-shrink-0 h-9 w-28 rounded bg-white/[.04] animate-pulse"/>
-              ))
-            )}
+            ))}
           </div>
         </div>
       </div>
 
-      {/* ── TESTIMONIALS ── */}
-      {testimonials.length > 0 && (
-        <div className="max-w-screen-xl mx-auto px-5 md:px-10 py-24 md:py-32 relative z-10">
-          <div className="flex flex-col lg:flex-row justify-between items-end mb-16 gap-8">
+      {/* ── TESTIMONIALS — only show if we have real ones ── */}
+      {realTestimonials.length > 0 && (
+        <div className="section-gap-sm">
+          <div className="max-w-screen-xl mx-auto px-6 md:px-10 relative z-10">
+
             <motion.div
               initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }}
               viewport={{ once:true }} transition={{ duration:.7, ease }}
+              className="flex items-center gap-5 mb-14"
             >
-              <span className="eyebrow mb-6 block">Client Voices</span>
-              <h2 className="display-md">What Our Partners<br/><span style={{ color:'#E3510F' }}>Say About Us</span></h2>
+              <span className="eyebrow">Client Voices</span>
+              <div className="flex-1 h-px" style={{ background:'linear-gradient(90deg,rgba(227,81,15,.18),transparent)' }}/>
             </motion.div>
-          </div>
 
-          <Swiper
-            modules={[Autoplay, Pagination]}
-            autoplay={{ delay:5500, disableOnInteraction:false }}
-            pagination={{ clickable:true, el:'.testimonial-dots' }}
-            spaceBetween={18}
-            slidesPerView={1}
-            breakpoints={{ 768:{ slidesPerView:2 }, 1200:{ slidesPerView:3 } }}
-            className="!pb-14"
-          >
-            {testimonials.map((t, i) => (
-              <SwiperSlide key={t.id || i}>
-                <div className="cell h-full flex flex-col p-8 group min-h-[280px]">
-                  {/* Stars */}
-                  <div className="flex gap-1 mb-5">
-                    {Array.from({ length: 5 }).map((_, si) => (
-                      <Star key={si} size={12} className="fill-[#E3510F] text-[#E3510F]"/>
+            <div className="relative">
+              <motion.div
+                key={activeIdx}
+                initial={{ opacity:0, y:18 }} animate={{ opacity:1, y:0 }}
+                transition={{ duration:.55, ease }}
+                className="story-card p-10 md:p-14 max-w-4xl mx-auto"
+              >
+                <Quote size={40} className="text-[#E3510F] opacity-25 mb-8"/>
+                <blockquote className="text-[#EDF0F5] text-[1.05rem] md:text-[1.2rem] leading-relaxed font-light mb-10">
+                  "{realTestimonials[activeIdx]?.content || realTestimonials[activeIdx]?.message}"
+                </blockquote>
+                <div className="flex items-center gap-5">
+                  {realTestimonials[activeIdx]?.image && (
+                    <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[#E3510F]/25 flex-shrink-0">
+                      <Image
+                        src={getAbsoluteURL(realTestimonials[activeIdx].image)}
+                        alt={realTestimonials[activeIdx].name}
+                        width={48} height={48}
+                        className="object-cover"
+                        unoptimized
+                      />
+                    </div>
+                  )}
+                  <div>
+                    <div className="text-[#EDF0F5] font-semibold text-[.92rem]">
+                      {realTestimonials[activeIdx]?.name}
+                    </div>
+                    <div className="text-[#4E5A6E] text-[.78rem]">
+                      {realTestimonials[activeIdx]?.designation || realTestimonials[activeIdx]?.company}
+                    </div>
+                  </div>
+                  <div className="ml-auto flex gap-0.5">
+                    {Array.from({ length:5 }).map((_,s) => (
+                      <Star key={s} size={13} className="fill-[#E3510F] text-[#E3510F]"/>
                     ))}
                   </div>
-                  {/* Quote icon */}
-                  <div className="w-10 h-10 rounded-xl bg-[#E3510F]/10 flex items-center justify-center mb-5
-                    group-hover:bg-[#E3510F] transition-colors duration-400">
-                    <Quote size={15} className="text-[#E3510F] group-hover:text-white transition-colors"/>
-                  </div>
-                  {/* Quote text */}
-                  <p className="text-[#9BA5B4] text-[.88rem] leading-relaxed mb-7 flex-grow italic">
-                    &ldquo;{t.content || t.message || t.review}&rdquo;
-                  </p>
-                  {/* Author */}
-                  <div className="flex items-center gap-3.5 pt-5 border-t border-white/[.05]">
-                    <div className="w-10 h-10 rounded-full bg-[#E3510F]/12 flex items-center justify-center flex-shrink-0
-                      border border-[#E3510F]/20 overflow-hidden">
-                      {t.image
-                        ? <Image src={getAbsoluteURL(t.image)} alt={t.name} width={40} height={40} className="object-cover w-full h-full" unoptimized/>
-                        : <span className="text-[#E3510F] font-bold text-sm">{(t.name || 'C')[0]}</span>
-                      }
-                    </div>
-                    <div>
-                      <div className="text-[#F0F2F5] font-semibold text-[.88rem]">{t.name}</div>
-                      {t.designation && <div className="text-[#5A6478] text-xs">{t.designation}</div>}
-                    </div>
-                  </div>
                 </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          <div className="testimonial-dots flex justify-center gap-2 mt-2"/>
+              </motion.div>
+
+              {/* Navigation */}
+              {realTestimonials.length > 1 && (
+                <div className="flex justify-center gap-3 mt-8">
+                  <button
+                    onClick={() => setActiveIdx(i => (i-1+realTestimonials.length)%realTestimonials.length)}
+                    className="w-10 h-10 rounded-full border border-white/[.08] flex items-center justify-center text-[#8C98AA] hover:border-[#E3510F] hover:text-[#E3510F] transition-all"
+                  >
+                    <ChevronLeft size={16}/>
+                  </button>
+                  {realTestimonials.map((_,i) => (
+                    <button key={i} onClick={() => setActiveIdx(i)}
+                      className={`w-2 h-2 rounded-full transition-all ${i===activeIdx?'bg-[#E3510F] w-6':'bg-white/[.15] hover:bg-white/30'}`}
+                    />
+                  ))}
+                  <button
+                    onClick={() => setActiveIdx(i => (i+1)%realTestimonials.length)}
+                    className="w-10 h-10 rounded-full border border-white/[.08] flex items-center justify-center text-[#8C98AA] hover:border-[#E3510F] hover:text-[#E3510F] transition-all"
+                  >
+                    <ChevronRight size={16}/>
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       )}
     </section>

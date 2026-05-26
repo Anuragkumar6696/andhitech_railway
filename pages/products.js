@@ -4,9 +4,12 @@ import Image from 'next/image';
 import Header from '../components/Header';
 import PageBanner from '@/components/PageBanner';
 import Footer from '@/components/Footer';
+import ContactCTA from '@/components/ContactCTA';
 import Head from 'next/head';
 import { motion } from 'framer-motion';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { useState } from 'react';
+import { getAbsoluteURL } from '@/utils/url';
 
 export async function getServerSideProps() {
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
@@ -14,71 +17,141 @@ export async function getServerSideProps() {
     const r = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/products/`);
     const d = await r.json();
     return { props: { products: Array.isArray(d) ? d : d.results||[] } };
-  } catch { return { props: { products: [] } }; }
+  } catch { return { props: { products:[] } }; }
 }
 
-export default function Products({ products }) {
-  return (
-    <div className="bg-[#07080C] min-h-screen">
-      <Head>
-        <title>Products & Services | AND Hitech</title>
-        <meta name="description" content="Premium industrial products and services for railways and beyond." />
-      </Head>
-      <Header />
-      <PageBanner title="Products & Services" backgroundImage="/images/page-header-bg.jpg" currentPage="Products & Services" />
+const CATEGORIES = ['All','LHB','Vande Bharat','Metro','Brake','HVAC','Track'];
+const CAT_COLORS = { 'LHB':'#E3510F','Vande Bharat':'#2563EB','Metro':'#7C3AED','Brake':'#DC2626','HVAC':'#059669','Track':'#D97706' };
+const ease = [.22,1,.36,1];
 
-      <section className="py-24 md:py-32 relative">
-        <div className="absolute inset-0 bg-grid-fine opacity-40 pointer-events-none" />
-        <div className="max-w-screen-xl mx-auto px-5 md:px-10 relative z-10">
+const strip = (html, n=20) => (html||'').replace(/<[^>]*>/g,'').split(' ').slice(0,n).join(' ')+'…';
+
+export default function Products({ products }) {
+  const [activeCat, setActiveCat] = useState('All');
+
+  const filtered = activeCat === 'All'
+    ? products
+    : products.filter(p => (p.category?.name||'').includes(activeCat));
+
+  return (
+    <div className="min-h-screen" style={{ background:'#050608' }}>
+      <Head>
+        <title>Products & Solutions | AND Hitech Industries</title>
+        <meta name="description" content="Premium railway components and engineering solutions — LHB, Vande Bharat, Metro, Brake Systems, HVAC, Track Maintenance."/>
+      </Head>
+
+      <Header/>
+      <PageBanner
+        title="Products & Solutions"
+        backgroundImage="/images/ourproductbg.jpg"
+        currentPage="Products"
+      />
+
+      <section className="relative overflow-hidden section-gap" style={{ background:'#050608' }}>
+        <div className="absolute inset-0 bg-grid-fine opacity-40 pointer-events-none"/>
+        <div className="absolute inset-0 glow-left pointer-events-none opacity-60"/>
+
+        <div className="max-w-screen-xl mx-auto px-6 md:px-10 relative z-10">
+
           {/* Header */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20 items-end">
-            <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}>
-              <span className="eyebrow mb-5 block">Our Solutions</span>
-              <h2 className="display-md">High-Performance Components<br/>for <span style={{color:'#E3510F'}}>Critical Infrastructure</span></h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16 items-end">
+            <motion.div initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:.75, ease }}>
+              <span className="eyebrow mb-7 block">Our Solutions</span>
+              <h2 className="display-md">
+                High-Performance Components<br/>for <span style={{ color:'#E3510F' }}>Critical Infrastructure</span>
+              </h2>
             </motion.div>
-            <p className="text-[#9BA5B4] text-sm leading-relaxed border-l-2 border-[#E3510F]/40 pl-6 italic">
-              &ldquo;At AHIL, we specialize in manufacturing high-performance components designed for safety, efficiency, and reliability.&rdquo;
-            </p>
+            <motion.p
+              initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }}
+              viewport={{ once:true }} transition={{ delay:.14, duration:.7, ease }}
+              className="text-[#8C98AA] leading-relaxed border-l-2 border-[#E3510F]/35 pl-7 text-[.95rem]"
+            >
+              At AHIL, we specialise in manufacturing high-performance railway components designed for safety, efficiency, and long-term reliability — from concept through to certified delivery.
+            </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {products.map((p, i) => (
-              <motion.div key={p.id} initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}
-                transition={{ delay:(i%6)*0.07, duration:0.65 }}
-                className="product-card group flex flex-col">
-                <div className="relative h-56 overflow-hidden flex-shrink-0">
-                  <Image src={p.icon} alt={p.title} fill className="object-cover opacity-75 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#07080C] via-[#07080C]/20 to-transparent" />
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-[#E3510F] text-white text-[9px] font-medium uppercase tracking-widest px-3 py-1" style={{fontFamily:'var(--font-mono)',clipPath:'polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px))'}}>
-                      {p.category?.name||'Engineering'}
-                    </span>
-                  </div>
-                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="w-8 h-8 rounded-full bg-[#E3510F] flex items-center justify-center">
-                      <ArrowUpRight size={14} className="text-white" />
-                    </div>
-                  </div>
-                </div>
-                <div className="p-7 flex flex-col flex-grow">
-                  <h3 className="text-[#F0F2F5] font-semibold text-base mb-3 group-hover:text-[#E3510F] transition-colors leading-snug">{p.title}</h3>
-                  <p className="text-[#5A6478] text-sm leading-relaxed mb-7 line-clamp-3 flex-grow">
-                    {p.content?.replace(/<[^>]*>/g,'')||'Precision engineered for maximum efficiency and long-term reliability.'}
-                  </p>
-                  <Link href={`/products/${p.slug}`}
-                    className="flex items-center gap-2 text-[#9BA5B4] hover:text-[#E3510F] transition-colors text-xs uppercase tracking-wider font-medium pt-5 border-t border-white/5 group/link"
-                    style={{fontFamily:'var(--font-mono)'}}>
-                    <span>View Details</span>
-                    <ArrowRight size={13} className="group-hover/link:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-              </motion.div>
+          {/* Category filter */}
+          <motion.div
+            initial={{ opacity:0 }} whileInView={{ opacity:1 }}
+            viewport={{ once:true }} transition={{ delay:.18 }}
+            className="flex flex-wrap gap-2.5 mb-12"
+          >
+            {CATEGORIES.map(cat => (
+              <button
+                key={cat}
+                onClick={() => setActiveCat(cat)}
+                className={`px-5 py-2 rounded-full text-[.62rem] font-medium uppercase tracking-widest transition-all duration-300 ${
+                  activeCat===cat
+                    ? 'bg-[#E3510F] text-white shadow-lg shadow-[#E3510F]/25'
+                    : 'bg-white/[.04] text-[#4E5A6E] border border-white/[.06] hover:border-[#E3510F]/35 hover:text-[#E3510F]'
+                }`}
+                style={{ fontFamily:'var(--font-mono)' }}
+              >
+                {cat}
+              </button>
             ))}
-            {!products.length && <div className="col-span-3 text-center py-20 text-[#4A5568]">No products found.</div>}
+          </motion.div>
+
+          {/* Product grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {(filtered.length ? filtered : products).map((p, i) => {
+              const catName = p.category?.name || 'Engineering';
+              const accent  = CAT_COLORS[catName] || '#E3510F';
+              const imgSrc  = p.icon ? (p.icon.startsWith('http') ? p.icon : getAbsoluteURL(p.icon)) : '/images/hero-bg.jpg';
+              return (
+                <motion.div
+                  key={p.id||i}
+                  initial={{ opacity:0, y:32 }} whileInView={{ opacity:1, y:0 }}
+                  viewport={{ once:true, margin:'-50px' }} transition={{ delay:(i%6)*.07, duration:.7, ease }}
+                  className="group"
+                >
+                  <Link href={`/products/${p.slug||p.id}`}>
+                    <div className="pcard flex flex-col h-full">
+                      <div className="relative overflow-hidden flex-shrink-0" style={{ height:220 }}>
+                        <Image
+                          src={imgSrc} alt={p.title} fill
+                          className="object-cover opacity-65 group-hover:opacity-90 group-hover:scale-[1.07] transition-all duration-700"
+                          unoptimized
+                        />
+                        <div className="absolute inset-0" style={{ background:'linear-gradient(to top,#0B0E15 0%,transparent 55%)' }}/>
+                        <div className="absolute top-4 left-4">
+                          <span className="chip" style={{ background:accent }}>{catName}</span>
+                        </div>
+                        <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-400">
+                          <div className="w-9 h-9 rounded-full flex items-center justify-center" style={{ background:accent }}>
+                            <ArrowUpRight size={14} className="text-white"/>
+                          </div>
+                        </div>
+                        <div className="absolute bottom-0 left-0 right-0 h-px"
+                          style={{ background:`linear-gradient(90deg,${accent}00,${accent}45,${accent}00)` }}/>
+                      </div>
+                      <div className="p-7 flex flex-col flex-grow">
+                        <h3 className="text-[#EDF0F5] font-semibold text-[.95rem] mb-3 leading-snug group-hover:text-[#E3510F] transition-colors duration-300">
+                          {p.title}
+                        </h3>
+                        <p className="text-[#4E5A6E] text-[.8rem] leading-relaxed flex-1 mb-6">
+                          {strip(p.description || p.content)}
+                        </p>
+                        <div className="flex items-center gap-2 text-[.62rem] font-medium uppercase tracking-widest transition-colors duration-300"
+                          style={{ color:accent, fontFamily:'var(--font-mono)' }}>
+                          <span>View Details</span>
+                          <ArrowRight size={11} className="group-hover:translate-x-1 transition-transform"/>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              );
+            })}
+            {!filtered.length && !products.length && (
+              <div className="col-span-3 text-center py-24 text-[#4E5A6E]">No products found.</div>
+            )}
           </div>
         </div>
       </section>
-      <Footer />
+
+      <ContactCTA/>
+      <Footer/>
     </div>
   );
 }

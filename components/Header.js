@@ -1,35 +1,41 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { Menu, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 
 const links = [
-  { label:'Home',       href:'/' },
-  { label:'About',      href:'/about-us' },
-  { label:'Products',   href:'/products' },
-  { label:'Industries', href:'/industries' },
-  { label:'Infra',      href:'/infrastructure' },
-  { label:'Career',     href:'/career' },
-  { label:'News',       href:'/news-media' },
-  { label:'Contact',    href:'/contact' },
+  { label:'Home',           href:'/' },
+  { label:'About',          href:'/about-us' },
+  { label:'Products',       href:'/products' },
+  { label:'Industries',     href:'/industries' },
+  { label:'Infrastructure', href:'/infrastructure' },
+  { label:'Career',         href:'/career' },
+  { label:'News',           href:'/news-media' },
+  { label:'Contact',        href:'/contact' },
 ];
 
 export default function Header({ initialData }) {
-  const [settings, setSettings] = useState(initialData || null);
-  const [open, setOpen]         = useState(false);
-  const [scrollY, setScrollY]   = useState(0);
+  const [settings,   setSettings]   = useState(initialData || null);
+  const [open,       setOpen]       = useState(false);
+  const [scrolled,   setScrolled]   = useState(false);
+  const [scrollDir,  setScrollDir]  = useState('up');
+  const lastY = useRef(0);
   const router = useRouter();
 
+  const { scrollY } = useScroll();
+  useMotionValueEvent(scrollY, 'change', (y) => {
+    setScrolled(y > 72);
+    setScrollDir(y > lastY.current ? 'down' : 'up');
+    lastY.current = y;
+  });
+
   useEffect(() => {
-    const fn = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', fn, { passive: true });
     if (!initialData) {
       fetch('/api/proxy/site-settings').then(r => r.json()).then(setSettings).catch(() => {});
     }
-    return () => window.removeEventListener('scroll', fn);
   }, []);
 
   useEffect(() => {
@@ -38,44 +44,69 @@ export default function Header({ initialData }) {
     return () => router.events.off('routeChangeStart', close);
   }, [router]);
 
-  const scrolled = scrollY > 64;
-  const active   = (h) => h === '/' ? router.pathname === '/' : router.pathname.startsWith(h);
+  const active = (h) => h === '/' ? router.pathname === '/' : router.pathname.startsWith(h);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-[900] transition-all duration-500
-        ${scrolled ? 'bg-[#07080C]/92 backdrop-blur-2xl border-b border-white/[.05] py-3' : 'bg-transparent py-5'}`}
+    <motion.header
+      animate={{ y: scrolled && scrollDir === 'down' && !open ? -100 : 0 }}
+      transition={{ duration: .45, ease: [.22,1,.36,1] }}
+      className={`fixed top-0 left-0 right-0 z-[900] transition-all duration-500 ${
+        scrolled
+          ? 'bg-[#050608]/90 backdrop-blur-2xl border-b border-white/[.04]'
+          : 'bg-transparent'
+      }`}
     >
-      {/* Flame top stripe — animates in on scroll */}
-      <div
-        className={`absolute top-0 inset-x-0 h-[1.5px] transition-opacity duration-500 ${scrolled ? 'opacity-100' : 'opacity-0'}`}
-        style={{ background: 'linear-gradient(90deg,transparent 0%,#E3510F 40%,#FF6B35 60%,transparent 100%)' }}
+      {/* Animated flame top stripe */}
+      <motion.div
+        animate={{ scaleX: scrolled ? 1 : 0 }}
+        transition={{ duration: .5 }}
+        className="absolute top-0 inset-x-0 h-[1px] origin-left"
+        style={{ background:'linear-gradient(90deg,#E3510F 0%,#FF6835 40%,rgba(227,81,15,.4) 70%,transparent 100%)' }}
       />
 
-      <div className="max-w-screen-xl mx-auto px-5 md:px-10 flex items-center justify-between gap-8">
+      <div className="max-w-screen-xl mx-auto px-6 md:px-10 flex items-center justify-between gap-8" style={{ paddingTop: scrolled ? 14 : 22, paddingBottom: scrolled ? 14 : 22, transition:'padding .3s' }}>
+
         {/* Logo */}
-        <Link href="/" className="relative z-10 flex-shrink-0">
+        <Link href="/" className="relative z-10 flex-shrink-0 group">
           {settings?.logo ? (
             <Image
               src={settings.logo}
               alt="AND Hitech Industries"
-              width={160} height={50}
-              className="h-10 w-auto brightness-0 invert transition-opacity hover:opacity-80"
+              width={160} height={48}
+              className="h-9 w-auto brightness-0 invert opacity-85 group-hover:opacity-100 transition-opacity"
               priority
             />
           ) : (
-            <span className="font-bold tracking-[.08em] text-[1.2rem]" style={{ fontFamily:'var(--font-display)' }}>
-              AND<span style={{ color:'#E3510F' }}>HI</span>TECH
-            </span>
+            <div className="flex items-center gap-3">
+              {/* Geometric logo mark */}
+              <div className="relative w-7 h-7 flex-shrink-0">
+                <div className="absolute inset-0" style={{
+                  background:'#E3510F',
+                  clipPath:'polygon(0 0,100% 0,100% 70%,70% 100%,0 100%)',
+                }}/>
+                <div className="absolute inset-[3px]" style={{
+                  background:'#050608',
+                  clipPath:'polygon(0 0,100% 0,100% 70%,70% 100%,0 100%)',
+                }}/>
+                <div className="absolute inset-[5px]" style={{
+                  background:'#E3510F',
+                  clipPath:'polygon(0 0,100% 0,100% 70%,70% 100%,0 100%)',
+                  opacity:.7,
+                }}/>
+              </div>
+              <span style={{ fontFamily:'var(--font-display)', fontSize:'1.25rem', letterSpacing:'.1em', color:'#EDF0F5' }}>
+                AND<span style={{ color:'#E3510F' }}>HITECH</span>
+              </span>
+            </div>
           )}
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-7">
+        <nav className="hidden lg:flex items-center gap-6">
           {links.map(({ label, href }) => (
             <Link
               key={href} href={href}
-              className={`nav-link ${active(href) ? 'active !text-[#E3510F]' : 'text-[#9BA5B4] hover:text-[#F0F2F5]'}`}
+              className={`nav-link ${active(href) ? 'active !text-[#E3510F]' : 'text-[#8C98AA] hover:text-[#EDF0F5]'}`}
             >
               {label}
             </Link>
@@ -83,7 +114,7 @@ export default function Header({ initialData }) {
         </nav>
 
         {/* Desktop CTA */}
-        <Link href="/contact" className="btn-flame hidden lg:inline-flex py-3 px-7 text-xs">
+        <Link href="/contact" className="btn-flame hidden lg:inline-flex py-3 px-7 text-[.6rem]">
           Get a Quote
         </Link>
 
@@ -91,12 +122,12 @@ export default function Header({ initialData }) {
         <button
           onClick={() => setOpen(v => !v)}
           aria-label="Toggle menu"
-          className="lg:hidden relative z-10 text-[#9BA5B4] hover:text-white transition-colors"
+          className="lg:hidden relative z-10 w-9 h-9 flex items-center justify-center text-[#8C98AA] hover:text-white transition-colors"
         >
           <AnimatePresence mode="wait" initial={false}>
             {open
-              ? <motion.div key="x"  initial={{rotate:-90,opacity:0}} animate={{rotate:0,opacity:1}} exit={{rotate:90,opacity:0}}  transition={{duration:.18}}><X    size={22}/></motion.div>
-              : <motion.div key="m" initial={{rotate:90,opacity:0}}  animate={{rotate:0,opacity:1}} exit={{rotate:-90,opacity:0}} transition={{duration:.18}}><Menu size={22}/></motion.div>
+              ? <motion.div key="x"  initial={{rotate:-90,opacity:0}} animate={{rotate:0,opacity:1}} exit={{rotate:90,opacity:0}}  transition={{duration:.18}}><X    size={20}/></motion.div>
+              : <motion.div key="m"  initial={{rotate:90,opacity:0}}  animate={{rotate:0,opacity:1}} exit={{rotate:-90,opacity:0}} transition={{duration:.18}}><Menu size={20}/></motion.div>
             }
           </AnimatePresence>
         </button>
@@ -106,31 +137,32 @@ export default function Header({ initialData }) {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity:0, y:-6 }}
-            animate={{ opacity:1, y:0 }}
-            exit={{ opacity:0, y:-6 }}
-            transition={{ duration:.3, ease:[.22,1,.36,1] }}
-            className="absolute top-full inset-x-0 bg-[#07080C]/98 backdrop-blur-2xl border-b border-white/5 lg:hidden"
+            initial={{ opacity:0, y:-8, backdropFilter:'blur(0px)' }}
+            animate={{ opacity:1, y:0,  backdropFilter:'blur(32px)' }}
+            exit={{ opacity:0, y:-8 }}
+            transition={{ duration:.32, ease:[.22,1,.36,1] }}
+            className="absolute top-full inset-x-0 bg-[#050608]/96 border-b border-white/[.04] lg:hidden"
           >
-            <div className="max-w-screen-xl mx-auto px-5 py-8 space-y-px">
+            <div className="max-w-screen-xl mx-auto px-6 py-8 space-y-px">
               {links.map(({ label, href }, i) => (
                 <motion.div
                   key={href}
-                  initial={{ opacity:0, x:-14 }}
+                  initial={{ opacity:0, x:-16 }}
                   animate={{ opacity:1, x:0 }}
-                  transition={{ delay: i * .05 }}
+                  transition={{ delay: i * .04, duration:.4, ease:[.22,1,.36,1] }}
                 >
                   <Link
                     href={href}
-                    className={`block py-3.5 px-3 border-b border-white/[.04] text-[.95rem] font-medium tracking-wide transition-colors
-                      ${active(href) ? 'text-[#E3510F]' : 'text-[#9BA5B4] hover:text-white'}`}
+                    className={`flex items-center justify-between py-4 border-b border-white/[.035] text-[.88rem] font-medium tracking-wide transition-colors group
+                      ${active(href) ? 'text-[#E3510F]' : 'text-[#8C98AA] hover:text-white'}`}
                     onClick={() => setOpen(false)}
                   >
-                    {label}
+                    <span>{label}</span>
+                    <span className="w-0 group-hover:w-5 h-px bg-[#E3510F] transition-all duration-300 overflow-hidden"/>
                   </Link>
                 </motion.div>
               ))}
-              <div className="pt-7">
+              <div className="pt-8">
                 <Link href="/contact" className="btn-flame w-full justify-center" onClick={() => setOpen(false)}>
                   Get a Free Quote
                 </Link>
@@ -139,6 +171,6 @@ export default function Header({ initialData }) {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   );
 }

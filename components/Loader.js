@@ -1,60 +1,134 @@
 'use client';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 export default function Loader() {
-  return (
-    <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#07080C]">
-      {/* Grid BG */}
-      <div className="absolute inset-0 bg-grid opacity-25 pointer-events-none"/>
-      {/* Center glow */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        background: 'radial-gradient(ellipse 600px 400px at 50% 50%,rgba(227,81,15,.06),transparent 70%)'
-      }}/>
+  const [progress, setProgress] = useState(0);
 
-      {/* Spinner rings */}
-      <div className="relative flex items-center justify-center mb-8">
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress(p => Math.min(p + Math.random() * 18, 95));
+    }, 120);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <motion.div
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: .6, ease: [.22,1,.36,1] } }}
+      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#050608] overflow-hidden"
+    >
+      {/* Atmospheric grid */}
+      <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none"/>
+
+      {/* Radial glow pulse */}
+      <motion.div
+        animate={{ scale: [1, 1.15, 1], opacity: [.06, .12, .06] }}
+        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute w-[600px] h-[600px] rounded-full pointer-events-none"
+        style={{ background: 'radial-gradient(circle, rgba(227,81,15,.15) 0%, transparent 70%)' }}
+      />
+
+      {/* Corner accents */}
+      {[
+        'top-8 left-8 border-t border-l',
+        'top-8 right-8 border-t border-r',
+        'bottom-8 left-8 border-b border-l',
+        'bottom-8 right-8 border-b border-r',
+      ].map((cls, i) => (
         <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-          className="absolute w-24 h-24 rounded-full"
-          style={{ border:'1px solid rgba(227,81,15,.25)', borderTopColor:'#E3510F' }}
+          key={i}
+          initial={{ opacity: 0, scale: .8 }}
+          animate={{ opacity: .3, scale: 1 }}
+          transition={{ delay: i * .08, duration: .6 }}
+          className={`absolute w-12 h-12 border-[#E3510F]/40 ${cls}`}
         />
+      ))}
+
+      {/* Main logo mark */}
+      <div className="relative mb-12 flex flex-col items-center">
+        {/* Spinning SVG rings */}
+        <div className="relative w-28 h-28 mb-8">
+          <motion.svg
+            animate={{ rotate: 360 }}
+            transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+            className="absolute inset-0"
+            viewBox="0 0 112 112"
+          >
+            <circle cx="56" cy="56" r="50" fill="none" stroke="rgba(227,81,15,.1)" strokeWidth="1" strokeDasharray="6 4"/>
+          </motion.svg>
+          <motion.svg
+            animate={{ rotate: -360 }}
+            transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
+            className="absolute inset-0"
+            viewBox="0 0 112 112"
+          >
+            <circle
+              cx="56" cy="56" r="46"
+              fill="none"
+              stroke="url(#loaderGrad)"
+              strokeWidth="1.5"
+              strokeDasharray="32 282"
+              strokeLinecap="round"
+            />
+            <defs>
+              <linearGradient id="loaderGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#E3510F"/>
+                <stop offset="100%" stopColor="rgba(227,81,15,0)"/>
+              </linearGradient>
+            </defs>
+          </motion.svg>
+          {/* Centre text */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <motion.span
+              animate={{ opacity: [.5, 1, .5] }}
+              transition={{ duration: 2.2, repeat: Infinity }}
+              style={{ fontFamily:'var(--font-display)', fontSize:'1.2rem', letterSpacing:'.32em', color:'#EDF0F5' }}
+            >
+              AHIL
+            </motion.span>
+          </div>
+        </div>
+
+        {/* Brand name */}
         <motion.div
-          animate={{ rotate: -360 }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-          className="absolute w-14 h-14 rounded-full"
-          style={{ border:'1px dashed rgba(227,81,15,.18)', borderTopColor:'rgba(227,81,15,.5)' }}
-        />
-        {/* Center icon */}
-        <motion.div
-          animate={{ opacity: [.4, 1, .4] }}
-          transition={{ duration: 1.9, repeat: Infinity }}
-          className="relative z-10"
-          style={{ fontFamily:'var(--font-display)', fontSize:'.85rem', letterSpacing:'.3em', color:'#F0F2F5' }}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: .4, duration: .7 }}
+          style={{ fontFamily:'var(--font-display)', fontSize:'clamp(1rem,3vw,1.4rem)', letterSpacing:'.22em', color:'rgba(237,240,245,.35)' }}
         >
-          AHIL
+          AND HITECH INDUSTRIES
         </motion.div>
       </div>
 
-      {/* Progress bar */}
-      <div className="w-[240px] h-[1px] bg-white/[.06] overflow-hidden rounded-full">
+      {/* Progress track */}
+      <div className="w-72 h-px bg-white/[.04] overflow-hidden relative rounded-full mb-4">
         <motion.div
-          initial={{ x: '-100%' }}
-          animate={{ x: '100%' }}
-          transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
-          className="h-full w-1/2 rounded-full"
-          style={{ background: 'linear-gradient(90deg,transparent,#E3510F,transparent)' }}
+          className="h-full rounded-full"
+          style={{
+            width: `${progress}%`,
+            background: 'linear-gradient(90deg,#E3510F,#FF6835)',
+            boxShadow: '0 0 12px rgba(227,81,15,.6)',
+            transition: 'width .12s linear',
+          }}
+        />
+        {/* Shimmer */}
+        <motion.div
+          animate={{ x: ['-100%', '200%'] }}
+          transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut', repeatDelay: .4 }}
+          className="absolute inset-y-0 w-1/3 rounded-full"
+          style={{ background: 'linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent)' }}
         />
       </div>
 
+      {/* Status text */}
       <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: .22 }}
-        transition={{ delay: .6 }}
-        className="absolute bottom-14 text-[.55rem] uppercase tracking-[.45em] text-[#F0F2F5] font-mono"
+        animate={{ opacity: [.2, .5, .2] }}
+        transition={{ duration: 2, repeat: Infinity }}
+        style={{ fontFamily:'var(--font-mono)', fontSize:'.5rem', letterSpacing:'.35em', textTransform:'uppercase', color:'rgba(237,240,245,.3)' }}
       >
-        Engineering Excellence
+        Initialising Systems
       </motion.p>
-    </div>
+    </motion.div>
   );
 }
