@@ -2,51 +2,53 @@
 
 /*
  * ═══════════════════════════════════════════════════════════════
- *   AND HITECH INDUSTRIES — PRECISION MACHINE DESIGN SYSTEM v3
- *   Aesthetic: Dark industrial · Cinematic · Enterprise-grade
+ *   AND HITECH INDUSTRIES — CINEMATIC DESIGN SYSTEM v4
+ *   Aesthetic: Dark industrial · Cinematic · Futuristic Rail
  * ═══════════════════════════════════════════════════════════════
  */
 
 @theme {
-  /* ── VOID PALETTE ── */
-  --color-void:        #07080C;
-  --color-surface-1:   #0D1117;
-  --color-surface-2:   #111827;
-  --color-surface-3:   #1A2133;
-  --color-surface-4:   #222D42;
-
-  /* ── BRAND FLAME ── */
+  --color-void:         #07080C;
+  --color-surface-1:    #0D1117;
+  --color-surface-2:    #111827;
+  --color-surface-3:    #1A2133;
+  --color-surface-4:    #222D42;
   --color-flame:        #E3510F;
   --color-flame-bright: #FF6B35;
   --color-flame-dim:    #A33A0A;
-
-  /* ── METAL / CHROME ── */
-  --color-chrome:  #8892A0;
-  --color-steel:   #4B5568;
-  --color-iron:    #2D3748;
-
-  /* ── INK / TEXT ── */
-  --color-ink-1: #F0F2F5;
-  --color-ink-2: #9BA5B4;
-  --color-ink-3: #5A6478;
-  --color-ink-4: #3A4457;
-
-  /* ── TYPOGRAPHY ── */
-  --font-display: 'Bebas Neue', 'Impact', ui-sans-serif;
-  --font-body:    'DM Sans', ui-sans-serif, system-ui;
-  --font-mono:    'DM Mono', 'Courier New', monospace;
+  --color-chrome:       #8892A0;
+  --color-steel:        #4B5568;
+  --color-iron:         #2D3748;
+  --color-ink-1:        #F0F2F5;
+  --color-ink-2:        #9BA5B4;
+  --color-ink-3:        #5A6478;
+  --color-ink-4:        #3A4457;
+  --font-display:       'Bebas Neue', 'Impact', ui-sans-serif;
+  --font-body:          'DM Sans', ui-sans-serif, system-ui;
+  --font-mono:          'DM Mono', 'Courier New', monospace;
 }
 
 /* ─── KEYFRAMES ─────────────────────────────────────────── */
-@keyframes ticker-scroll     { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-@keyframes flame-pulse        { 0%,100%{opacity:1} 50%{opacity:.55} }
-@keyframes float-y            { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-@keyframes scan-down          { from{transform:translateY(-100%)} to{transform:translateY(100vh)} }
-@keyframes slide-in-up        { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
-@keyframes gradient-x         { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
-@keyframes spin-slow          { to{transform:rotate(360deg)} }
-@keyframes count-up           { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
-@keyframes border-glow        { 0%,100%{opacity:.4} 50%{opacity:1} }
+@keyframes ticker-scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+@keyframes flame-pulse   { 0%,100%{opacity:1} 50%{opacity:.55} }
+@keyframes float-y       { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+@keyframes scan-down     { from{transform:translateY(-100%)} to{transform:translateY(100vh)} }
+@keyframes border-glow   { 0%,100%{opacity:.4} 50%{opacity:1} }
+@keyframes shimmer-x     { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+@keyframes spin-slow     { to{transform:rotate(360deg)} }
+@keyframes spin-slow-rev { to{transform:rotate(-360deg)} }
+@keyframes pulse-dot     { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.8)} }
+
+/* ─── WHEEL SPIN (CSS-controlled, toggled via .moving class) ── */
+@keyframes wheelSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+.train-svg.moving .wheel-inner {
+  animation: wheelSpin 0.52s linear infinite;
+  transform-box: fill-box;
+  transform-origin: center center;
+}
 
 /* ─── BASE ───────────────────────────────────────────────── */
 @layer base {
@@ -87,23 +89,14 @@
 /* ─── COMPONENTS ─────────────────────────────────────────── */
 @layer components {
 
-  /* ── Glass cards ── */
   .glass {
-    background: rgba(13,17,23,.75);
+    background: rgba(13,17,23,.78);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255,255,255,.07);
     border-radius: 14px;
   }
-  .glass-bright {
-    background: rgba(26,33,51,.55);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255,255,255,.11);
-    border-radius: 14px;
-  }
 
-  /* ── Primary CTA button ── */
   .btn-flame {
     position: relative;
     display: inline-flex;
@@ -137,7 +130,6 @@
   .btn-flame:hover { transform: translateY(-2px); box-shadow: 0 16px 48px rgba(227,81,15,.38); }
   .btn-flame:active { transform: scale(.98); }
 
-  /* ── Ghost / wire button ── */
   .btn-wire {
     display: inline-flex;
     align-items: center;
@@ -157,7 +149,6 @@
   }
   .btn-wire:hover { border-color: #E3510F; color: #E3510F; }
 
-  /* ── Eyebrow label ── */
   .eyebrow {
     display: inline-flex;
     align-items: center;
@@ -177,13 +168,11 @@
     flex-shrink: 0;
   }
 
-  /* ── Display type scale ── */
-  .display-xl  { font-family:var(--font-display); font-size:clamp(4rem,11vw,10rem); line-height:.9; letter-spacing:.02em; }
-  .display-lg  { font-family:var(--font-display); font-size:clamp(2.8rem,7vw,6.5rem); line-height:.93; letter-spacing:.02em; }
+  .display-xl  { font-family:var(--font-display); font-size:clamp(4rem,11vw,10rem); line-height:.88; letter-spacing:.02em; }
+  .display-lg  { font-family:var(--font-display); font-size:clamp(2.8rem,7vw,6.5rem); line-height:.92; letter-spacing:.02em; }
   .display-md  { font-family:var(--font-display); font-size:clamp(2rem,4.5vw,4rem); line-height:.96; letter-spacing:.025em; }
   .display-sm  { font-family:var(--font-display); font-size:clamp(1.4rem,3vw,2.4rem); line-height:1; letter-spacing:.03em; }
 
-  /* ── Engineering grid bg ── */
   .bg-grid {
     background-image:
       linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
@@ -201,21 +190,11 @@
     background-size: 28px 28px;
   }
 
-  /* ── Flame glows ── */
-  .glow-center {
-    background: radial-gradient(ellipse 700px 500px at 50% 50%, rgba(227,81,15,.08),transparent 70%);
-  }
-  .glow-bottom {
-    background: radial-gradient(ellipse 800px 400px at 50% 100%, rgba(227,81,15,.1),transparent 70%);
-  }
-  .glow-left {
-    background: radial-gradient(ellipse 500px 600px at 0% 50%, rgba(227,81,15,.07),transparent 70%);
-  }
-  .glow-right {
-    background: radial-gradient(ellipse 500px 600px at 100% 50%, rgba(227,81,15,.07),transparent 70%);
-  }
+  .glow-center { background: radial-gradient(ellipse 700px 500px at 50% 50%, rgba(227,81,15,.08),transparent 70%); }
+  .glow-bottom { background: radial-gradient(ellipse 800px 400px at 50% 100%, rgba(227,81,15,.10),transparent 70%); }
+  .glow-left   { background: radial-gradient(ellipse 500px 600px at 0% 50%, rgba(227,81,15,.07),transparent 70%); }
+  .glow-right  { background: radial-gradient(ellipse 500px 600px at 100% 50%, rgba(227,81,15,.07),transparent 70%); }
 
-  /* ── Bento cell ── */
   .cell {
     background: #0D1117;
     border: 1px solid rgba(255,255,255,.06);
@@ -229,7 +208,6 @@
     box-shadow: 0 24px 60px rgba(0,0,0,.45);
   }
 
-  /* ── Product / article card ── */
   .pcard {
     background: #0D1117;
     border: 1px solid rgba(255,255,255,.06);
@@ -243,14 +221,12 @@
     box-shadow: 0 28px 64px rgba(0,0,0,.5),0 0 0 1px rgba(227,81,15,.12);
   }
 
-  /* ── Ticker ── */
   .ticker { display:flex; gap:80px; align-items:center; animation: ticker-scroll 35s linear infinite; will-change:transform; }
   .ticker:hover { animation-play-state:paused; }
 
-  /* ── Section divider ── */
-  .divider { height:1px; background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent); }
+  .divider       { height:1px; background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent); }
+  .divider-flame { height:1px; background:linear-gradient(90deg,transparent,rgba(227,81,15,.35),transparent); }
 
-  /* ── Nav link ── */
   .nav-link {
     position: relative;
     font-family: var(--font-mono);
@@ -273,7 +249,6 @@
   }
   .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
 
-  /* ── Input ── */
   .inp {
     width: 100%;
     padding: 14px 18px;
@@ -289,10 +264,8 @@
   .inp:focus { border-color: #E3510F; background: rgba(227,81,15,.04); }
   .inp::placeholder { color: #3A4457; }
 
-  /* ── Accent line ── */
   .accent { display:block; width:36px; height:2px; background:linear-gradient(90deg,#E3510F,#FF6B35); border-radius:1px; }
 
-  /* ── Metric number ── */
   .metric {
     font-family: var(--font-display);
     font-size: clamp(3.2rem,6vw,5.5rem);
@@ -301,7 +274,6 @@
     color: #F0F2F5;
   }
 
-  /* ── Process step ── */
   .step {
     position: relative;
     background: #0D1117;
@@ -321,4 +293,8 @@
   }
   .step:hover { border-color:rgba(227,81,15,.22); transform:translateY(-3px); }
   .step:hover::after { opacity:1; }
+
+  /* Hero scroll storytelling layout */
+  .hero-scroll-space { height: 200vh; position: relative; }
+  .hero-sticky-inner { position: sticky; top: 0; height: 100vh; overflow: hidden; }
 }

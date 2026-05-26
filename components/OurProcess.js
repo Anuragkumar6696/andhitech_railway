@@ -1,5 +1,4 @@
 'use client';
-import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Search, Settings, Zap, Shield } from 'lucide-react';
@@ -11,58 +10,77 @@ const steps = [
   { Icon:Shield,   n:'04', title:'Rigorous Testing',        text:'Every product certified through comprehensive testing aligned with international railway standards.' },
 ];
 
-const ease = [.22,1,.36,1];
+const ease = [.22, 1, .36, 1];
 
 export default function OurProcess() {
   return (
     <section className="bg-[#07080C] py-24 md:py-36 overflow-hidden relative">
-      <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none"/>
-      <div className="absolute inset-0 glow-center pointer-events-none opacity-60"/>
+      <div className="absolute inset-0 bg-grid opacity-45 pointer-events-none"/>
+      <div className="absolute inset-0 glow-center pointer-events-none opacity-55"/>
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/[.04] to-transparent"/>
 
       <div className="max-w-screen-xl mx-auto px-5 md:px-10 relative z-10">
 
-        {/* Header row */}
+        {/* Header */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-24 items-end">
-          <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:.7,ease}}>
+          <motion.div
+            initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }}
+            viewport={{ once:true }} transition={{ duration:.7, ease }}
+          >
             <span className="eyebrow mb-6 block">Engineering Workflow</span>
-            <h2 className="display-md">From Concept to<br/><span style={{color:'#E3510F'}}>Certified Product</span></h2>
+            <h2 className="display-md">From Concept to<br/><span style={{ color:'#E3510F' }}>Certified Product</span></h2>
           </motion.div>
-          <motion.p initial={{opacity:0,y:16}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:.15,duration:.7,ease}}
-            className="text-[#9BA5B4] leading-relaxed text-[.95rem] border-l-2 border-[#E3510F]/35 pl-6">
+          <motion.p
+            initial={{ opacity:0, y:16 }} whileInView={{ opacity:1, y:0 }}
+            viewport={{ once:true }} transition={{ delay:.15, duration:.7, ease }}
+            className="text-[#9BA5B4] leading-relaxed text-[.96rem] border-l-2 border-[#E3510F]/35 pl-6"
+          >
             At AHIL, a structured four-stage engineering process ensures every deliverable meets the precise standards required for railway and metro applications.
           </motion.p>
         </div>
 
-        {/* ── TIMELINE ── */}
+        {/* Timeline */}
         <div className="relative">
-          {/* Horizontal connecting line — desktop */}
-          <div className="absolute hidden lg:block"
-            style={{top:'56px',left:'calc(56px + 2.5rem)',right:'calc(56px + 2.5rem)',height:'1px',background:'linear-gradient(90deg,transparent,rgba(227,81,15,.25) 20%,rgba(227,81,15,.25) 80%,transparent)'}}>
+          {/* Horizontal connecting line (desktop) */}
+          <div
+            className="absolute hidden lg:block"
+            style={{
+              top: '56px',
+              left: 'calc(56px + 2.5rem)',
+              right: 'calc(56px + 2.5rem)',
+              height: '1px',
+              background: 'linear-gradient(90deg,transparent,rgba(227,81,15,.22) 20%,rgba(227,81,15,.22) 80%,transparent)',
+            }}
+          >
             {/* Progress dots */}
-            {[0,1,2,3].map(i => (
-              <div key={i} className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#E3510F] border border-[#07080C]"
-                style={{left:`${(i/3)*100}%`}}/>
+            {[0, 1, 2, 3].map(i => (
+              <motion.div
+                key={i}
+                initial={{ scale:0 }} whileInView={{ scale:1 }}
+                viewport={{ once:true }} transition={{ delay: i * .15 + .3, duration:.4 }}
+                className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#E3510F] border border-[#07080C]"
+                style={{ left: `${(i / 3) * 100}%` }}
+              />
             ))}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {steps.map(({ Icon, n, title, text }, i) => (
-              <motion.div key={i} initial={{opacity:0,y:28}} whileInView={{opacity:1,y:0}} viewport={{once:true}}
-                transition={{delay:i*.13,duration:.7,ease}}
-                className="step group">
-
+              <motion.div
+                key={i}
+                initial={{ opacity:0, y:28 }} whileInView={{ opacity:1, y:0 }}
+                viewport={{ once:true }} transition={{ delay: i * .13, duration:.7, ease }}
+                className="step group"
+              >
                 {/* Icon + number row */}
                 <div className="flex items-center gap-4 mb-7">
                   <div className="w-14 h-14 rounded-2xl bg-[#111827] border border-white/8 flex items-center justify-center flex-shrink-0
                     group-hover:bg-[#E3510F] group-hover:border-[#E3510F] transition-all duration-400 relative z-10">
-                    <Icon size={21} className="text-[#E3510F] group-hover:text-white transition-colors"/>
+                    <Icon size={20} className="text-[#E3510F] group-hover:text-white transition-colors"/>
                   </div>
-                  <span className="text-[#1A2133] font-bold text-[4.5rem] leading-none select-none" style={{fontFamily:'var(--font-display)'}}>{n}</span>
+                  <span className="text-[#1A2133] font-bold text-[4.5rem] leading-none select-none" style={{ fontFamily:'var(--font-display)' }}>{n}</span>
                 </div>
-
-                {/* Accent */}
                 <span className="accent mb-5 block"/>
-
                 <h3 className="text-[#F0F2F5] font-semibold text-[.96rem] mb-3 leading-snug">{title}</h3>
                 <p className="text-[#5A6478] text-[.82rem] leading-relaxed">{text}</p>
               </motion.div>
@@ -70,15 +88,35 @@ export default function OurProcess() {
           </div>
         </div>
 
-        {/* ── Photo banner ── */}
-        <motion.div initial={{opacity:0,y:32}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:.4,duration:.8,ease}}
-          className="mt-14 rounded-2xl overflow-hidden relative h-[300px] md:h-[360px] border border-white/[.05]">
-          <Image src="/images/ourprocess.jpg" alt="Manufacturing Process" fill className="object-cover opacity-45"/>
-          <div className="absolute inset-0" style={{background:'linear-gradient(90deg,rgba(7,8,12,.92) 0%,rgba(7,8,12,.6) 50%,transparent 100%)'}}/>
+        {/* Quality banner */}
+        <motion.div
+          initial={{ opacity:0, y:32 }} whileInView={{ opacity:1, y:0 }}
+          viewport={{ once:true }} transition={{ delay:.4, duration:.8, ease }}
+          className="mt-14 rounded-2xl overflow-hidden relative h-[300px] md:h-[360px] border border-white/[.05]"
+        >
+          {/* Background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0D1117] via-[#111827] to-[#0D1117]">
+            <svg className="absolute inset-0 w-full h-full opacity-40" viewBox="0 0 1200 360" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <linearGradient id="qBannerG" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%"   stopColor="#E3510F" stopOpacity=".1"/>
+                  <stop offset="50%"  stopColor="transparent"/>
+                </linearGradient>
+              </defs>
+              <rect width="1200" height="360" fill="url(#qBannerG)"/>
+              <g stroke="rgba(255,255,255,0.035)" strokeWidth="1" fill="none">
+                {[60,120,180,240,300].map(y => <line key={y} x1="0" y1={y} x2="1200" y2={y}/>)}
+                {[100,200,300].map(x => <line key={x} x1={x} y1="0" x2={x} y2="360"/>)}
+              </g>
+              <path d="M 0,90 L 100,90 L 100,180 L 200,180 L 200,270 L 300,270"
+                fill="none" stroke="rgba(227,81,15,.22)" strokeWidth="1.5" strokeDasharray="6 3"/>
+            </svg>
+          </div>
+          <div className="absolute inset-0" style={{ background:'linear-gradient(90deg,rgba(7,8,12,.92) 0%,rgba(7,8,12,.6) 50%,transparent 100%)' }}/>
           <div className="absolute inset-0 flex items-center px-10 md:px-16">
             <div className="max-w-lg">
-              <span className="eyebrow mb-5 block" style={{color:'rgba(255,255,255,.35)'}}>Quality Assurance</span>
-              <h3 className="text-[#F0F2F5] mb-4 leading-tight" style={{fontFamily:'var(--font-display)',fontSize:'clamp(1.6rem,3.5vw,2.8rem)'}}>
+              <span className="eyebrow mb-5 block" style={{ color:'rgba(255,255,255,.3)' }}>Quality Assurance</span>
+              <h3 className="text-[#F0F2F5] mb-4 leading-tight" style={{ fontFamily:'var(--font-display)', fontSize:'clamp(1.6rem,3.5vw,2.8rem)' }}>
                 ISO Certified<br/>Manufacturing
               </h3>
               <p className="text-[#9BA5B4] text-[.88rem] mb-8 leading-relaxed">

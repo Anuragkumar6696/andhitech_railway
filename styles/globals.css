@@ -1,9 +1,9 @@
 /*
  * AND HITECH — GLOBALS.CSS
- * Motion system · Legacy overrides · Utility classes
+ * Motion system · Component overrides · Utilities
  */
 
-/* ── SWIPER OVERRIDES ─────────────────────────── */
+/* ── SWIPER OVERRIDES ─────────────────────────────── */
 .swiper-pagination-bullet {
   width:6px!important; height:6px!important;
   background:rgba(255,255,255,.18)!important;
@@ -17,7 +17,7 @@
   color:#E3510F; font-size:14px!important; font-weight:800!important;
 }
 
-/* ── PROSE (product detail) ─────────────────── */
+/* ── PROSE (product detail) ─────────────────────── */
 .prose { color:#9BA5B4; }
 .prose h1,.prose h2,.prose h3,.prose h4 { color:#F0F2F5; }
 .prose a { color:#E3510F; }
@@ -25,7 +25,7 @@
 .prose code  { background:rgba(255,255,255,.06); color:#F0F2F5; padding:2px 6px; border-radius:4px; }
 .prose blockquote { border-left-color:#E3510F; }
 
-/* ── POPUP ────────────────────────────────────── */
+/* ── POPUP ────────────────────────────────────────── */
 .popup-overlay {
   position:fixed; inset:0; background:rgba(0,0,0,.8); backdrop-filter:blur(10px);
   display:flex; align-items:center; justify-content:center; z-index:9999;
@@ -40,7 +40,7 @@
 .close-btn { position:absolute; top:14px; right:18px; font-size:22px; cursor:pointer; color:#9BA5B4; transition:color .2s; }
 .close-btn:hover { color:#E3510F; }
 
-/* ── CONTACT FORM ────────────────────────────── */
+/* ── CONTACT FORM ────────────────────────────────── */
 .contact-us-form1 .contact-form .form-control {
   background:rgba(255,255,255,.04); color:#F0F2F5;
   border:1px solid rgba(255,255,255,.08); border-radius:8px;
@@ -52,7 +52,7 @@
 }
 .contact-us-form1 .contact-form .form-control::placeholder { color:#3A4457; }
 
-/* ── JOB CARDS (legacy) ──────────────────────── */
+/* ── JOB CARDS ──────────────────────────────────── */
 .cus-jobs .team-box { border:1px solid rgba(255,255,255,.07); border-radius:12px; transition:border-color .3s,transform .3s; }
 .cus-jobs .team-box:hover { border-color:rgba(227,81,15,.3); transform:translateY(-4px); }
 .cus-jobs .team-text { background:#0D1117; padding:28px; border-radius:12px; text-align:center; }
@@ -60,7 +60,7 @@
 .cus-jobs .team-text p  { color:#9BA5B4; }
 .cus-jobs .team-text i  { color:#E3510F; background:rgba(227,81,15,.1); border-radius:8px; padding:18px 20px; font-size:26px; margin-bottom:16px; }
 
-/* ── BROCHURE ────────────────────────────────── */
+/* ── BROCHURE ────────────────────────────────────── */
 a.pdf-btn {
   background:#E3510F; padding:10px 16px; border-radius:4px; color:#fff;
   display:block; width:60%; margin:0 auto; text-align:center;
@@ -69,7 +69,7 @@ a.pdf-btn {
 }
 a.pdf-btn:hover { background:#FF6B35; }
 
-/* ── PRESS RELEASE ───────────────────────────── */
+/* ── PRESS RELEASE ───────────────────────────────── */
 .press-release-section { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; padding:40px 20px; }
 .press-item { background:#0D1117; border:1px solid rgba(255,255,255,.07); border-radius:12px; overflow:hidden; transition:transform .35s,border-color .35s; }
 .press-item:hover { transform:translateY(-6px); border-color:rgba(227,81,15,.3); }
@@ -83,14 +83,14 @@ a.readmorebtn {
 }
 a.readmorebtn:hover { background:#FF6B35; }
 
-/* ── RIGHT COMPLAINT FORM ─────────────────────── */
+/* ── COMPLAINT FORM ──────────────────────────────── */
 .right-form { border:2px solid #E3510F; background:#0D1117; padding:36px 32px; border-radius:16px; box-shadow:0 0 40px rgba(227,81,15,.08); position:relative; overflow:hidden; }
 .right-form::after { content:""; position:absolute; bottom:0; right:0; width:80px; height:80px; background:#E3510F; clip-path:polygon(100% 0,100% 100%,0 100%); opacity:.35; }
 label { font-weight:600; margin-bottom:5px; font-family:'DM Sans',sans-serif; color:#9BA5B4; display:block; }
 .form-section { border:1px solid rgba(255,255,255,.08); padding:24px; border-radius:10px; margin-bottom:24px; }
 .form-section h4 { color:#E3510F; margin-bottom:20px; }
 
-/* ── JOB DETAIL ──────────────────────────────── */
+/* ── JOB DETAIL ──────────────────────────────────── */
 .job-detail { display:flex; justify-content:space-between; align-items:flex-start; }
 .apply-time  { flex-direction:column; width:28%; text-align:end; }
 .description-text { width:72%; padding:0 48px 0 0; }
@@ -106,6 +106,7 @@ label { font-weight:600; margin-bottom:5px; font-family:'DM Sans',sans-serif; co
 .post-text p  { color:#9BA5B4; font-size:14px; }
 .post-icon    { margin-right:14px; float:left; }
 .post-icon i  { color:#E3510F; font-size:22px; }
+
 @media (max-width:991px) {
   .job-detail { flex-direction:column; }
   .apply-time  { width:100%; text-align:left; }
