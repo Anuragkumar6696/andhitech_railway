@@ -9,10 +9,11 @@ import Services from '@/components/services';
 import OurProcess from '@/components/OurProcess';
 import Certificates from '@/components/Certificates';
 import ContactCTA from '@/components/ContactCTA';
+import IndustrialTicker from '@/components/IndustrialTicker';
 
 export default function Home({ siteSettings, banner, products, testimonials, clientLogos }) {
   return (
-    <div className="bg-[#07080C] min-h-screen">
+    <div className="bg-[#050608] min-h-screen">
       <Head>
         <title>{siteSettings?.meta_title || 'AND Hitech Industries | Engineering the Future of Rail'}</title>
         <meta name="description" content={siteSettings?.meta_description || 'Premium Railway Rolling Stock components and advanced HVAC engineering solutions — built for safety, precision and the future of transit.'} />
@@ -22,28 +23,34 @@ export default function Home({ siteSettings, banner, products, testimonials, cli
       <Header initialData={siteSettings}/>
 
       <main>
-        {/* 1 · CINEMATIC HERO — 200vh scroll-linked train */}
+        {/* 1 · CINEMATIC HERO — scroll-linked train storytelling */}
         <Hero initialData={banner}/>
 
-        {/* 2 · TRUSTED BY + TESTIMONIALS */}
+        {/* 2 · INDUSTRIAL TICKER — brand momentum strip */}
+        <IndustrialTicker/>
+
+        {/* 3 · TRUSTED BY + TESTIMONIALS */}
         <OurTestimonial initialData={{ testimonials, clientLogos }}/>
 
-        {/* 3 · CORE CAPABILITIES — BENTO GRID */}
+        {/* 4 · CORE CAPABILITIES — bento grid */}
         <WhatWeDo/>
 
-        {/* 4 · INTERACTIVE STATS */}
+        {/* 5 · PERFORMANCE METRICS */}
         <Statistics/>
 
-        {/* 5 · FEATURED PRODUCTS */}
+        {/* 6 · FEATURED PRODUCTS — split-screen showcase */}
         <Services initialData={products}/>
 
-        {/* 6 · PROCESS TIMELINE */}
+        {/* 7 · TICKER (inverted) — momentum between sections */}
+        <IndustrialTicker inverted/>
+
+        {/* 8 · MANUFACTURING PROCESS TIMELINE */}
         <OurProcess/>
 
-        {/* 7 · CERTIFICATIONS & QUALITY */}
+        {/* 9 · CERTIFICATIONS & QUALITY */}
         <Certificates/>
 
-        {/* 8 · CONTACT CTA */}
+        {/* 10 · CONTACT CTA */}
         <ContactCTA/>
       </main>
 
