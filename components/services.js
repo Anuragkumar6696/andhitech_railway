@@ -11,6 +11,32 @@ const strip = (html, n = 22) =>
 
 const ease = [.22, 1, .36, 1];
 
+const getProductImage = (p) => {
+  let imgSrc = p.icon ? (p.icon.startsWith('http') ? p.icon : getAbsoluteURL(p.icon)) : '/images/hero-bg.jpg';
+  const slug = (p.slug || '').toLowerCase();
+
+  if (slug === 'dashboard-interface' || p.title?.toLowerCase().includes('dashboard') || p.icon?.includes('image18')) {
+    imgSrc = '/images/products/products-index-19.jpg';
+  } else if (slug === 'iv-coupler') {
+    imgSrc = '/images/products/iv-coupler-v2/iv-2.jpg';
+  } else if (slug === 'air-suspension-control-equipment') {
+    imgSrc = '/images/products/air-suspension-v2/as-1.jpg';
+  } else if (slug.includes('axle-mounted-brake-disc')) {
+    imgSrc = '/images/products/axle-brake-v2/br-1.jpg';
+  } else if (slug.includes('roof-mounted-package-unit-rmpu-for-lhb-coaches')) {
+    imgSrc = '/images/products/rmpu-21.jpg';
+  } else if (slug.includes('wheel-mounted-brake-disc-vande-bharat')) {
+    imgSrc = '/images/products/wm-vb/vb-1.jpg';
+  } else if (slug.includes('split-axle-mounted-brake-disc')) {
+    imgSrc = '/images/products/split-brake/split-1.jpg';
+  } else if (slug.includes('brake-pads')) {
+    imgSrc = '/images/products/brake-pads/pad-1.jpg';
+  } else if (slug.includes('lhb-dampers')) {
+    imgSrc = '/images/products/lhb-dampers/damper-1.jpg';
+  }
+  return imgSrc;
+};
+
 const CAT_META = {
   'LHB':           { color:'#E3510F', num:'01' },
   'Vande Bharat':  { color:'#3B82F6', num:'02' },
@@ -30,7 +56,7 @@ function FeaturedProduct({ p, idx, total }) {
     ? useTransform(scrollYProgress, [0, 1], [-20, 20])
     : useTransform(scrollYProgress, [0, 1], [20, -20]);
 
-  const imgSrc  = p.icon ? getAbsoluteURL(p.icon) : '/images/hero-bg.jpg';
+  const imgSrc  = getProductImage(p);
   const catName = p.category?.name || 'Engineering';
   const meta    = CAT_META[catName] || { color: '#E3510F', num: '0' + (idx + 1) };
   const isEven  = idx % 2 === 0;
@@ -189,7 +215,7 @@ function FeaturedProduct({ p, idx, total }) {
 
 /* ── Compact grid card ── */
 function CompactCard({ p, index }) {
-  const imgSrc  = p.icon ? getAbsoluteURL(p.icon) : '/images/hero-bg.jpg';
+  const imgSrc  = getProductImage(p);
   const catName = p.category?.name || 'Engineering';
   const meta    = CAT_META[catName] || { color: '#E3510F', num: '00' };
 

@@ -7,6 +7,26 @@ import 'swiper/css'; import 'swiper/css/pagination';
 
 export default function InfrastructureGallerySections({ sections=[] }) {
   if (!sections?.length) return null;
+
+  // Override images for "Brake Pads and Brake Blocks Production" section
+  const enhancedSections = sections.map(section => {
+    const isBrakeProduction = section.title?.toLowerCase().includes('brake pads') || section.title?.toLowerCase().includes('brake blocks');
+    if (isBrakeProduction) {
+      return {
+        ...section,
+        images: [
+          { image: '/images/infra/infra-1.jpg', caption: 'Brake Production 1' },
+          { image: '/images/infra/infra-2.jpg', caption: 'Brake Production 2' },
+          { image: '/images/infra/infra-3.jpg', caption: 'Brake Production 3' },
+          { image: '/images/infra/infra-4.jpg', caption: 'Brake Production 4' },
+          { image: '/images/infra/infra-5.png', caption: 'Brake Production 5' },
+          { image: '/images/infra/infra-6.jpg', caption: 'Brake Production 6' }
+        ]
+      };
+    }
+    return section;
+  });
+
   return (
     <section className="py-20 bg-[#07080C] relative">
       <div className="absolute inset-0 bg-grid-eng opacity-30 pointer-events-none" />
@@ -16,7 +36,7 @@ export default function InfrastructureGallerySections({ sections=[] }) {
           <h2 className="display-md max-w-xl">Our <span style={{color:'#E3510F'}}>Manufacturing Facilities</span></h2>
         </motion.div>
         <div className="space-y-16">
-          {sections.map((section, si) => (
+          {enhancedSections.map((section, si) => (
             <motion.div key={si} initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}>
               {section.title && <h3 className="text-[#F0F2F5] font-semibold text-lg mb-7 flex items-center gap-3"><span className="accent-line" />{section.title}</h3>}
               {section.images?.length > 0 && (

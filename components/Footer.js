@@ -18,9 +18,6 @@ export default function Footer({ initialData }) {
   const year = new Date().getFullYear();
   const socials = [
     { Icon:Linkedin,  href:s?.linkedin  ||'#', label:'LinkedIn'  },
-    { Icon:Facebook,  href:s?.facebook  ||'#', label:'Facebook'  },
-    { Icon:Instagram, href:s?.instagram ||'#', label:'Instagram' },
-    { Icon:Twitter,   href:s?.twitter   ||'#', label:'Twitter'   },
   ];
 
   return (
@@ -59,8 +56,8 @@ export default function Footer({ initialData }) {
             <Link href="/" className="block group">
               {s?.logo ? (
                 <Image
-                  src={s.logo} alt="AND Hitech Industries" width={160} height={50}
-                  className="h-9 w-auto brightness-0 invert opacity-75 group-hover:opacity-100 transition-opacity"
+                  src={s.logo} alt="AND Hitech Industries" width={180} height={56}
+                  className="h-11 w-auto brightness-0 invert opacity-75 group-hover:opacity-100 transition-opacity"
                 />
               ) : (
                 <div className="flex items-center gap-3">

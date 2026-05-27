@@ -68,37 +68,13 @@ export default function Header({ initialData }) {
 
         {/* Logo */}
         <Link href="/" className="relative z-10 flex-shrink-0 group">
-          {settings?.logo ? (
-            <Image
-              src={settings.logo}
-              alt="AND Hitech Industries"
-              width={160} height={48}
-              className="h-9 w-auto brightness-0 invert opacity-85 group-hover:opacity-100 transition-opacity"
-              priority
-            />
-          ) : (
-            <div className="flex items-center gap-3">
-              {/* Geometric logo mark */}
-              <div className="relative w-7 h-7 flex-shrink-0">
-                <div className="absolute inset-0" style={{
-                  background:'#E3510F',
-                  clipPath:'polygon(0 0,100% 0,100% 70%,70% 100%,0 100%)',
-                }}/>
-                <div className="absolute inset-[3px]" style={{
-                  background:'#050608',
-                  clipPath:'polygon(0 0,100% 0,100% 70%,70% 100%,0 100%)',
-                }}/>
-                <div className="absolute inset-[5px]" style={{
-                  background:'#E3510F',
-                  clipPath:'polygon(0 0,100% 0,100% 70%,70% 100%,0 100%)',
-                  opacity:.7,
-                }}/>
-              </div>
-              <span style={{ fontFamily:'var(--font-display)', fontSize:'1.25rem', letterSpacing:'.1em', color:'#EDF0F5' }}>
-                AND<span style={{ color:'#E3510F' }}>HITECH</span>
-              </span>
-            </div>
-          )}
+          <Image
+            src="/images/logo.png"
+            alt="AND Hitech Industries"
+            width={180} height={54}
+            className="h-11 w-auto brightness-0 invert opacity-85 group-hover:opacity-100 transition-opacity"
+            priority
+          />
         </Link>
 
         {/* Desktop nav */}
@@ -115,7 +91,7 @@ export default function Header({ initialData }) {
 
         {/* Desktop CTA */}
         <Link href="/contact" className="btn-flame hidden lg:inline-flex py-3 px-7 text-[.6rem]">
-          Get a Quote
+          <span>Get a Quote</span>
         </Link>
 
         {/* Mobile toggle */}
@@ -164,7 +140,7 @@ export default function Header({ initialData }) {
               ))}
               <div className="pt-8">
                 <Link href="/contact" className="btn-flame w-full justify-center" onClick={() => setOpen(false)}>
-                  Get a Free Quote
+                  <span>Get a Free Quote</span>
                 </Link>
               </div>
             </div>

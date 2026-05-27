@@ -31,12 +31,13 @@ export default function ClientLogoslider({ logos = [] }) {
             >
               {logos.map((logo) => (
                 <SwiperSlide key={logo.id}>
-                  <div className="company-logo" title={logo.alt_text}>
+                  <div className="company-logo flex items-center justify-center p-4 transition-all duration-500" title={logo.alt_text}>
                     <Image
                       src={logo.image}
                       alt={logo.alt_text || "Client Logo"}
-                      width={100}
-                      height={100}
+                      width={140}
+                      height={140}
+                      className="opacity-70 brightness-110 contrast-125 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500 scale-110"
                       unoptimized // Remove if using local/static images
                     />
                   </div>

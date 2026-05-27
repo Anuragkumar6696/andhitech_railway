@@ -8,15 +8,18 @@ import Head from 'next/head';
 import { motion } from 'framer-motion';
 import { Mail } from 'lucide-react';
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/jobs/`);
     if (!res.ok) throw new Error('Failed to fetch jobs');
     const data = await res.json();
-    return { props: { jobs: data.results || [] } };
+    return { 
+      props: { jobs: data.results || [] },
+      revalidate: 60
+    };
   } catch (error) {
     console.error('Error fetching jobs:', error);
-    return { props: { jobs: [] } };
+    return { props: { jobs: [] }, revalidate: 60 };
   }
 }
 
@@ -57,10 +60,10 @@ export default function CareerPage({ jobs }) {
               </p>
               <a
                 href="mailto:careers@andhitech.in"
-                className="btn-premium inline-flex items-center gap-2"
+                className="btn-premium inline-flex items-center gap-3 text-white font-bold text-lg tracking-wide hover:text-[#E3510F] transition-colors"
               >
-                <Mail size={16} />
-                <span>careers@andhitech.in</span>
+                <Mail size={20} className="text-[#E3510F]" />
+                <span style={{ textShadow: '0 0 20px rgba(227,81,15,0.2)' }}>careers@andhitech.in</span>
               </a>
             </motion.div>
           </div>

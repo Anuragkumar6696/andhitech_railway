@@ -11,13 +11,16 @@ import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { useState } from 'react';
 import { getAbsoluteURL } from '@/utils/url';
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
   try {
     const r = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/products/`);
     const d = await r.json();
-    return { props: { products: Array.isArray(d) ? d : d.results||[] } };
-  } catch { return { props: { products:[] } }; }
+    return { 
+      props: { products: Array.isArray(d) ? d : d.results||[] },
+      revalidate: 60
+    };
+  } catch { return { props: { products:[] }, revalidate: 60 }; }
 }
 
 const CATEGORIES = ['All','LHB','Vande Bharat','Metro','Brake','HVAC','Track'];
@@ -80,10 +83,10 @@ export default function Products({ products }) {
               <button
                 key={cat}
                 onClick={() => setActiveCat(cat)}
-                className={`px-5 py-2 rounded-full text-[.62rem] font-medium uppercase tracking-widest transition-all duration-300 ${
+                className={`px-5 py-2 rounded-full text-[.68rem] font-bold uppercase tracking-[.15em] transition-all duration-400 ${
                   activeCat===cat
-                    ? 'bg-[#E3510F] text-white shadow-lg shadow-[#E3510F]/25'
-                    : 'bg-white/[.04] text-[#4E5A6E] border border-white/[.06] hover:border-[#E3510F]/35 hover:text-[#E3510F]'
+                    ? 'bg-[#E3510F] text-white shadow-lg shadow-[#E3510F]/30 scale-105'
+                    : 'bg-white/[.06] text-[#ADBAC7] border border-white/[.1] hover:border-[#E3510F]/50 hover:text-white hover:bg-white/[.1]'
                 }`}
                 style={{ fontFamily:'var(--font-mono)' }}
               >
@@ -97,7 +100,53 @@ export default function Products({ products }) {
             {(filtered.length ? filtered : products).map((p, i) => {
               const catName = p.category?.name || 'Engineering';
               const accent  = CAT_COLORS[catName] || '#E3510F';
-              const imgSrc  = p.icon ? (p.icon.startsWith('http') ? p.icon : getAbsoluteURL(p.icon)) : '/images/hero-bg.jpg';
+              let imgSrc  = p.icon ? (p.icon.startsWith('http') ? p.icon : getAbsoluteURL(p.icon)) : '/images/hero-bg.jpg';
+              
+              // Image 18 to 19 replacement for dashboard module
+              if (p.slug === 'dashboard-interface' || p.title?.toLowerCase().includes('dashboard') || p.icon?.includes('image18')) {
+                imgSrc = '/images/products/products-index-19.jpg';
+              }
+              
+              // IV Coupler thumbnail update
+              if (p.slug === 'iv-coupler') {
+                imgSrc = '/images/products/iv-coupler-v2/iv-2.jpg';
+              }
+              
+              // Air Suspension thumbnail update
+              if (p.slug === 'air-suspension-control-equipment') {
+                imgSrc = '/images/products/air-suspension-v2/as-1.jpg';
+              }
+              
+              // Axle Brake thumbnail update
+              if (p.slug?.includes('axle-mounted-brake-disc')) {
+                imgSrc = '/images/products/axle-brake-v2/br-1.jpg';
+              }
+              
+              // RMPU thumbnail update
+               if (p.slug?.includes('roof-mounted-package-unit-rmpu-for-lhb-coaches')) {
+                 imgSrc = '/images/products/rmpu-21.jpg';
+               }
+               
+               // Vande Bharat Brake thumbnail update
+               if (p.slug?.includes('wheel-mounted-brake-disc-vande-bharat')) {
+                 imgSrc = '/images/products/wm-vb/vb-1.jpg';
+               }
+               
+               // Split Axle Brake thumbnail update
+               if (p.slug?.includes('split-axle-mounted-brake-disc')) {
+                 imgSrc = '/images/products/split-brake/split-1.jpg';
+               }
+               
+               // Brake Pads thumbnail update
+               if (p.slug?.includes('brake-pads')) {
+                 imgSrc = '/images/products/brake-pads/pad-1.jpg';
+               }
+               
+               // LHB Dampers thumbnail update
+               if (p.slug?.includes('lhb-dampers')) {
+                 imgSrc = '/images/products/lhb-dampers/damper-1.jpg';
+               }
+
               return (
                 <motion.div
                   key={p.id||i}
