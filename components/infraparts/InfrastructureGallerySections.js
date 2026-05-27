@@ -8,21 +8,37 @@ import 'swiper/css'; import 'swiper/css/pagination';
 export default function InfrastructureGallerySections({ sections=[] }) {
   if (!sections?.length) return null;
 
-  // Override images for "Brake Pads and Brake Blocks Production" section
+  // Override images for "Brake Pads and Brake Blocks Production" or "Our Production Units" section
   const enhancedSections = sections.map(section => {
     const isBrakeProduction = section.title?.toLowerCase().includes('brake pads') || section.title?.toLowerCase().includes('brake blocks');
-    if (isBrakeProduction) {
-      return {
-        ...section,
-        images: [
-          { image: '/images/infra/infra-1.jpg', caption: 'Brake Production 1' },
-          { image: '/images/infra/infra-2.jpg', caption: 'Brake Production 2' },
-          { image: '/images/infra/infra-3.jpg', caption: 'Brake Production 3' },
-          { image: '/images/infra/infra-4.jpg', caption: 'Brake Production 4' },
-          { image: '/images/infra/infra-5.png', caption: 'Brake Production 5' },
-          { image: '/images/infra/infra-6.jpg', caption: 'Brake Production 6' }
-        ]
-      };
+    const isProductionUnits = section.title?.toLowerCase().includes('production units');
+    
+    if (isBrakeProduction || isProductionUnits) {
+      const originalImages = section.images || [];
+      const newImages = [...originalImages];
+      
+      if (isBrakeProduction) {
+        return {
+          ...section,
+          images: [
+            { image: '/images/infra/infra-1.jpg', caption: 'Brake Production 1' },
+            { image: '/images/infra/infra-2.jpg', caption: 'Brake Production 2' },
+            { image: '/images/infra/infra-3.jpg', caption: 'Brake Production 3' },
+            { image: '/images/infra/infra-4.jpg', caption: 'Brake Production 4' },
+            { image: '/images/infra/infra-5.png', caption: 'Brake Production 5' },
+            { image: '/images/production-unit-final.jpg', caption: 'Our Production Unit' }
+          ]
+        };
+      }
+      
+      if (isProductionUnits && newImages.length > 0) {
+        newImages[newImages.length - 1] = {
+          ...newImages[newImages.length - 1],
+          image: '/images/production-unit-final.jpg',
+          caption: 'Our Production Unit'
+        };
+        return { ...section, images: newImages };
+      }
     }
     return section;
   });

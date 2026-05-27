@@ -32,7 +32,7 @@ export default function HistoryTabs() {
           <motion.div initial={{ opacity:0, scale:0.9 }} whileInView={{ opacity:1, scale:1 }} viewport={{ once:true }} transition={{ duration:0.8 }}
             className="relative">
             <div className="rounded-2xl overflow-hidden border border-white/6 relative">
-              <Image src="/images/aboutussectionimg1.jpg" alt="AND Hitech" width={600} height={500}
+              <Image src="/images/production-unit-final.jpg" alt="AND Hitech" width={600} height={500}
                 className="w-full h-auto object-cover opacity-75 hover:opacity-90 transition-opacity duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#07080C]/50 to-transparent" />
             </div>

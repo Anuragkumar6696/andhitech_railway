@@ -54,35 +54,26 @@ export default function Footer({ initialData }) {
           {/* Brand column */}
           <div className="lg:col-span-4 space-y-8">
             <Link href="/" className="block group">
-              {s?.logo ? (
-                <Image
-                  src={s.logo} alt="AND Hitech Industries" width={180} height={56}
-                  className="h-11 w-auto brightness-0 invert opacity-75 group-hover:opacity-100 transition-opacity"
-                />
-              ) : (
-                <div className="flex items-center gap-3">
-                  <div className="relative w-6 h-6 flex-shrink-0">
-                    <div className="absolute inset-0" style={{ background:'#E3510F', clipPath:'polygon(0 0,100% 0,100% 70%,70% 100%,0 100%)' }}/>
-                    <div className="absolute inset-[2.5px]" style={{ background:'#050608', clipPath:'polygon(0 0,100% 0,100% 70%,70% 100%,0 100%)' }}/>
-                    <div className="absolute inset-[4.5px]" style={{ background:'#E3510F', clipPath:'polygon(0 0,100% 0,100% 70%,70% 100%,0 100%)', opacity:.7 }}/>
-                  </div>
-                  <span className="font-bold tracking-[.1em] text-[1.15rem] opacity-75 group-hover:opacity-100 transition-opacity"
+                <div className="flex items-center gap-4">
+                  <Image
+                    src="/images/logo-main.png" alt="AND Hitech Industries" width={60} height={60}
+                    className="h-14 w-auto brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity"
+                  />
+                  <span className="font-bold tracking-[.1em] text-[1.25rem] opacity-90 group-hover:opacity-100 transition-opacity"
                     style={{ fontFamily:'var(--font-display)' }}>
                     AND<span style={{ color:'#E3510F' }}>HITECH</span>
                   </span>
                 </div>
-              )}
             </Link>
             <p className="text-[#3D4A5C] text-[.84rem] leading-relaxed max-w-xs">
               Engineering excellence and innovative industrial solutions for railways, metros, and critical infrastructure worldwide.
             </p>
-            {/* Social icons */}
-            <div className="flex gap-2.5">
+            <div className="flex gap-4">
               {socials.map(({ Icon, href, label }) => (
                 <a key={label} href={href} aria-label={label} target="_blank" rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-lg border border-white/[.06] flex items-center justify-center text-[#3D4A5C]
-                    hover:text-white hover:bg-[#E3510F] hover:border-[#E3510F] transition-all duration-300">
-                  <Icon size={13}/>
+                  className="w-12 h-12 rounded-xl border border-white/10 flex items-center justify-center text-[#ADBAC7]
+                    hover:text-white hover:bg-[#E3510F] hover:border-[#E3510F] transition-all duration-500 shadow-lg">
+                  <Icon size={18}/>
                 </a>
               ))}
             </div>
@@ -169,9 +160,9 @@ export default function Footer({ initialData }) {
         </div>
 
         {/* ── Bottom bar ── */}
-        <div className="border-t border-white/[.04] py-7 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-[#2E3848] text-[.73rem]">
-            © {year} AND Hitech Industries Limited. All Rights Reserved.
+        <div className="border-t border-white/[.04] py-10 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-[#4E5A6E] text-[.85rem] font-medium">
+            © {year} AND Hitech Industries Limited.
           </p>
           <div className="flex items-center gap-6 flex-wrap justify-center">
             {[['Privacy Policy','/privacy-policy'],['Terms & Conditions','/terms'],['Online Complaint','/online-complaint'],['Our Policy','/our-policy']].map(([l, h]) => (

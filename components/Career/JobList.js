@@ -12,23 +12,22 @@ export default function JobList({ jobs }) {
           <span className="eyebrow mb-5 block">Open Positions</span>
           <h2 className="display-md max-w-lg">Current <span style={{color:'#E3510F'}}>Job Openings</span></h2>
         </motion.div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {jobs.map((job, i) => (
             <motion.div key={job.slug} initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}
-              transition={{ delay:i*0.08 }} className="bento-cell p-8 group flex flex-col hover:-translate-y-1 transition-transform duration-400">
-              <div className="w-12 h-12 rounded-xl bg-[#E3510F]/10 flex items-center justify-center mb-6 group-hover:bg-[#E3510F] transition-colors">
-                <Briefcase size={22} className="text-[#E3510F] group-hover:text-white transition-colors" />
+              transition={{ delay:i*0.08 }} className="story-card p-10 group flex flex-col hover:-translate-y-2 transition-all duration-500 shadow-2xl">
+              <div className="w-16 h-16 rounded-2xl bg-[#E3510F]/10 flex items-center justify-center mb-8 group-hover:bg-[#E3510F] transition-all duration-500 shadow-lg border border-[#E3510F]/20">
+                <Briefcase size={28} className="text-[#E3510F] group-hover:text-white transition-colors" />
               </div>
-              <h3 className="text-[#F0F2F5] font-semibold text-base mb-5 group-hover:text-[#E3510F] transition-colors leading-snug">{job.title}</h3>
-              <div className="space-y-2 mb-7 flex-grow">
-                {job.experience && <div className="flex items-center gap-2 text-[#5A6478] text-sm"><Briefcase size={13} className="text-[#E3510F] flex-shrink-0" /><span>{job.experience}</span></div>}
-                {job.qualification && <div className="flex items-center gap-2 text-[#5A6478] text-sm"><GraduationCap size={13} className="text-[#E3510F] flex-shrink-0" /><span>{job.qualification}</span></div>}
-                {job.location && <div className="flex items-center gap-2 text-[#5A6478] text-sm"><MapPin size={13} className="text-[#E3510F] flex-shrink-0" /><span>{job.location}</span></div>}
+              <h3 className="text-[#EDF0F5] font-bold text-2xl mb-6 group-hover:text-[#E3510F] transition-colors leading-tight tracking-tight" style={{fontFamily:'var(--font-display)'}}>{job.title}</h3>
+              <div className="space-y-4 mb-10 flex-grow">
+                {job.experience && <div className="flex items-center gap-3 text-[#ADBAC7] text-base font-medium"><div className="w-1.5 h-1.5 rounded-full bg-[#E3510F]" /><span>{job.experience}</span></div>}
+                {job.qualification && <div className="flex items-center gap-3 text-[#ADBAC7] text-base font-medium"><div className="w-1.5 h-1.5 rounded-full bg-[#E3510F]" /><span>{job.qualification}</span></div>}
+                {job.location && <div className="flex items-center gap-3 text-[#ADBAC7] text-base font-medium"><MapPin size={16} className="text-[#E3510F] flex-shrink-0" /><span>{job.location}</span></div>}
               </div>
               <Link href={`/career/${job.slug}`}
-                className="flex items-center gap-2 text-[#E3510F] text-[10px] uppercase tracking-wider font-medium group/link pt-5 border-t border-white/5"
-                style={{fontFamily:'var(--font-mono)'}}>
-                <span>View Details</span><ArrowRight size={12} className="group-hover/link:translate-x-1 transition-transform" />
+                className="btn-wire w-full justify-center py-4 text-xs font-bold tracking-[0.2em] group/link border-white/10 hover:border-[#E3510F]/50">
+                <span>View Position</span><ArrowRight size={14} className="group-hover/link:translate-x-2 transition-transform" />
               </Link>
             </motion.div>
           ))}

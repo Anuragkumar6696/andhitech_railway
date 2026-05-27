@@ -19,23 +19,23 @@ export default function Benefits() {
         <motion.div initial={{ opacity:0, x:-30 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }}
           className="flex flex-col justify-center px-8 md:px-16 py-20 lg:py-28 relative z-10">
           <span className="eyebrow mb-6 block">Why Join Us?</span>
-          <h2 className="display-md mb-4">Become Part of <span style={{color:'#E3510F'}}>Our Team</span></h2>
-          <p className="text-[#5A6478] text-sm mb-10 max-w-md leading-relaxed">At AND Hitech Industries, work meets ethics and ambition meets action.</p>
-          <div className="space-y-3">
+          <h2 className="display-md mb-6">Become Part of <span style={{color:'#E3510F'}}>Our Team</span></h2>
+          <p className="text-[#8C98AA] text-lg mb-12 max-w-md leading-relaxed font-light">At AND Hitech Industries, where engineering excellence meets professional integrity and action.</p>
+          <div className="space-y-4">
             {items.map(item => (
-              <div key={item.id} className="rounded-xl border border-white/6 overflow-hidden">
+              <div key={item.id} className="rounded-2xl border border-white/10 overflow-hidden bg-white/[0.01]">
                 <button onClick={() => setOpen(open===item.id?null:item.id)}
-                  className="w-full flex items-center justify-between px-6 py-5 text-left group hover:bg-white/[0.03] transition-colors">
-                  <span className={`font-semibold text-[15px] leading-snug transition-colors ${open===item.id?'text-[#E3510F]':'text-[#9BA5B4] group-hover:text-[#F0F2F5]'}`}>{item.title}</span>
-                  <span className={`flex-shrink-0 ml-4 w-7 h-7 rounded-lg flex items-center justify-center transition-all ${open===item.id?'bg-[#E3510F] text-white':'bg-white/5 text-[#5A6478]'}`}>
-                    {open===item.id ? <ChevronUp size={14}/> : <ChevronDown size={14}/>}
+                  className="w-full flex items-center justify-between px-8 py-6 text-left group hover:bg-white/[0.03] transition-all duration-300">
+                  <span className={`font-bold text-lg leading-snug transition-colors tracking-tight ${open===item.id?'text-[#E3510F]':'text-[#ADBAC7] group-hover:text-[#F0F2F5]'}`}>{item.title}</span>
+                  <span className={`flex-shrink-0 ml-4 w-9 h-9 rounded-xl flex items-center justify-center transition-all shadow-lg ${open===item.id?'bg-[#E3510F] text-white':'bg-white/5 text-[#4E5A6E]'}`}>
+                    {open===item.id ? <ChevronUp size={18}/> : <ChevronDown size={18}/>}
                   </span>
                 </button>
                 <AnimatePresence initial={false}>
                   {open===item.id && (
-                    <motion.div initial={{ height:0, opacity:0 }} animate={{ height:'auto', opacity:1 }} exit={{ height:0, opacity:0 }} transition={{ duration:0.35, ease:[0.22,1,0.36,1] }}>
-                      <div className="px-6 pb-6 border-t border-white/5">
-                        <p className="text-[#5A6478] text-sm leading-relaxed pt-4">{item.content}</p>
+                    <motion.div initial={{ height:0, opacity:0 }} animate={{ height:'auto', opacity:1 }} exit={{ height:0, opacity:0 }} transition={{ duration:0.4, ease:[0.22,1,0.36,1] }}>
+                      <div className="px-8 pb-8 border-t border-white/5">
+                        <p className="text-[#8C98AA] text-base leading-relaxed pt-6 font-light">{item.content}</p>
                       </div>
                     </motion.div>
                   )}

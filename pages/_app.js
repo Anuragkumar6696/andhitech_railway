@@ -79,6 +79,8 @@ export default function App({ Component, pageProps }) {
       <Head>
         <title>AND Hitech Industries | Engineering Motion for Modern Railways</title>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="icon" href="/icon.png" type="image/png" sizes="32x32" />
+        <link rel="apple-touch-icon" href="/apple-icon.png" />
         {/* Preconnect */}
         <link rel="preconnect" href="https://fonts.googleapis.com"/>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous"/>
