@@ -162,6 +162,11 @@ export default function Products({ products }) {
                  imgSrc = '/images/products/lhb-dampers/damper-1.jpg';
                }
 
+               // Tamping Tools thumbnail update
+               if (p.slug?.includes('tamping-tools') || p.slug?.includes('tamping-tool')) {
+                 imgSrc = '/images/products/tamping-tools/image1.jpg';
+               }
+
               return (
                 <motion.div
                   key={p.id||i}

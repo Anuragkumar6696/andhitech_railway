@@ -87,6 +87,19 @@ export default function ServiceContent({ product }) {
       { id: 'damp1', image: '/images/products/lhb-dampers/damper-1.jpg', alt_text: 'LHB Damper 1' },
       { id: 'damp2', image: '/images/products/lhb-dampers/damper-2.jpg', alt_text: 'LHB Damper 2' }
     ];
+  } else if (slug.includes('tamping-tools') || slug.includes('tamping-tool')) {
+    images = [
+      { id: 'tamp1', image: '/images/products/tamping-tools/image1.jpg', alt_text: 'Tamping Tool 1' },
+      { id: 'tamp2', image: '/images/products/tamping-tools/image2.jpg', alt_text: 'Tamping Tool 2' },
+      { id: 'tamp3', image: '/images/products/tamping-tools/image3.jpg', alt_text: 'Tamping Tool 3' },
+      { id: 'tamp4', image: '/images/products/tamping-tools/image4.jpg', alt_text: 'Tamping Tool 4' },
+      { id: 'tamp5', image: '/images/products/tamping-tools/image5.jpg', alt_text: 'Tamping Tool 5' },
+      { id: 'tamp6', image: '/images/products/tamping-tools/image6.jpg', alt_text: 'Tamping Tool 6' },
+      { id: 'tamp7', image: '/images/products/tamping-tools/image7.jpg', alt_text: 'Tamping Tool 7' },
+      { id: 'tamp8', image: '/images/products/tamping-tools/image8.jpg', alt_text: 'Tamping Tool 8' },
+      { id: 'tamp9', image: '/images/products/tamping-tools/image9.jpg', alt_text: 'Tamping Tool 9' },
+      { id: 'tamp10', image: '/images/products/tamping-tools/image10.jpg', alt_text: 'Tamping Tool 10' }
+    ];
   }
 
   return (

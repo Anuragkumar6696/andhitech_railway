@@ -55,6 +55,7 @@ export default function ProductDetail({ product, categories }) {
     if (slug.includes('air-suspension')) return '/images/products/air-suspension-v2/as-1.jpg';
     if (slug.includes('axle-mounted-brake-disc')) return '/images/products/axle-brake-v2/br-1.jpg';
     if (slug.includes('roof-mounted-package-unit')) return '/images/products/rmpu-21.jpg';
+    if (slug.includes('tamping-tools') || slug.includes('tamping-tool')) return '/images/products/tamping-tools/image1.jpg';
     return p.featured_image || p.image || '/default-og-image.jpg';
   };
 

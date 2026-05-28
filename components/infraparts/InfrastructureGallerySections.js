@@ -11,38 +11,73 @@ export default function InfrastructureGallerySections({ sections=[] }) {
   // Override images for "Brake Pads and Brake Blocks Production" or "Our Production Units" section
   const enhancedSections = sections.map(section => {
     const isBrakeProduction = section.title?.toLowerCase().includes('brake pads') || section.title?.toLowerCase().includes('brake blocks');
+    const isRMPUDevelopment = section.title?.toLowerCase().includes('rmpu') && (section.title?.toLowerCase().includes('development') || section.title?.toLowerCase().includes('testing'));
+    const isAssemblyQC = section.title?.toLowerCase().includes('assembly') || section.title?.toLowerCase().includes('qc') || section.title?.toLowerCase().includes('testing');
     const isProductionUnits = section.title?.toLowerCase().includes('production units');
     
-    if (isBrakeProduction || isProductionUnits) {
-      if (isBrakeProduction) {
-        return {
-          ...section,
-          images: [
-            { image: '/images/infra/infra-1.jpg', caption: 'Brake Production 1' },
-            { image: '/images/infra/infra-2.jpg', caption: 'Brake Production 2' },
-            { image: '/images/infra/infra-3.jpg', caption: 'Brake Production 3' },
-            { image: '/images/infra/infra-4.jpg', caption: 'Brake Production 4' },
-            { image: '/images/infra/infra-5.png', caption: 'Brake Production 5' },
-            { image: '/images/production-unit-final.jpg', caption: 'Our Production Unit' }
-          ]
-        };
-      }
-      
-      if (isProductionUnits) {
-        return {
-          ...section,
-          images: [
-            { image: '/images/infra/production/image1.jpg', caption: 'Production Unit 1' },
-            { image: '/images/infra/production/image2.jpg', caption: 'Production Unit 2' },
-            { image: '/images/infra/production/image3.jpg', caption: 'Production Unit 3' },
-            { image: '/images/infra/production/image4.png', caption: 'Production Unit 4' },
-            { image: '/images/infra/production/image5.jpg', caption: 'Production Unit 5' },
-            { image: '/images/infra/production/image6.jpg', caption: 'Production Unit 6' },
-            { image: '/images/infra/production/image7.jpg', caption: 'Production Unit 7' },
-            { image: '/images/infra/production/image8.jpg', caption: 'Production Unit 8' }
-          ]
-        };
-      }
+    if (isBrakeProduction) {
+      return {
+        ...section,
+        images: [
+          { image: '/images/infra/brake/image1.jpg', caption: 'Brake Production 1' },
+          { image: '/images/infra/brake/image2.jpg', caption: 'Brake Production 2' },
+          { image: '/images/infra/brake/image3.jpg', caption: 'Brake Production 3' },
+          { image: '/images/infra/brake/image4.jpg', caption: 'Brake Production 4' },
+          { image: '/images/infra/brake/image5.jpg', caption: 'Brake Production 5' },
+          { image: '/images/infra/brake/image6.jpg', caption: 'Brake Production 6' },
+          { image: '/images/infra/brake/image7.jpg', caption: 'Brake Production 7' },
+          { image: '/images/infra/brake/image8.jpg', caption: 'Brake Production 8' }
+        ]
+      };
+    }
+
+    if (isRMPUDevelopment) {
+      return {
+        ...section,
+        images: [
+          { image: '/images/infra/rmpu-testing/image1.jpg', caption: 'RMPU Testing 1' },
+          { image: '/images/infra/rmpu-testing/image2.jpg', caption: 'RMPU Testing 2' },
+          { image: '/images/infra/rmpu-testing/image3.jpg', caption: 'RMPU Testing 3' },
+          { image: '/images/infra/rmpu-testing/image4.jpg', caption: 'RMPU Testing 4' },
+          { image: '/images/infra/rmpu-testing/image5.jpg', caption: 'RMPU Testing 5' },
+          { image: '/images/infra/rmpu-testing/image6.jpg', caption: 'RMPU Testing 6' },
+          { image: '/images/infra/rmpu-testing/image7.jpg', caption: 'RMPU Testing 7' },
+          { image: '/images/infra/rmpu-testing/image8.jpg', caption: 'RMPU Testing 8' }
+        ]
+      };
+    }
+
+    if (isAssemblyQC) {
+      return {
+        ...section,
+        images: [
+          { image: '/images/infra/assembly/image1.jpg', caption: 'Assembly & QC 1' },
+          { image: '/images/infra/assembly/image2.jpg', caption: 'Assembly & QC 2' },
+          { image: '/images/infra/assembly/image3.jpg', caption: 'Assembly & QC 3' },
+          { image: '/images/infra/assembly/image4.jpg', caption: 'Assembly & QC 4' },
+          { image: '/images/infra/assembly/image5.jpg', caption: 'Assembly & QC 5' },
+          { image: '/images/infra/assembly/image6.jpg', caption: 'Assembly & QC 6' },
+          { image: '/images/infra/assembly/image7.jpg', caption: 'Assembly & QC 7' },
+          { image: '/images/infra/assembly/image8.jpg', caption: 'Assembly & QC 8' },
+          { image: '/images/infra/assembly/image9.jpg', caption: 'Assembly & QC 9' }
+        ]
+      };
+    }
+    
+    if (isProductionUnits) {
+      return {
+        ...section,
+        images: [
+          { image: '/images/infra/production/image1.jpg', caption: 'Production Unit 1' },
+          { image: '/images/infra/production/image2.jpg', caption: 'Production Unit 2' },
+          { image: '/images/infra/production/image3.jpg', caption: 'Production Unit 3' },
+          { image: '/images/infra/production/image4.png', caption: 'Production Unit 4' },
+          { image: '/images/infra/production/image5.jpg', caption: 'Production Unit 5' },
+          { image: '/images/infra/production/image6.jpg', caption: 'Production Unit 6' },
+          { image: '/images/infra/production/image7.jpg', caption: 'Production Unit 7' },
+          { image: '/images/infra/production/image8.jpg', caption: 'Production Unit 8' }
+        ]
+      };
     }
 
     if (section.title?.toLowerCase().includes('precision machining')) {

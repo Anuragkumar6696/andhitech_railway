@@ -37,7 +37,6 @@ export default function HistoryTabs() {
               <div className="absolute inset-0 bg-gradient-to-t from-[#07080C]/50 to-transparent" />
             </div>
             <div className="absolute -bottom-5 -right-5 w-28 h-28 bg-[#E3510F] opacity-10 rounded-full blur-3xl -z-0" />
-            <div className="absolute -top-5 -left-5 w-20 h-20 bg-[#E3510F] -z-0 hidden md:block" style={{clipPath:'polygon(0 0,100% 0,100% 100%,0 100%)',opacity:0.6}} />
           </motion.div>
         </div>
       </div>
