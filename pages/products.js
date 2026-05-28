@@ -139,7 +139,7 @@ export default function Products({ products }) {
               
               // RMPU thumbnail update
                if (p.slug?.includes('roof-mounted-package-unit-rmpu-for-lhb-coaches')) {
-                 imgSrc = '/images/products/rmpu-21.jpg';
+                 imgSrc = '/images/products/rmpu-25.jpg';
                }
                
                // Vande Bharat Brake thumbnail update

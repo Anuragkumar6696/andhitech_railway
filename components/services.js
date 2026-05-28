@@ -24,7 +24,7 @@ const getProductImage = (p) => {
   } else if (slug.includes('axle-mounted-brake-disc')) {
     imgSrc = '/images/products/axle-brake-v2/br-1.jpg';
   } else if (slug.includes('roof-mounted-package-unit-rmpu-for-lhb-coaches')) {
-    imgSrc = '/images/products/rmpu-21.jpg';
+    imgSrc = '/images/products/rmpu-25.jpg';
   } else if (slug.includes('wheel-mounted-brake-disc-vande-bharat')) {
     imgSrc = '/images/products/wm-vb/vb-1.jpg';
   } else if (slug.includes('split-axle-mounted-brake-disc')) {

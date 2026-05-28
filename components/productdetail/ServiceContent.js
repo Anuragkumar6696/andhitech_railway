@@ -31,7 +31,14 @@ export default function ServiceContent({ product }) {
     ];
   } else if (isRMPU) {
     images = [
-      { id: 'rmpu1', image: '/images/products/rmpu-21.jpg', alt_text: 'RMPU Main Layout' }
+      { id: 'rmpu1', image: '/images/products/rmpu-21.jpg', alt_text: 'RMPU Main Layout' },
+      { id: 'rmpu2', image: '/images/products/rmpu-25.jpg', alt_text: 'RMPU System' }
+    ];
+  } else if (slug.includes('split-axle-mounted-brake-disc')) {
+    images = [
+      { id: 'split1', image: '/images/products/split-brake/split-1.jpg', alt_text: 'Split Brake 1' },
+      { id: 'split2', image: '/images/products/split-brake/split-2.jpg', alt_text: 'Split Brake 2' },
+      { id: 'split3', image: '/images/products/split-brake/split-3.jpg', alt_text: 'Split Brake 3' }
     ];
   } else if (slug.includes('axle-mounted-brake-disc')) {
     images = [
@@ -70,12 +77,6 @@ export default function ServiceContent({ product }) {
       { id: 'dm_brake4', image: '/images/products/delhi-metro-brake/image4.jpg', alt_text: 'Delhi Metro Brake 4' },
       { id: 'dm_brake5', image: '/images/products/delhi-metro-brake/image5.jpg', alt_text: 'Delhi Metro Brake 5' }
     ];
-  } else if (slug.includes('split-axle-mounted-brake-disc')) {
-    images = [
-      { id: 'split1', image: '/images/products/split-brake/split-1.jpg', alt_text: 'Split Brake 1' },
-      { id: 'split2', image: '/images/products/split-brake/split-2.jpg', alt_text: 'Split Brake 2' },
-      { id: 'split3', image: '/images/products/split-brake/split-3.jpg', alt_text: 'Split Brake 3' }
-    ];
   } else if (slug.includes('brake-pads')) {
     images = [
       { id: 'pad1', image: '/images/products/brake-pads/pad-1.jpg', alt_text: 'Brake Pad 1' },
@@ -85,7 +86,10 @@ export default function ServiceContent({ product }) {
   } else if (slug.includes('lhb-dampers')) {
     images = [
       { id: 'damp1', image: '/images/products/lhb-dampers/damper-1.jpg', alt_text: 'LHB Damper 1' },
-      { id: 'damp2', image: '/images/products/lhb-dampers/damper-2.jpg', alt_text: 'LHB Damper 2' }
+      { id: 'damp2', image: '/images/products/lhb-dampers/damper-2.jpg', alt_text: 'LHB Damper 2' },
+      { id: 'damp3', image: '/images/products/lhb-dampers/damper-3.jpg', alt_text: 'LHB Damper 3' },
+      { id: 'damp4', image: '/images/products/lhb-dampers/damper-4.jpg', alt_text: 'LHB Damper 4' },
+      { id: 'damp5', image: '/images/products/lhb-dampers/damper-5.jpg', alt_text: 'LHB Damper 5' }
     ];
   } else if (slug.includes('tamping-tools') || slug.includes('tamping-tool')) {
     images = [

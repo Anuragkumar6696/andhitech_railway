@@ -2,7 +2,15 @@
 const nextConfig = {
   images: {
     unoptimized: true,
-    domains: ['admin.andhitech.in'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'admin.andhitech.in',
+      },
+    ],
+  },
+  turbopack: {
+    root: 'C:/Users/DELL/Desktop/andhitech_railway',
   },
 };
 
