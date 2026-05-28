@@ -59,10 +59,6 @@ export default function Footer({ initialData }) {
                     src="/images/logo-main.png" alt="AND Hitech Industries" width={60} height={60}
                     className="h-14 w-auto brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity"
                   />
-                  <span className="font-bold tracking-[.1em] text-[1.25rem] opacity-90 group-hover:opacity-100 transition-opacity"
-                    style={{ fontFamily:'var(--font-display)' }}>
-                    AND<span style={{ color:'#E3510F' }}>HITECH</span>
-                  </span>
                 </div>
             </Link>
             <p className="text-[#3D4A5C] text-[.84rem] leading-relaxed max-w-xs">

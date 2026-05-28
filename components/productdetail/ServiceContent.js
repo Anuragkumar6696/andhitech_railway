@@ -18,10 +18,9 @@ export default function ServiceContent({ product }) {
   
   if (isIVCoupler) {
     images = [
-      { id: 'iv1_v2', image: '/images/products/iv-coupler-v2/iv-1.png', alt_text: 'IV Coupler New 1' },
       { id: 'iv2_v2', image: '/images/products/iv-coupler-v2/iv-2.jpg', alt_text: 'IV Coupler New 2' },
       { id: 'iv3_v2', image: '/images/products/iv-coupler-v2/iv-3.jpg', alt_text: 'IV Coupler New 3' },
-      { id: 'iv4_v2', image: '/images/products/iv-coupler-v2/iv-4.jpg', alt_text: 'IV Coupler New 4' }
+      { id: 'iv_final', image: '/images/products/iv-coupler-v2/iv-final.png', alt_text: 'IV Coupler Final' }
     ];
   } else if (isAirSuspension) {
     images = [
@@ -47,6 +46,29 @@ export default function ServiceContent({ product }) {
       { id: 'vb1', image: '/images/products/wm-vb/vb-1.jpg', alt_text: 'Vande Bharat Brake 1' },
       { id: 'vb2', image: '/images/products/wm-vb/vb-2.jpg', alt_text: 'Vande Bharat Brake 2' },
       { id: 'vb3', image: '/images/products/wm-vb/vb-3.jpg', alt_text: 'Vande Bharat Brake 3' }
+    ];
+  } else if (slug.includes('single-leaf-plug-door-vande-bharat-trains')) {
+    images = [
+      { id: 'vb_door1', image: '/images/products/vande-bharat-door/image1.jpg', alt_text: 'Vande Bharat Door 1' },
+      { id: 'vb_door2', image: '/images/products/vande-bharat-door/image2.jpg', alt_text: 'Vande Bharat Door 2' },
+      { id: 'vb_door3', image: '/images/products/vande-bharat-door/image3.jpg', alt_text: 'Vande Bharat Door 3' },
+      { id: 'vb_door4', image: '/images/products/vande-bharat-door/image4.jpg', alt_text: 'Vande Bharat Door 4' },
+      { id: 'vb_door5', image: '/images/products/vande-bharat-door/image5.jpg', alt_text: 'Vande Bharat Door 5' }
+    ];
+  } else if (slug.includes('pantograph')) {
+    images = [
+      { id: 'panto1', image: '/images/products/pantograph/image1.jpg', alt_text: 'Pantograph 1' },
+      { id: 'panto2', image: '/images/products/pantograph/image2.jpg', alt_text: 'Pantograph 2' },
+      { id: 'panto3', image: '/images/products/pantograph/image3.jpg', alt_text: 'Pantograph 3' },
+      { id: 'panto4', image: '/images/products/pantograph/image4.jpg', alt_text: 'Pantograph 4' }
+    ];
+  } else if (slug.includes('wheel-mounted-brake-disc-delhi-metro')) {
+    images = [
+      { id: 'dm_brake1', image: '/images/products/delhi-metro-brake/image1.jpg', alt_text: 'Delhi Metro Brake 1' },
+      { id: 'dm_brake2', image: '/images/products/delhi-metro-brake/image2.jpg', alt_text: 'Delhi Metro Brake 2' },
+      { id: 'dm_brake3', image: '/images/products/delhi-metro-brake/image3.jpg', alt_text: 'Delhi Metro Brake 3' },
+      { id: 'dm_brake4', image: '/images/products/delhi-metro-brake/image4.jpg', alt_text: 'Delhi Metro Brake 4' },
+      { id: 'dm_brake5', image: '/images/products/delhi-metro-brake/image5.jpg', alt_text: 'Delhi Metro Brake 5' }
     ];
   } else if (slug.includes('split-axle-mounted-brake-disc')) {
     images = [

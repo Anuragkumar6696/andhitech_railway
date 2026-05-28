@@ -62,10 +62,10 @@ export default function CareerPage({ jobs }) {
               </p>
               <a
                 href="mailto:careers@andhitech.in"
-                className="btn-flame inline-flex items-center gap-4 py-4 px-10"
+                className="btn-flame inline-flex items-center gap-4 py-4 px-10 hover:shadow-[0_0_30px_rgba(227,81,15,0.4)] transition-all duration-500 group"
               >
-                <Mail size={18} />
-                <span>Send Your Resume</span>
+                <Mail size={18} className="group-hover:scale-110 transition-transform" />
+                <span className="group-hover:tracking-wider transition-all duration-500">Send Your Resume</span>
               </a>
             </motion.div>
           </div>

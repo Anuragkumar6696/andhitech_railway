@@ -184,6 +184,14 @@ export default function Hero({ initialData }) {
   const vidRef   = useRef(null);
   const videoRef = useRef(null);
   const trainRef = useRef(null);
+  const scrollRef = useRef(null);
+
+  const scrollToContent = () => {
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: 'smooth'
+    });
+  };
 
   /* Video section parallax */
   const { scrollYProgress: videoProgress } = useScroll({
@@ -488,9 +496,16 @@ export default function Hero({ initialData }) {
           </div>
 
           {/* Keep scrolling */}
-          <div className="absolute bottom-5 left-1/2 -translate-x-1/2 pointer-events-none hidden md:flex flex-col items-center gap-2">
-            <div style={{ width:'1px', height:'32px', background:'linear-gradient(to bottom,rgba(227,81,15,.4),transparent)' }}/>
-            <span style={{ fontFamily:'var(--font-mono)', fontSize:'.44rem', letterSpacing:'.28em', textTransform:'uppercase', color:'#1C2540' }}>Keep Scrolling</span>
+          <div className="absolute bottom-5 left-1/2 -translate-x-1/2 pointer-events-auto flex flex-col items-center gap-2 cursor-pointer group" onClick={scrollToContent}>
+            <motion.div 
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="flex flex-col items-center gap-1"
+            >
+              <div style={{ width:'1px', height:'32px', background:'linear-gradient(to bottom,rgba(227,81,15,.6),rgba(227,81,15,0))' }} className="group-hover:height-40 transition-all"/>
+              <ChevronDown size={14} className="text-[#E3510F]/60 group-hover:text-[#E3510F] transition-colors" />
+            </motion.div>
+            <span style={{ fontFamily:'var(--font-mono)', fontSize:'.44rem', letterSpacing:'.28em', textTransform:'uppercase', color:'#1C2540' }} className="group-hover:text-[#E3510F]/60 transition-colors">Keep Scrolling</span>
           </div>
         </div>
       </div>

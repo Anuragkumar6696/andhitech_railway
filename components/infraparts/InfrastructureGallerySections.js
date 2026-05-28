@@ -14,9 +14,6 @@ export default function InfrastructureGallerySections({ sections=[] }) {
     const isProductionUnits = section.title?.toLowerCase().includes('production units');
     
     if (isBrakeProduction || isProductionUnits) {
-      const originalImages = section.images || [];
-      const newImages = [...originalImages];
-      
       if (isBrakeProduction) {
         return {
           ...section,
@@ -31,14 +28,36 @@ export default function InfrastructureGallerySections({ sections=[] }) {
         };
       }
       
-      if (isProductionUnits && newImages.length > 0) {
-        newImages[newImages.length - 1] = {
-          ...newImages[newImages.length - 1],
-          image: '/images/production-unit-final.jpg',
-          caption: 'Our Production Unit'
+      if (isProductionUnits) {
+        return {
+          ...section,
+          images: [
+            { image: '/images/infra/production/image1.jpg', caption: 'Production Unit 1' },
+            { image: '/images/infra/production/image2.jpg', caption: 'Production Unit 2' },
+            { image: '/images/infra/production/image3.jpg', caption: 'Production Unit 3' },
+            { image: '/images/infra/production/image4.png', caption: 'Production Unit 4' },
+            { image: '/images/infra/production/image5.jpg', caption: 'Production Unit 5' },
+            { image: '/images/infra/production/image6.jpg', caption: 'Production Unit 6' },
+            { image: '/images/infra/production/image7.jpg', caption: 'Production Unit 7' },
+            { image: '/images/infra/production/image8.jpg', caption: 'Production Unit 8' }
+          ]
         };
-        return { ...section, images: newImages };
       }
+    }
+
+    if (section.title?.toLowerCase().includes('precision machining')) {
+      return {
+        ...section,
+        images: [
+          { image: '/images/infra/precision-machining/image1.jpg', caption: 'Machining Center 1' },
+          { image: '/images/infra/precision-machining/image2.jpg', caption: 'Machining Center 2' },
+          { image: '/images/infra/precision-machining/image3.jpg', caption: 'Machining Center 3' },
+          { image: '/images/infra/precision-machining/image4.jpg', caption: 'Machining Center 4' },
+          { image: '/images/infra/precision-machining/image5.jpg', caption: 'Machining Center 5' },
+          { image: '/images/infra/precision-machining/image6.jpg', caption: 'Machining Center 6' },
+          { image: '/images/infra/precision-machining/image7.jpg', caption: 'Machining Center 7' }
+        ]
+      };
     }
     return section;
   });

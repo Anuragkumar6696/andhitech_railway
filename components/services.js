@@ -33,6 +33,18 @@ const getProductImage = (p) => {
     imgSrc = '/images/products/brake-pads/pad-1.jpg';
   } else if (slug.includes('lhb-dampers')) {
     imgSrc = '/images/products/lhb-dampers/damper-1.jpg';
+  } else if (slug.includes('single-leaf-plug-door-vande-bharat-trains')) {
+    imgSrc = '/images/products/vande-bharat-door/image1.jpg';
+  } else if (slug.includes('pantograph')) {
+    imgSrc = '/images/products/pantograph/image1.jpg';
+  } else if (slug.includes('wheel-mounted-brake-disc-delhi-metro')) {
+    imgSrc = '/images/products/delhi-metro-brake/image1.jpg';
+  } else if (slug.includes('iv-coupler')) {
+    imgSrc = '/images/products/iv-coupler-v2/iv-final.png';
+  } else if (slug.includes('pantograph')) {
+    imgSrc = '/images/products/pantograph/image1.jpg';
+  } else if (slug.includes('single-leaf-plug-door-vande-bharat-trains')) {
+    imgSrc = '/images/products/vande-bharat-door/image1.jpg';
   }
   return imgSrc;
 };
@@ -85,7 +97,7 @@ function FeaturedProduct({ p, idx, total }) {
         <motion.div style={{ y: imgY }} className="absolute inset-0 scale-[1.12]">
           <Image
             src={imgSrc} alt={p.title} fill
-            className="object-cover opacity-55 group-hover:opacity-75 transition-opacity duration-700"
+            className="object-cover opacity-75 group-hover:opacity-95 transition-all duration-700 brightness-110 contrast-[1.05]"
             unoptimized
           />
         </motion.div>
@@ -93,11 +105,11 @@ function FeaturedProduct({ p, idx, total }) {
         <div className="absolute inset-0"
           style={{
             background: isEven
-              ? 'linear-gradient(to right,#050608 0%,rgba(5,6,8,.3) 60%,transparent 100%)'
-              : 'linear-gradient(to left,#050608 0%,rgba(5,6,8,.3) 60%,transparent 100%)',
+              ? 'linear-gradient(to right,#050608 0%,rgba(5,6,8,.1) 60%,transparent 100%)'
+              : 'linear-gradient(to left,#050608 0%,rgba(5,6,8,.1) 60%,transparent 100%)',
           }}/>
         <div className="absolute inset-0"
-          style={{ background: 'linear-gradient(to top,#050608 0%,transparent 50%)' }}/>
+          style={{ background: 'linear-gradient(to top,#050608 0%,transparent 40%)' }}/>
 
         {/* Category badge */}
         <div className="absolute top-8 left-8">

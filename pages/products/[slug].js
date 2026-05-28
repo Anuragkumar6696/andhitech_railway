@@ -44,7 +44,22 @@ export default function ProductDetail({ product, categories }) {
     product.excerpt ||
     product.description?.slice(0, 150) ||
     'View our product details and offerings.';
-  const image = getAbsoluteURL(product.featured_image || product.image || '/default-og-image.jpg');
+  
+  const getProductMainImage = (p) => {
+    const slug = (p.slug || '').toLowerCase();
+    if (slug.includes('iv-coupler')) return '/images/products/iv-coupler-v2/iv-final.png';
+    if (slug.includes('pantograph')) return '/images/products/pantograph/image1.jpg';
+    if (slug.includes('single-leaf-plug-door-vande-bharat-trains')) return '/images/products/vande-bharat-door/image1.jpg';
+    if (slug.includes('wheel-mounted-brake-disc-delhi-metro')) return '/images/products/delhi-metro-brake/image1.jpg';
+    if (slug.includes('dashboard-interface')) return '/images/products/products-index-19.jpg';
+    if (slug.includes('air-suspension')) return '/images/products/air-suspension-v2/as-1.jpg';
+    if (slug.includes('axle-mounted-brake-disc')) return '/images/products/axle-brake-v2/br-1.jpg';
+    if (slug.includes('roof-mounted-package-unit')) return '/images/products/rmpu-21.jpg';
+    return p.featured_image || p.image || '/default-og-image.jpg';
+  };
+
+  const mainImg = getProductMainImage(product);
+  const image = getAbsoluteURL(mainImg);
 
   return (
     <div className="bg-[#050608] min-h-screen">

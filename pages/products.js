@@ -109,9 +109,24 @@ export default function Products({ products }) {
               
               // IV Coupler thumbnail update
               if (p.slug === 'iv-coupler') {
-                imgSrc = '/images/products/iv-coupler-v2/iv-2.jpg';
+                imgSrc = '/images/products/iv-coupler-v2/iv-final.png';
               }
               
+              // Pantograph thumbnail update
+              if (p.slug?.includes('pantograph')) {
+                imgSrc = '/images/products/pantograph/image1.jpg';
+              }
+
+              // Vande Bharat Door thumbnail update
+              if (p.slug?.includes('single-leaf-plug-door-vande-bharat-trains')) {
+                imgSrc = '/images/products/vande-bharat-door/image1.jpg';
+              }
+
+              // Delhi Metro Brake thumbnail update
+              if (p.slug?.includes('wheel-mounted-brake-disc-delhi-metro')) {
+                imgSrc = '/images/products/delhi-metro-brake/image1.jpg';
+              }
+
               // Air Suspension thumbnail update
               if (p.slug === 'air-suspension-control-equipment') {
                 imgSrc = '/images/products/air-suspension-v2/as-1.jpg';
@@ -159,7 +174,7 @@ export default function Products({ products }) {
                       <div className="relative overflow-hidden flex-shrink-0" style={{ height:220 }}>
                         <Image
                           src={imgSrc} alt={p.title} fill
-                          className="object-cover opacity-65 group-hover:opacity-90 group-hover:scale-[1.07] transition-all duration-700"
+                          className="object-cover opacity-85 group-hover:opacity-100 group-hover:scale-[1.07] transition-all duration-700 brightness-110 contrast-[1.05]"
                           unoptimized
                         />
                         <div className="absolute inset-0" style={{ background:'linear-gradient(to top,#0B0E15 0%,transparent 55%)' }}/>
