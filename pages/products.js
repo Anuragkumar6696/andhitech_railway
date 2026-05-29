@@ -119,7 +119,17 @@ export default function Products({ products }) {
 
               // Vande Bharat Door thumbnail update
               if (p.slug?.includes('single-leaf-plug-door-vande-bharat-trains')) {
-                imgSrc = '/images/products/vande-bharat-door/image1.jpg';
+                imgSrc = '/images/products/vande-bharat-door/main.jpg';
+              }
+
+              // Vande Bharat Brake thumbnail update
+              if (p.slug?.includes('wheel-mounted-brake-disc-vande-bharat')) {
+                imgSrc = '/images/products/wm-vb/image1.jpg';
+              }
+
+              // Brake Blocks thumbnail update
+              if (p.slug?.includes('brake-blocks')) {
+                imgSrc = '/images/products/brake-blocks/image1.jpg';
               }
 
               // Delhi Metro Brake thumbnail update
@@ -131,21 +141,16 @@ export default function Products({ products }) {
               if (p.slug === 'air-suspension-control-equipment') {
                 imgSrc = '/images/products/air-suspension-v2/as-1.jpg';
               }
-              
+
               // Axle Brake thumbnail update
               if (p.slug?.includes('axle-mounted-brake-disc')) {
                 imgSrc = '/images/products/axle-brake-v2/br-1.jpg';
               }
-              
+
               // RMPU thumbnail update
-               if (p.slug?.includes('roof-mounted-package-unit-rmpu-for-lhb-coaches')) {
-                 imgSrc = '/images/products/rmpu-25.jpg';
-               }
-               
-               // Vande Bharat Brake thumbnail update
-               if (p.slug?.includes('wheel-mounted-brake-disc-vande-bharat')) {
-                 imgSrc = '/images/products/wm-vb/vb-1.jpg';
-               }
+              if (p.slug?.includes('roof-mounted-package-unit-rmpu-for-lhb-coaches')) {
+                imgSrc = '/images/products/rmpu-25.jpg';
+              }
                
                // Split Axle Brake thumbnail update
                if (p.slug?.includes('split-axle-mounted-brake-disc')) {

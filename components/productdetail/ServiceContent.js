@@ -50,17 +50,31 @@ export default function ServiceContent({ product }) {
     ];
   } else if (slug.includes('wheel-mounted-brake-disc-vande-bharat')) {
     images = [
-      { id: 'vb1', image: '/images/products/wm-vb/vb-1.jpg', alt_text: 'Vande Bharat Brake 1' },
-      { id: 'vb2', image: '/images/products/wm-vb/vb-2.jpg', alt_text: 'Vande Bharat Brake 2' },
-      { id: 'vb3', image: '/images/products/wm-vb/vb-3.jpg', alt_text: 'Vande Bharat Brake 3' }
+      { id: 'vb1', image: '/images/products/wm-vb/image1.jpg', alt_text: 'Vande Bharat Brake 1' },
+      { id: 'vb2', image: '/images/products/wm-vb/image2.jpg', alt_text: 'Vande Bharat Brake 2' },
+      { id: 'vb3', image: '/images/products/wm-vb/image3.jpg', alt_text: 'Vande Bharat Brake 3' },
+      { id: 'vb4', image: '/images/products/wm-vb/image4.jpg', alt_text: 'Vande Bharat Brake 4' },
+      { id: 'vb5', image: '/images/products/wm-vb/image5.jpg', alt_text: 'Vande Bharat Brake 5' },
+      { id: 'vb6', image: '/images/products/wm-vb/image6.jpg', alt_text: 'Vande Bharat Brake 6' },
+      { id: 'vb7', image: '/images/products/wm-vb/image7.jpg', alt_text: 'Vande Bharat Brake 7' }
     ];
   } else if (slug.includes('single-leaf-plug-door-vande-bharat-trains')) {
     images = [
+      { id: 'vb_door_main', image: '/images/products/vande-bharat-door/main.jpg', alt_text: 'Vande Bharat Door Main' },
       { id: 'vb_door1', image: '/images/products/vande-bharat-door/image1.jpg', alt_text: 'Vande Bharat Door 1' },
       { id: 'vb_door2', image: '/images/products/vande-bharat-door/image2.jpg', alt_text: 'Vande Bharat Door 2' },
       { id: 'vb_door3', image: '/images/products/vande-bharat-door/image3.jpg', alt_text: 'Vande Bharat Door 3' },
       { id: 'vb_door4', image: '/images/products/vande-bharat-door/image4.jpg', alt_text: 'Vande Bharat Door 4' },
       { id: 'vb_door5', image: '/images/products/vande-bharat-door/image5.jpg', alt_text: 'Vande Bharat Door 5' }
+    ];
+  } else if (slug.includes('brake-blocks')) {
+    images = [
+      { id: 'bb1', image: '/images/products/brake-blocks/image1.jpg', alt_text: 'Brake Block 1' },
+      { id: 'bb2', image: '/images/products/brake-blocks/image2.jpg', alt_text: 'Brake Block 2' },
+      { id: 'bb3', image: '/images/products/brake-blocks/image3.jpg', alt_text: 'Brake Block 3' },
+      { id: 'bb4', image: '/images/products/brake-blocks/image4.jpg', alt_text: 'Brake Block 4' },
+      { id: 'bb5', image: '/images/products/brake-blocks/image5.jpg', alt_text: 'Brake Block 5' },
+      { id: 'bb6', image: '/images/products/brake-blocks/image6.jpg', alt_text: 'Brake Block 6' }
     ];
   } else if (slug.includes('pantograph')) {
     images = [
