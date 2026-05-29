@@ -118,12 +118,12 @@ export default function WhatWeDo() {
             viewport={{ once:true }} transition={{ delay:.14, duration:.75, ease }}
           >
             <div className="border-l-2 border-[#E3510F]/35 pl-7">
-              <p className="text-[#8C98AA] leading-relaxed text-[.96rem] mb-5">
+              <p className="text-[#ADBAC7] leading-relaxed text-[1.1rem] mb-5 font-medium">
                 End-to-end manufacturing solutions combining innovation, precision, and efficiency — from concept engineering through international certification.
               </p>
               <Link href="/about-us" className="btn-ghost inline-flex items-center gap-2 group">
-                <span>Learn About AHIL</span>
-                <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform"/>
+                <span className="text-[#EDF0F5]">Learn About AHIL</span>
+                <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform text-[#E3510F]"/>
               </Link>
             </div>
           </motion.div>
@@ -193,8 +193,8 @@ export default function WhatWeDo() {
                 <Icon size={19} className="text-[#E3510F] group-hover:text-white transition-colors"/>
               </div>
               <div className="flex-1">
-                <h3 className="text-[#EDF0F5] font-semibold text-[.92rem] mb-2.5 leading-snug group-hover:text-[#E3510F] transition-colors duration-300">{title}</h3>
-                <p className="text-[#4E5A6E] text-[.8rem] leading-relaxed">{desc}</p>
+                <h3 className="text-[#EDF0F5] font-bold text-[1.1rem] mb-3 leading-snug group-hover:text-[#E3510F] transition-colors duration-300">{title}</h3>
+                <p className="text-[#ADBAC7] text-[.92rem] leading-relaxed font-medium">{desc}</p>
               </div>
               <div className="h-px w-full bg-gradient-to-r from-[#E3510F]/0 via-[#E3510F]/15 to-[#E3510F]/0 group-hover:via-[#E3510F]/35 transition-all duration-500"/>
             </motion.div>
@@ -204,16 +204,16 @@ export default function WhatWeDo() {
           <motion.div
             initial={{ opacity:0, y:18 }} whileInView={{ opacity:1, y:0 }}
             viewport={{ once:true }} transition={{ delay:.3, duration:.7, ease }}
-            className="lg:col-span-12 cell px-8 py-7 flex flex-col md:flex-row items-start md:items-center justify-between gap-8"
+            className="lg:col-span-12 cell px-10 py-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 shadow-xl"
           >
-            <p className="text-[#8C98AA] text-[.9rem] leading-relaxed max-w-xl">
+            <p className="text-[#ADBAC7] text-[1.05rem] leading-relaxed max-w-xl font-medium">
               From design and procurement to precision manufacturing and rigorous testing — AHIL manages the full production lifecycle with certified quality at every stage.
             </p>
-            <div className="flex gap-10 flex-shrink-0 flex-wrap items-center">
+            <div className="flex gap-12 flex-shrink-0 flex-wrap items-center">
               {facts.map(({ n, l }, i) => (
                 <div key={i} className="text-center">
-                  <div className="text-[2.3rem] font-bold text-[#E3510F] leading-none mb-0.5" style={{ fontFamily:'var(--font-display)' }}>{n}</div>
-                  <div className="text-[.54rem] text-[#2E3848] uppercase tracking-[.2em]" style={{ fontFamily:'var(--font-mono)' }}>{l}</div>
+                  <div className="text-[2.6rem] font-bold text-[#E3510F] leading-none mb-1" style={{ fontFamily:'var(--font-display)' }}>{n}</div>
+                  <div className="text-[.6rem] text-[#ADBAC7] uppercase tracking-[.2em] font-bold" style={{ fontFamily:'var(--font-mono)' }}>{l}</div>
                 </div>
               ))}
               <Link href="/products" className="btn-wire py-3 px-6 text-[.62rem] hidden md:inline-flex items-center gap-2 group">

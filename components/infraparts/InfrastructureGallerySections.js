@@ -116,8 +116,7 @@ export default function InfrastructureGallerySections({ sections=[] }) {
                     <SwiperSlide key={ii}>
                       <div className="relative h-56 rounded-xl overflow-hidden border border-white/6 group">
                         <Image src={img.image} alt={img.caption||`Gallery ${ii+1}`} fill
-                          className="object-cover opacity-70 group-hover:opacity-90 group-hover:scale-[1.05] transition-all duration-500" unoptimized />
-                        {img.caption && <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#07080C]/80 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity"><p className="text-[#F0F2F5] text-xs font-medium">{img.caption}</p></div>}
+                          className="object-cover opacity-80 transition-all duration-500" unoptimized />
                       </div>
                     </SwiperSlide>
                   ))}

@@ -132,12 +132,12 @@ function StepCard({ step, index, isActive, onClick }) {
         {title}
       </h3>
 
-      <p className="text-[.62rem] mb-5 uppercase tracking-widest transition-colors duration-300"
-        style={{ fontFamily: 'var(--font-mono)', color: isActive ? color : '#2E3848' }}>
+      <p className="text-[.68rem] mb-5 uppercase tracking-widest transition-colors duration-300 font-bold"
+        style={{ fontFamily: 'var(--font-mono)', color: isActive ? color : '#3D4A5C' }}>
         {subtitle}
       </p>
 
-      <p className={`text-[.82rem] leading-relaxed mb-7 transition-all duration-500 ${isActive ? 'text-[#8C98AA]' : 'text-[#2E3848]'}`}>
+      <p className={`text-[.92rem] leading-relaxed mb-7 transition-all duration-500 font-medium ${isActive ? 'text-[#ADBAC7]' : 'text-[#3D4A5C]'}`}>
         {text}
       </p>
 
@@ -202,7 +202,7 @@ export default function OurProcess() {
           </motion.div>
           <motion.div initial={{ opacity:0, y:18 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:.14, duration:.75, ease }}
             className="border-l-2 border-[#E3510F]/32 pl-7">
-            <p className="text-[#8C98AA] leading-relaxed text-[.96rem]">
+            <p className="text-[#ADBAC7] leading-relaxed text-[1.1rem] font-medium">
               A structured four-stage manufacturing process ensures every component meets the precise standards required for railway and metro applications worldwide. Click any stage to explore.
             </p>
           </motion.div>

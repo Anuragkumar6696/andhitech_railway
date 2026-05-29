@@ -19,8 +19,8 @@ export default function ContactInfo() {
       <div className="grid grid-cols-1 gap-5">
         {[
           { Icon: Mail, title: 'Direct Email', lines: ['info@andhitech.in'], href: 'mailto:info@andhitech.in' },
-          { Icon: Phone, title: 'Support Line', lines: ['011-25710064'], href: 'tel:01125710064' },
-          { Icon: MapPin, title: 'HQ Location', lines: ['509, 5th Floor, Kirti Mahal Building 19,', 'Rajendra Place, New Delhi – 110008'], href: 'https://maps.google.com' },
+          { Icon: Phone, title: 'Support Line', lines: ['+91 11 44766444'], href: 'tel:+911144766444' },
+          { Icon: MapPin, title: 'HQ Location', lines: ['403, 4th floor Kirti Mahal Building 19,', 'Rajendra Place, New Delhi – 110008'], href: 'https://maps.google.com' },
           { Icon: Clock, title: 'Business Hours', lines: ['Mon - Sat: 9:00 AM - 6:00 PM', 'Sunday: Closed'] }
         ].map(({ Icon, title, lines, href }, i) => {
           const inner = (

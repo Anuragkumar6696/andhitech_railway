@@ -150,17 +150,17 @@ function FeaturedProduct({ p, idx, total }) {
         >
           {p.title}
         </h3>
-        <p className="text-[#4E5A6E] text-[.88rem] leading-relaxed mb-8 max-w-md">
+        <p className="text-[#ADBAC7] text-[1.05rem] leading-relaxed mb-8 max-w-md font-medium">
           {strip(p.description || p.content, 28)}
         </p>
 
         {/* Spec rows */}
         <div className="space-y-0 mb-10">
           {specs.map(({ label, val }) => (
-            <div key={label} className="feature-item" style={{ borderColor: 'rgba(255,255,255,.04)' }}>
-              <span className="feature-num w-28 flex-shrink-0">{label}</span>
-              <span className="text-[#8C98AA] text-[.78rem]">{val}</span>
-              <div className="w-1.5 h-1.5 rounded-full bg-[#1C2540] flex-shrink-0"/>
+            <div key={label} className="feature-item border-b border-white/[.08] py-4 flex items-center justify-between group/item">
+              <span className="text-[#E3510F] text-[.75rem] uppercase tracking-widest font-bold w-32 flex-shrink-0" style={{ fontFamily:'var(--font-mono)' }}>{label}</span>
+              <span className="text-[#EDF0F5] text-[.95rem] font-semibold flex-1 text-right mr-4">{val}</span>
+              <div className="w-1.5 h-1.5 rounded-full bg-[#E3510F] flex-shrink-0 animate-pulse"/>
             </div>
           ))}
         </div>
@@ -256,10 +256,12 @@ function CompactCard({ p, index }) {
               <ArrowUpRight size={12} className="text-white"/>
             </div>
           </div>
-          {/* Body */}
-          <div className="flex flex-col flex-1 p-6">
-            <h3 className="text-[#EDF0F5] font-semibold text-[.9rem] mb-2 leading-snug group-hover:text-[#E3510F] transition-colors duration-300">{p.title}</h3>
-            <p className="text-[#3D4A5C] text-[.78rem] leading-relaxed flex-1 mb-5">{strip(p.description || p.content, 16)}</p>
+          {/* Info */}
+          <div className="p-6 flex flex-col flex-1">
+            <h4 className="text-[#EDF0F5] font-bold text-[1.1rem] mb-3 group-hover:text-[#E3510F] transition-colors duration-300">{p.title}</h4>
+            <p className="text-[#ADBAC7] text-[.88rem] leading-relaxed mb-6 font-medium line-clamp-3">
+              {strip(p.description || p.content, 18)}
+            </p>
             <div className="flex items-center gap-2 group-hover:gap-3 transition-all duration-300"
               style={{ fontFamily: 'var(--font-mono)', fontSize: '.58rem', letterSpacing: '.18em', textTransform: 'uppercase', color: meta.color }}>
               <span>Explore</span>

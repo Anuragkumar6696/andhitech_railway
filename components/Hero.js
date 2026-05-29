@@ -260,7 +260,7 @@ export default function Hero({ initialData }) {
             poster="/images/hero-bg.jpg"
             onCanPlay={() => setReady(true)}
             onPlaying={() => setReady(true)}
-            className={`w-full h-full object-cover transition-opacity duration-[2.5s] ${ready ? 'opacity-25' : 'opacity-0'}`}
+            className={`w-full h-full object-cover transition-opacity duration-[2.5s] ${ready ? 'opacity-65' : 'opacity-0'}`}
           >
             <source
               src={banner?.video ? getAbsoluteURL(banner.video) : '/images/andhitechvideo.mp4'}
@@ -268,10 +268,10 @@ export default function Hero({ initialData }) {
             />
           </video>
           {/* Multi-layer gradients */}
-          <div className="absolute inset-0" style={{ background:'linear-gradient(110deg,#030405 0%,rgba(3,4,5,.88) 38%,rgba(3,4,5,.2) 100%)' }}/>
-          <div className="absolute inset-0" style={{ background:'linear-gradient(to top,#030405 0%,transparent 40%,rgba(3,4,5,.3) 100%)' }}/>
+          <div className="absolute inset-0" style={{ background:'linear-gradient(110deg,#030405 10%,rgba(3,4,5,.75) 50%,rgba(3,4,5,.25) 100%)' }}/>
+          <div className="absolute inset-0" style={{ background:'linear-gradient(to top,#030405 0%,transparent 70%,rgba(3,4,5,.35) 100%)' }}/>
           {/* Vignette */}
-          <div className="absolute inset-0" style={{ background:'radial-gradient(ellipse at center,transparent 38%,rgba(3,4,5,.7) 100%)' }}/>
+          <div className="absolute inset-0" style={{ background:'radial-gradient(ellipse at center,transparent 30%,rgba(3,4,5,.6) 100%)' }}/>
         </motion.div>
 
         {/* Engineering grid */}
@@ -286,16 +286,6 @@ export default function Hero({ initialData }) {
         {/* Atmospheric glow */}
         <div className="absolute bottom-0 left-0 z-[1] w-[65vw] h-[55vh] pointer-events-none"
           style={{ background:'radial-gradient(ellipse at bottom left,rgba(227,81,15,.1) 0%,transparent 65%)' }}/>
-
-        {/* Animated scan line */}
-        <div className="absolute inset-y-0 z-[3] hidden xl:block overflow-hidden" style={{ right:'23%', width:'1px' }}>
-          <motion.div
-            animate={{ y: ['-100%', '100vh'] }}
-            transition={{ duration: 4.5, repeat: Infinity, repeatDelay: 3, ease: 'linear' }}
-            className="w-full h-24"
-            style={{ background:'linear-gradient(to bottom,transparent,rgba(227,81,15,.5),transparent)' }}
-          />
-        </div>
 
         {/* Main content */}
         <motion.div
@@ -324,7 +314,7 @@ export default function Hero({ initialData }) {
 
             <motion.p
               variants={{ hidden:{opacity:0,y:24}, show:{opacity:1,y:0,transition:{duration:.85,ease}} }}
-              className="text-[#8C98AA] text-[1rem] md:text-[1.08rem] leading-relaxed max-w-[580px] mb-14 font-light"
+              className="text-[#ADBAC7] text-[1.1rem] md:text-[1.2rem] leading-relaxed max-w-[620px] mb-14 font-medium"
             >
               {subline.replace(/<[^>]*>/g, '')}
             </motion.p>
@@ -378,8 +368,8 @@ export default function Hero({ initialData }) {
           <div className="max-w-screen-xl mx-auto grid grid-cols-3 divide-x divide-white/[.04]">
             {[['10+','Years of Innovation'],['500+','Projects Delivered'],['100%','Client Satisfaction']].map(([n, l], i) => (
               <div key={i} className="px-10 py-6 hidden md:block text-center group cursor-default">
-                <div className="text-[1.95rem] font-bold text-[#EDF0F5] mb-0.5 group-hover:text-[#E3510F] transition-colors duration-400" style={{ fontFamily:'var(--font-display)' }}>{n}</div>
-                <div className="text-[.55rem] text-[#1C2540] uppercase tracking-[.25em]" style={{ fontFamily:'var(--font-mono)' }}>{l}</div>
+                <div className="text-[2.2rem] font-bold text-[#EDF0F5] mb-1 group-hover:text-[#E3510F] transition-colors duration-400" style={{ fontFamily:'var(--font-display)' }}>{n}</div>
+                <div className="text-[.75rem] text-[#ADBAC7] uppercase tracking-[.25em] font-bold" style={{ fontFamily:'var(--font-mono)' }}>{l}</div>
               </div>
             ))}
           </div>

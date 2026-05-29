@@ -1,8 +1,9 @@
 'use client';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { ShieldCheck, CheckCircle2, Award, ArrowRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ShieldCheck, CheckCircle2, Award, ArrowRight, X } from 'lucide-react';
 
 const certs = [
   { src:'/images/certificate1.png',  title:'ISO 9001:2015',   subtitle:'Quality Management',      tag:'Certified' },
@@ -21,6 +22,8 @@ const qualities = [
 const ease = [.22,1,.36,1];
 
 export default function Certificates() {
+  const [selectedCert, setSelectedCert] = useState(null);
+
   return (
     <section className="relative overflow-hidden section-gap" style={{ background:'#0B0E15' }}>
       {/* Backgrounds */}
@@ -70,7 +73,8 @@ export default function Certificates() {
               key={i}
               initial={{ opacity:0, y:30 }} whileInView={{ opacity:1, y:0 }}
               viewport={{ once:true }} transition={{ delay:i*.1, duration:.65, ease }}
-              className="story-card group flex flex-col items-center p-7 text-center cursor-default"
+              className="story-card group flex flex-col items-center p-7 text-center cursor-pointer"
+              onClick={() => setSelectedCert(c)}
             >
               {/* Badge tag */}
               <div className="badge mb-5 self-center">{c.tag}</div>
@@ -98,6 +102,41 @@ export default function Certificates() {
             </motion.div>
           ))}
         </div>
+
+        {/* Lightbox Modal */}
+        <AnimatePresence>
+          {selectedCert && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/95 p-6 md:p-12"
+              onClick={() => setSelectedCert(null)}
+            >
+              <motion.button
+                className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors"
+                onClick={() => setSelectedCert(null)}
+              >
+                <X size={32} />
+              </motion.button>
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                className="relative max-w-4xl w-full h-full"
+                onClick={e => e.stopPropagation()}
+              >
+                <Image
+                  src={selectedCert.src}
+                  alt={selectedCert.title}
+                  fill
+                  className="object-contain"
+                  unoptimized
+                />
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* ── Bottom trust banner ── */}
         <motion.div

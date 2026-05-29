@@ -131,14 +131,14 @@ export default function Footer({ initialData }) {
             <div className="space-y-5">
               {[
                 { Icon:Mail,  href:'mailto:Info@andhitech.in', text:'Info@andhitech.in'  },
-                { Icon:Phone, href:'tel:01125710064',          text:'011-25710064'        },
+                { Icon:Phone, href:'tel:+911144766444',          text:'+91 11 44766444'        },
               ].map(({ Icon, href, text }) => (
                 <div key={text} className="flex items-center gap-3">
                   <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
                     style={{ background:'rgba(227,81,15,.08)', border:'1px solid rgba(227,81,15,.14)' }}>
                     <Icon size={12} className="text-[#E3510F]"/>
                   </div>
-                  <a href={href} className="text-[#3D4A5C] hover:text-[#EDF0F5] text-[.83rem] transition-colors">{text}</a>
+                  <a href={href} className="text-[#ADBAC7] hover:text-[#EDF0F5] text-[.83rem] transition-colors">{text}</a>
                 </div>
               ))}
               <div className="flex items-start gap-3">
@@ -146,9 +146,9 @@ export default function Footer({ initialData }) {
                   style={{ background:'rgba(227,81,15,.08)', border:'1px solid rgba(227,81,15,.14)' }}>
                   <MapPin size={12} className="text-[#E3510F]"/>
                 </div>
-                <address className="not-italic text-[#3D4A5C] text-[.81rem] leading-relaxed">
-                  509, 5th Floor, Kirti Mahal Building 19,<br/>
-                  Rajendra Place, New Delhi – 110008
+                <address className="not-italic text-[#ADBAC7] text-[.81rem] leading-relaxed">
+                  403, 4th floor Kirti Mahal Building 19,<br/>
+                  Rajendra Place , New Delhi-110008
                 </address>
               </div>
             </div>

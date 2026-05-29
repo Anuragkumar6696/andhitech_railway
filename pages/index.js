@@ -29,7 +29,7 @@ export default function Home({ siteSettings, banner, products, testimonials, cli
         {/* 2 · INDUSTRIAL TICKER — brand momentum strip */}
         <IndustrialTicker/>
 
-        {/* 3 · TRUSTED BY + TESTIMONIALS */}
+        {/* 3 · STRATEGIC PARTNERSHIPS */}
         <OurTestimonial initialData={{ testimonials, clientLogos }}/>
 
         {/* 4 · CORE CAPABILITIES — bento grid */}

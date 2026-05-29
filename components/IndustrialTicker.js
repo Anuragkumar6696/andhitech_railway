@@ -1,20 +1,34 @@
 'use client';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const ITEMS = [
-  '● RDSO APPROVED',
-  '// ISO 9001:2015',
-  '× PRECISION ENGINEERING',
-  '● RAILWAY ROLLING STOCK',
-  '// PAN-INDIA DISTRIBUTION',
-  '× METRO RAIL SYSTEMS',
-  '● VANDE BHARAT COMPONENTS',
-  '// MAKE IN INDIA',
-  '× 500+ PROJECTS DELIVERED',
-  '● 10+ YEARS EXCELLENCE',
+  { type: 'text', content: '● RDSO APPROVED' },
+  { type: 'image', content: '/images/make-in-india-lion.jpg' },
+  { type: 'text', content: '● ISO 9001:2015' },
+  { type: 'text', content: '● PRECISION ENGINEERING' },
+  { type: 'image', content: '/images/iso-logo-red.jpg' },
+  { type: 'text', content: '● RAILWAY ROLLING STOCK' },
+  { type: 'text', content: '● PAN-INDIA DISTRIBUTION' },
+  { type: 'text', content: '● METRO RAIL SYSTEMS' },
+  { type: 'text', content: '● VANDE BHARAT COMPONENTS' },
+  { type: 'text', content: '● MAKE IN INDIA' },
+  { type: 'text', content: '● 500+ PROJECTS DELIVERED' },
+  { type: 'text', content: '● 10+ YEARS EXCELLENCE' },
 ];
 
-const SpecialItem = ({ text }) => {
+const SpecialItem = ({ item }) => {
+  if (item.type === 'image') {
+    return (
+      <div className="flex-shrink-0 px-12 h-14 flex items-center">
+        <div className="relative h-12 w-20 rounded-lg overflow-hidden border border-white/10 shadow-lg">
+          <Image src={item.content} alt="Railway Product" fill className="object-cover" unoptimized />
+        </div>
+      </div>
+    );
+  }
+
+  const text = item.content;
   const isVande = text.includes('VANDE BHARAT');
   const isMakeInIndia = text.includes('MAKE IN INDIA');
   
@@ -26,11 +40,10 @@ const SpecialItem = ({ text }) => {
           fontWeight: '950',
           textShadow: '0 0 40px rgba(227,81,15,0.7), 0 0 10px rgba(227,81,15,0.4)',
           letterSpacing: '.5em',
-          fontSize: '.85rem'
+          fontSize: '1rem'
         }}>
           {text}
         </span>
-        <div className="w-24 h-px bg-[#E3510F]/60 shadow-[0_0_10px_rgba(227,81,15,0.3)]" />
       </span>
     );
   }
@@ -40,11 +53,11 @@ const SpecialItem = ({ text }) => {
       className="flex-shrink-0 px-12 select-none"
       style={{
         fontFamily: 'var(--font-mono)',
-        fontSize: '.65rem',
+        fontSize: '.85rem',
         letterSpacing: '.32em',
         textTransform: 'uppercase',
-        color: text.startsWith('●') ? '#E3510F' : 'rgba(237,240,245,.25)',
-        fontWeight: '600'
+        color: '#E3510F',
+        fontWeight: '700'
       }}
     >
       {text}
@@ -56,7 +69,7 @@ export default function IndustrialTicker({ inverted = false }) {
   const doubled = [...ITEMS, ...ITEMS];
   return (
     <div
-      className="relative overflow-hidden py-8 border-y"
+      className="relative overflow-hidden py-10 border-y"
       style={{
         background: inverted ? 'rgba(227,81,15,.12)' : 'rgba(255,255,255,.03)',
         borderColor: inverted ? 'rgba(227,81,15,.3)' : 'rgba(255,255,255,.08)',
@@ -68,9 +81,9 @@ export default function IndustrialTicker({ inverted = false }) {
       <div className="absolute right-0 inset-y-0 w-32 z-10 pointer-events-none"
         style={{ background: `linear-gradient(270deg,${inverted ? 'rgba(5,6,8,1)' : '#050608'},transparent)` }}/>
 
-      <div className="flex w-max ticker" style={{ animationDuration: inverted ? '45s' : '32s', animationDirection: inverted ? 'reverse' : 'normal' }}>
+      <div className="flex w-max ticker items-center" style={{ animationDuration: inverted ? '45s' : '32s', animationDirection: inverted ? 'reverse' : 'normal' }}>
         {doubled.map((item, i) => (
-          <SpecialItem key={i} text={item} />
+          <SpecialItem key={i} item={item} />
         ))}
       </div>
     </div>

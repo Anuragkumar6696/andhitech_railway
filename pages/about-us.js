@@ -7,6 +7,7 @@ import PageBanner from "@/components/PageBanner";
 import OurHistorySection from "@/components/aboutparts/OurHistorySection";
 import OurMissionVision from "@/components/aboutparts/OurMissionVision";
 import OurFeatures from "@/components/aboutparts/OurFeatures";
+import AboutImages from "@/components/aboutparts/AboutImages";
 import Footer from "@/components/Footer";
 export default function AboutUs() {
   return (
@@ -18,6 +19,7 @@ export default function AboutUs() {
         currentPage="About Us"
       />
       <OurHistorySection />
+      <AboutImages />
       <OurMissionVision />
       <OurFeatures />
       <Footer />

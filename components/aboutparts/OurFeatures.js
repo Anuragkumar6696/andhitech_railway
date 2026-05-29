@@ -15,12 +15,12 @@ export default function OurFeatures() {
       <div className="absolute inset-0 bg-grid-eng opacity-40 pointer-events-none" />
       <div className="max-w-screen-xl mx-auto px-5 md:px-10 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-end mb-20">
-          <motion.div initial={{ opacity:0, x:-20 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }}>
-            <span className="eyebrow mb-5 block">Our Key Strengths</span>
-            <h2 className="display-md">Core Strengths in <span style={{color:'#E3510F'}}>Industrial Innovation</span></h2>
+          <motion.div initial={{ opacity:0, x:-20 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} className="mb-14">
+            <span className="eyebrow mb-7 block">Our Key Strengths</span>
+            <h2 className="display-md">Core Strengths in <br/><span style={{color:'#E3510F'}}>Industrial Innovation</span></h2>
           </motion.div>
           <motion.p initial={{ opacity:0, x:20 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ delay:0.2 }}
-            className="text-[#9BA5B4] leading-relaxed border-l-2 border-[#E3510F]/40 pl-6 italic text-sm">
+            className="text-[#ADBAC7] leading-relaxed border-l-2 border-[#E3510F]/40 pl-6 italic text-[1.1rem] font-medium">
             &ldquo;At AHIL, our strength lies in combining precision engineering, ethical practices, and customer-focused manufacturing to deliver products that meet the highest standards.&rdquo;
           </motion.p>
         </div>
@@ -28,12 +28,12 @@ export default function OurFeatures() {
           <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-5">
             {features.map(({ Icon, title, desc }, i) => (
               <motion.div key={i} initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:i*0.1 }}
-                className="bento-cell p-9 group">
-                <div className="w-12 h-12 rounded-xl bg-[#E3510F]/10 flex items-center justify-center mb-6 group-hover:bg-[#E3510F] transition-colors duration-400">
-                  <Icon size={22} className="text-[#E3510F] group-hover:text-white transition-colors" />
+                className="bento-cell p-10 group bg-white/[0.02] border border-white/8 hover:border-[#E3510F]/30 transition-all duration-400">
+                <div className="w-14 h-14 rounded-xl bg-[#E3510F]/15 flex items-center justify-center mb-7 group-hover:bg-[#E3510F] transition-colors duration-400 shadow-lg">
+                  <Icon size={24} className="text-[#E3510F] group-hover:text-white transition-colors" />
                 </div>
-                <h3 className="text-[#F0F2F5] font-semibold text-base mb-4 group-hover:text-[#E3510F] transition-colors leading-snug">{title}</h3>
-                <p className="text-[#5A6478] text-sm leading-relaxed">{desc}</p>
+                <h3 className="text-[#EDF0F5] font-bold text-lg mb-4 group-hover:text-[#E3510F] transition-colors leading-snug">{title}</h3>
+                <p className="text-[#ADBAC7] text-[.92rem] leading-relaxed font-medium">{desc}</p>
               </motion.div>
             ))}
             <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:0.3 }}

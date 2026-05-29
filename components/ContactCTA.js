@@ -113,10 +113,10 @@ export default function ContactCTA() {
               <Mail size={14}/>
               <span>Info@andhitech.in</span>
             </a>
-            <a href="tel:01125710064"
+            <a href="tel:+911144766444"
               className="btn-wire group py-4 px-9 text-[.64rem] inline-flex items-center gap-2.5">
               <Phone size={14}/>
-              <span>011-25710064</span>
+              <span>+91 11 44766444</span>
             </a>
           </motion.div>
 
@@ -131,8 +131,8 @@ export default function ContactCTA() {
                 style={{ background:'rgba(227,81,15,.1)', border:'1px solid rgba(227,81,15,.18)' }}>
                 <MapPin size={13} className="text-[#E3510F]"/>
               </div>
-              <address className="not-italic text-[#3D4A5C] text-[.82rem] leading-relaxed">
-                509, 5th Floor, Kirti Mahal Building 19,<br/>
+              <address className="not-italic text-[#ADBAC7] text-[.82rem] leading-relaxed">
+                403, 4th floor Kirti Mahal Building 19,<br/>
                 Rajendra Place, New Delhi – 110008
               </address>
             </div>

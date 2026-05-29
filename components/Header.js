@@ -78,11 +78,11 @@ export default function Header({ initialData }) {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-6">
+        <nav className="hidden lg:flex items-center gap-8">
           {links.map(({ label, href }) => (
             <Link
               key={href} href={href}
-              className={`nav-link ${active(href) ? 'active !text-[#E3510F]' : 'text-[#8C98AA] hover:text-[#EDF0F5]'}`}
+              className={`nav-link text-[.95rem] font-bold tracking-wide ${active(href) ? 'active !text-[#E3510F]' : 'text-[#ADBAC7] hover:text-[#EDF0F5]'}`}
             >
               {label}
             </Link>

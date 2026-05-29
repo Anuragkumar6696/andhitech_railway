@@ -45,17 +45,17 @@ export default function OurMissionVision() {
                     <curr.Icon size={22} />
                   </div>
                   <h3 className="text-[#F0F2F5] text-3xl font-bold" style={{fontFamily:'var(--font-display)'}}>{curr.label}</h3>
-                  <p className="text-[#9BA5B4] text-base leading-relaxed italic">&ldquo;{curr.content}&rdquo;</p>
+                  <p className="text-[#ADBAC7] text-lg leading-relaxed italic font-medium">&ldquo;{curr.content}&rdquo;</p>
                 </div>
                 <div className="lg:col-span-5">
                   <div className="bg-white/[0.03] border border-white/6 rounded-xl p-8">
-                    <h4 className="text-[#5A6478] text-[10px] uppercase tracking-[0.2em] mb-6 font-medium" style={{fontFamily:'var(--font-mono)'}}>Strategic Priorities</h4>
+                    <h4 className="text-[#E3510F] text-[12px] uppercase tracking-[0.2em] mb-6 font-bold" style={{fontFamily:'var(--font-mono)'}}>Strategic Priorities</h4>
                     <ul className="space-y-4">
                       {curr.points.map((p,i) => (
                         <motion.li key={i} initial={{ opacity:0, x:-10 }} animate={{ opacity:1, x:0 }} transition={{ delay:i*0.08 }}
-                          className="flex items-center gap-3 text-[#F0F2F5]">
-                          <CheckCircle2 size={15} className="text-[#E3510F] flex-shrink-0" />
-                          <span className="text-sm font-medium">{p}</span>
+                          className="flex items-center gap-3 text-[#EDF0F5]">
+                          <CheckCircle2 size={16} className="text-[#E3510F] flex-shrink-0" />
+                          <span className="text-base font-bold">{p}</span>
                         </motion.li>
                       ))}
                     </ul>
