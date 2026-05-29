@@ -56,8 +56,7 @@ const CAT_META = {
   'Vande Bharat':  { color:'#3B82F6', num:'02' },
   'Metro':         { color:'#8B5CF6', num:'03' },
   'Brake':         { color:'#EF4444', num:'04' },
-  'HVAC':          { color:'#10B981', num:'05' },
-  'Track':         { color:'#F59E0B', num:'06' },
+  'Track':         { color:'#F59E0B', num:'05' },
 };
 
 /* ── Featured Split Product Row ── */
@@ -275,13 +274,13 @@ function CompactCard({ p, index }) {
   );
 }
 
-const CATEGORIES = ['All', 'LHB', 'Vande Bharat', 'Metro', 'Brake', 'HVAC', 'Track'];
+const CATEGORIES = ['All', 'LHB', 'Vande Bharat', 'Metro', 'Brake', 'Track'];
 
 const DEFAULT_PRODUCTS = [
   { id:1, title:'LHB Coach Axle & Wheel Disc',     slug:'lhb-coach-components',           category:{name:'LHB'},          icon:'/images/Axle-weel-disc.jpg',     description:'Precision-engineered LHB coach axle assemblies, wheel disc sets, and bogie components for Indian Railways rolling stock — certified to the highest RDSO standards.' },
   { id:2, title:'Vande Bharat HVAC Assemblies',     slug:'vande-bharat-assemblies',         category:{name:'Vande Bharat'},  icon:'/images/trainnew.jpg',           description:'Advanced HVAC components and interior fittings for the Vande Bharat Express including climate control modules and structural assemblies.' },
   { id:3, title:'Brake Disc & Caliper System',      slug:'brake-system-components',         category:{name:'Brake'},         icon:'/images/Brake-Disc-product.png', description:'High-performance brake discs, pads, and caliper assemblies designed to meet RDSO and international railway safety standards under heavy cyclic loading.' },
-  { id:4, title:'Air Spring Suspension Systems',    slug:'air-spring-systems',              category:{name:'HVAC'},          icon:'/images/Air-Spring.jpg',         description:'Premium air spring suspension systems engineered for smooth ride quality in metro and mainline railway applications across diverse operating conditions.' },
+  { id:4, title:'Air Spring Suspension Systems',    slug:'air-spring-systems',              category:{name:'Metro'},          icon:'/images/Air-Spring.jpg',         description:'Premium air spring suspension systems engineered for smooth ride quality in metro and mainline railway applications across diverse operating conditions.' },
   { id:5, title:'Tungsten Carbide Tamping Tools',   slug:'track-maintenance-equipment',     category:{name:'Track'},         icon:'/images/Tungsten-Carbide-Tamping-Tools.jpg', description:'Tungsten carbide tamping tools and track maintenance components for ballast cleaning, tamping, and precision track geometry alignment operations.' },
   { id:6, title:'Metro Rail Brake Components',      slug:'metro-rail-components',           category:{name:'Metro'},         icon:'/images/weel.jpg',               description:'Purpose-built components for metro rail systems — suspension members, braking elements, and structural parts built for high-frequency urban cycle demands.' },
 ];

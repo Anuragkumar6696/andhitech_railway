@@ -63,7 +63,9 @@ export default function ProductSidebar({ product, categories = [] }) {
         </h3>
         <ul className="space-y-3">
           {categories.length > 0 ? (
-            categories.map((cat) => (
+            categories
+              .filter(cat => cat.name?.toUpperCase() !== 'HVAC')
+              .map((cat) => (
               <li key={cat.id || cat.slug}>
                 <Link 
                   href={`/products`}

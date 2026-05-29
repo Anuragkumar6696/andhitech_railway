@@ -26,7 +26,9 @@ const ProductServicesSection = ({ products = [], categories = [] }) => {
               {/* Tabs */}
               <div className="mission-vision-nav">
                 <ul className="nav">
-                  {categories.map((cat) => (
+                  {categories
+                    .filter(cat => cat.name?.toUpperCase() !== 'HVAC')
+                    .map((cat) => (
                     <li key={cat.slug} className="nav-item">
                       <button
                         className={`nav-link ${activeTab === cat.slug ? 'active' : ''}`}

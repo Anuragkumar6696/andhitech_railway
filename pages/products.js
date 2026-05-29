@@ -23,8 +23,8 @@ export async function getStaticProps() {
   } catch { return { props: { products:[] }, revalidate: 60 }; }
 }
 
-const CATEGORIES = ['All','LHB','Vande Bharat','Metro','Brake','HVAC','Track'];
-const CAT_COLORS = { 'LHB':'#E3510F','Vande Bharat':'#2563EB','Metro':'#7C3AED','Brake':'#DC2626','HVAC':'#059669','Track':'#D97706' };
+const CATEGORIES = ['All','LHB','Vande Bharat','Metro','Brake','Track'];
+const CAT_COLORS = { 'LHB':'#E3510F','Vande Bharat':'#2563EB','Metro':'#7C3AED','Brake':'#DC2626','Track':'#D97706' };
 const ease = [.22,1,.36,1];
 
 const strip = (html, n=20) => (html||'').replace(/<[^>]*>/g,'').split(' ').slice(0,n).join(' ')+'…';
@@ -55,7 +55,7 @@ export default function Products({ products }) {
     <div className="min-h-screen" style={{ background:'#050608' }}>
       <Head>
         <title>Products & Solutions | AND Hitech Industries</title>
-        <meta name="description" content="Premium railway components and engineering solutions — LHB, Vande Bharat, Metro, Brake Systems, HVAC, Track Maintenance."/>
+        <meta name="description" content="Premium railway components and engineering solutions — LHB, Vande Bharat, Metro, Brake Systems, Track Maintenance."/>
       </Head>
 
       <Header/>
