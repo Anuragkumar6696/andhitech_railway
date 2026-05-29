@@ -129,7 +129,7 @@ export default function Products({ products }) {
               
               // Pantograph thumbnail update
               if (p.slug?.includes('pantograph')) {
-                imgSrc = '/images/products/pantograph/image1.jpg';
+                imgSrc = '/images/products/pantograph/main.jpg';
               }
 
               // Vande Bharat Door thumbnail update
@@ -144,7 +144,7 @@ export default function Products({ products }) {
 
               // Brake Blocks thumbnail update
               if (p.slug?.includes('brake-blocks')) {
-                imgSrc = '/images/products/brake-blocks/image1.jpg';
+                imgSrc = '/images/products/brake-blocks/main.jpg';
               }
 
               // Delhi Metro Brake thumbnail update

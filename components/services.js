@@ -34,17 +34,15 @@ const getProductImage = (p) => {
   } else if (slug.includes('lhb-dampers')) {
     imgSrc = '/images/products/lhb-dampers/damper-1.jpg';
   } else if (slug.includes('single-leaf-plug-door-vande-bharat-trains')) {
-    imgSrc = '/images/products/vande-bharat-door/image1.jpg';
+    imgSrc = '/images/products/vande-bharat-door/main.jpg';
   } else if (slug.includes('pantograph')) {
-    imgSrc = '/images/products/pantograph/image1.jpg';
+    imgSrc = '/images/products/pantograph/main.jpg';
+  } else if (slug.includes('brake-blocks')) {
+    imgSrc = '/images/products/brake-blocks/main.jpg';
   } else if (slug.includes('wheel-mounted-brake-disc-delhi-metro')) {
     imgSrc = '/images/products/delhi-metro-brake/image1.jpg';
   } else if (slug.includes('iv-coupler')) {
     imgSrc = '/images/products/iv-coupler-v2/iv-final.png';
-  } else if (slug.includes('pantograph')) {
-    imgSrc = '/images/products/pantograph/image1.jpg';
-  } else if (slug.includes('single-leaf-plug-door-vande-bharat-trains')) {
-    imgSrc = '/images/products/vande-bharat-door/image1.jpg';
   } else if (slug.includes('tamping-tools') || slug.includes('tamping-tool')) {
     imgSrc = '/images/products/tamping-tool-main.jpg';
   }

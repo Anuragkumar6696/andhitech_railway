@@ -69,6 +69,7 @@ export default function ServiceContent({ product }) {
     ];
   } else if (slug.includes('brake-blocks')) {
     images = [
+      { id: 'bb_main', image: '/images/products/brake-blocks/main.jpg', alt_text: 'Brake Block Main' },
       { id: 'bb1', image: '/images/products/brake-blocks/image1.jpg', alt_text: 'Brake Block 1' },
       { id: 'bb2', image: '/images/products/brake-blocks/image2.jpg', alt_text: 'Brake Block 2' },
       { id: 'bb3', image: '/images/products/brake-blocks/image3.jpg', alt_text: 'Brake Block 3' },
@@ -78,6 +79,7 @@ export default function ServiceContent({ product }) {
     ];
   } else if (slug.includes('pantograph')) {
     images = [
+      { id: 'panto_main', image: '/images/products/pantograph/main.jpg', alt_text: 'Pantograph Main' },
       { id: 'panto1', image: '/images/products/pantograph/image1.jpg', alt_text: 'Pantograph 1' },
       { id: 'panto2', image: '/images/products/pantograph/image2.jpg', alt_text: 'Pantograph 2' },
       { id: 'panto3', image: '/images/products/pantograph/image3.jpg', alt_text: 'Pantograph 3' },
