@@ -235,7 +235,12 @@ export default function Hero({ initialData }) {
   const headline = banner?.title      || 'ENGINEERING<br/>MOTION FOR<br/><em>MODERN RAILWAYS</em>';
   const subline  = banner?.content    || 'Premium Railway Rolling Stock components and advanced HVAC engineering solutions — built for safety, precision and the future of transit.';
   const btnText  = banner?.button_text || 'Explore Solutions';
-  const btnLink  = banner?.button_link || '/products';
+  let btnLink    = banner?.button_link || '/products';
+
+  // Force relative contact link for "Explore Now" button or any contact-related link
+  if (banner?.button_text?.trim().toLowerCase() === 'explore now' || btnLink.includes('contact')) {
+    btnLink = '/contact';
+  }
 
   return (
     <>

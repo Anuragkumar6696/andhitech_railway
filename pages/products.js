@@ -34,7 +34,22 @@ export default function Products({ products }) {
 
   const filtered = activeCat === 'All'
     ? products
-    : products.filter(p => (p.category?.name||'').includes(activeCat));
+    : products.filter(p => {
+        const pCat = (p.category?.name || '').trim().toLowerCase();
+        const pTitle = (p.title || '').trim().toLowerCase();
+        const pSlug = (p.slug || '').trim().toLowerCase();
+        const targetCat = activeCat.trim().toLowerCase();
+        
+        // Exact category match or category inclusion
+        if (pCat === targetCat || pCat.includes(targetCat)) return true;
+        
+        // Special case for "Brake" category: also check title and slug
+        if (targetCat === 'brake') {
+          return pTitle.includes('brake') || pSlug.includes('brake');
+        }
+        
+        return false;
+      });
 
   return (
     <div className="min-h-screen" style={{ background:'#050608' }}>
@@ -97,7 +112,7 @@ export default function Products({ products }) {
 
           {/* Product grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {(filtered.length ? filtered : products).map((p, i) => {
+            {filtered.map((p, i) => {
               const catName = p.category?.name || 'Engineering';
               const accent  = CAT_COLORS[catName] || '#E3510F';
               let imgSrc  = p.icon ? (p.icon.startsWith('http') ? p.icon : getAbsoluteURL(p.icon)) : '/images/hero-bg.jpg';
@@ -169,7 +184,7 @@ export default function Products({ products }) {
 
                // Tamping Tools thumbnail update
                if (p.slug?.includes('tamping-tools') || p.slug?.includes('tamping-tool')) {
-                 imgSrc = '/images/products/tamping-tools/image1.jpg';
+                 imgSrc = '/images/products/tamping-tool-main.jpg';
                }
 
               return (
@@ -181,7 +196,7 @@ export default function Products({ products }) {
                 >
                   <Link href={`/products/${p.slug||p.id}`}>
                     <div className="pcard flex flex-col h-full">
-                      <div className="relative overflow-hidden flex-shrink-0" style={{ height:220 }}>
+                      <div className="relative overflow-hidden flex-shrink-0 aspect-[16/10] sm:h-[220px]">
                         <Image
                           src={imgSrc} alt={p.title} fill
                           className="object-cover opacity-85 group-hover:opacity-100 group-hover:scale-[1.07] transition-all duration-700 brightness-110 contrast-[1.05]"
@@ -217,8 +232,16 @@ export default function Products({ products }) {
                 </motion.div>
               );
             })}
-            {!filtered.length && !products.length && (
-              <div className="col-span-3 text-center py-24 text-[#4E5A6E]">No products found.</div>
+            {filtered.length === 0 && (
+              <div className="col-span-1 md:col-span-2 lg:col-span-3 text-center py-24">
+                <p className="text-[#4E5A6E] text-lg">No products found in this category.</p>
+                <button 
+                  onClick={() => setActiveCat('All')}
+                  className="mt-4 text-[#E3510F] hover:underline"
+                >
+                  View all products
+                </button>
+              </div>
             )}
           </div>
         </div>

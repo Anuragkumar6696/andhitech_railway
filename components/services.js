@@ -45,6 +45,8 @@ const getProductImage = (p) => {
     imgSrc = '/images/products/pantograph/image1.jpg';
   } else if (slug.includes('single-leaf-plug-door-vande-bharat-trains')) {
     imgSrc = '/images/products/vande-bharat-door/image1.jpg';
+  } else if (slug.includes('tamping-tools') || slug.includes('tamping-tool')) {
+    imgSrc = '/images/products/tamping-tool-main.jpg';
   }
   return imgSrc;
 };
@@ -242,7 +244,7 @@ function CompactCard({ p, index }) {
       <Link href={`/products/${p.slug || p.id}`}>
         <div className="pcard overflow-hidden h-full flex flex-col">
           {/* Image */}
-          <div className="relative overflow-hidden" style={{ height: 200 }}>
+          <div className="relative overflow-hidden aspect-[16/10] sm:h-[200px]">
             <Image
               src={imgSrc} alt={p.title} fill
               className="object-cover opacity-55 group-hover:opacity-80 group-hover:scale-[1.06] transition-all duration-700"
@@ -302,7 +304,22 @@ export default function Services({ initialData }) {
   const source   = products.length ? products : DEFAULT_PRODUCTS;
   const filtered = activeCat === 'All'
     ? source
-    : source.filter(p => (p.category?.name || '').includes(activeCat));
+    : source.filter(p => {
+        const pCat = (p.category?.name || '').trim().toLowerCase();
+        const pTitle = (p.title || '').trim().toLowerCase();
+        const pSlug = (p.slug || '').trim().toLowerCase();
+        const targetCat = activeCat.trim().toLowerCase();
+        
+        // Exact category match or category inclusion
+        if (pCat === targetCat || pCat.includes(targetCat)) return true;
+        
+        // Special case for "Brake" category: also check title and slug
+        if (targetCat === 'brake') {
+          return pTitle.includes('brake') || pSlug.includes('brake');
+        }
+        
+        return false;
+      });
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden" style={{ background: '#050608' }}>
