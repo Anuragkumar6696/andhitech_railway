@@ -1,9 +1,8 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShieldCheck, CheckCircle2, Award, ArrowRight, X } from 'lucide-react';
+import { ShieldCheck, CheckCircle2, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const certs = [
   { src:'/images/certificate1.png',  title:'ISO 9001:2015',   subtitle:'Quality Management',      tag:'Certified' },
@@ -21,8 +20,173 @@ const qualities = [
 
 const ease = [.22,1,.36,1];
 
+/* ─── Certificate Lightbox ─────────────────────────────────────────── */
+function CertLightbox({ startIndex, onClose }) {
+  const [current, setCurrent] = useState(startIndex);
+  const [direction, setDirection] = useState(0);
+  const touchStartX = useRef(null);
+  const touchStartY = useRef(null);
+  const total = certs.length;
+
+  /* Prevent background scroll */
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = prev; };
+  }, []);
+
+  /* Keyboard navigation */
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === 'ArrowRight') goNext();
+      else if (e.key === 'ArrowLeft') goPrev();
+      else if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [current]);
+
+  const goPrev = useCallback(() => {
+    setDirection(-1);
+    setCurrent((c) => (c - 1 + total) % total);
+  }, [total]);
+
+  const goNext = useCallback(() => {
+    setDirection(1);
+    setCurrent((c) => (c + 1) % total);
+  }, [total]);
+
+  /* Swipe support */
+  const onTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+  const onTouchEnd = (e) => {
+    if (touchStartX.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    const dy = e.changedTouches[0].clientY - touchStartY.current;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+      dx < 0 ? goNext() : goPrev();
+    }
+    touchStartX.current = null;
+    touchStartY.current = null;
+  };
+
+  const variants = {
+    enter: (dir) => ({ opacity: 0, x: dir > 0 ? 60 : -60 }),
+    center: { opacity: 1, x: 0 },
+    exit: (dir) => ({ opacity: 0, x: dir > 0 ? -60 : 60 }),
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.22 }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center"
+      style={{ background: 'rgba(3,4,5,0.97)', backdropFilter: 'blur(12px)' }}
+      data-lenis-prevent
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+      onClick={onClose}
+    >
+      {/* Close button */}
+      <button
+        aria-label="Close lightbox"
+        onClick={onClose}
+        className="absolute top-5 right-5 z-10 flex items-center justify-center w-10 h-10 rounded-full border border-white/10 text-white/60 hover:text-[#E3510F] hover:border-[#E3510F] transition-all duration-200"
+        style={{ background: 'rgba(0,0,0,0.5)' }}
+      >
+        <X size={20} />
+      </button>
+
+      {/* Counter */}
+      <div
+        className="absolute top-5 left-1/2 -translate-x-1/2 z-10 px-4 py-1.5 rounded-full text-sm font-mono text-white/50 border border-white/8"
+        style={{ background: 'rgba(0,0,0,0.5)', letterSpacing: '0.08em' }}
+      >
+        {current + 1} / {total}
+      </div>
+
+      {/* Prev arrow */}
+      <button
+        aria-label="Previous certificate"
+        onClick={(e) => { e.stopPropagation(); goPrev(); }}
+        className="absolute left-4 md:left-8 z-10 flex items-center justify-center w-11 h-11 rounded-full border border-white/10 text-white/60 hover:text-[#E3510F] hover:border-[#E3510F] transition-all duration-200"
+        style={{ background: 'rgba(0,0,0,0.5)' }}
+      >
+        <ChevronLeft size={22} />
+      </button>
+
+      {/* Next arrow */}
+      <button
+        aria-label="Next certificate"
+        onClick={(e) => { e.stopPropagation(); goNext(); }}
+        className="absolute right-4 md:right-8 z-10 flex items-center justify-center w-11 h-11 rounded-full border border-white/10 text-white/60 hover:text-[#E3510F] hover:border-[#E3510F] transition-all duration-200"
+        style={{ background: 'rgba(0,0,0,0.5)' }}
+      >
+        <ChevronRight size={22} />
+      </button>
+
+      {/* Image container */}
+      <div
+        className="relative w-full h-full flex items-center justify-center px-20"
+        onClick={(e) => e.stopPropagation()}
+        style={{ maxWidth: '1400px', margin: '0 auto' }}
+      >
+        <AnimatePresence initial={false} custom={direction} mode="wait">
+          <motion.div
+            key={current}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            className="relative w-full"
+            style={{ height: 'calc(100vh - 120px)' }}
+          >
+            <Image
+              src={certs[current].src}
+              alt={certs[current].title}
+              fill
+              className="object-contain"
+              unoptimized
+              priority
+            />
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Dot indicators */}
+      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+        {certs.map((_, i) => (
+          <button
+            key={i}
+            aria-label={`Go to certificate ${i + 1}`}
+            onClick={(e) => { e.stopPropagation(); setDirection(i > current ? 1 : -1); setCurrent(i); }}
+            style={{
+              width: i === current ? 20 : 6,
+              height: 6,
+              borderRadius: i === current ? 3 : '50%',
+              background: i === current ? '#E3510F' : 'rgba(255,255,255,0.2)',
+              transition: 'all 0.3s ease',
+              border: 'none',
+              cursor: 'pointer',
+              padding: 0,
+            }}
+          />
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
+/* ─── Main Component ─────────────────────────────────────────────────── */
 export default function Certificates() {
-  const [selectedCert, setSelectedCert] = useState(null);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
 
   return (
     <section className="relative overflow-hidden section-gap" style={{ background:'#0B0E15' }}>
@@ -74,7 +238,7 @@ export default function Certificates() {
               initial={{ opacity:0, y:30 }} whileInView={{ opacity:1, y:0 }}
               viewport={{ once:true }} transition={{ delay:i*.1, duration:.65, ease }}
               className="story-card group flex flex-col items-center p-7 text-center cursor-pointer"
-              onClick={() => setSelectedCert(c)}
+              onClick={() => setLightboxIndex(i)}
             >
               {/* Badge tag */}
               <div className="badge mb-5 self-center">{c.tag}</div>
@@ -102,41 +266,6 @@ export default function Certificates() {
             </motion.div>
           ))}
         </div>
-
-        {/* Lightbox Modal */}
-        <AnimatePresence>
-          {selectedCert && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/95 p-6 md:p-12"
-              onClick={() => setSelectedCert(null)}
-            >
-              <motion.button
-                className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors"
-                onClick={() => setSelectedCert(null)}
-              >
-                <X size={32} />
-              </motion.button>
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                className="relative max-w-4xl w-full h-full"
-                onClick={e => e.stopPropagation()}
-              >
-                <Image
-                  src={selectedCert.src}
-                  alt={selectedCert.title}
-                  fill
-                  className="object-contain"
-                  unoptimized
-                />
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
 
         {/* ── Bottom trust banner ── */}
         <motion.div
@@ -172,6 +301,16 @@ export default function Certificates() {
         </motion.div>
 
       </div>
+
+      {/* Certificate Lightbox */}
+      <AnimatePresence>
+        {lightboxIndex !== null && (
+          <CertLightbox
+            startIndex={lightboxIndex}
+            onClose={() => setLightboxIndex(null)}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 }
