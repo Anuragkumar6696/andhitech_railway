@@ -9,9 +9,9 @@ const nextConfig = {
       },
     ],
   },
-  turbopack: {
-    root: 'C:/Users/DELL/Desktop/andhitech_railway',
-  },
+  // NOTE: turbopack.root removed — it was hardcoded to a Windows dev-machine
+  // path ("C:/Users/DELL/Desktop/...") which caused Vercel (Linux) builds to
+  // fail intermittently and contributed to RSC header leakage on all pages.
 };
 
 export default nextConfig;
