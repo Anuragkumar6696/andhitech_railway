@@ -4,15 +4,17 @@ import Image from 'next/image';
 
 const ITEMS = [
   { type: 'text', content: '● RDSO APPROVED' },
-  { type: 'image', content: '/images/make-in-india-lion.jpg' },
-  { type: 'text', content: '● ISO 9001:2015' },
+  { type: 'text', content: '● MAKE IN INDIA' },
+  { type: 'image', content: '/images/mid.png' },
   { type: 'text', content: '● PRECISION ENGINEERING' },
-  { type: 'image', content: '/images/iso-logo-red.jpg' },
+  { type: 'text', content: '● ISO 9001:2015' },
+  { type: 'image', content: '/images/ISO.jpeg' },
   { type: 'text', content: '● RAILWAY ROLLING STOCK' },
   { type: 'text', content: '● PAN-INDIA DISTRIBUTION' },
   { type: 'text', content: '● METRO RAIL SYSTEMS' },
   { type: 'text', content: '● VANDE BHARAT COMPONENTS' },
-  { type: 'text', content: '● MAKE IN INDIA' },
+  { type: 'image', content: '/images/VB.jpeg' },
+  // { type: 'text', content: '● MAKE IN INDIA' },
   { type: 'text', content: '● 500+ PROJECTS DELIVERED' },
   { type: 'text', content: '● 10+ YEARS EXCELLENCE' },
 ];
@@ -39,8 +41,8 @@ const SpecialItem = ({ item }) => {
           color: '#E3510F', 
           fontWeight: '950',
           textShadow: '0 0 40px rgba(227,81,15,0.7), 0 0 10px rgba(227,81,15,0.4)',
-          letterSpacing: '.5em',
-          fontSize: '1rem'
+          letterSpacing: '.2em',
+          fontSize: '0.85rem'
         }}>
           {text}
         </span>
@@ -56,8 +58,8 @@ const SpecialItem = ({ item }) => {
         fontSize: '.85rem',
         letterSpacing: '.32em',
         textTransform: 'uppercase',
-        color: '#E3510F',
-        fontWeight: '700'
+        color: text.startsWith('●') ? '#E3510F' : 'rgba(237,240,245,.25)',
+        fontWeight: '600'
       }}
     >
       {text}
@@ -81,7 +83,7 @@ export default function IndustrialTicker({ inverted = false }) {
       <div className="absolute right-0 inset-y-0 w-32 z-10 pointer-events-none"
         style={{ background: `linear-gradient(270deg,${inverted ? 'rgba(5,6,8,1)' : '#050608'},transparent)` }}/>
 
-      <div className="flex w-max ticker items-center" style={{ animationDuration: inverted ? '45s' : '32s', animationDirection: inverted ? 'reverse' : 'normal' }}>
+      <div className="flex w-max ticker items-center" style={{ animationDuration: inverted ? '45s' : '32s', animationDirection:   'normal' }}>
         {doubled.map((item, i) => (
           <SpecialItem key={i} item={item} />
         ))}

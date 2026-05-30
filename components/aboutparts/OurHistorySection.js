@@ -14,17 +14,17 @@ export default function HistoryTabs() {
             <div>
               <span className="eyebrow mb-7 block">Who We Are</span>
               <h2 className="display-md mb-8">Welcome to <span style={{color:'#E3510F'}}>AND HITECH</span> INDUSTRIES LTD</h2>
-              <p className="text-[#ADBAC7] text-[1.15rem] leading-relaxed font-medium">
+              <p className="text-[#9BA5B4] text-base leading-relaxed">
                 Established in 2013, AND HITECH INDUSTRIES LTD (AHIL) has emerged as a trusted name in precision manufacturing. We specialize in high-quality components for Railway Rolling Stock and advanced HVAC systems for Railways and Metros.
               </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {['Precision Engineering Excellence','Tailored Industrial Solutions','Quality & Compliance','Sustainable Practices'].map((item, i) => (
-                <div key={i} className="flex items-center gap-4 py-4 px-6 rounded-xl bg-white/[0.04] border border-white/8 hover:border-[#E3510F]/30 transition-all duration-400 group cursor-default shadow-lg">
-                  <div className="w-6 h-6 rounded-full bg-[#E3510F]/15 flex items-center justify-center flex-shrink-0 group-hover:bg-[#E3510F] transition-colors">
-                    <CheckCircle2 size={13} className="text-[#E3510F] group-hover:text-white transition-colors" />
+                <div key={i} className="flex items-center gap-3 py-3 px-4 rounded-lg bg-white/[0.03] border border-white/5 hover:border-[#E3510F]/20 transition-colors group cursor-default">
+                  <div className="w-5 h-5 rounded-full bg-[#E3510F]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#E3510F] transition-colors">
+                    <CheckCircle2 size={11} className="text-[#E3510F] group-hover:text-white transition-colors" />
                   </div>
-                  <span className="text-[#ADBAC7] text-[.95rem] font-bold">{item}</span>
+                  <span className="text-[#9BA5B4] text-sm font-medium">{item}</span>
                 </div>
               ))}
             </div>

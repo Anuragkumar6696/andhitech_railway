@@ -1,11 +1,14 @@
 'use client';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css'; import 'swiper/css/pagination';
 
-export default function InfrastructureGallerySections({ sections=[] }) {
+export default function InfrastructureGallerySections({ sections = [] }) {
+  const [selectedImage, setSelectedImage] = useState(null);
   if (!sections?.length) return null;
 
   // Override images for "Brake Pads and Brake Blocks Production" or "Our Production Units" section
@@ -14,7 +17,7 @@ export default function InfrastructureGallerySections({ sections=[] }) {
     const isRMPUDevelopment = section.title?.toLowerCase().includes('rmpu') && (section.title?.toLowerCase().includes('development') || section.title?.toLowerCase().includes('testing'));
     const isAssemblyQC = section.title?.toLowerCase().includes('assembly') || section.title?.toLowerCase().includes('qc') || section.title?.toLowerCase().includes('testing');
     const isProductionUnits = section.title?.toLowerCase().includes('production units');
-    
+
     if (isBrakeProduction) {
       return {
         ...section,
@@ -63,7 +66,7 @@ export default function InfrastructureGallerySections({ sections=[] }) {
         ]
       };
     }
-    
+
     if (isProductionUnits) {
       return {
         ...section,
@@ -96,27 +99,35 @@ export default function InfrastructureGallerySections({ sections=[] }) {
     }
     return section;
   });
-
   return (
     <section className="py-20 bg-[#07080C] relative">
       <div className="absolute inset-0 bg-grid-eng opacity-30 pointer-events-none" />
       <div className="max-w-screen-xl mx-auto px-5 md:px-10 relative z-10">
-        <motion.div initial={{ opacity:0, y:16 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} className="mb-14">
+        <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-14">
           <span className="eyebrow mb-5 block">Facility Gallery</span>
-          <h2 className="display-md max-w-xl">Our <span style={{color:'#E3510F'}}>Manufacturing Facilities</span></h2>
+          <h2 className="display-md max-w-xl">Our <span style={{ color: '#E3510F' }}>Manufacturing Facilities</span></h2>
         </motion.div>
         <div className="space-y-16">
           {enhancedSections.map((section, si) => (
-            <motion.div key={si} initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}>
+            <motion.div key={si} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
               {section.title && <h3 className="text-[#F0F2F5] font-semibold text-lg mb-7 flex items-center gap-3"><span className="accent-line" />{section.title}</h3>}
               {section.images?.length > 0 && (
-                <Swiper modules={[Navigation,Pagination,Autoplay]} autoplay={{ delay:4000 }} pagination={{ clickable:true }}
-                  spaceBetween={16} slidesPerView={1} breakpoints={{ 640:{slidesPerView:2}, 1024:{slidesPerView:3} }} className="!pb-10">
+                <Swiper modules={[Navigation, Pagination, Autoplay]} autoplay={{ delay: 4000 }} pagination={{ clickable: true }}
+                  spaceBetween={16} slidesPerView={1} breakpoints={{ 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }} className="!pb-10">
                   {section.images.map((img, ii) => (
                     <SwiperSlide key={ii}>
-                      <div className="relative h-56 rounded-xl overflow-hidden border border-white/6 group">
-                        <Image src={img.image} alt={img.caption||`Gallery ${ii+1}`} fill
-                          className="object-cover opacity-80 transition-all duration-500" unoptimized />
+                      <div
+                        className="relative h-56 rounded-xl overflow-hidden border border-white/6 group cursor-pointer hover:scale-[1.03] transition-all duration-500"
+                        onClick={() => setSelectedImage(img)}
+                      >                       <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-130">
+                          <Image
+                            src={img.image}
+                            alt={img.caption || `Gallery ${ii + 1}`}
+                            fill
+                            className="object-cover opacity-80"
+                            unoptimized
+                          />
+                        </div>
                       </div>
                     </SwiperSlide>
                   ))}
@@ -126,6 +137,38 @@ export default function InfrastructureGallerySections({ sections=[] }) {
           ))}
         </div>
       </div>
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center p-4 md:p-10"
+            onClick={() => setSelectedImage(null)}
+          >
+            <button
+              className="absolute top-6 right-6 text-white hover:text-[#E3510F]"
+              onClick={() => setSelectedImage(null)}
+            >
+              <X size={32} />
+            </button>
+
+            <motion.div
+              className="relative w-full max-w-6xl h-[85vh]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Image
+                src={selectedImage.image}
+                alt={selectedImage.caption || 'Gallery Image'}
+                fill
+                className="object-contain"
+                unoptimized
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
+

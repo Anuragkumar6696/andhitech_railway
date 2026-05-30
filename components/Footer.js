@@ -56,12 +56,12 @@ export default function Footer({ initialData }) {
             <Link href="/" className="block group">
                 <div className="flex items-center gap-4">
                   <Image
-                    src="/images/logo-main.png" alt="AND Hitech Industries" width={60} height={60}
-                    className="h-14 w-auto brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity"
+                    src="/images/logo-main.png" alt="AND Hitech Industries" width={230} height={100}
+                    className="h-24 w-auto brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity"
                   />
                 </div>
             </Link>
-            <p className="text-[#3D4A5C] text-[.84rem] leading-relaxed max-w-xs">
+            <p className="text-[#A0AABA] text-[.84rem] leading-relaxed max-w-xs">
               Engineering excellence and innovative industrial solutions for railways, metros, and critical infrastructure worldwide.
             </p>
             <div className="flex gap-4">
@@ -93,7 +93,7 @@ export default function Footer({ initialData }) {
               ].map(([l, h]) => (
                 <li key={h}>
                   <Link href={h}
-                    className="text-[#3D4A5C] hover:text-[#EDF0F5] text-[.83rem] transition-colors flex items-center gap-2 group">
+                    className="text-[#A0AABA] hover:text-[#EDF0F5] text-[.83rem] transition-colors flex items-center gap-2 group">
                     <span className="w-0 group-hover:w-3 h-px bg-[#E3510F] overflow-hidden transition-all duration-300"/>
                     {l}
                   </Link>
@@ -114,7 +114,7 @@ export default function Footer({ initialData }) {
               ].map(label => (
                 <li key={label}>
                   <Link href="/products"
-                    className="text-[#3D4A5C] hover:text-[#EDF0F5] text-[.83rem] transition-colors flex items-center gap-2 group">
+                    className="text-[#A0AABA] hover:text-[#EDF0F5] text-[.83rem] transition-colors flex items-center gap-2 group">
                     <span className="w-0 group-hover:w-3 h-px bg-[#E3510F] overflow-hidden transition-all duration-300"/>
                     {label}
                   </Link>
@@ -138,7 +138,7 @@ export default function Footer({ initialData }) {
                     style={{ background:'rgba(227,81,15,.08)', border:'1px solid rgba(227,81,15,.14)' }}>
                     <Icon size={12} className="text-[#E3510F]"/>
                   </div>
-                  <a href={href} className="text-[#ADBAC7] hover:text-[#EDF0F5] text-[.83rem] transition-colors">{text}</a>
+                  <a href={href} className="text-[#C8D0DA] hover:text-[#EDF0F5] text-[.83rem] transition-colors">{text}</a>
                 </div>
               ))}
               <div className="flex items-start gap-3">
@@ -146,7 +146,7 @@ export default function Footer({ initialData }) {
                   style={{ background:'rgba(227,81,15,.08)', border:'1px solid rgba(227,81,15,.14)' }}>
                   <MapPin size={12} className="text-[#E3510F]"/>
                 </div>
-                <address className="not-italic text-[#ADBAC7] text-[.81rem] leading-relaxed">
+                <address className="not-italic text-[#C8D0DA] text-[.81rem] leading-relaxed">
                   403, 4th floor Kirti Mahal Building 19,<br/>
                   Rajendra Place , New Delhi-110008
                 </address>

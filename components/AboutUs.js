@@ -97,7 +97,7 @@ export default function AboutUs() {
               <h2 className="display-md mb-7">
                 Leading the Way in<br/><span style={{ color:'#E3510F' }}>Industrial Precision</span>
               </h2>
-              <p className="text-[#ADBAC7] text-[1.1rem] leading-relaxed font-medium">
+              <p className="text-[#8C98AA] text-[.96rem] leading-relaxed font-light">
                 Established in 2013, AND HITECH INDUSTRIES LTD (AHIL) has emerged as a trusted name in precision manufacturing, specialising in high-quality components for Railway Rolling Stock and advanced HVAC systems for Indian Railways and Metro networks.
               </p>
             </motion.div>
@@ -110,15 +110,15 @@ export default function AboutUs() {
             >
               {features.map((f, i) => (
                 <div key={i}
-                  className="flex items-center gap-3 py-4 px-6 rounded-xl border border-white/[.08] hover:border-[#E3510F]/40 transition-all duration-400 group cursor-default shadow-lg"
-                  style={{ background:'rgba(255,255,255,.02)' }}>
-                  <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-400"
-                    style={{ background:'rgba(227,81,15,.15)' }}
+                  className="flex items-center gap-3 py-3.5 px-5 rounded-xl border border-white/[.05] hover:border-[#E3510F]/22 transition-all duration-400 group cursor-default"
+                  style={{ background:'rgba(255,255,255,.015)' }}>
+                  <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-400"
+                    style={{ background:'rgba(227,81,15,.1)' }}
                     onMouseEnter={e => e.currentTarget.style.background='#E3510F'}
-                    onMouseLeave={e => e.currentTarget.style.background='rgba(227,81,15,.15)'}>
-                    <CheckCircle2 size={13} className="text-[#E3510F] group-hover:text-white transition-colors"/>
+                    onMouseLeave={e => e.currentTarget.style.background='rgba(227,81,15,.1)'}>
+                    <CheckCircle2 size={11} className="text-[#E3510F] group-hover:text-white transition-colors"/>
                   </div>
-                  <span className="text-[#ADBAC7] text-[.95rem] font-semibold">{f}</span>
+                  <span className="text-[#8C98AA] text-[.83rem] font-medium">{f}</span>
                 </div>
               ))}
             </motion.div>

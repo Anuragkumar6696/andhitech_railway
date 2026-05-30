@@ -31,8 +31,17 @@ export default function InfraSection({ title, description, sections=[], subTitle
                       <div className="w-5 h-5 rounded-md bg-[#E3510F]/40" />
                     </div>
                 }
-                <h4 className="text-[#F0F2F5] font-semibold text-base mb-3 group-hover:text-[#E3510F] transition-colors">{item.section_title}</h4>
-                <p className="text-[#5A6478] text-sm leading-relaxed">{item.section_content}</p>
+                <h3
+                  className="text-[#E3510F] mb-2.5 group-hover:text-[#F2F4F7] transition-colors duration-300"
+                  style={{
+                    fontFamily: 'DM Sans, sans-serif',
+                    fontWeight: 700,
+                    fontSize: '18px',
+                    lineHeight: '1.5',
+                    letterSpacing: '0.02em',
+                  }}
+                >{item.section_title}</h3>
+                <p className="text-[#AAB4C3] text-sm leading-relaxed">{item.section_content}</p>
               </motion.div>
             ))}
           </div>

@@ -50,11 +50,11 @@ const getProductImage = (p) => {
 };
 
 const CAT_META = {
-  'LHB':           { color:'#E3510F', num:'01' },
-  'Vande Bharat':  { color:'#3B82F6', num:'02' },
-  'Metro':         { color:'#8B5CF6', num:'03' },
-  'Brake':         { color:'#EF4444', num:'04' },
-  'Track':         { color:'#F59E0B', num:'05' },
+  'LHB': { color: '#A0AABA', num: '01' },
+  'Vande Bharat': { color: '#3B82F6', num: '02' },
+  'Metro': { color: '#8B5CF6', num: '03' },
+  'Brake': { color: '#EF4444', num: '04' },
+  'Track': { color: '#F59E0B', num: '05' },
 };
 
 /* ── Featured Split Product Row ── */
@@ -62,21 +62,21 @@ function FeaturedProduct({ p, idx, total }) {
   const ref = useRef(null);
   const [expanded, setExpanded] = useState(false);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const imgY   = useTransform(scrollYProgress, [0, 1], [60, -60]);
-  const imgX   = idx % 2 === 0
+  const imgY = useTransform(scrollYProgress, [0, 1], [60, -60]);
+  const imgX = idx % 2 === 0
     ? useTransform(scrollYProgress, [0, 1], [-20, 20])
     : useTransform(scrollYProgress, [0, 1], [20, -20]);
 
-  const imgSrc  = getProductImage(p);
+  const imgSrc = getProductImage(p);
   const catName = p.category?.name || 'Engineering';
-  const meta    = CAT_META[catName] || { color: '#E3510F', num: '0' + (idx + 1) };
-  const isEven  = idx % 2 === 0;
+  const meta = CAT_META[catName] || { color: '#E3510F', num: '0' + (idx + 1) };
+  const isEven = idx % 2 === 0;
 
   const specs = [
-    { label: 'Standard',       val: 'RDSO / ISO 9001' },
-    { label: 'Material',       val: 'Grade A Steel' },
-    { label: 'Application',    val: catName + ' Systems' },
-    { label: 'Lead Time',      val: '4–6 Weeks' },
+    { label: 'Standard', val: 'RDSO / ISO 9001' },
+    { label: 'Material', val: 'Grade A Steel' },
+    { label: 'Application', val: catName + ' Systems' },
+    { label: 'Lead Time', val: '4–6 Weeks' },
   ];
 
   return (
@@ -86,9 +86,8 @@ function FeaturedProduct({ p, idx, total }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 1, ease }}
-      className={`relative grid grid-cols-1 lg:grid-cols-2 gap-0 min-h-[520px] group overflow-hidden ${
-        idx < total - 1 ? 'border-b border-white/[.04]' : ''
-      }`}
+      className={`relative grid grid-cols-1 lg:grid-cols-2 gap-0 min-h-[520px] group overflow-hidden ${idx < total - 1 ? 'border-b border-white/[.04]' : ''
+        }`}
     >
       {/* Image side */}
       <div className={`relative overflow-hidden ${!isEven ? 'lg:order-2' : ''}`}
@@ -106,9 +105,9 @@ function FeaturedProduct({ p, idx, total }) {
             background: isEven
               ? 'linear-gradient(to right,#050608 0%,rgba(5,6,8,.1) 60%,transparent 100%)'
               : 'linear-gradient(to left,#050608 0%,rgba(5,6,8,.1) 60%,transparent 100%)',
-          }}/>
+          }} />
         <div className="absolute inset-0"
-          style={{ background: 'linear-gradient(to top,#050608 0%,transparent 40%)' }}/>
+          style={{ background: 'linear-gradient(to top,#050608 0%,transparent 40%)' }} />
 
         {/* Category badge */}
         <div className="absolute top-8 left-8">
@@ -150,7 +149,7 @@ function FeaturedProduct({ p, idx, total }) {
         >
           {p.title}
         </h3>
-        <p className="text-[#ADBAC7] text-[1.05rem] leading-relaxed mb-8 max-w-md font-medium">
+        <p className="text-[#B4BEC9] text-[.88rem] leading-relaxed mb-8 max-w-md font-light">
           {strip(p.description || p.content, 28)}
         </p>
 
@@ -158,9 +157,9 @@ function FeaturedProduct({ p, idx, total }) {
         <div className="space-y-0 mb-10">
           {specs.map(({ label, val }) => (
             <div key={label} className="feature-item border-b border-white/[.08] py-4 flex items-center justify-between group/item">
-              <span className="text-[#E3510F] text-[.75rem] uppercase tracking-widest font-bold w-32 flex-shrink-0" style={{ fontFamily:'var(--font-mono)' }}>{label}</span>
-              <span className="text-[#EDF0F5] text-[.95rem] font-semibold flex-1 text-right mr-4">{val}</span>
-              <div className="w-1.5 h-1.5 rounded-full bg-[#E3510F] flex-shrink-0 animate-pulse"/>
+              <span className="text-[#E3510F] text-[.72rem] uppercase tracking-widest font-medium w-32 flex-shrink-0" style={{ fontFamily: 'var(--font-mono)' }}>{label}</span>
+              <span className="text-[#8C98AA] text-[.78rem] font-medium flex-1 text-right mr-4">{val}</span>
+              <div className="w-1.5 h-1.5 rounded-full bg-[#1C2540] flex-shrink-0" />
             </div>
           ))}
         </div>
@@ -174,7 +173,7 @@ function FeaturedProduct({ p, idx, total }) {
           <div className={`w-5 h-5 rounded-full border flex items-center justify-center transition-all duration-300
             ${expanded ? 'border-current bg-current/10' : 'border-[#1C2540] group-hover/btn:border-current'}`}
             style={{ color: meta.color }}>
-            {expanded ? <X size={8}/> : <Plus size={8}/>}
+            {expanded ? <X size={8} /> : <Plus size={8} />}
           </div>
           {expanded ? 'Hide Details' : 'Technical Specs'}
         </button>
@@ -193,9 +192,9 @@ function FeaturedProduct({ p, idx, total }) {
                   All components are manufactured to RDSO specification and subjected to rigorous quality inspection including dimensional verification, material testing, and performance validation under simulated operating conditions.
                 </p>
                 <div className="grid grid-cols-2 gap-3">
-                  {['RDSO Spec Compliant','Third-party Verified','Load tested 2× rated','Full documentation'].map((f, i) => (
+                  {['RDSO Spec Compliant', 'Third-party Verified', 'Load tested 2× rated', 'Full documentation'].map((f, i) => (
                     <div key={i} className="flex items-center gap-2">
-                      <div className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: meta.color }}/>
+                      <div className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: meta.color }} />
                       <span className="text-[#4E5A6E] text-[.72rem]">{f}</span>
                     </div>
                   ))}
@@ -212,23 +211,23 @@ function FeaturedProduct({ p, idx, total }) {
           <span>View Full Details</span>
           <div className="w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 group-hover/cta:bg-current/10"
             style={{ borderColor: `${meta.color}40` }}>
-            <ArrowRight size={11}/>
+            <ArrowRight size={11} />
           </div>
         </Link>
       </div>
 
       {/* Connecting vertical rule */}
       <div className="absolute inset-y-0 w-px pointer-events-none hidden lg:block"
-        style={{ left: isEven ? '50%' : '50%', background: `linear-gradient(to bottom,transparent,${meta.color}18,transparent)` }}/>
+        style={{ left: isEven ? '50%' : '50%', background: `linear-gradient(to bottom,transparent,${meta.color}18,transparent)` }} />
     </motion.div>
   );
 }
 
 /* ── Compact grid card ── */
 function CompactCard({ p, index }) {
-  const imgSrc  = getProductImage(p);
+  const imgSrc = getProductImage(p);
   const catName = p.category?.name || 'Engineering';
-  const meta    = CAT_META[catName] || { color: '#E3510F', num: '00' };
+  const meta = CAT_META[catName] || { color: '#E3510F', num: '00' };
 
   return (
     <motion.div
@@ -247,25 +246,25 @@ function CompactCard({ p, index }) {
               className="object-cover opacity-55 group-hover:opacity-80 group-hover:scale-[1.06] transition-all duration-700"
               unoptimized
             />
-            <div className="absolute inset-0" style={{ background: 'linear-gradient(to top,#0B0E15 0%,transparent 60%)' }}/>
+            <div className="absolute inset-0" style={{ background: 'linear-gradient(to top,#0B0E15 0%,transparent 60%)' }} />
             <div className="absolute top-4 left-4">
               <span className="chip" style={{ background: meta.color }}>{catName}</span>
             </div>
             <div className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-400"
               style={{ background: meta.color }}>
-              <ArrowUpRight size={12} className="text-white"/>
+              <ArrowUpRight size={12} className="text-white" />
             </div>
           </div>
           {/* Info */}
           <div className="p-6 flex flex-col flex-1">
-            <h4 className="text-[#EDF0F5] font-bold text-[1.1rem] mb-3 group-hover:text-[#E3510F] transition-colors duration-300">{p.title}</h4>
-            <p className="text-[#ADBAC7] text-[.88rem] leading-relaxed mb-6 font-medium line-clamp-3">
+            <h4 className="text-[#EDF0F5] font-semibold text-[.92rem] mb-2.5 group-hover:text-[#E3510F] transition-colors">{p.title}</h4>
+            <p className="text-[#4E5A6E] text-[.8rem] leading-relaxed mb-6 font-light line-clamp-3">
               {strip(p.description || p.content, 18)}
             </p>
             <div className="flex items-center gap-2 group-hover:gap-3 transition-all duration-300"
               style={{ fontFamily: 'var(--font-mono)', fontSize: '.58rem', letterSpacing: '.18em', textTransform: 'uppercase', color: meta.color }}>
               <span>Explore</span>
-              <ChevronRight size={9}/>
+              <ChevronRight size={9} />
             </div>
           </div>
         </div>
@@ -277,19 +276,19 @@ function CompactCard({ p, index }) {
 const CATEGORIES = ['All', 'LHB', 'Vande Bharat', 'Metro', 'Brake', 'Track'];
 
 const DEFAULT_PRODUCTS = [
-  { id:1, title:'LHB Coach Axle & Wheel Disc',     slug:'lhb-coach-components',           category:{name:'LHB'},          icon:'/images/Axle-weel-disc.jpg',     description:'Precision-engineered LHB coach axle assemblies, wheel disc sets, and bogie components for Indian Railways rolling stock — certified to the highest RDSO standards.' },
-  { id:2, title:'Vande Bharat HVAC Assemblies',     slug:'vande-bharat-assemblies',         category:{name:'Vande Bharat'},  icon:'/images/trainnew.jpg',           description:'Advanced HVAC components and interior fittings for the Vande Bharat Express including climate control modules and structural assemblies.' },
-  { id:3, title:'Brake Disc & Caliper System',      slug:'brake-system-components',         category:{name:'Brake'},         icon:'/images/Brake-Disc-product.png', description:'High-performance brake discs, pads, and caliper assemblies designed to meet RDSO and international railway safety standards under heavy cyclic loading.' },
-  { id:4, title:'Air Spring Suspension Systems',    slug:'air-spring-systems',              category:{name:'Metro'},          icon:'/images/Air-Spring.jpg',         description:'Premium air spring suspension systems engineered for smooth ride quality in metro and mainline railway applications across diverse operating conditions.' },
-  { id:5, title:'Tungsten Carbide Tamping Tools',   slug:'track-maintenance-equipment',     category:{name:'Track'},         icon:'/images/Tungsten-Carbide-Tamping-Tools.jpg', description:'Tungsten carbide tamping tools and track maintenance components for ballast cleaning, tamping, and precision track geometry alignment operations.' },
-  { id:6, title:'Metro Rail Brake Components',      slug:'metro-rail-components',           category:{name:'Metro'},         icon:'/images/weel.jpg',               description:'Purpose-built components for metro rail systems — suspension members, braking elements, and structural parts built for high-frequency urban cycle demands.' },
+  { id: 1, title: 'LHB Coach Axle & Wheel Disc', slug: 'lhb-coach-components', category: { name: 'LHB' }, icon: '/images/Axle-weel-disc.jpg', description: 'Precision-engineered LHB coach axle assemblies, wheel disc sets, and bogie components for Indian Railways rolling stock — certified to the highest RDSO standards.' },
+  { id: 2, title: 'Vande Bharat HVAC Assemblies', slug: 'vande-bharat-assemblies', category: { name: 'Vande Bharat' }, icon: '/images/trainnew.jpg', description: 'Advanced HVAC components and interior fittings for the Vande Bharat Express including climate control modules and structural assemblies.' },
+  { id: 3, title: 'Brake Disc & Caliper System', slug: 'brake-system-components', category: { name: 'Brake' }, icon: '/images/Brake-Disc-product.png', description: 'High-performance brake discs, pads, and caliper assemblies designed to meet RDSO and international railway safety standards under heavy cyclic loading.' },
+  { id: 4, title: 'Air Spring Suspension Systems', slug: 'air-spring-systems', category: { name: 'Metro' }, icon: '/images/Air-Spring.jpg', description: 'Premium air spring suspension systems engineered for smooth ride quality in metro and mainline railway applications across diverse operating conditions.' },
+  { id: 5, title: 'Tungsten Carbide Tamping Tools', slug: 'track-maintenance-equipment', category: { name: 'Track' }, icon: '/images/Tungsten-Carbide-Tamping-Tools.jpg', description: 'Tungsten carbide tamping tools and track maintenance components for ballast cleaning, tamping, and precision track geometry alignment operations.' },
+  { id: 6, title: 'Metro Rail Brake Components', slug: 'metro-rail-components', category: { name: 'Metro' }, icon: '/images/weel.jpg', description: 'Purpose-built components for metro rail systems — suspension members, braking elements, and structural parts built for high-frequency urban cycle demands.' },
 ];
 
 export default function Services({ initialData }) {
-  const [products,  setProducts]  = useState(initialData || []);
-  const [loading,   setLoading]   = useState(!initialData);
+  const [products, setProducts] = useState(initialData || []);
+  const [loading, setLoading] = useState(!initialData);
   const [activeCat, setActiveCat] = useState('All');
-  const [viewMode,  setViewMode]  = useState('featured'); // 'featured' | 'grid'
+  const [viewMode, setViewMode] = useState('featured'); // 'featured' | 'grid'
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -300,54 +299,54 @@ export default function Services({ initialData }) {
       .catch(() => setLoading(false));
   }, []);
 
-  const source   = products.length ? products : DEFAULT_PRODUCTS;
+  const source = products.length ? products : DEFAULT_PRODUCTS;
   const filtered = activeCat === 'All'
     ? source
     : source.filter(p => {
-        const pCat = (p.category?.name || '').trim().toLowerCase();
-        const pTitle = (p.title || '').trim().toLowerCase();
-        const pSlug = (p.slug || '').trim().toLowerCase();
-        const targetCat = activeCat.trim().toLowerCase();
-        
-        // Exact category match or category inclusion
-        if (pCat === targetCat || pCat.includes(targetCat)) return true;
-        
-        // Special case for "Brake" category: also check title and slug
-        if (targetCat === 'brake') {
-          return pTitle.includes('brake') || pSlug.includes('brake');
-        }
-        
-        return false;
-      });
+      const pCat = (p.category?.name || '').trim().toLowerCase();
+      const pTitle = (p.title || '').trim().toLowerCase();
+      const pSlug = (p.slug || '').trim().toLowerCase();
+      const targetCat = activeCat.trim().toLowerCase();
+
+      // Exact category match or category inclusion
+      if (pCat === targetCat || pCat.includes(targetCat)) return true;
+
+      // Special case for "Brake" category: also check title and slug
+      if (targetCat === 'brake') {
+        return pTitle.includes('brake') || pSlug.includes('brake');
+      }
+
+      return false;
+    });
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden" style={{ background: '#050608' }}>
-      <div className="absolute inset-0 bg-grid opacity-30 pointer-events-none"/>
-      <div className="absolute inset-x-0 top-0 h-px divider-flame opacity-30 pointer-events-none"/>
+      <div className="absolute inset-0 bg-grid opacity-30 pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 h-px divider-flame opacity-30 pointer-events-none" />
 
       {/* ── Section Header ── */}
       <div className="max-w-screen-xl mx-auto px-6 md:px-10 pt-24 pb-20 relative z-10">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 mb-14">
 
           <motion.div
-            initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }}
-            viewport={{ once:true }} transition={{ duration:.75, ease }}
+            initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: .75, ease }}
           >
             <span className="eyebrow mb-7 block">Product Portfolio</span>
             <h2 className="display-md">
-              Precision-Engineered<br/>
-              for <span style={{ color:'#E3510F' }}>Critical Infrastructure</span>
+              Precision-Engineered<br />
+              for <span style={{ color: '#E3510F' }}>Critical Infrastructure</span>
             </h2>
           </motion.div>
 
           <motion.div
-            initial={{ opacity:0, y:16 }} whileInView={{ opacity:1, y:0 }}
-            viewport={{ once:true }} transition={{ delay:.14, duration:.7, ease }}
+            initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ delay: .14, duration: .7, ease }}
             className="flex flex-col sm:flex-row items-start sm:items-center gap-4"
           >
             {/* View toggle */}
-            <div className="flex rounded-xl overflow-hidden border border-white/[.06]" style={{ background:'#0B0E15' }}>
-              {[['featured','Featured'],['grid','All Products']].map(([mode, label]) => (
+            <div className="flex rounded-xl overflow-hidden border border-white/[.06]" style={{ background: '#0B0E15' }}>
+              {[['featured', 'Featured'], ['grid', 'All Products']].map(([mode, label]) => (
                 <button
                   key={mode}
                   onClick={() => setViewMode(mode)}
@@ -367,15 +366,15 @@ export default function Services({ initialData }) {
             </div>
             <Link href="/products" className="btn-wire py-3 px-7 text-[.6rem] group inline-flex items-center gap-2">
               <span>Full Catalogue</span>
-              <ArrowRight size={11} className="group-hover:translate-x-1 transition-transform"/>
+              <ArrowRight size={11} className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
         </div>
 
         {/* Category filter */}
         <motion.div
-          initial={{ opacity:0 }} whileInView={{ opacity:1 }}
-          viewport={{ once:true }} transition={{ delay:.2 }}
+          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
+          viewport={{ once: true }} transition={{ delay: .2 }}
           className="flex flex-wrap gap-2 mb-0"
         >
           {CATEGORIES.map(cat => (
@@ -385,10 +384,14 @@ export default function Services({ initialData }) {
               className="px-5 py-2 rounded-full text-[.6rem] font-medium uppercase tracking-widest transition-all duration-300"
               style={{
                 fontFamily: 'var(--font-mono)',
-                background:     activeCat === cat ? '#E3510F'              : 'rgba(255,255,255,.03)',
-                color:          activeCat === cat ? '#fff'                 : '#3D4A5C',
-                border:         activeCat === cat ? '1px solid #E3510F'   : '1px solid rgba(255,255,255,.055)',
-                boxShadow:      activeCat === cat ? '0 8px 24px rgba(227,81,15,.2)' : 'none',
+                background: activeCat === cat ? '#E3510F' : 'rgba(255,255,255,.03)',
+                color: activeCat === cat ? '#fff' : '#B8C2CF',
+                border: activeCat === cat
+                  ? '1px solid #E3510F'
+                  : '1px solid rgba(255,255,255,.055)',
+                boxShadow: activeCat === cat
+                  ? '0 8px 24px rgba(227,81,15,.2)'
+                  : 'none',
               }}
             >
               {cat}
@@ -401,7 +404,7 @@ export default function Services({ initialData }) {
       {viewMode === 'featured' && !loading && (
         <div className="border-t border-white/[.04]">
           {filtered.slice(0, 4).map((p, i) => (
-            <FeaturedProduct key={p.id || i} p={p} idx={i} total={Math.min(filtered.length, 4)}/>
+            <FeaturedProduct key={p.id || i} p={p} idx={i} total={Math.min(filtered.length, 4)} />
           ))}
         </div>
       )}
@@ -411,14 +414,14 @@ export default function Services({ initialData }) {
         <div className="max-w-screen-xl mx-auto px-6 md:px-10 pb-24 relative z-10">
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {Array.from({length:6}).map((_,i) => (
-                <div key={i} className="h-[380px] rounded-2xl animate-pulse bg-white/[.03] border border-white/[.04]"/>
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="h-[380px] rounded-2xl animate-pulse bg-white/[.03] border border-white/[.04]" />
               ))}
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {filtered.map((p, i) => (
-                <CompactCard key={p.id || i} p={p} index={i}/>
+                <CompactCard key={p.id || i} p={p} index={i} />
               ))}
             </div>
           )}
@@ -428,21 +431,21 @@ export default function Services({ initialData }) {
       {/* ── Bottom CTA ── */}
       <div className="max-w-screen-xl mx-auto px-6 md:px-10 py-16 relative z-10">
         <motion.div
-          initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }}
-          viewport={{ once:true }} transition={{ delay:.2, duration:.7, ease }}
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ delay: .2, duration: .7, ease }}
           className="relative rounded-2xl overflow-hidden border border-white/[.05] flex flex-col md:flex-row items-start md:items-center justify-between gap-8 px-10 py-10"
-          style={{ background:'linear-gradient(135deg,#0B0E15 0%,#0F1420 100%)' }}
+          style={{ background: 'linear-gradient(135deg,#0B0E15 0%,#0F1420 100%)' }}
         >
           <div className="absolute top-0 left-0 right-0 h-[1.5px]"
-            style={{ background:'linear-gradient(90deg,transparent,rgba(227,81,15,.5),transparent)' }}/>
-          <div className="absolute inset-0 bg-grid-fine opacity-20 pointer-events-none"/>
+            style={{ background: 'linear-gradient(90deg,transparent,rgba(227,81,15,.5),transparent)' }} />
+          <div className="absolute inset-0 bg-grid-fine opacity-20 pointer-events-none" />
           <div>
             <p className="text-[#EDF0F5] font-semibold text-[1.05rem] mb-1">Need a custom engineering solution?</p>
             <p className="text-[#3D4A5C] text-[.82rem]">Our engineering team designs and manufactures to your exact specifications.</p>
           </div>
           <Link href="/contact" className="btn-flame flex-shrink-0 group py-3.5 px-9 text-[.62rem] inline-flex items-center gap-2.5">
             <span>Discuss Your Project</span>
-            <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform"/>
+            <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </motion.div>
       </div>

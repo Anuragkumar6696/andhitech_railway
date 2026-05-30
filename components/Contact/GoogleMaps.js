@@ -12,8 +12,12 @@ export default function GoogleMaps() {
           <div className="col-lg-3 col-md-6">
             <h5 className="mb-3 text-center">Corporate Office</h5>
             <div className="google-map-iframe">
-              
-              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d448194.8284599452!2d77.178097!3d28.644082!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d03c1ac2a06ed%3A0x9fd61c4eea0cef69!2sAND%20Hitech%20Industries%20Limited.%20(Corporate%20Office)!5e0!3m2!1sen!2sin!4v1748424146134!5m2!1sen!2sin" allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.884523321583!2d77.17572847585258!3d28.64433557565814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d03c1ac2a06ed%3A0x9fd61c4eea0cef69!2sAND%20Hitech%20Industries%20Limited.%20(Corporate%20Office)!5e0!3m2!1sen!2sin!4v1717056000000!5m2!1sen!2sin" 
+                allowFullScreen 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
             </div>
           </div>
           <div className="col-lg-3 col-md-6">

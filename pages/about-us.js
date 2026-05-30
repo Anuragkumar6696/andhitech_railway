@@ -5,6 +5,7 @@ import Link from "next/link";
 import Header from "../components/Header";
 import PageBanner from "@/components/PageBanner";
 import OurHistorySection from "@/components/aboutparts/OurHistorySection";
+import MDMessage from "@/components/aboutparts/MDMessage";
 import OurMissionVision from "@/components/aboutparts/OurMissionVision";
 import OurFeatures from "@/components/aboutparts/OurFeatures";
 import AboutImages from "@/components/aboutparts/AboutImages";
@@ -19,6 +20,7 @@ export default function AboutUs() {
         currentPage="About Us"
       />
       <OurHistorySection />
+      <MDMessage />
       <AboutImages />
       <OurMissionVision />
       <OurFeatures />

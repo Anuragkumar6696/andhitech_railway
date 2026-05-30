@@ -140,14 +140,14 @@ export default function Statistics() {
                 <AnimCounter end={n} suffix={sfx} duration={1800 + i * 150}/>
               </div>
 
-              <div className="text-[.72rem] uppercase tracking-[.24em] text-[#E3510F] font-bold mb-3 relative z-10"
+              <div className="text-[.65rem] uppercase tracking-[.24em] text-[#E3510F] font-medium mb-3 relative z-10"
                 style={{ fontFamily:'var(--font-mono)' }}>
                 {label}
               </div>
-              <div className="text-[#ADBAC7] text-[.85rem] font-semibold mb-6 relative z-10 hidden md:block">{sub}</div>
+              <div className="text-[#B8C2D0] text-[.75rem] font-bold mb-6 relative z-10 hidden md:block">{sub}</div>
 
               {/* Description — revealed on hover */}
-              <div className="mt-auto text-[#EDF0F5] text-[.88rem] leading-relaxed relative z-10 opacity-0 group-hover:opacity-100 max-h-0 group-hover:max-h-24 transition-all duration-500 overflow-hidden hidden lg:block font-medium">
+              <div className="mt-auto text-[#D6DDE8] text-[.85rem] font-bold leading-relaxed relative z-10 opacity-0 group-hover:opacity-100 max-h-0 group-hover:max-h-24 transition-all duration-500 overflow-hidden hidden lg:block font-light">
                 {desc}
               </div>
 
@@ -166,7 +166,7 @@ export default function Statistics() {
         >
           <div className="flex items-center gap-4">
             <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0"/>
-            <span className="text-[#ADBAC7] text-[.95rem] font-medium">
+            <span className="text-[#4E5A6E] text-[.85rem] font-light">
               All metrics verified through third-party audits and RDSO certification processes
             </span>
           </div>

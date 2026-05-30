@@ -131,7 +131,7 @@ export default function ContactCTA() {
                 style={{ background:'rgba(227,81,15,.1)', border:'1px solid rgba(227,81,15,.18)' }}>
                 <MapPin size={13} className="text-[#E3510F]"/>
               </div>
-              <address className="not-italic text-[#ADBAC7] text-[.82rem] leading-relaxed">
+              <address className="not-italic text-[#3D4A5C] text-[.82rem] leading-relaxed">
                 403, 4th floor Kirti Mahal Building 19,<br/>
                 Rajendra Place, New Delhi – 110008
               </address>

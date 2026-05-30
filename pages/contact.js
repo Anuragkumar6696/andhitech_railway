@@ -49,7 +49,7 @@ const ContactPage = () => {
       {/* Map Section */}
       <section className="h-[500px] w-full bg-[#0D1117] grayscale hover:grayscale-0 transition-all duration-1000 border-t border-white/5">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.442751483861!2d77.17646277631338!3d28.646452583447144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d02996d933e4f%3A0xc66579626359005!2sKirti%20Mahal%2C%2019%2C%20Rajendra%20Place%2C%20New%20Delhi%2C%20Delhi%20110008!5e0!3m2!1sen!2sin!4v1709456789012!5m2!1sen!2sin"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.884523321583!2d77.17572847585258!3d28.64433557565814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d03c1ac2a06ed%3A0x9fd61c4eea0cef69!2sAND%20Hitech%20Industries%20Limited.%20(Corporate%20Office)!5e0!3m2!1sen!2sin!4v1717056000000!5m2!1sen!2sin"
           width="100%"
           height="100%"
           style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) brightness(95%) contrast(90%)' }}

@@ -162,6 +162,16 @@ html.lenis {
     isolation: isolate;
     z-index: 10;
   }
+  .btn-flame,
+.btn-flame:hover,
+.btn-flame:focus,
+.btn-flame:visited {
+  color: #fff !important;
+}
+
+.btn-flame * {
+  color: inherit !important;
+}
   .btn-flame::before {
     content: '';
     position: absolute;

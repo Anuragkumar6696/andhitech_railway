@@ -71,8 +71,8 @@ export default function Header({ initialData }) {
           <Image
             src="/images/logo.png"
             alt="AND Hitech Industries"
-            width={180} height={54}
-            className="h-11 w-auto brightness-0 invert opacity-85 group-hover:opacity-100 transition-opacity"
+            width={500} height={90}
+            className="h-12 md:h-16 w-auto brightness-0 invert opacity-95 group-hover:opacity-100 transition-opacity"
             priority
           />
         </Link>
@@ -82,7 +82,7 @@ export default function Header({ initialData }) {
           {links.map(({ label, href }) => (
             <Link
               key={href} href={href}
-              className={`nav-link text-[.95rem] font-bold tracking-wide ${active(href) ? 'active !text-[#E3510F]' : 'text-[#ADBAC7] hover:text-[#EDF0F5]'}`}
+              className={`nav-link text-[.70rem] font-medium ${active(href) ? 'active !text-[#E3510F]' : 'text-[#8C98AA] hover:text-[#EDF0F5]'}`}
             >
               {label}
             </Link>
@@ -90,7 +90,7 @@ export default function Header({ initialData }) {
         </nav>
 
         {/* Desktop CTA */}
-        <Link href="/contact" className="btn-flame hidden lg:inline-flex py-3 px-7 text-[.6rem]">
+        <Link href="/contact" className="btn-flame hidden lg:inline-flex py-3 px-8 text-[.75rem] font-bold uppercase tracking-wider">
           <span>Get a Quote</span>
         </Link>
 
