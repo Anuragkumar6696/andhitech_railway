@@ -30,7 +30,7 @@ const getProductImage = (p) => {
   } else if (slug.includes('split-axle-mounted-brake-disc')) {
     imgSrc = '/images/products/split-brake/split-1.jpg';
   } else if (slug.includes('brake-pads')) {
-    imgSrc = '/images/products/brake-pads/pad-1.jpg';
+    imgSrc = '/images/products/brake-pads/pad-new-homepage.jpg';
   } else if (slug.includes('lhb-dampers')) {
     imgSrc = '/images/products/lhb-dampers/damper-1.jpg';
   } else if (slug.includes('single-leaf-plug-door-vande-bharat-trains')) {
