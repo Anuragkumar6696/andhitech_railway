@@ -215,10 +215,10 @@ export default function Products({ products }) {
                           style={{ background:`linear-gradient(90deg,${accent}00,${accent}45,${accent}00)` }}/>
                       </div>
                       <div className="p-7 flex flex-col flex-grow">
-                        <h3 className="text-[#EDF0F5] font-semibold text-[.95rem] mb-3 leading-snug group-hover:text-[#E3510F] transition-colors duration-300">
+                        <h3 className="text-[#EDF0F5] font-semibold text-[.95rem] mb-3 leading-snug group-hover:text-[#E3510F] transition-colors duration-300" style={{fontFamily:'DM Sans, sans-serif'}}>
                           {p.title}
                         </h3>
-                        <p className="text-[#4E5A6E] text-[.8rem] leading-relaxed flex-1 mb-6">
+                        <p className="text-[.8rem] leading-relaxed flex-1 mb-6" style={{color:'#AAB4C3'}}>
                           {strip(p.description || p.content)}
                         </p>
                         <div className="flex items-center gap-2 text-[.62rem] font-medium uppercase tracking-widest transition-colors duration-300"

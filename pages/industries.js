@@ -69,10 +69,10 @@ export default function Industries() {
                   {/* Content */}
                   <div className="w-full lg:w-1/2 space-y-7">
                     <div>
-                      <span className="eyebrow mb-3 block">Industry 0{idx+1}</span>
-                      <h3 className="text-[#F0F2F5] font-bold leading-tight" style={{fontFamily:'var(--font-display)',fontSize:'clamp(1.8rem,3.5vw,2.8rem)'}}>{title}</h3>
+                      <span className="eyebrow mb-3 block" style={{fontSize:'11px'}}>Industry 0{idx+1}</span>
+                      <h3 className="text-[#F0F2F5] font-bold leading-tight" style={{fontFamily:'DM Sans, sans-serif',fontSize:'clamp(1.8rem,3.5vw,2.8rem)'}}>{title}</h3>
                     </div>
-                    <p className="text-[#9BA5B4] text-sm leading-relaxed">{desc}</p>
+                    <p className="text-[#9BA5B4] leading-relaxed" style={{fontSize:'15px'}}>{desc}</p>
                     <div className="grid grid-cols-2 gap-3">
                       {features.map((f,fi) => (
                         <div key={fi} className="flex items-center gap-2.5 py-2 px-3 rounded-lg bg-white/[0.03] border border-white/5 hover:border-[#E3510F]/20 transition-colors">

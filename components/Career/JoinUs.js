@@ -32,7 +32,7 @@ export default function JoinUs() {
                 <Icon size={28} className="text-[#E3510F] group-hover:text-white transition-colors" />
               </div>
               <div className="accent-line mb-8 w-12 h-0.5 bg-[#E3510F]/30" />
-              <h3 className="text-[#F0F2F5] font-bold text-xl mb-5 leading-tight tracking-tight group-hover:text-[#E3510F] transition-colors">{title}</h3>
+              <h3 className="text-[#F0F2F5] font-bold text-xl mb-5 leading-tight tracking-tight group-hover:text-[#E3510F] transition-colors" style={{fontFamily:'DM Sans, sans-serif'}}>{title}</h3>
               <p className="text-[#8C98AA] text-base leading-relaxed font-light" dangerouslySetInnerHTML={{ __html:desc }} />
             </motion.div>
           ))}

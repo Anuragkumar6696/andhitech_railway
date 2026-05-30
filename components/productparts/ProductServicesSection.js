@@ -57,7 +57,7 @@ const ProductServicesSection = ({ products = [], categories = [] }) => {
                             />
                           </div>
                           <div className="service-body">
-                            <h3>{product.title}</h3>
+                            <h3 style={{fontFamily:'DM Sans, sans-serif'}}>{product.title}</h3>
                           </div>
                           <div className="service-footer">
                             <Link

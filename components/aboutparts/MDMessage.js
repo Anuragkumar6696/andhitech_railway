@@ -29,7 +29,7 @@ export default function MDMessage() {
             <div className="relative">
               {/* Quote Section with Dark Theme Styling */}
               <div className="space-y-8 relative">
-                <Quote className="text-[#E3510F] opacity-20 absolute -top-8 -left-8" size={60} />
+                {/* Quote icon removed */}
                 
                 <p className="text-[#9BA5B4] text-lg md:text-xl leading-relaxed font-medium italic relative z-10">
                   “At AND HITECH, we believe engineering excellence is built through precision, integrity, and continuous innovation. Over the years, our focus has remained unchanged—delivering reliable solutions that support critical transportation infrastructure while creating lasting value for our customers, partners, and industry stakeholders.”

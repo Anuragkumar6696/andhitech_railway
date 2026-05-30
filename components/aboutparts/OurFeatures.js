@@ -37,26 +37,29 @@ export default function OurFeatures() {
                   style={{
                     fontFamily: 'DM Sans, sans-serif',
                     fontWeight: 700,
-                    fontSize: '18px',
+                    fontSize: '15px',
                     lineHeight: '1.5',
                     letterSpacing: '0.02em',
                   }}
                 >{title}</h3>
-                <p className="text-[#B4BEC9] text-sm leading-relaxed">{desc}</p>
+                <p className="text-[#B4BEC9] leading-relaxed" style={{fontSize:'15px'}}>{desc}</p>
               </motion.div>
             ))}
             <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:0.3 }}
               className="p-9 flex flex-col justify-center" style={{background:'#E3510F',borderRadius:'16px'}}>
               <Zap size={40} className="text-white mb-5" />
-              <h3 className="text-white text-xl font-bold mb-3" style={{
+              <h3 className="text-white font-bold mb-3" style={{
                     fontFamily: 'DM Sans, sans-serif',
                     fontWeight: 700,
-                    fontSize: '18px',
+                    fontSize: '15px',
                     lineHeight: '1.5',
                     letterSpacing: '0.02em',
                   }}>Ready for Innovation?</h3>
               <p className="text-white/70 text-sm">Let&apos;s discuss how our precision manufacturing can elevate your next project.</p>
               <div className="mt-5 h-px w-16 bg-white/25 rounded-full" />
+              <a href="/contact" className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 border-2 border-white text-white text-sm font-semibold rounded-lg hover:bg-white hover:text-[#E3510F] transition-all duration-300" style={{fontFamily:'DM Sans, sans-serif',width:'fit-content'}}>
+                Talk to us
+              </a>
             </motion.div>
           </div>
           <motion.div initial={{ opacity:0, scale:0.9 }} whileInView={{ opacity:1, scale:1 }} viewport={{ once:true }}

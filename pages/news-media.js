@@ -49,8 +49,8 @@ export default function PressPage({ pressItems }) {
                       <div className="absolute inset-0 bg-gradient-to-t from-[#07080C]/60 to-transparent" />
                     </div>
                     <div className="p-7 flex flex-col flex-grow">
-                      <h3 className="text-[#F0F2F5] font-semibold text-base mb-3 group-hover:text-[#E3510F] transition-colors line-clamp-2 leading-snug">{item.title}</h3>
-                      <p className="text-[#5A6478] text-sm leading-relaxed mb-6 line-clamp-3 flex-grow">
+                      <h3 className="text-[#F0F2F5] font-semibold text-base mb-3 group-hover:text-[#E3510F] transition-colors line-clamp-2 leading-snug" style={{fontFamily:'DM Sans, sans-serif'}}>{item.title}</h3>
+                      <p className="text-sm leading-relaxed mb-6 line-clamp-3 flex-grow" style={{color:'#AAB4C3'}}>
                         {item.excerpt||item.content?.replace(/<[^>]*>/g,'').slice(0,140)}
                       </p>
                       <div className="pt-5 border-t border-white/5 flex items-center justify-between">

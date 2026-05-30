@@ -149,12 +149,7 @@ function Lightbox({ images, startIndex, onClose }) {
           </motion.div>
         </AnimatePresence>
 
-        {/* Caption */}
-        {images[current].caption && (
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/40 text-sm font-mono tracking-wider text-center px-4">
-            {images[current].caption}
-          </div>
-        )}
+        {/* Caption removed as per request */}
       </div>
 
       {/* Dot indicators */}

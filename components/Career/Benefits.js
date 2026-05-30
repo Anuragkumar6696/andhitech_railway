@@ -26,7 +26,7 @@ export default function Benefits() {
               <div key={item.id} className="rounded-2xl border border-white/10 overflow-hidden bg-white/[0.01]">
                 <button onClick={() => setOpen(open===item.id?null:item.id)}
                   className="w-full flex items-center justify-between px-8 py-6 text-left group hover:bg-white/[0.03] transition-all duration-300">
-                  <span className={`font-bold text-lg leading-snug transition-colors tracking-tight ${open===item.id?'text-[#E3510F]':'text-[#ADBAC7] group-hover:text-[#F0F2F5]'}`}>{item.title}</span>
+                  <span className={`font-bold text-lg leading-snug transition-colors tracking-tight ${open===item.id?'text-[#E3510F]':'text-[#ADBAC7] group-hover:text-[#F0F2F5]'}`} style={{fontFamily:'DM Sans, sans-serif'}}>{item.title}</span>
                   <span className={`flex-shrink-0 ml-4 w-9 h-9 rounded-xl flex items-center justify-center transition-all shadow-lg ${open===item.id?'bg-[#E3510F] text-white':'bg-white/5 text-[#4E5A6E]'}`}>
                     {open===item.id ? <ChevronUp size={18}/> : <ChevronDown size={18}/>}
                   </span>
