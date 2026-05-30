@@ -30,7 +30,6 @@ export default function App({ Component, pageProps }) {
           infinite:     false,
         });
         lenisRef.current = lenis;
-        // Expose for GSAP ScrollTrigger
         if (typeof window !== 'undefined') window.__lenis = lenis;
 
         function animate(time) {
@@ -39,7 +38,6 @@ export default function App({ Component, pageProps }) {
         }
         raf = requestAnimationFrame(animate);
       } catch (e) {
-        // Lenis unavailable – graceful fallback
         if (typeof document !== 'undefined') {
           document.documentElement.style.scrollBehavior = 'smooth';
         }
@@ -81,22 +79,29 @@ export default function App({ Component, pageProps }) {
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="icon" href="/icon.png" type="image/png" sizes="32x32" />
         <link rel="apple-touch-icon" href="/apple-icon.png" />
-        {/* Preconnect */}
+        {/* DNS prefetch for API */}
+        <link rel="dns-prefetch" href="https://admin.andhitech.in" />
+        {/* Single preconnect block (no duplicates) */}
         <link rel="preconnect" href="https://fonts.googleapis.com"/>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous"/>
-        {/* Bebas Neue (display) + DM Sans (body) + DM Mono + Barlow (sub-headlines) */}
+        {/* Single consolidated font request - all weights in one call */}
+        <link
+          rel="preload"
+          as="style"
+          href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap"
+        />
         <link
           href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap"
           rel="stylesheet"
         />
       </Head>
 
-      {/* Core scripts */}
+      {/* jQuery from CDN — afterInteractive so it never blocks render */}
       <Script src="https://code.jquery.com/jquery-3.6.0.min.js" strategy="afterInteractive"/>
       <Script src="/js/bootstrap.min.js"   strategy="afterInteractive"/>
       <Script src="/js/validator.min.js"   strategy="afterInteractive"/>
 
-      {/* Lazy scripts */}
+      {/* Heavy plugins — lazy loaded, only needed for specific interactions */}
       <Script src="/js/swiper-bundle.min.js"         strategy="lazyOnload"/>
       <Script src="/js/jquery.waypoints.min.js"      strategy="lazyOnload"/>
       <Script src="/js/jquery.counterup.min.js"      strategy="lazyOnload"/>

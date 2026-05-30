@@ -229,3 +229,27 @@ html {
   transition: left .5s ease;
 }
 .hover-sweep:hover::before { left: 150%; }
+
+/* ── PERFORMANCE: GPU COMPOSITING HINTS ──────────── */
+/* Promote animated elements to their own compositor layer */
+[data-reveal],
+.hover-sweep::before,
+.swiper-wrapper,
+.swiper-slide,
+.train-svg {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Contain layout thrashing on card grids */
+.product-card,
+.team-box,
+.cus-jobs .team-box {
+  contain: layout style;
+}
+
+/* Use font-display: swap to avoid invisible text flash */
+@font-face {
+  font-display: swap;
+}

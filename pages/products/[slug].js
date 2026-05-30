@@ -1,5 +1,3 @@
-'use client';
-
 import Header from '@/components/Header';
 import PageBanner from '@/components/PageBanner';
 import Footer from '@/components/Footer';
@@ -9,7 +7,18 @@ import FAQSection from '@/components/productdetail/FAQSection';
 import Head from 'next/head';
 import { getAbsoluteURL } from '@/utils/url';
 
-export async function getServerSideProps({ params }) {
+export async function getStaticPaths() {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/products/`);
+    const data = await res.json();
+    const paths = (data.results || []).map((p) => ({ params: { slug: p.slug } }));
+    return { paths, fallback: 'blocking' };
+  } catch {
+    return { paths: [], fallback: 'blocking' };
+  }
+}
+
+export async function getStaticProps({ params }) {
   const slug = params.slug;
 
   try {
@@ -30,6 +39,7 @@ export async function getServerSideProps({ params }) {
         product,
         categories: categoriesData.results || [],
       },
+      revalidate: 300,
     };
   } catch (error) {
     console.error('Error fetching product or categories:', error);
@@ -44,7 +54,7 @@ export default function ProductDetail({ product, categories }) {
     product.excerpt ||
     product.description?.slice(0, 150) ||
     'View our product details and offerings.';
-  
+
   const getProductMainImage = (p) => {
     const slug = (p.slug || '').toLowerCase();
     if (slug.includes('iv-coupler')) return '/images/products/iv-coupler-v2/iv-final.png';
@@ -86,11 +96,11 @@ export default function ProductDetail({ product, categories }) {
       <section className="py-24">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-            
+
             {/* Main Content */}
             <div className="lg:col-span-8 space-y-12">
               <ServiceContent product={product} />
-              
+
               {product.faqs?.length > 0 && (
                 <div className="pt-12 border-t border-gray-100">
                   <FAQSection faqs={product.faqs} />

@@ -4,12 +4,10 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
+        {/* Font preconnects live here at document level for earliest possible DNS resolution */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap"
-          rel="stylesheet"
-        />
+        {/* Fonts are loaded once in _app.js Head - no duplicate here */}
       </Head>
       <body>
         <Main />

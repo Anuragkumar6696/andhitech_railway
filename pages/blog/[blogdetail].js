@@ -6,21 +6,31 @@ import PostContent from '@/components/Blog/PostContent';
 import RelatedPosts from '@/components/Blog/RelatedPosts';
 import Head from 'next/head';
 
-export async function getServerSideProps({ params }) {
+export async function getStaticPaths() {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/blog/`);
+    const data = await res.json();
+    const paths = (data.results || []).map((post) => ({
+      params: { blogdetail: post.slug },
+    }));
+    return { paths, fallback: 'blocking' };
+  } catch {
+    return { paths: [], fallback: 'blocking' };
+  }
+}
+
+export async function getStaticProps({ params }) {
   const { blogdetail } = params;
   const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   try {
-    // Fetch main post
     const resPost = await fetch(`${baseUrl}/blog/${blogdetail}/`);
     if (!resPost.ok) throw new Error('Post fetch failed');
     const post = await resPost.json();
 
-    // Fetch related posts
     const resRelated = await fetch(`${baseUrl}/blog/${blogdetail}/related/`);
     const related = resRelated.ok ? await resRelated.json() : [];
 
-    // Format post
     const formattedPost = {
       ...post,
       image: post.featured_image,
@@ -29,15 +39,12 @@ export async function getServerSideProps({ params }) {
     };
 
     return {
-      props: {
-        post: formattedPost,
-      },
+      props: { post: formattedPost },
+      revalidate: 300,
     };
   } catch (error) {
     console.error('Error fetching blog post:', error);
-    return {
-      notFound: true,
-    };
+    return { notFound: true };
   }
 }
 

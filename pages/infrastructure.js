@@ -9,7 +9,7 @@ import InfrastructureGallerySections from '@/components/infraparts/Infrastructur
 import VideoSection from '@/components/infraparts/VideoSection'
 import BrochuresSection from '@/components/infraparts/BrochuresSection'
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
   const API = (process.env.NEXT_PUBLIC_API_BASE_URL || '').replace(/\/+$/, '')
 
@@ -26,7 +26,7 @@ export async function getServerSideProps() {
     const page = Array.isArray(payload?.results) ? payload.results[0] : payload
 
     if (!page) {
-      return { props: { data: null, gallerySections: [] } }
+      return { props: { data: null, gallerySections: [] }, revalidate: 60 }
     }
 
     const welcome = Array.isArray(page.sections)
@@ -58,11 +58,12 @@ export async function getServerSideProps() {
           Brochure: brochures
         },
         gallerySections
-      }
+      },
+      revalidate: 300,
     }
   } catch (err) {
     console.error('Failed to load infrastructure:', err)
-    return { props: { data: null, gallerySections: [] } }
+    return { props: { data: null, gallerySections: [] }, revalidate: 60 }
   }
 }
 
