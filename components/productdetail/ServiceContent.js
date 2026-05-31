@@ -153,7 +153,13 @@ export default function ServiceContent({ product }) {
       )}
       <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} className="space-y-6">
         <span className="eyebrow block">Product Overview</span>
-        <h2 className="text-[#F0F2F5] font-bold leading-tight" style={{fontFamily:'var(--font-display)',fontSize:'clamp(1.8rem,3vw,2.6rem)'}}>About {product.title}</h2>
+        <h2 className="text-[#F0F2F5] font-bold leading-tight" style={{
+                    fontFamily: 'DM Sans, sans-serif',
+                    fontWeight: 700,
+                    fontSize: '24px',
+                    lineHeight: '1.5',
+                    letterSpacing: '0.02em',
+                  }}>About {product.title}</h2>
         <div className="text-[#8C98AA] leading-relaxed space-y-5 text-[15px] prose prose-invert max-w-none 
           prose-p:text-[#8C98AA] prose-headings:text-white prose-strong:text-[#E3510F] prose-li:text-[#8C98AA]"
           dangerouslySetInnerHTML={{ __html:product.description||product.content||'Product information coming soon.' }} />
