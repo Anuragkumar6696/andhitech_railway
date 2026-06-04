@@ -9,7 +9,7 @@ import { motion } from 'framer-motion';
 
 const ContactPage = () => {
   return (
-    <div className="bg-[#050608] min-h-screen">
+    <div className="page-bg min-h-screen">
       <Head>
         <title>Contact Us | AND Hitech</title>
         <meta name="description" content="Get in touch with AND HITECH INDUSTRIES LTD for premium industrial solutions." />
@@ -25,8 +25,8 @@ const ContactPage = () => {
 
       <section className="py-24 relative overflow-hidden">
         {/* Cinematic Background Elements */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#E3510F]/5 blur-[120px] rounded-full pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#E3510F]/3 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#B88746]/5 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#B88746]/3 blur-[120px] rounded-full pointer-events-none" />
         <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
         
         <div className="max-w-screen-xl mx-auto px-6 md:px-10 relative z-10">

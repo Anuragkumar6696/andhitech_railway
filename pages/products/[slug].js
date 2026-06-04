@@ -73,7 +73,7 @@ export default function ProductDetail({ product, categories }) {
   const image = getAbsoluteURL(mainImg);
 
   return (
-    <div className="bg-[#050608] min-h-screen">
+    <div className="page-bg min-h-screen">
       <Head>
         <title>{title} | AND Hitech</title>
         <meta name="description" content={description} />

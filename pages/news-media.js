@@ -36,7 +36,7 @@ export default function PressPage({ pressItems }) {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-16">
             <span className="eyebrow mb-5 block">Press & Coverage</span>
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-              <h2 className="display-md max-w-xl">Press Release &<br /><span style={{ color: '#E3510F' }}>Media</span></h2>
+              <h2 className="display-md max-w-xl">Press Release &<br /><span style={{ color: '#B88746' }}>Media</span></h2>
               <p className="text-[#9BA5B4] text-sm max-w-sm leading-relaxed">Latest news, features, and mentions about AND Hitech Industries.</p>
             </div>
           </motion.div>
@@ -54,7 +54,7 @@ export default function PressPage({ pressItems }) {
                     <div className="absolute inset-0 bg-gradient-to-t from-[#07080C]/60 to-transparent" />
                   </div>
                   <div className="p-7 flex flex-col flex-grow">
-                    <h3 className="text-[#F0F2F5] font-semibold text-base mb-3 group-hover:text-[#E3510F] transition-colors line-clamp-2 leading-snug" style={{ fontFamily: 'DM Sans, sans-serif' }}>{item.title}</h3>
+                    <h3 className="text-white font-semibold text-base mb-3 group-hover:text-[#B88746] transition-colors line-clamp-2 leading-snug" style={{ fontFamily: 'Inter, sans-serif' }}>{item.title}</h3>
                     <p className="text-sm leading-relaxed mb-6 line-clamp-3 flex-grow" style={{ color: '#AAB4C3' }}>
                       {item.excerpt || item.content?.replace(/<[^>]*>/g, '').slice(0, 140)}
                     </p>
@@ -63,7 +63,7 @@ export default function PressPage({ pressItems }) {
                         <Calendar size={11} />{item.date || 'Recent'}
                       </span>
                       <a href={item.link || '#'} target="_blank" rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-[#E3510F] text-[10px] uppercase tracking-wider font-medium hover:underline"
+                        className="flex items-center gap-1.5 text-[#B88746] text-[10px] uppercase tracking-wider font-medium hover:underline"
                         style={{ fontFamily: 'var(--font-mono)' }}>
                         Read <ExternalLink size={11} />
                       </a>

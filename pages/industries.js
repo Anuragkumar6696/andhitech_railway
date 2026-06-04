@@ -25,7 +25,7 @@ export default function Industries() {
   ];
 
   return (
-    <div className="bg-[#07080C] min-h-screen">
+    <div className="bg-[#07080C] page-bg min-h-screen">
       <Head>
         <title>Industries We Serve | AND Hitech</title>
       </Head>
@@ -37,7 +37,7 @@ export default function Industries() {
         <div className="max-w-screen-xl mx-auto px-5 md:px-10 relative z-10">
           <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} className="max-w-3xl mb-24">
             <span className="eyebrow mb-5 block">Our Reach</span>
-            <h2 className="display-md">Driving Innovation Across<br/><span style={{color:'#E3510F'}}>Key Industrial Sectors</span></h2>
+            <h2 className="display-md">Driving Innovation Across<br/><span style={{color:'#B88746'}}>Key Industrial Sectors</span></h2>
           </motion.div>
 
           <div className="space-y-28 md:space-y-36">
@@ -55,7 +55,7 @@ export default function Industries() {
                       <div className="absolute inset-0 bg-gradient-to-t from-[#07080C]/60 to-transparent" />
                     </div>
                     {/* Icon badge */}
-                    <div className={`absolute -bottom-7 ${rev?'left-8':'right-8'} w-14 h-14 bg-[#E3510F] flex items-center justify-center text-white shadow-xl`}
+                    <div className={`absolute -bottom-7 ${rev?'left-8':'right-8'} w-14 h-14 bg-[#B88746] flex items-center justify-center text-white shadow-xl`}
                       style={{clipPath:'polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px))'}}>
                       <Icon size={26} />
                     </div>
@@ -70,14 +70,14 @@ export default function Industries() {
                   <div className="w-full lg:w-1/2 space-y-7">
                     <div>
                       <span className="eyebrow mb-3 block" style={{fontSize:'11px'}}>Industry 0{idx+1}</span>
-                      <h3 className="text-[#F0F2F5] font-bold leading-tight" style={{fontFamily:'DM Sans, sans-serif',fontSize:'clamp(1.8rem,3.5vw,2.8rem)'}}>{title}</h3>
+                      <h3 className="text-white font-bold leading-tight" style={{fontFamily:'Inter, sans-serif',fontSize:'clamp(1.8rem,3.5vw,2.8rem)'}}>{title}</h3>
                     </div>
                     <p className="text-[#9BA5B4] leading-relaxed" style={{fontSize:'15px'}}>{desc}</p>
                     <div className="grid grid-cols-2 gap-3">
                       {features.map((f,fi) => (
-                        <div key={fi} className="flex items-center gap-2.5 py-2 px-3 rounded-lg bg-white/[0.03] border border-white/5 hover:border-[#E3510F]/20 transition-colors">
-                          <div className="w-4 h-4 rounded-full bg-[#E3510F]/10 flex items-center justify-center flex-shrink-0">
-                            <CheckCircle2 size={11} className="text-[#E3510F]" />
+                        <div key={fi} className="flex items-center gap-2.5 py-2 px-3 rounded-lg bg-white/[0.03] border border-white/5 hover:border-[#B88746]/20 transition-colors">
+                          <div className="w-4 h-4 rounded-full bg-[#B88746]/10 flex items-center justify-center flex-shrink-0">
+                            <CheckCircle2 size={11} className="text-[#B88746]" />
                           </div>
                           <span className="text-[#9BA5B4] text-xs font-medium">{f}</span>
                         </div>

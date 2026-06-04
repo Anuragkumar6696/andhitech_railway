@@ -24,7 +24,7 @@ export async function getStaticProps() {
 }
 
 const CATEGORIES = ['All','LHB','Vande Bharat','Metro','Brake','Track'];
-const CAT_COLORS = { 'LHB':'#E3510F','Vande Bharat':'#2563EB','Metro':'#7C3AED','Brake':'#DC2626','Track':'#D97706' };
+const CAT_COLORS = { 'LHB':'#B88746','Vande Bharat':'#2563EB','Metro':'#7C3AED','Brake':'#DC2626','Track':'#D97706' };
 const ease = [.22,1,.36,1];
 
 const strip = (html, n=20) => (html||'').replace(/<[^>]*>/g,'').split(' ').slice(0,n).join(' ')+'…';
@@ -52,7 +52,7 @@ export default function Products({ products }) {
       });
 
   return (
-    <div className="min-h-screen" style={{ background:'#050608' }}>
+    <div className="min-h-screen" style={{ background:'#0B1F3A' }}>
       <Head>
         <title>Products & Solutions | AND Hitech Industries</title>
         <meta name="description" content="Premium railway components and engineering solutions — LHB, Vande Bharat, Metro, Brake Systems, Track Maintenance."/>
@@ -65,7 +65,7 @@ export default function Products({ products }) {
         currentPage="Products"
       />
 
-      <section className="relative overflow-hidden section-gap" style={{ background:'#050608' }}>
+      <section className="relative overflow-hidden section-gap" style={{ background:'#0B1F3A' }}>
         <div className="absolute inset-0 bg-grid-fine opacity-40 pointer-events-none"/>
         <div className="absolute inset-0 glow-left pointer-events-none opacity-60"/>
 
@@ -76,13 +76,13 @@ export default function Products({ products }) {
             <motion.div initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:.75, ease }}>
               <span className="eyebrow mb-7 block">Our Solutions</span>
               <h2 className="display-md">
-                High-Performance Components<br/>for <span style={{ color:'#E3510F' }}>Critical Infrastructure</span>
+                High-Performance Components<br/>for <span style={{ color:'#B88746' }}>Critical Infrastructure</span>
               </h2>
             </motion.div>
             <motion.p
               initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }}
               viewport={{ once:true }} transition={{ delay:.14, duration:.7, ease }}
-              className="text-[#8C98AA] leading-relaxed border-l-2 border-[#E3510F]/35 pl-7 text-[.95rem]"
+              className="text-[#8C98AA] leading-relaxed border-l-2 border-[#B88746]/35 pl-7 text-[.95rem]"
             >
               At AHIL, we specialise in manufacturing high-performance railway components designed for safety, efficiency, and long-term reliability — from concept through to certified delivery.
             </motion.p>
@@ -100,8 +100,8 @@ export default function Products({ products }) {
                 onClick={() => setActiveCat(cat)}
                 className={`px-5 py-2 rounded-full text-[.68rem] font-bold uppercase tracking-[.15em] transition-all duration-400 ${
                   activeCat===cat
-                    ? 'bg-[#E3510F] text-white shadow-lg shadow-[#E3510F]/30 scale-105'
-                    : 'bg-white/[.06] text-[#ADBAC7] border border-white/[.1] hover:border-[#E3510F]/50 hover:text-white hover:bg-white/[.1]'
+                    ? 'bg-[#B88746] text-white shadow-lg shadow-[#B88746]/30 scale-105'
+                    : 'bg-white/[.06] text-[#ADBAC7] border border-white/[.1] hover:border-[#B88746]/50 hover:text-white hover:bg-white/[.1]'
                 }`}
                 style={{ fontFamily:'var(--font-mono)' }}
               >
@@ -114,7 +114,7 @@ export default function Products({ products }) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {filtered.map((p, i) => {
               const catName = p.category?.name || 'Engineering';
-              const accent  = CAT_COLORS[catName] || '#E3510F';
+              const accent  = CAT_COLORS[catName] || '#B88746';
               let imgSrc  = p.icon ? (p.icon.startsWith('http') ? p.icon : getAbsoluteURL(p.icon)) : '/images/hero-bg.jpg';
               
               // Image 18 to 19 replacement for dashboard module
@@ -202,7 +202,7 @@ export default function Products({ products }) {
                           className="object-cover opacity-85 group-hover:opacity-100 group-hover:scale-[1.07] transition-all duration-700 brightness-110 contrast-[1.05]"
                           unoptimized
                         />
-                        <div className="absolute inset-0" style={{ background:'linear-gradient(to top,#0B0E15 0%,transparent 55%)' }}/>
+                        <div className="absolute inset-0" style={{ background:'linear-gradient(to top,#0B1F3A 0%,transparent 55%)' }}/>
                         <div className="absolute top-4 left-4">
                           <span className="chip" style={{ background:accent }}>{catName}</span>
                         </div>
@@ -215,7 +215,7 @@ export default function Products({ products }) {
                           style={{ background:`linear-gradient(90deg,${accent}00,${accent}45,${accent}00)` }}/>
                       </div>
                       <div className="p-7 flex flex-col flex-grow">
-                        <h3 className="text-[#EDF0F5] font-semibold text-[.95rem] mb-3 leading-snug group-hover:text-[#E3510F] transition-colors duration-300" style={{fontFamily:'DM Sans, sans-serif'}}>
+                        <h3 className="text-white font-semibold text-[.95rem] mb-3 leading-snug group-hover:text-[#B88746] transition-colors duration-300" style={{fontFamily:'Inter, sans-serif'}}>
                           {p.title}
                         </h3>
                         <p className="text-[.8rem] leading-relaxed flex-1 mb-6" style={{color:'#AAB4C3'}}>
@@ -237,7 +237,7 @@ export default function Products({ products }) {
                 <p className="text-[#4E5A6E] text-lg">No products found in this category.</p>
                 <button 
                   onClick={() => setActiveCat('All')}
-                  className="mt-4 text-[#E3510F] hover:underline"
+                  className="mt-4 text-[#B88746] hover:underline"
                 >
                   View all products
                 </button>

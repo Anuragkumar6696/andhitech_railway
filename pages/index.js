@@ -10,51 +10,70 @@ import OurProcess from '@/components/OurProcess';
 import Certificates from '@/components/Certificates';
 import ContactCTA from '@/components/ContactCTA';
 import IndustrialTicker from '@/components/IndustrialTicker';
+import RailwayTimeline from '@/components/RailwayTimeline';
+import VandeBharat from '@/components/VandeBharat';
+import WhyAndHitech from '@/components/WhyAndHitech';
+import IndustryPresence from '@/components/IndustryPresence';
 
 export default function Home({ siteSettings, banner, products, testimonials, clientLogos }) {
   return (
-    <div className="bg-[#050608] min-h-screen">
+    <div className="page-bg min-h-screen">
       <Head>
-        <title>{siteSettings?.meta_title || 'AND Hitech Industries | Engineering the Future of Rail'}</title>
-        <meta name="description" content={siteSettings?.meta_description || 'Premium Railway Rolling Stock components and advanced HVAC engineering solutions — built for safety, precision and the future of transit.'} />
-        <meta name="keywords"    content={siteSettings?.meta_keywords    || 'railway components, HVAC systems, precision engineering, RDSO approved'} />
+        <title>{siteSettings?.meta_title || 'AND Hitech Industries | Railway Engineering & Manufacturing'}</title>
+        <meta name="description" content={siteSettings?.meta_description || 'AND Hitech Industries — precision railway components, HVAC systems, brake components and rolling stock solutions for Indian Railways, Vande Bharat and Metro networks.'} />
+        <meta name="keywords" content="railway components manufacturer India, railway engineering solutions, railway HVAC systems, rail coach components, railway manufacturing company, RDSO approved vendor, Vande Bharat supplier" />
+        <meta property="og:title" content="AND Hitech Industries | Railway Engineering & Manufacturing" />
+        <meta property="og:description" content="Advanced railway systems and precision engineering excellence for the next generation of Indian rail transportation." />
+        <meta property="og:type" content="website" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
       </Head>
 
-      <Header initialData={siteSettings}/>
+      <Header initialData={siteSettings} />
 
       <main>
-        {/* 1 · CINEMATIC HERO — scroll-linked train storytelling */}
-        <Hero initialData={banner}/>
+        {/* 1 · Hero */}
+        <Hero initialData={banner} />
 
-        {/* 2 · INDUSTRIAL TICKER — brand momentum strip */}
-        <IndustrialTicker/>
+        {/* 2 · Ticker */}
+        <IndustrialTicker />
 
-        {/* 3 · STRATEGIC PARTNERSHIPS */}
-        <OurTestimonial initialData={{ testimonials, clientLogos }}/>
+        {/* 3 · Company Overview + Stats */}
+        <Statistics />
 
-        {/* 4 · CORE CAPABILITIES — bento grid */}
-        <WhatWeDo/>
+        {/* 4 · Indian Railway Timeline */}
+        <RailwayTimeline />
 
-        {/* 5 · PERFORMANCE METRICS */}
-        <Statistics/>
+        {/* 5 · Vande Bharat Section */}
+        <VandeBharat />
 
-        {/* 6 · FEATURED PRODUCTS — split-screen showcase */}
-        <Services initialData={products}/>
+        {/* 6 · Core Capabilities */}
+        <WhatWeDo />
 
-        {/* 7 · TICKER (inverted) — momentum between sections */}
-        <IndustrialTicker inverted/>
+        {/* 7 · Products & Solutions */}
+        <Services initialData={products} />
 
-        {/* 8 · MANUFACTURING PROCESS TIMELINE */}
-        <OurProcess/>
+        {/* 8 · Manufacturing Process */}
+        <OurProcess />
 
-        {/* 9 · CERTIFICATIONS & QUALITY */}
-        <Certificates/>
+        {/* 9 · Industry Presence (Expo) */}
+        <IndustryPresence />
 
-        {/* 10 · CONTACT CTA */}
-        <ContactCTA/>
+        {/* 10 · Why AND Hitech */}
+        <WhyAndHitech />
+
+        {/* 11 · Testimonials & Partners */}
+        <OurTestimonial initialData={{ testimonials, clientLogos }} />
+
+        {/* 12 · Certifications */}
+        <Certificates />
+
+        {/* 13 · Contact CTA */}
+        <ContactCTA />
       </main>
 
-      <Footer initialData={siteSettings}/>
+      <Footer initialData={siteSettings} />
     </div>
   );
 }
@@ -81,10 +100,7 @@ export async function getStaticProps() {
     };
   } catch {
     return {
-      props: {
-        siteSettings: {}, banner: null,
-        products: [], testimonials: [], clientLogos: [],
-      },
+      props: { siteSettings: {}, banner: null, products: [], testimonials: [], clientLogos: [] },
     };
   }
 }
