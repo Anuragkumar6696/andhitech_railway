@@ -86,7 +86,7 @@ function Lightbox({ images, startIndex, onClose }) {
       <button
         aria-label="Close lightbox"
         onClick={onClose}
-        className="absolute top-5 right-5 z-10 flex items-center justify-center w-10 h-10 rounded-full border border-white/10 text-white/60 hover:text-white hover:border-[#E3510F] hover:text-[#E3510F] transition-all duration-200"
+        className="absolute top-5 right-5 z-10 flex items-center justify-center w-10 h-10 rounded-full border border-white/10 text-white/60 hover:text-white hover:border-[#B88746] hover:text-[#B88746] transition-all duration-200"
         style={{ background: 'rgba(0,0,0,0.5)' }}
       >
         <X size={20} />
@@ -104,7 +104,7 @@ function Lightbox({ images, startIndex, onClose }) {
       <button
         aria-label="Previous image"
         onClick={(e) => { e.stopPropagation(); goPrev(); }}
-        className="absolute left-4 md:left-8 z-10 flex items-center justify-center w-11 h-11 rounded-full border border-white/10 text-white/60 hover:text-[#E3510F] hover:border-[#E3510F] transition-all duration-200"
+        className="absolute left-4 md:left-8 z-10 flex items-center justify-center w-11 h-11 rounded-full border border-white/10 text-white/60 hover:text-[#B88746] hover:border-[#B88746] transition-all duration-200"
         style={{ background: 'rgba(0,0,0,0.5)' }}
       >
         <ChevronLeft size={22} />
@@ -114,7 +114,7 @@ function Lightbox({ images, startIndex, onClose }) {
       <button
         aria-label="Next image"
         onClick={(e) => { e.stopPropagation(); goNext(); }}
-        className="absolute right-4 md:right-8 z-10 flex items-center justify-center w-11 h-11 rounded-full border border-white/10 text-white/60 hover:text-[#E3510F] hover:border-[#E3510F] transition-all duration-200"
+        className="absolute right-4 md:right-8 z-10 flex items-center justify-center w-11 h-11 rounded-full border border-white/10 text-white/60 hover:text-[#B88746] hover:border-[#B88746] transition-all duration-200"
         style={{ background: 'rgba(0,0,0,0.5)' }}
       >
         <ChevronRight size={22} />
@@ -164,7 +164,7 @@ function Lightbox({ images, startIndex, onClose }) {
                 width: i === current ? 20 : 6,
                 height: 6,
                 borderRadius: i === current ? 3 : '50%',
-                background: i === current ? '#E3510F' : 'rgba(255,255,255,0.2)',
+                background: i === current ? '#B88746' : 'rgba(255,255,255,0.2)',
                 transition: 'all 0.3s ease',
                 border: 'none',
                 cursor: 'pointer',
@@ -257,7 +257,7 @@ export default function InfrastructureGallerySections({ sections = [] }) {
         >
           <span className="eyebrow mb-5 block">Facility Gallery</span>
           <h2 className="display-md max-w-xl">
-            Our <span style={{ color: '#E3510F' }}>Manufacturing Facilities</span>
+            Our <span style={{ color: '#B88746' }}>Manufacturing Facilities</span>
           </h2>
         </motion.div>
 

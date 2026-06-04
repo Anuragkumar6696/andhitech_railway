@@ -96,7 +96,7 @@ function CertLightbox({ startIndex, onClose }) {
       <button
         aria-label="Close lightbox"
         onClick={onClose}
-        className="absolute top-5 right-5 z-10 flex items-center justify-center w-10 h-10 rounded-full border border-white/10 text-white/60 hover:text-[#E3510F] hover:border-[#E3510F] transition-all duration-200"
+        className="absolute top-5 right-5 z-10 flex items-center justify-center w-10 h-10 rounded-full border border-white/10 text-white/60 hover:text-[#B88746] hover:border-[#B88746] transition-all duration-200"
         style={{ background: 'rgba(0,0,0,0.5)' }}
       >
         <X size={20} />
@@ -114,7 +114,7 @@ function CertLightbox({ startIndex, onClose }) {
       <button
         aria-label="Previous certificate"
         onClick={(e) => { e.stopPropagation(); goPrev(); }}
-        className="absolute left-4 md:left-8 z-10 flex items-center justify-center w-11 h-11 rounded-full border border-white/10 text-white/60 hover:text-[#E3510F] hover:border-[#E3510F] transition-all duration-200"
+        className="absolute left-4 md:left-8 z-10 flex items-center justify-center w-11 h-11 rounded-full border border-white/10 text-white/60 hover:text-[#B88746] hover:border-[#B88746] transition-all duration-200"
         style={{ background: 'rgba(0,0,0,0.5)' }}
       >
         <ChevronLeft size={22} />
@@ -124,7 +124,7 @@ function CertLightbox({ startIndex, onClose }) {
       <button
         aria-label="Next certificate"
         onClick={(e) => { e.stopPropagation(); goNext(); }}
-        className="absolute right-4 md:right-8 z-10 flex items-center justify-center w-11 h-11 rounded-full border border-white/10 text-white/60 hover:text-[#E3510F] hover:border-[#E3510F] transition-all duration-200"
+        className="absolute right-4 md:right-8 z-10 flex items-center justify-center w-11 h-11 rounded-full border border-white/10 text-white/60 hover:text-[#B88746] hover:border-[#B88746] transition-all duration-200"
         style={{ background: 'rgba(0,0,0,0.5)' }}
       >
         <ChevronRight size={22} />
@@ -171,7 +171,7 @@ function CertLightbox({ startIndex, onClose }) {
               width: i === current ? 20 : 6,
               height: 6,
               borderRadius: i === current ? 3 : '50%',
-              background: i === current ? '#E3510F' : 'rgba(255,255,255,0.2)',
+              background: i === current ? '#B88746' : 'rgba(255,255,255,0.2)',
               transition: 'all 0.3s ease',
               border: 'none',
               cursor: 'pointer',
@@ -189,12 +189,12 @@ export default function Certificates() {
   const [lightboxIndex, setLightboxIndex] = useState(null);
 
   return (
-    <section className="relative overflow-hidden section-gap" style={{ background:'#0B0E15' }}>
+    <section className="relative overflow-hidden section-gap" style={{ background:'#0B1F3A' }}>
       {/* Backgrounds */}
       <div className="absolute inset-0 bg-grid pointer-events-none opacity-40"/>
       <div className="absolute inset-0 pointer-events-none"
-        style={{ background:'radial-gradient(ellipse 800px 600px at 50% -5%,rgba(227,81,15,.05),transparent 68%)' }}/>
-      <div className="absolute inset-x-0 top-0 h-px" style={{ background:'linear-gradient(90deg,transparent,rgba(227,81,15,.2),transparent)' }}/>
+        style={{ background:'radial-gradient(ellipse 800px 600px at 50% -5%,rgba(184,135,70,.05),transparent 68%)' }}/>
+      <div className="absolute inset-x-0 top-0 h-px" style={{ background:'linear-gradient(90deg,transparent,rgba(184,135,70,.2),transparent)' }}/>
       <div className="absolute inset-x-0 bottom-0 h-px divider pointer-events-none"/>
 
       <div className="max-w-screen-xl mx-auto px-6 md:px-10 relative z-10">
@@ -206,7 +206,7 @@ export default function Certificates() {
             viewport={{ once:true }} transition={{ duration:.75, ease }}
           >
             <span className="eyebrow mb-7 block">Trust & Compliance</span>
-            <h2 className="display-md">Certified for<br/><span style={{ color:'#E3510F' }}>Excellence</span></h2>
+            <h2 className="display-md">Certified for<br/><span style={{ color:'#B88746' }}>Excellence</span></h2>
           </motion.div>
 
           <motion.div
@@ -214,16 +214,16 @@ export default function Certificates() {
             viewport={{ once:true }} transition={{ delay:.14, duration:.75, ease }}
             className="space-y-5"
           >
-            <p className="text-[#8C98AA] text-[.95rem] leading-relaxed">
+            <p className="text-[#6B7A8E] text-[.95rem] leading-relaxed">
               Our quality assurance processes adhere to the most stringent international standards, ensuring every component we deliver is reliable, safe, and fully compliant with railway regulations.
             </p>
             <ul className="space-y-3 mt-2">
               {qualities.map((q, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full bg-[#E3510F]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <CheckCircle2 size={11} className="text-[#E3510F]"/>
+                  <div className="w-5 h-5 rounded-full bg-[#B88746]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <CheckCircle2 size={11} className="text-[#B88746]"/>
                   </div>
-                  <span className="text-[#8C98AA] text-[.83rem] leading-relaxed">{q}</span>
+                  <span className="text-[#6B7A8E] text-[.83rem] leading-relaxed">{q}</span>
                 </li>
               ))}
             </ul>
@@ -244,7 +244,7 @@ export default function Certificates() {
               <div className="badge mb-5 self-center">{c.tag}</div>
 
               {/* Certificate image */}
-              <div className="relative w-full rounded-xl overflow-hidden bg-[#050608] border border-white/[.05] mb-6"
+              <div className="relative w-full rounded-xl overflow-hidden bg-[#0B1F3A] border border-white/[.05] mb-6"
                 style={{ aspectRatio:'3/4' }}>
                 <Image
                   src={c.src} alt={c.title} fill
@@ -253,16 +253,16 @@ export default function Certificates() {
                 />
                 {/* Glow on hover */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{ background:'linear-gradient(135deg,rgba(227,81,15,.07) 0%,transparent 55%)' }}/>
+                  style={{ background:'linear-gradient(135deg,rgba(184,135,70,.07) 0%,transparent 55%)' }}/>
               </div>
 
-              <div className="text-[#EDF0F5] font-semibold text-[.92rem] mb-1 group-hover:text-[#E3510F] transition-colors duration-300">
+              <div className="text-[#0B1F3A] font-semibold text-[.92rem] mb-1 group-hover:text-[#B88746] transition-colors duration-300">
                 {c.title}
               </div>
-              <div className="text-[#4E5A6E] text-[.74rem]">{c.subtitle}</div>
+              <div className="text-[#6B7A8E] text-[.74rem]">{c.subtitle}</div>
 
               {/* Bottom accent bar */}
-              <div className="mt-5 h-[1px] w-0 group-hover:w-12 bg-gradient-to-r from-[#E3510F] to-[#FF6835] transition-all duration-500 rounded-full"/>
+              <div className="mt-5 h-[1px] w-0 group-hover:w-12 bg-gradient-to-r from-[#B88746] to-[#D4A054] transition-all duration-500 rounded-full"/>
             </motion.div>
           ))}
         </div>
@@ -272,28 +272,28 @@ export default function Certificates() {
           initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }}
           viewport={{ once:true }} transition={{ delay:.35, duration:.75, ease }}
           className="relative rounded-2xl overflow-hidden border border-white/[.05]"
-          style={{ background:'linear-gradient(135deg,#0B0E15 0%,#0F1420 50%,#0B0E15 100%)' }}
+          style={{ background:'linear-gradient(135deg,#0B1F3A 0%,#0F2847 50%,#0B1F3A 100%)' }}
         >
           {/* Top accent line */}
           <div className="absolute top-0 left-0 right-0 h-[1.5px]"
-            style={{ background:'linear-gradient(90deg,transparent,#E3510F,rgba(227,81,15,.2),transparent)' }}/>
+            style={{ background:'linear-gradient(90deg,transparent,#B88746,rgba(184,135,70,.2),transparent)' }}/>
 
           <div className="px-8 py-7 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="flex items-center gap-5">
               <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-                style={{ background:'rgba(227,81,15,.1)', border:'1px solid rgba(227,81,15,.2)' }}>
-                <ShieldCheck size={20} className="text-[#E3510F]"/>
+                style={{ background:'rgba(184,135,70,.1)', border:'1px solid rgba(184,135,70,.2)' }}>
+                <ShieldCheck size={20} className="text-[#B88746]"/>
               </div>
               <div>
-                <div className="text-[#EDF0F5] font-semibold text-[.94rem]">Certified & RDSO Approved Manufacturer</div>
-                <div className="text-[#4E5A6E] text-[.78rem] mt-0.5">Trusted by Indian Railways and Metro networks across India since 2013</div>
+                <div className="text-[#0B1F3A] font-semibold text-[.94rem]">Certified & RDSO Approved Manufacturer</div>
+                <div className="text-[#6B7A8E] text-[.78rem] mt-0.5">Trusted by Indian Railways and Metro networks across India since 2013</div>
               </div>
             </div>
             <div className="flex items-center gap-6 flex-shrink-0 flex-wrap">
               {['ISO 9001','ISO 14001','RDSO','Make in India'].map((label, i) => (
                 <div key={i} className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-emerald-400"/>
-                  <span className="text-[#4E5A6E] text-[.64rem] uppercase tracking-widest" style={{ fontFamily:'var(--font-mono)' }}>{label}</span>
+                  <span className="text-[#6B7A8E] text-[.64rem] uppercase tracking-widest" style={{ fontFamily:'var(--font-mono)' }}>{label}</span>
                 </div>
               ))}
             </div>

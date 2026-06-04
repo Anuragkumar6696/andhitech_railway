@@ -1,154 +1,91 @@
 'use client';
 import Link from 'next/link';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { ArrowRight, Mail, Phone, MapPin } from 'lucide-react';
-import { useRef } from 'react';
 
 const ease = [.22, 1, .36, 1];
 
 export default function ContactCTA() {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const y1     = useTransform(scrollYProgress, [0, 1], [50, -50]);
-  const y2     = useTransform(scrollYProgress, [0, 1], [-30, 30]);
-  const scaleX = useTransform(scrollYProgress, [0, .5], [0.92, 1]);
-
   return (
-    <section ref={ref} className="relative overflow-hidden" style={{ background: '#050608' }}>
-      {/* Grid */}
-      <div className="absolute inset-0 bg-grid z-[1] pointer-events-none opacity-50"/>
+    <section className="relative overflow-hidden" style={{ background: '#F7F5F0' }}>
+      <div className="absolute inset-0 bg-dots opacity-60 pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 h-px divider-light" />
 
-      {/* Parallax glows */}
-      <motion.div
-        style={{ y: y1 }}
-        className="absolute inset-0 z-[1] pointer-events-none"
-        style={{ background:'radial-gradient(ellipse 1100px 750px at 50% 65%,rgba(227,81,15,.08),transparent 68%)', y: y1 }}
-      />
-      <motion.div
-        style={{ y: y2 }}
-        className="absolute top-0 left-[-5%] z-[1] pointer-events-none w-[45%] h-[55%]"
-        style={{ background:'radial-gradient(circle,rgba(227,81,15,.04),transparent 70%)', y: y2 }}
-      />
+      <div className="max-w-screen-xl mx-auto px-6 md:px-10 py-24 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
 
-      {/* Diagonal structural lines */}
-      {[-60, -30, 0, 30, 60].map((offset, i) => (
-        <div key={i} className="absolute inset-0 pointer-events-none z-[1]" style={{
-          background:`linear-gradient(${offset}deg,transparent 49.5%,rgba(255,255,255,.01) 49.5%,rgba(255,255,255,.01) 50.5%,transparent 50.5%)`,
-          backgroundSize: '80px 80px',
-        }}/>
-      ))}
-
-      {/* Flame accent line */}
-      <div className="absolute inset-x-0 top-0 h-[1.5px] z-[2]"
-        style={{ background:'linear-gradient(90deg,transparent,rgba(227,81,15,.35),transparent)' }}/>
-
-      {/* ── Large display number watermark ── */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none select-none z-[1] hidden xl:block"
-        style={{
-          fontFamily: 'var(--font-display)',
-          fontSize: '22rem',
-          lineHeight: 1,
-          color: 'rgba(255,255,255,.012)',
-          letterSpacing: '-.02em',
-          right: '-2rem',
-        }}
-      >
-        LET&apos;S
-      </div>
-
-      <div className="max-w-screen-xl mx-auto px-6 md:px-10 py-32 md:py-52 relative z-10">
-        <div className="max-w-5xl">
-
-          {/* Ready pill */}
+          {/* Left: office image */}
           <motion.div
-            initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }}
-            viewport={{ once:true }} transition={{ duration:.75, ease }}
-            className="mb-10"
+            initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }} transition={{ duration: .9, ease }}
+            className="relative"
           >
-            <div className="inline-flex items-center gap-3 border border-[#E3510F]/22 rounded-full px-6 py-2.5"
-              style={{ background:'rgba(227,81,15,.07)' }}>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E3510F] animate-pulse"/>
-              <span className="text-[#E3510F] text-[.55rem] uppercase tracking-[.26em]"
-                style={{ fontFamily:'var(--font-mono)' }}>
-                Ready to Start?
-              </span>
+            <div className="rounded-2xl overflow-hidden relative" style={{ height: 420 }}>
+              <Image src="/images/office.jpg" alt="AND Hitech Corporate Office" fill className="object-cover" />
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(11,31,58,.4) 0%, transparent 60%)' }} />
+              <div className="absolute top-0 left-0 w-12 h-12 border-l-2 border-t-2 border-[#B88746]/60 rounded-tl-2xl" />
             </div>
+            {/* Reception badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ duration: .7, ease, delay: .3 }}
+              className="absolute -bottom-6 -right-4 p-5 rounded-xl shadow-xl"
+              style={{ background: '#0B1F3A', border: '1px solid rgba(184,135,70,.2)' }}
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-2 rounded-full bg-[#0F766E]" style={{ animation: 'pulse 2s infinite' }} />
+                <div>
+                  <div className="text-white text-[.8rem] font-medium">Available for Enquiries</div>
+                  <div className="text-white/40 text-[.65rem]">Mon–Sat, 9AM–6PM IST</div>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
 
-          {/* Large headline */}
-          <motion.h2
-            initial={{ opacity:0, y:36, filter:'blur(8px)' }}
-            whileInView={{ opacity:1, y:0, filter:'blur(0px)' }}
-            viewport={{ once:true }} transition={{ delay:.08, duration:1, ease }}
-            className="display-lg mb-10"
-            style={{ lineHeight:.88 }}
-          >
-            Have a Project<br/>in Mind?&nbsp;
-            <span style={{ color:'#E3510F' }}>Let&apos;s Build.</span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }}
-            viewport={{ once:true }} transition={{ delay:.18, duration:.8, ease }}
-            className="text-[#8C98AA] text-[1rem] md:text-[1.08rem] leading-relaxed max-w-2xl mb-16 font-light"
-          >
-            Our engineering team is ready to provide high-performance industrial solutions tailored to your exact specifications — from first consultation through to final delivery and certification.
-          </motion.p>
-
-          {/* CTAs */}
+          {/* Right: contact content */}
           <motion.div
-            initial={{ opacity:0, y:18 }} whileInView={{ opacity:1, y:0 }}
-            viewport={{ once:true }} transition={{ delay:.28, duration:.75, ease }}
-            className="flex flex-col sm:flex-row items-start sm:items-center gap-5 flex-wrap mb-20"
+            initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }} transition={{ duration: .9, ease }}
           >
-            <Link href="/contact"
-              className="btn-flame group py-4 px-12 text-[.64rem] inline-flex items-center gap-3">
-              <span>Get a Free Quote</span>
-              <div className="w-6 h-6 rounded-full bg-white/15 flex items-center justify-center group-hover:bg-white/25 transition-colors">
-                <ArrowRight size={12}/>
-              </div>
-            </Link>
-            <a href="mailto:Info@andhitech.in"
-              className="btn-wire group py-4 px-9 text-[.64rem] inline-flex items-center gap-2.5">
-              <Mail size={14}/>
-              <span>Info@andhitech.in</span>
-            </a>
-            <a href="tel:+911144766444"
-              className="btn-wire group py-4 px-9 text-[.64rem] inline-flex items-center gap-2.5">
-              <Phone size={14}/>
-              <span>+91 11 44766444</span>
-            </a>
-          </motion.div>
+            <div className="label-dark mb-4">Partner With Us</div>
+            <h2 className="display-md-dark mb-4 leading-tight">
+              Ready to Discuss Your<br />
+              <span className="text-copper">Engineering Requirements?</span>
+            </h2>
+            <div className="accent mb-6" />
+            <p className="text-[#4A5568] leading-relaxed mb-8 text-[.92rem]">
+              Whether you need HVAC systems for your rolling stock, precision brake components, or custom engineering solutions, our team is ready to support your project from concept to certified delivery.
+            </p>
 
-          {/* Contact details + trust marks */}
-          <motion.div
-            initial={{ opacity:0 }} whileInView={{ opacity:1 }}
-            viewport={{ once:true }} transition={{ delay:.4, duration:.8 }}
-            className="flex flex-col sm:flex-row gap-8 pt-10 border-t border-white/[.05]"
-          >
-            <div className="flex items-start gap-3">
-              <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
-                style={{ background:'rgba(227,81,15,.1)', border:'1px solid rgba(227,81,15,.18)' }}>
-                <MapPin size={13} className="text-[#E3510F]"/>
-              </div>
-              <address className="not-italic text-[#3D4A5C] text-[.82rem] leading-relaxed">
-                403, 4th floor Kirti Mahal Building 19,<br/>
-                Rajendra Place, New Delhi – 110008
-              </address>
+            {/* Contact details */}
+            <div className="space-y-4 mb-8">
+              {[
+                { Icon: Phone, label: '+91 141 123 4567', sub: 'Sales & Engineering Enquiries' },
+                { Icon: Mail,  label: 'info@andhitech.com', sub: 'General & Technical Correspondence' },
+                { Icon: MapPin, label: 'Jaipur, Rajasthan', sub: 'Head Office & Manufacturing' },
+              ].map(({ Icon, label, sub }) => (
+                <div key={label} className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                    style={{ background: 'rgba(11,31,58,.06)', border: '1px solid rgba(184,135,70,.2)' }}>
+                    <Icon size={16} className="text-[#B88746]" />
+                  </div>
+                  <div>
+                    <div className="text-[#0B1F3A] font-semibold text-[.88rem]">{label}</div>
+                    <div className="text-[#6B7A8E] text-[.74rem]">{sub}</div>
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                style={{ background:'rgba(227,81,15,.1)', border:'1px solid rgba(227,81,15,.18)' }}>
-                <span className="text-[#E3510F] text-[.48rem] font-bold" style={{ fontFamily:'var(--font-mono)' }}>ISO</span>
-              </div>
-              <div>
-                <div className="text-[#8C98AA] text-[.78rem] font-medium">ISO 9001:2015 Certified</div>
-                <div className="text-[#3D4A5C] text-[.68rem]">Quality Management System</div>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0"/>
-              <span className="text-[#3D4A5C] text-[.78rem]">RDSO Approved Manufacturer</span>
+
+            <div className="flex gap-4 flex-wrap">
+              <Link href="/contact" className="btn-primary group inline-flex items-center gap-2">
+                <span>Get a Quote</span>
+                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link href="/products" className="btn-copper inline-flex items-center gap-2">
+                View Products
+              </Link>
             </div>
           </motion.div>
         </div>

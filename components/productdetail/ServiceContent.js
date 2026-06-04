@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import 'swiper/css'; import 'swiper/css/navigation'; import 'swiper/css/pagination'; import 'swiper/css/effect-fade';
 
 export default function ServiceContent({ product }) {
-  if (!product) return <div className="flex justify-center py-20"><div className="w-10 h-10 border-2 border-[#E3510F] border-t-transparent rounded-full animate-spin" /></div>;
+  if (!product) return <div className="flex justify-center py-20"><div className="w-10 h-10 border-2 border-[#B88746] border-t-transparent rounded-full animate-spin" /></div>;
   
   // Asset Overrides based on slug
   let images = product.images?.length > 0 ? product.images : product.image ? [{id:'f',image:product.image}] : [];
@@ -154,14 +154,14 @@ export default function ServiceContent({ product }) {
       <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} className="space-y-6">
         <span className="eyebrow block">Product Overview</span>
         <h2 className="text-[#F0F2F5] font-bold leading-tight" style={{
-                    fontFamily: 'DM Sans, sans-serif',
+                    fontFamily: 'Inter, sans-serif',
                     fontWeight: 700,
                     fontSize: '24px',
                     lineHeight: '1.5',
                     letterSpacing: '0.02em',
                   }}>About {product.title}</h2>
-        <div className="text-[#8C98AA] leading-relaxed space-y-5 text-[15px] prose prose-invert max-w-none 
-          prose-p:text-[#8C98AA] prose-headings:text-white prose-strong:text-[#E3510F] prose-li:text-[#8C98AA]"
+        <div className="text-[#6B7A8E] leading-relaxed space-y-5 text-[15px] prose prose-invert max-w-none 
+          prose-p:text-[#6B7A8E] prose-headings:text-white prose-strong:text-[#B88746] prose-li:text-[#6B7A8E]"
           dangerouslySetInnerHTML={{ __html:product.description||product.content||'Product information coming soon.' }} />
       </motion.div>
     </div>

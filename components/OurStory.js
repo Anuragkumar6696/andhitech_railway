@@ -20,7 +20,7 @@ export default function OurStory() {
   const lineH       = useTransform(scrollYProgress, [.1, .8], ['0%', '100%']);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden section-gap" style={{ background: '#0B0E15' }}>
+    <section ref={sectionRef} className="relative overflow-hidden section-gap" style={{ background: '#0B1F3A' }}>
       <div className="absolute inset-0 bg-grid-fine opacity-40 pointer-events-none"/>
       <div className="absolute inset-0 glow-right pointer-events-none opacity-40"/>
       <div className="absolute inset-x-0 top-0 h-px divider pointer-events-none"/>
@@ -36,7 +36,7 @@ export default function OurStory() {
           >
             <span className="eyebrow mb-7 block">Our Story</span>
             <h2 className="display-md">
-              Transforming Industries<br/>Through <span style={{ color:'#E3510F' }}>Innovation</span>
+              Transforming Industries<br/>Through <span style={{ color:'#B88746' }}>Innovation</span>
             </h2>
           </motion.div>
 
@@ -45,7 +45,7 @@ export default function OurStory() {
             viewport={{ once:true }} transition={{ delay:.14, duration:.75, ease }}
             className="space-y-6"
           >
-            <p className="text-[#8C98AA] leading-relaxed border-l-2 border-[#E3510F]/35 pl-7 text-[.96rem]">
+            <p className="text-[#6B7A8E] leading-relaxed border-l-2 border-[#B88746]/35 pl-7 text-[.96rem]">
               Founded in 2013, AHIL has steadily built a reputation for trust, reliability, and customer-centric manufacturing. Under visionary leadership, we've grown into a dynamic organisation known for innovative engineering solutions.
             </p>
             <p className="text-[#3D4A5C] leading-relaxed text-[.88rem] pl-7">
@@ -76,16 +76,16 @@ export default function OurStory() {
               <div className="absolute inset-0" style={{ background:'linear-gradient(to top,rgba(11,14,21,.7) 0%,transparent 50%)' }}/>
               {/* Bottom label */}
               <div className="absolute bottom-6 left-7 right-7 flex items-center gap-3">
-                <div className="h-px flex-1" style={{ background:'linear-gradient(90deg,rgba(227,81,15,.6),transparent)' }}/>
-                <span className="text-[#4E5A6E] text-[.66rem]" style={{ fontFamily:'var(--font-mono)' }}>Manufacturing Excellence Since 2013</span>
+                <div className="h-px flex-1" style={{ background:'linear-gradient(90deg,rgba(184,135,70,.6),transparent)' }}/>
+                <span className="text-[#6B7A8E] text-[.66rem]" style={{ fontFamily:'var(--font-mono)' }}>Manufacturing Excellence Since 2013</span>
               </div>
               {/* Corner accent */}
-              <div className="absolute top-0 left-0 w-px h-16" style={{ background:'linear-gradient(to bottom,#E3510F,transparent)' }}/>
-              <div className="absolute top-0 left-0 h-px w-16" style={{ background:'linear-gradient(90deg,#E3510F,transparent)' }}/>
+              <div className="absolute top-0 left-0 w-px h-16" style={{ background:'linear-gradient(to bottom,#B88746,transparent)' }}/>
+              <div className="absolute top-0 left-0 h-px w-16" style={{ background:'linear-gradient(90deg,#B88746,transparent)' }}/>
             </div>
 
             {/* Overlapping second image */}
-            <div className="absolute -bottom-10 -right-8 w-[48%] rounded-xl overflow-hidden border-4 border-[#0B0E15] shadow-2xl hidden md:block z-10">
+            <div className="absolute -bottom-10 -right-8 w-[48%] rounded-xl overflow-hidden border-4 border-[#0B1F3A] shadow-2xl hidden md:block z-10">
               <Image
                 src="/images/storytopleft.jpg"
                 alt="AHIL Production" width={320} height={220}
@@ -97,7 +97,7 @@ export default function OurStory() {
 
             {/* Year badge */}
             <div className="absolute -top-5 -left-5 hidden md:flex flex-col items-center justify-center text-white z-20"
-              style={{ width:88, height:88, background:'#E3510F', clipPath:'polygon(0 0,calc(100%-10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100%-10px))' }}>
+              style={{ width:88, height:88, background:'#B88746', clipPath:'polygon(0 0,calc(100%-10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100%-10px))' }}>
               <span className="text-2xl font-bold leading-none" style={{ fontFamily:'var(--font-display)' }}>10+</span>
               <span className="text-[.48rem] uppercase tracking-wider opacity-80 mt-0.5" style={{ fontFamily:'var(--font-mono)' }}>Years</span>
             </div>
@@ -110,7 +110,7 @@ export default function OurStory() {
               <motion.div
                 style={{ height: lineH }}
                 className="absolute top-0 left-0 w-full origin-top rounded-full"
-                style={{ background:'linear-gradient(to bottom,#E3510F,rgba(227,81,15,.1))', height: lineH }}
+                style={{ background:'linear-gradient(to bottom,#B88746,rgba(184,135,70,.1))', height: lineH }}
               />
             </div>
 
@@ -123,10 +123,10 @@ export default function OurStory() {
                   className="relative flex items-start gap-8 py-8 border-b border-white/[.04] group cursor-default"
                 >
                   {/* Rail dot */}
-                  <div className="absolute left-[11px] top-1/2 -translate-y-1/2 w-5 h-5 rounded-full border-2 border-[#050608] hidden md:flex items-center justify-center z-10 transition-all duration-400"
-                    style={{ background:'#1C2540', boxShadow:'none' }}
-                    onMouseEnter={e => Object.assign(e.currentTarget.style, { background:'#E3510F', boxShadow:'0 0 16px rgba(227,81,15,.6)' })}
-                    onMouseLeave={e => Object.assign(e.currentTarget.style, { background:'#1C2540', boxShadow:'none' })}
+                  <div className="absolute left-[11px] top-1/2 -translate-y-1/2 w-5 h-5 rounded-full border-2 border-[#0B1F3A] hidden md:flex items-center justify-center z-10 transition-all duration-400"
+                    style={{ background:'#0B1F3A', boxShadow:'none' }}
+                    onMouseEnter={e => Object.assign(e.currentTarget.style, { background:'#B88746', boxShadow:'0 0 16px rgba(184,135,70,.6)' })}
+                    onMouseLeave={e => Object.assign(e.currentTarget.style, { background:'#0B1F3A', boxShadow:'none' })}
                   >
                     <div className="w-1.5 h-1.5 rounded-full bg-current"/>
                   </div>
@@ -134,13 +134,13 @@ export default function OurStory() {
                   <div className="md:pl-8 flex items-start gap-6 w-full">
                     {/* Year */}
                     <div
-                      className="flex-shrink-0 text-[2.2rem] font-bold leading-none transition-colors duration-400 group-hover:text-[#E3510F]"
+                      className="flex-shrink-0 text-[2.2rem] font-bold leading-none transition-colors duration-400 group-hover:text-[#B88746]"
                       style={{ fontFamily:'var(--font-display)', color:'rgba(255,255,255,.08)', letterSpacing:'.01em', minWidth:80 }}
                     >
                       {year}
                     </div>
                     {/* Event */}
-                    <p className="text-[#3D4A5C] text-[.85rem] leading-relaxed group-hover:text-[#8C98AA] transition-colors duration-400 pt-1">
+                    <p className="text-[#3D4A5C] text-[.85rem] leading-relaxed group-hover:text-[#6B7A8E] transition-colors duration-400 pt-1">
                       {event}
                     </p>
                   </div>
@@ -155,10 +155,10 @@ export default function OurStory() {
               className="mt-10 grid grid-cols-3 gap-5"
             >
               {[['10+','Years'],['100+','Engineers'],['500+','Projects']].map(([n, l]) => (
-                <div key={l} className="text-center py-5 rounded-xl border border-white/[.04] hover:border-[#E3510F]/20 transition-all duration-400 cursor-default"
+                <div key={l} className="text-center py-5 rounded-xl border border-white/[.04] hover:border-[#B88746]/20 transition-all duration-400 cursor-default"
                   style={{ background:'rgba(255,255,255,.015)' }}>
-                  <div className="text-[2rem] font-bold text-[#E3510F] leading-none mb-1" style={{ fontFamily:'var(--font-display)' }}>{n}</div>
-                  <div className="text-[.54rem] text-[#2E3848] uppercase tracking-wider" style={{ fontFamily:'var(--font-mono)' }}>{l}</div>
+                  <div className="text-[2rem] font-bold text-[#B88746] leading-none mb-1" style={{ fontFamily:'var(--font-display)' }}>{n}</div>
+                  <div className="text-[.54rem] text-[#9AAABB] uppercase tracking-wider" style={{ fontFamily:'var(--font-mono)' }}>{l}</div>
                 </div>
               ))}
             </motion.div>

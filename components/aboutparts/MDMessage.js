@@ -5,10 +5,10 @@ import { Quote } from 'lucide-react';
 
 export default function MDMessage() {
   return (
-    <section className="py-24 md:py-32 bg-[#050608] relative overflow-hidden">
+    <section className="py-24 md:py-32 bg-[#0B1F3A] relative overflow-hidden">
       {/* Background decorations matching the About page template */}
       <div className="absolute inset-0 bg-grid opacity-30 pointer-events-none" />
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#E3510F]/5 rounded-full blur-[120px] -mr-64 -mt-64 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#B88746]/5 rounded-full blur-[120px] -mr-64 -mt-64 pointer-events-none" />
       
       <div className="max-w-screen-xl mx-auto px-6 md:px-10 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
@@ -23,7 +23,7 @@ export default function MDMessage() {
             <span className="eyebrow mb-7 block">Leadership Message</span>
             <h2 className="display-md mb-10">
               Message from our <br />
-              <span style={{ color: '#E3510F' }}>Managing Director</span>
+              <span style={{ color: '#B88746' }}>Managing Director</span>
             </h2>
 
             <div className="relative">
@@ -37,7 +37,7 @@ export default function MDMessage() {
 
                 <div className="pt-8 border-t border-white/10">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-px bg-[#E3510F]" />
+                    <div className="w-10 h-px bg-[#B88746]" />
                     <div>
                       <h4 className="text-[#F0F2F5] font-light text-xl tracking-wide" style={{ fontFamily: 'var(--font-display)' }}>Angad Singh</h4>
                       <p className="text-[#5A6478] text-sm uppercase tracking-widest mt-1" style={{ fontFamily: 'var(--font-mono)' }}>Managing Director</p>
@@ -66,16 +66,16 @@ export default function MDMessage() {
                   className="object-cover transition-transform duration-1000 group-hover:scale-105"
                   unoptimized
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050608] via-transparent to-transparent opacity-60" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B1F3A] via-transparent to-transparent opacity-60" />
               </div>
               
               {/* Corner Accents */}
-              <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#E3510F]/40 rounded-tl-xl" />
-              <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[#E3510F]/40 rounded-br-xl" />
+              <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#B88746]/40 rounded-tl-xl" />
+              <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[#B88746]/40 rounded-br-xl" />
             </div>
 
             {/* Background Glow */}
-            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-[#E3510F]/10 rounded-full blur-3xl -z-10" />
+            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-[#B88746]/10 rounded-full blur-3xl -z-10" />
           </motion.div>
 
         </div>

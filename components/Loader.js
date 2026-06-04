@@ -16,7 +16,7 @@ export default function Loader() {
     <motion.div
       initial={{ opacity: 1 }}
       exit={{ opacity: 0, transition: { duration: .6, ease: [.22,1,.36,1] } }}
-      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#050608] overflow-hidden"
+      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#0B1F3A] overflow-hidden"
     >
       {/* Atmospheric grid */}
       <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none"/>
@@ -26,7 +26,7 @@ export default function Loader() {
         animate={{ scale: [1, 1.15, 1], opacity: [.06, .12, .06] }}
         transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
         className="absolute w-[600px] h-[600px] rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(227,81,15,.15) 0%, transparent 70%)' }}
+        style={{ background: 'radial-gradient(circle, rgba(184,135,70,.15) 0%, transparent 70%)' }}
       />
 
       {/* Corner accents */}
@@ -41,7 +41,7 @@ export default function Loader() {
           initial={{ opacity: 0, scale: .8 }}
           animate={{ opacity: .3, scale: 1 }}
           transition={{ delay: i * .08, duration: .6 }}
-          className={`absolute w-12 h-12 border-[#E3510F]/40 ${cls}`}
+          className={`absolute w-12 h-12 border-[#B88746]/40 ${cls}`}
         />
       ))}
 
@@ -55,7 +55,7 @@ export default function Loader() {
             className="absolute inset-0"
             viewBox="0 0 112 112"
           >
-            <circle cx="56" cy="56" r="50" fill="none" stroke="rgba(227,81,15,.1)" strokeWidth="1" strokeDasharray="6 4"/>
+            <circle cx="56" cy="56" r="50" fill="none" stroke="rgba(184,135,70,.1)" strokeWidth="1" strokeDasharray="6 4"/>
           </motion.svg>
           <motion.svg
             animate={{ rotate: -360 }}
@@ -73,8 +73,8 @@ export default function Loader() {
             />
             <defs>
               <linearGradient id="loaderGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#E3510F"/>
-                <stop offset="100%" stopColor="rgba(227,81,15,0)"/>
+                <stop offset="0%" stopColor="#B88746"/>
+                <stop offset="100%" stopColor="rgba(184,135,70,0)"/>
               </linearGradient>
             </defs>
           </motion.svg>
@@ -107,8 +107,8 @@ export default function Loader() {
           className="h-full rounded-full"
           style={{
             width: `${progress}%`,
-            background: 'linear-gradient(90deg,#E3510F,#FF6835)',
-            boxShadow: '0 0 12px rgba(227,81,15,.6)',
+            background: 'linear-gradient(90deg,#B88746,#D4A054)',
+            boxShadow: '0 0 12px rgba(184,135,70,.6)',
             transition: 'width .12s linear',
           }}
         />

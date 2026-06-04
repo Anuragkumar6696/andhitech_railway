@@ -25,7 +25,7 @@ export default function VideoSection({ videos }) {
             </div>
             <div className="absolute inset-0 bg-gradient-to-t from-[#0D1117]/80 via-[#0D1117]/20 to-transparent flex flex-col items-center justify-center text-center px-6">
               <motion.div whileHover={{ scale:1.12 }} transition={{ type:'spring', stiffness:300 }}
-                className="w-24 h-24 rounded-full bg-[#E3510F] flex items-center justify-center shadow-2xl shadow-[#E3510F]/30 mb-8">
+                className="w-24 h-24 rounded-full bg-[#B88746] flex items-center justify-center shadow-2xl shadow-[#B88746]/30 mb-8">
                 <Play size={30} className="text-white fill-white ml-1" />
               </motion.div>
               {v.title && <h2 className="text-[#F0F2F5] font-bold max-w-2xl leading-tight" style={{fontFamily:'var(--font-display)',fontSize:'clamp(1.5rem,3vw,2.4rem)',textShadow:'0 2px 20px rgba(0,0,0,0.8)'}}>{v.title}</h2>}
@@ -47,7 +47,7 @@ export default function VideoSection({ videos }) {
               onClick={e=>e.stopPropagation()}>
               <iframe src={src} className="w-full h-full" allow="autoplay; fullscreen" allowFullScreen />
               <button onClick={close}
-                className="absolute top-4 right-4 w-9 h-9 rounded-full bg-[#07080C]/70 flex items-center justify-center text-[#9BA5B4] hover:bg-[#E3510F] hover:text-white transition-colors">
+                className="absolute top-4 right-4 w-9 h-9 rounded-full bg-[#07080C]/70 flex items-center justify-center text-[#9BA5B4] hover:bg-[#B88746] hover:text-white transition-colors">
                 <X size={16} />
               </button>
             </motion.div>

@@ -35,18 +35,18 @@ export default function OurTestimonial({ initialData }) {
   );
 
   return (
-    <section className="relative overflow-hidden" style={{ background:'#0F1420' }}>
+    <section className="relative overflow-hidden" style={{ background:'#0F2847' }}>
       <div className="absolute inset-0 bg-grid pointer-events-none opacity-35"/>
-      <div className="absolute inset-x-0 top-0 h-px" style={{ background:'linear-gradient(90deg,transparent,rgba(227,81,15,.2),transparent)' }}/>
+      <div className="absolute inset-x-0 top-0 h-px" style={{ background:'linear-gradient(90deg,transparent,rgba(184,135,70,.2),transparent)' }}/>
       <div className="absolute inset-x-0 bottom-0 h-px divider pointer-events-none"/>
 
       {/* ── TRUSTED BY MARQUEE ── */}
       <div className="py-20 relative overflow-hidden">
         {/* Fade masks */}
         <div className="absolute left-0 inset-y-0 w-48 z-10 pointer-events-none"
-          style={{ background:'linear-gradient(90deg,#0F1420,transparent)' }}/>
+          style={{ background:'linear-gradient(90deg,#0F2847,transparent)' }}/>
         <div className="absolute right-0 inset-y-0 w-48 z-10 pointer-events-none"
-          style={{ background:'linear-gradient(270deg,#0F1420,transparent)' }}/>
+          style={{ background:'linear-gradient(270deg,#0F2847,transparent)' }}/>
 
         {/* Label */}
         <div className="max-w-screen-xl mx-auto px-10 mb-14 flex items-center gap-5 relative z-20">
@@ -56,7 +56,7 @@ export default function OurTestimonial({ initialData }) {
           >
             Strategic Industry Partnerships
           </motion.span>
-          <div className="flex-1 h-px" style={{ background:'linear-gradient(90deg,rgba(227,81,15,.4),transparent)' }}/>
+          <div className="flex-1 h-px" style={{ background:'linear-gradient(90deg,rgba(184,135,70,.4),transparent)' }}/>
         </div>
 
         {/* Marquee */}

@@ -25,16 +25,16 @@ export default function ContactForm() {
       initial={{ opacity:0, x:20 }} 
       whileInView={{ opacity:1, x:0 }} 
       viewport={{ once:true }}
-      className="bg-[#0D1117] p-8 md:p-12 rounded-[2rem] border border-white/10 shadow-2xl relative overflow-hidden"
+      className="bg-[#0B1F3A] p-8 md:p-12 rounded-[2rem] border border-white/10 shadow-2xl relative overflow-hidden"
     >
-      <div className="absolute top-0 right-0 w-48 h-48 bg-[#E3510F]/5 blur-[60px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 right-0 w-48 h-48 bg-[#B88746]/5 blur-[60px] rounded-full pointer-events-none" />
       
       <div className="relative z-10">
-        <div className="h-[2px] bg-[#E3510F] w-12 mb-8 rounded-full shadow-[0_0_10px_rgba(227,81,15,0.3)]" />
+        <div className="h-[2px] bg-[#B88746] w-12 mb-8 rounded-full shadow-[0_0_10px_rgba(184,135,70,0.3)]" />
         <h3 className="text-white text-3xl font-bold mb-3 tracking-normal leading-snug" style={{fontFamily:'var(--font-display)'}}>
-          Send Us a <span className="text-[#E3510F]">Message</span>
+          Send Us a <span className="text-[#B88746]">Message</span>
         </h3>
-        <p className="text-[#ADBAC7] text-base mb-10 font-medium tracking-wide">Our engineering team typically responds within 24 hours.</p>
+        <p className="text-[rgba(255,255,255,0.55)] text-base mb-10 font-medium tracking-wide">Our engineering team typically responds within 24 hours.</p>
 
         {ok ? (
           <motion.div initial={{ opacity:0, scale:0.95 }} animate={{ opacity:1, scale:1 }}
@@ -52,9 +52,9 @@ export default function ContactForm() {
                 <div key={n} className="space-y-3">
                   <label className="text-white text-[11px] uppercase tracking-[0.2em] font-bold ml-1 block" style={{fontFamily:'var(--font-mono)'}}>{l}</label>
                   <div className="relative group">
-                    <Icon size={16} className="absolute left-5 top-1/2 -translate-y-1/2 text-[#E3510F] transition-transform" />
+                    <Icon size={16} className="absolute left-5 top-1/2 -translate-y-1/2 text-[#B88746] transition-transform" />
                     <input type="text" name={n} value={form[n]} onChange={change} placeholder={p} required={n==='fname'}
-                      className="w-full pl-14 pr-5 py-4 bg-white/[0.04] border border-white/10 focus:border-[#E3510F]/60 focus:bg-white/[0.07] transition-all rounded-xl text-base text-white placeholder:text-white/20 font-medium outline-none" />
+                      className="w-full pl-14 pr-5 py-4 bg-white/[0.04] border border-white/10 focus:border-[#B88746]/60 focus:bg-white/[0.07] transition-all rounded-xl text-base text-white placeholder:text-white/20 font-medium outline-none" />
                   </div>
                 </div>
               ))}
@@ -64,9 +64,9 @@ export default function ContactForm() {
                 <div key={n} className="space-y-3">
                   <label className="text-white text-[11px] uppercase tracking-[0.2em] font-bold ml-1 block" style={{fontFamily:'var(--font-mono)'}}>{l}</label>
                   <div className="relative group">
-                    <Icon size={16} className="absolute left-5 top-1/2 -translate-y-1/2 text-[#E3510F] transition-transform" />
+                    <Icon size={16} className="absolute left-5 top-1/2 -translate-y-1/2 text-[#B88746] transition-transform" />
                     <input type={t} name={n} value={form[n]} onChange={change} placeholder={p} required={n==='email'}
-                      className="w-full pl-14 pr-5 py-4 bg-white/[0.04] border border-white/10 focus:border-[#E3510F]/60 focus:bg-white/[0.07] transition-all rounded-xl text-base text-white placeholder:text-white/20 font-medium outline-none" />
+                      className="w-full pl-14 pr-5 py-4 bg-white/[0.04] border border-white/10 focus:border-[#B88746]/60 focus:bg-white/[0.07] transition-all rounded-xl text-base text-white placeholder:text-white/20 font-medium outline-none" />
                   </div>
                 </div>
               ))}
@@ -74,10 +74,10 @@ export default function ContactForm() {
             <div className="space-y-3">
               <label className="text-white text-[11px] uppercase tracking-[0.2em] font-bold ml-1 block" style={{fontFamily:'var(--font-mono)'}}>Message</label>
               <div className="relative group">
-                <MessageSquare size={16} className="absolute left-5 top-6 text-[#E3510F] transition-transform" />
+                <MessageSquare size={16} className="absolute left-5 top-6 text-[#B88746] transition-transform" />
                 <textarea name="message" value={form.message} onChange={change} rows={5} required
                   placeholder="Describe your project or technical inquiry…" 
-                  className="w-full pl-14 pr-5 py-4 bg-white/[0.04] border border-white/10 focus:border-[#E3510F]/60 focus:bg-white/[0.07] transition-all rounded-xl text-base text-white placeholder:text-white/20 font-medium outline-none resize-none" />
+                  className="w-full pl-14 pr-5 py-4 bg-white/[0.04] border border-white/10 focus:border-[#B88746]/60 focus:bg-white/[0.07] transition-all rounded-xl text-base text-white placeholder:text-white/20 font-medium outline-none resize-none" />
               </div>
             </div>
             <button type="submit" disabled={busy}

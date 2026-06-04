@@ -15,26 +15,26 @@ export default function InfraSection({ title, description, sections=[], subTitle
           <motion.div initial={{ opacity:0, x:-30 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }}
             transition={{ duration:0.8 }} className="lg:sticky lg:top-28">
             <span className="eyebrow mb-5 block">{subTitle||'Our Infrastructure'}</span>
-            <h2 className="display-md mb-6">{first} <span style={{color:'#E3510F'}}>{last}</span></h2>
+            <h2 className="display-md mb-6">{first} <span style={{color:'#B88746'}}>{last}</span></h2>
             {description && <p className="text-[#9BA5B4] text-base leading-relaxed">{description}</p>}
-            <div className="mt-8 h-px w-16 bg-[#E3510F]" />
+            <div className="mt-8 h-px w-16 bg-[#B88746]" />
           </motion.div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {sections.map((item, i) => (
               <motion.div key={i} initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}
                 transition={{ delay:i*0.1 }} className="bento-cell p-7 group">
                 {item.icon
-                  ? <div className="w-12 h-12 rounded-xl bg-[#111827] border border-white/8 flex items-center justify-center mb-6 group-hover:bg-[#E3510F] group-hover:border-[#E3510F] transition-all duration-400">
+                  ? <div className="w-12 h-12 rounded-xl bg-[#111827] border border-white/8 flex items-center justify-center mb-6 group-hover:bg-[#B88746] group-hover:border-[#B88746] transition-all duration-400">
                       <Image src={item.icon} width={26} height={26} alt={item.section_title||'Icon'} className="group-hover:brightness-0 group-hover:invert transition-all" unoptimized />
                     </div>
-                  : <div className="w-12 h-12 rounded-xl bg-[#E3510F]/10 flex items-center justify-center mb-6">
-                      <div className="w-5 h-5 rounded-md bg-[#E3510F]/40" />
+                  : <div className="w-12 h-12 rounded-xl bg-[#B88746]/10 flex items-center justify-center mb-6">
+                      <div className="w-5 h-5 rounded-md bg-[#B88746]/40" />
                     </div>
                 }
                 <h3
-                  className="text-[#E3510F] mb-2.5 group-hover:text-[#F2F4F7] transition-colors duration-300"
+                  className="text-[#B88746] mb-2.5 group-hover:text-[#F2F4F7] transition-colors duration-300"
                   style={{
-                    fontFamily: 'DM Sans, sans-serif',
+                    fontFamily: 'Inter, sans-serif',
                     fontWeight: 700,
                     fontSize: '18px',
                     lineHeight: '1.5',

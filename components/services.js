@@ -69,7 +69,7 @@ function FeaturedProduct({ p, idx, total }) {
 
   const imgSrc = getProductImage(p);
   const catName = p.category?.name || 'Engineering';
-  const meta = CAT_META[catName] || { color: '#E3510F', num: '0' + (idx + 1) };
+  const meta = CAT_META[catName] || { color: '#B88746', num: '0' + (idx + 1) };
   const isEven = idx % 2 === 0;
 
   const specs = [
@@ -103,11 +103,11 @@ function FeaturedProduct({ p, idx, total }) {
         <div className="absolute inset-0"
           style={{
             background: isEven
-              ? 'linear-gradient(to right,#050608 0%,rgba(5,6,8,.1) 60%,transparent 100%)'
-              : 'linear-gradient(to left,#050608 0%,rgba(5,6,8,.1) 60%,transparent 100%)',
+              ? 'linear-gradient(to right,#0B1F3A 0%,rgba(11,31,58,.1) 60%,transparent 100%)'
+              : 'linear-gradient(to left,#0B1F3A 0%,rgba(11,31,58,.1) 60%,transparent 100%)',
           }} />
         <div className="absolute inset-0"
-          style={{ background: 'linear-gradient(to top,#050608 0%,transparent 40%)' }} />
+          style={{ background: 'linear-gradient(to top,#0B1F3A 0%,transparent 40%)' }} />
 
         {/* Category badge */}
         <div className="absolute top-8 left-8">
@@ -133,7 +133,7 @@ function FeaturedProduct({ p, idx, total }) {
 
       {/* Text side */}
       <div className={`relative z-10 flex flex-col justify-center px-10 lg:px-16 py-14 ${!isEven ? 'lg:order-1' : ''}`}
-        style={{ background: 'linear-gradient(135deg,#050608 0%,#080A0F 100%)' }}>
+        style={{ background: 'linear-gradient(135deg,#0B1F3A 0%,#080A0F 100%)' }}>
 
         {/* Accent rule */}
         <motion.div
@@ -145,7 +145,7 @@ function FeaturedProduct({ p, idx, total }) {
 
         <h3
           className="mb-5 leading-tight"
-          style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.8rem,3.5vw,3rem)', color: '#EDF0F5', letterSpacing: '.02em' }}
+          style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.8rem,3.5vw,3rem)', color: '#0B1F3A', letterSpacing: '.02em' }}
         >
           {p.title}
         </h3>
@@ -157,7 +157,7 @@ function FeaturedProduct({ p, idx, total }) {
         <div className="space-y-0 mb-10">
           {specs.map(({ label, val }) => (
             <div key={label} className="feature-item border-b border-white/[.08] py-4 flex items-center justify-between group/item">
-              <span className="text-[#E3510F] text-[.72rem] uppercase tracking-widest font-medium w-32 flex-shrink-0" style={{ fontFamily: 'var(--font-mono)' }}>{label}</span>
+              <span className="text-[#B88746] text-[.72rem] uppercase tracking-widest font-medium w-32 flex-shrink-0" style={{ fontFamily: 'var(--font-mono)' }}>{label}</span>
               <span className="text-[#8C98AA] text-[.78rem] font-medium flex-1 text-right mr-4">{val}</span>
               <div className="w-1.5 h-1.5 rounded-full bg-[#1C2540] flex-shrink-0" />
             </div>
@@ -168,7 +168,7 @@ function FeaturedProduct({ p, idx, total }) {
         <button
           onClick={() => setExpanded(e => !e)}
           className="flex items-center gap-3 mb-6 group/btn"
-          style={{ fontFamily: 'var(--font-mono)', fontSize: '.58rem', letterSpacing: '.22em', textTransform: 'uppercase', color: expanded ? meta.color : '#3D4A5C' }}
+          style={{ fontFamily: 'var(--font-mono)', fontSize: '.58rem', letterSpacing: '.22em', textTransform: 'uppercase', color: expanded ? meta.color : '#6B7A8E' }}
         >
           <div className={`w-5 h-5 rounded-full border flex items-center justify-center transition-all duration-300
             ${expanded ? 'border-current bg-current/10' : 'border-[#1C2540] group-hover/btn:border-current'}`}
@@ -188,14 +188,14 @@ function FeaturedProduct({ p, idx, total }) {
               className="overflow-hidden"
             >
               <div className="rounded-xl p-6 mb-8 border" style={{ background: 'rgba(255,255,255,.02)', borderColor: 'rgba(255,255,255,.05)' }}>
-                <p className="text-[#4E5A6E] text-[.8rem] leading-relaxed mb-4">
+                <p className="text-white/50 text-[.8rem] leading-relaxed mb-4">
                   All components are manufactured to RDSO specification and subjected to rigorous quality inspection including dimensional verification, material testing, and performance validation under simulated operating conditions.
                 </p>
                 <div className="grid grid-cols-2 gap-3">
                   {['RDSO Spec Compliant', 'Third-party Verified', 'Load tested 2× rated', 'Full documentation'].map((f, i) => (
                     <div key={i} className="flex items-center gap-2">
                       <div className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: meta.color }} />
-                      <span className="text-[#4E5A6E] text-[.72rem]">{f}</span>
+                      <span className="text-white/50 text-[.72rem]">{f}</span>
                     </div>
                   ))}
                 </div>
@@ -227,7 +227,7 @@ function FeaturedProduct({ p, idx, total }) {
 function CompactCard({ p, index }) {
   const imgSrc = getProductImage(p);
   const catName = p.category?.name || 'Engineering';
-  const meta = CAT_META[catName] || { color: '#E3510F', num: '00' };
+  const meta = CAT_META[catName] || { color: '#B88746', num: '00' };
 
   return (
     <motion.div
@@ -257,8 +257,8 @@ function CompactCard({ p, index }) {
           </div>
           {/* Info */}
           <div className="p-6 flex flex-col flex-1">
-            <h4 className="text-[#EDF0F5] font-semibold text-[.92rem] mb-2.5 group-hover:text-[#E3510F] transition-colors">{p.title}</h4>
-            <p className="text-[#4E5A6E] text-[.8rem] leading-relaxed mb-6 font-light line-clamp-3">
+            <h4 className="text-white font-semibold text-[.92rem] mb-2.5 group-hover:text-[#B88746] transition-colors">{p.title}</h4>
+            <p className="text-white/50 text-[.8rem] leading-relaxed mb-6 font-light line-clamp-3">
               {strip(p.description || p.content, 18)}
             </p>
             <div className="flex items-center gap-2 group-hover:gap-3 transition-all duration-300"
@@ -320,7 +320,7 @@ export default function Services({ initialData }) {
     });
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden" style={{ background: '#050608' }}>
+    <section ref={sectionRef} className="relative overflow-hidden" style={{ background: '#F7F5F0' }}>
       <div className="absolute inset-0 bg-grid opacity-30 pointer-events-none" />
       <div className="absolute inset-x-0 top-0 h-px divider-flame opacity-30 pointer-events-none" />
 
@@ -335,7 +335,7 @@ export default function Services({ initialData }) {
             <span className="eyebrow mb-7 block">Product Portfolio</span>
             <h2 className="display-md">
               Precision-Engineered<br />
-              for <span style={{ color: '#E3510F' }}>Critical Infrastructure</span>
+              for <span style={{ color: '#B88746' }}>Critical Infrastructure</span>
             </h2>
           </motion.div>
 
@@ -345,7 +345,7 @@ export default function Services({ initialData }) {
             className="flex flex-col sm:flex-row items-start sm:items-center gap-4"
           >
             {/* View toggle */}
-            <div className="flex rounded-xl overflow-hidden border border-white/[.06]" style={{ background: '#0B0E15' }}>
+            <div className="flex rounded-xl overflow-hidden border border-white/[.06]" style={{ background: '#F7F5F0' }}>
               {[['featured', 'Featured'], ['grid', 'All Products']].map(([mode, label]) => (
                 <button
                   key={mode}
@@ -356,8 +356,8 @@ export default function Services({ initialData }) {
                     fontSize: '.56rem',
                     letterSpacing: '.2em',
                     textTransform: 'uppercase',
-                    background: viewMode === mode ? '#E3510F' : 'transparent',
-                    color: viewMode === mode ? '#fff' : '#3D4A5C',
+                    background: viewMode === mode ? '#B88746' : 'transparent',
+                    color: viewMode === mode ? '#fff' : '#6B7A8E',
                   }}
                 >
                   {label}
@@ -384,13 +384,13 @@ export default function Services({ initialData }) {
               className="px-5 py-2 rounded-full text-[.6rem] font-medium uppercase tracking-widest transition-all duration-300"
               style={{
                 fontFamily: 'var(--font-mono)',
-                background: activeCat === cat ? '#E3510F' : 'rgba(255,255,255,.03)',
+                background: activeCat === cat ? '#B88746' : 'rgba(255,255,255,.03)',
                 color: activeCat === cat ? '#fff' : '#B8C2CF',
                 border: activeCat === cat
-                  ? '1px solid #E3510F'
+                  ? '1px solid #B88746'
                   : '1px solid rgba(255,255,255,.055)',
                 boxShadow: activeCat === cat
-                  ? '0 8px 24px rgba(227,81,15,.2)'
+                  ? '0 8px 24px rgba(184,135,70,.2)'
                   : 'none',
               }}
             >
@@ -434,14 +434,14 @@ export default function Services({ initialData }) {
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ delay: .2, duration: .7, ease }}
           className="relative rounded-2xl overflow-hidden border border-white/[.05] flex flex-col md:flex-row items-start md:items-center justify-between gap-8 px-10 py-10"
-          style={{ background: 'linear-gradient(135deg,#0B0E15 0%,#0F1420 100%)' }}
+          style={{ background: 'linear-gradient(135deg,#0B1F3A 0%,#0F2847 100%)' }}
         >
           <div className="absolute top-0 left-0 right-0 h-[1.5px]"
-            style={{ background: 'linear-gradient(90deg,transparent,rgba(227,81,15,.5),transparent)' }} />
+            style={{ background: 'linear-gradient(90deg,transparent,rgba(184,135,70,.5),transparent)' }} />
           <div className="absolute inset-0 bg-grid-fine opacity-20 pointer-events-none" />
           <div>
-            <p className="text-[#EDF0F5] font-semibold text-[1.05rem] mb-1">Need a custom engineering solution?</p>
-            <p className="text-[#3D4A5C] text-[.82rem]">Our engineering team designs and manufactures to your exact specifications.</p>
+            <p className="text-white font-semibold text-[1.05rem] mb-1">Need a custom engineering solution?</p>
+            <p className="text-[#6B7A8E] text-[.82rem]">Our engineering team designs and manufactures to your exact specifications.</p>
           </div>
           <Link href="/contact" className="btn-flame flex-shrink-0 group py-3.5 px-9 text-[.62rem] inline-flex items-center gap-2.5">
             <span>Discuss Your Project</span>

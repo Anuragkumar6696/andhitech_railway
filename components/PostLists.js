@@ -12,7 +12,7 @@ export default function PostLists({ posts }) {
         {posts.length > 0 && (
           <div className="mb-14">
             <span className="eyebrow mb-5 block">Insights & News</span>
-            <h2 className="display-md max-w-xl">Latest from <span style={{color:'#E3510F'}}>Our Blog</span></h2>
+            <h2 className="display-md max-w-xl">Latest from <span style={{color:'#B88746'}}>Our Blog</span></h2>
           </div>
         )}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -25,7 +25,7 @@ export default function PostLists({ posts }) {
                   className="object-cover opacity-70 group-hover:opacity-90 group-hover:scale-[1.06] transition-all duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#07080C]/60 to-transparent" />
                 <div className="absolute top-4 left-4">
-                  <span className="bg-[#E3510F] text-white text-[9px] font-medium uppercase tracking-widest px-3 py-1" style={{fontFamily:'var(--font-mono)',clipPath:'polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px))'}}>
+                  <span className="bg-[#B88746] text-white text-[9px] font-medium uppercase tracking-widest px-3 py-1" style={{fontFamily:'var(--font-mono)',clipPath:'polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px))'}}>
                     {post.category?.name || 'Industry'}
                   </span>
                 </div>
@@ -33,20 +33,20 @@ export default function PostLists({ posts }) {
               <div className="p-7 flex flex-col flex-grow">
                 <div className="flex gap-4 mb-4">
                   <span className="flex items-center gap-1.5 text-[#4A5568] text-[10px] uppercase tracking-wider" style={{fontFamily:'var(--font-mono)'}}>
-                    <Calendar size={11} className="text-[#E3510F]" />{post.date_published||'—'}
+                    <Calendar size={11} className="text-[#B88746]" />{post.date_published||'—'}
                   </span>
                   <span className="flex items-center gap-1.5 text-[#4A5568] text-[10px] uppercase tracking-wider" style={{fontFamily:'var(--font-mono)'}}>
-                    <User size={11} className="text-[#E3510F]" />{post.author||'Admin'}
+                    <User size={11} className="text-[#B88746]" />{post.author||'Admin'}
                   </span>
                 </div>
-                <h3 className="text-[#F0F2F5] font-semibold text-base mb-4 group-hover:text-[#E3510F] transition-colors line-clamp-2 leading-snug">
+                <h3 className="text-[#F0F2F5] font-semibold text-base mb-4 group-hover:text-[#B88746] transition-colors line-clamp-2 leading-snug">
                   <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                 </h3>
                 <p className="text-[#5A6478] text-sm leading-relaxed mb-6 line-clamp-3 flex-grow">
                   {post.excerpt||'Discover the latest insights and trends in industrial engineering.'}
                 </p>
                 <Link href={`/blog/${post.slug}`}
-                  className="flex items-center gap-2 text-[#9BA5B4] hover:text-[#E3510F] transition-colors text-[10px] uppercase tracking-wider font-medium pt-5 border-t border-white/5 group/link"
+                  className="flex items-center gap-2 text-[#9BA5B4] hover:text-[#B88746] transition-colors text-[10px] uppercase tracking-wider font-medium pt-5 border-t border-white/5 group/link"
                   style={{fontFamily:'var(--font-mono)'}}>
                   <span>Read Article</span>
                   <ArrowRight size={12} className="group-hover/link:translate-x-1 transition-transform" />

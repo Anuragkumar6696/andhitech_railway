@@ -17,10 +17,10 @@ export default function OurFeatures() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-end mb-20">
           <motion.div initial={{ opacity:0, x:-20 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} className="mb-14">
             <span className="eyebrow mb-5 block">Our Key Strengths</span>
-            <h2 className="display-md">Core Strengths in <span style={{color:'#E3510F'}}>Industrial Innovation</span></h2>
+            <h2 className="display-md">Core Strengths in <span style={{color:'#B88746'}}>Industrial Innovation</span></h2>
           </motion.div>
           <motion.p initial={{ opacity:0, x:20 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ delay:0.2 }}
-            className="text-[#9BA5B4] leading-relaxed border-l-2 border-[#E3510F]/40 pl-6 italic text-sm">
+            className="text-[#9BA5B4] leading-relaxed border-l-2 border-[#B88746]/40 pl-6 italic text-sm">
             &ldquo;At AHIL, our strength lies in combining precision engineering, ethical practices, and customer-focused manufacturing to deliver products that meet the highest standards.&rdquo;
           </motion.p>
         </div>
@@ -29,13 +29,13 @@ export default function OurFeatures() {
             {features.map(({ Icon, title, desc }, i) => (
               <motion.div key={i} initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:i*0.1 }}
                 className="bento-cell p-9 group">
-                <div className="w-12 h-12 rounded-xl bg-[#E3510F]/10 flex items-center justify-center mb-6 group-hover:bg-[#E3510F] transition-colors duration-400">
-                  <Icon size={22} className="text-[#E3510F] group-hover:text-white transition-colors" />
+                <div className="w-12 h-12 rounded-xl bg-[#B88746]/10 flex items-center justify-center mb-6 group-hover:bg-[#B88746] transition-colors duration-400">
+                  <Icon size={22} className="text-[#B88746] group-hover:text-white transition-colors" />
                 </div>
                 <h3
-                  className="text-[#E3510F] mb-2.5 group-hover:text-[#F2F4F7] transition-colors duration-300"
+                  className="text-[#B88746] mb-2.5 group-hover:text-[#F2F4F7] transition-colors duration-300"
                   style={{
-                    fontFamily: 'DM Sans, sans-serif',
+                    fontFamily: 'Inter, sans-serif',
                     fontWeight: 700,
                     fontSize: '15px',
                     lineHeight: '1.5',
@@ -46,10 +46,10 @@ export default function OurFeatures() {
               </motion.div>
             ))}
             <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:0.3 }}
-              className="p-9 flex flex-col justify-center" style={{background:'#E3510F',borderRadius:'16px'}}>
+              className="p-9 flex flex-col justify-center" style={{background:'#B88746',borderRadius:'16px'}}>
               <Zap size={40} className="text-white mb-5" />
               <h3 className="text-white font-bold mb-3" style={{
-                    fontFamily: 'DM Sans, sans-serif',
+                    fontFamily: 'Inter, sans-serif',
                     fontWeight: 700,
                     fontSize: '15px',
                     lineHeight: '1.5',
@@ -57,7 +57,7 @@ export default function OurFeatures() {
                   }}>Ready for Innovation?</h3>
               <p className="text-white/70 text-sm">Let&apos;s discuss how our precision manufacturing can elevate your next project.</p>
               <div className="mt-5 h-px w-16 bg-white/25 rounded-full" />
-              <a href="/contact" className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 border-2 border-white text-white text-sm font-semibold rounded-lg hover:bg-white hover:text-[#E3510F] transition-all duration-300" style={{fontFamily:'DM Sans, sans-serif',width:'fit-content'}}>
+              <a href="/contact" className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 border-2 border-white text-white text-sm font-semibold rounded-lg hover:bg-white hover:text-[#B88746] transition-all duration-300" style={{fontFamily:'Inter, sans-serif',width:'fit-content'}}>
                 Talk to us
               </a>
             </motion.div>

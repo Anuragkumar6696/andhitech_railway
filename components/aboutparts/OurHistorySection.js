@@ -13,16 +13,16 @@ export default function HistoryTabs() {
             className="space-y-8">
             <div>
               <span className="eyebrow mb-7 block">Who We Are</span>
-              <h2 className="display-md mb-8">Welcome to <span style={{color:'#E3510F'}}>AND HITECH</span> INDUSTRIES LTD</h2>
+              <h2 className="display-md mb-8">Welcome to <span style={{color:'#B88746'}}>AND HITECH</span> INDUSTRIES LTD</h2>
               <p className="text-[#9BA5B4] text-base leading-relaxed">
                 Established in 2013, AND HITECH INDUSTRIES LTD (AHIL) has emerged as a trusted name in precision manufacturing. We specialize in high-quality components for Railway Rolling Stock and advanced HVAC systems for Railways and Metros.
               </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {['Precision Engineering Excellence','Tailored Industrial Solutions','Quality & Compliance','Sustainable Practices'].map((item, i) => (
-                <div key={i} className="flex items-center gap-3 py-3 px-4 rounded-lg bg-white/[0.03] border border-white/5 hover:border-[#E3510F]/20 transition-colors group cursor-default">
-                  <div className="w-5 h-5 rounded-full bg-[#E3510F]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#E3510F] transition-colors">
-                    <CheckCircle2 size={11} className="text-[#E3510F] group-hover:text-white transition-colors" />
+                <div key={i} className="flex items-center gap-3 py-3 px-4 rounded-lg bg-white/[0.03] border border-white/5 hover:border-[#B88746]/20 transition-colors group cursor-default">
+                  <div className="w-5 h-5 rounded-full bg-[#B88746]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#B88746] transition-colors">
+                    <CheckCircle2 size={11} className="text-[#B88746] group-hover:text-white transition-colors" />
                   </div>
                   <span className="text-[#9BA5B4] text-sm font-medium">{item}</span>
                 </div>
@@ -36,7 +36,7 @@ export default function HistoryTabs() {
                 className="w-full h-auto object-cover opacity-75 hover:opacity-90 transition-opacity duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#07080C]/50 to-transparent" />
             </div>
-            <div className="absolute -bottom-5 -right-5 w-28 h-28 bg-[#E3510F] opacity-10 rounded-full blur-3xl -z-0" />
+            <div className="absolute -bottom-5 -right-5 w-28 h-28 bg-[#B88746] opacity-10 rounded-full blur-3xl -z-0" />
           </motion.div>
         </div>
       </div>

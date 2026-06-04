@@ -6,7 +6,6 @@ function AnimCounter({ end, suffix = '', duration = 2200 }) {
   const [val, setVal]   = useState(0);
   const ref             = useRef(null);
   const started         = useRef(false);
-
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting && !started.current) {
@@ -26,39 +25,14 @@ function AnimCounter({ end, suffix = '', duration = 2200 }) {
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, [end, duration]);
-
   return <span ref={ref}>{val}{suffix}</span>;
 }
 
 const stats = [
-  {
-    n: '500', sfx: '+',
-    label: 'Satisfied Clients',
-    sub: 'Railway, Metro & Industrial',
-    desc: 'From Indian Railways to Metro networks, our clients trust us for critical components.',
-    glyph: '——',
-  },
-  {
-    n: '250', sfx: '+',
-    label: 'Projects Delivered',
-    sub: 'On time, every time',
-    desc: 'Every project completed to specification and delivered with zero compromise on quality.',
-    glyph: '——',
-  },
-  {
-    n: '10', sfx: '+',
-    label: 'Years of Excellence',
-    sub: 'Founded in 2013',
-    desc: 'Over a decade of continuous growth, innovation, and trusted engineering partnerships.',
-    glyph: '——',
-  },
-  {
-    n: '100', sfx: '+',
-    label: 'Skilled Engineers',
-    sub: 'In-house expert team',
-    desc: 'A dedicated team of engineers, machinists, and quality specialists under one roof.',
-    glyph: '——',
-  },
+  { n: '500', sfx: '+', label: 'Components Delivered', sub: 'Railway & Metro Applications', desc: 'Precision-engineered components supplied to Indian Railways, Metro networks, and rail infrastructure projects nationwide.' },
+  { n: '10',  sfx: '+', label: 'Years of Excellence', sub: 'Founded 2013', desc: 'Over a decade of continuous growth, engineering innovation, and trusted manufacturing partnerships across India.' },
+  { n: '100', sfx: '+', label: 'Skilled Engineers', sub: 'In-house expertise', desc: 'A dedicated team of engineers, machinists, and quality specialists operating under one roof with advanced machinery.' },
+  { n: '25',  sfx: '+', label: 'Product Variants', sub: 'Across all categories', desc: 'From HVAC systems to brake components, suspension systems to rolling stock parts — comprehensive railway solutions.' },
 ];
 
 const ease = [.22, 1, .36, 1];
@@ -66,116 +40,67 @@ const ease = [.22, 1, .36, 1];
 export default function Statistics() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const y    = useTransform(scrollYProgress, [0, 1], [0, -40]);
-  const opBg = useTransform(scrollYProgress, [0, .3, .7, 1], [0, 1, 1, 0]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, -30]);
 
   return (
-    <section ref={ref} className="relative overflow-hidden" style={{ background: '#0B0E15' }}>
-      {/* Atmospheric grid */}
-      <div className="absolute inset-0 bg-grid-fine opacity-45 pointer-events-none"/>
+    <section ref={ref} className="relative overflow-hidden" style={{ background: '#0B1F3A' }}>
+      {/* Subtle grid */}
+      <div className="absolute inset-0 bg-grid opacity-30 pointer-events-none" />
+      {/* Copper radial glow */}
+      <div className="absolute inset-0 pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse 1000px 600px at 50% 50%,rgba(184,135,70,.06),transparent 70%)' }} />
 
-      {/* Scrolling radial glow */}
-      <motion.div style={{ y, opacity: opBg }} className="absolute inset-0 pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse 1200px 700px at 50% 50%,rgba(227,81,15,.07),transparent 68%)', y }}/>
+      <div className="max-w-screen-xl mx-auto px-6 md:px-10 py-20 relative z-10">
 
-      {/* Flame top stripe */}
-      <div className="absolute inset-x-0 top-0 h-[1.5px] pointer-events-none"
-        style={{ background: 'linear-gradient(90deg,transparent,rgba(227,81,15,.35),transparent)' }}/>
-      <div className="absolute inset-x-0 bottom-0 h-px divider pointer-events-none"/>
-
-      {/* ── MAIN CONTENT ── */}
-      <div className="max-w-screen-xl mx-auto px-6 md:px-10 py-28 relative z-10">
-
-        {/* Section label */}
+        {/* Header */}
         <motion.div
-          initial={{ opacity:0, y:18 }} whileInView={{ opacity:1, y:0 }}
-          viewport={{ once:true }} transition={{ duration:.7, ease }}
-          className="flex items-center gap-5 mb-16"
+          initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: .8, ease }}
+          className="text-center mb-16"
         >
-          <span className="eyebrow">Performance Metrics</span>
-          <div className="flex-1 h-px" style={{ background:'linear-gradient(90deg,rgba(227,81,15,.2),transparent)' }}/>
-          <span style={{ fontFamily:'var(--font-mono)', fontSize:'.5rem', letterSpacing:'.3em', textTransform:'uppercase', color:'#1C2540' }}>
-            As of 2024
-          </span>
+          <div className="label mb-4 inline-block">Our Track Record</div>
+          <h2 className="display-lg max-w-2xl mx-auto">
+            Built on Decades of<br />
+            <span style={{ color: '#B88746' }}>Railway Engineering</span>
+          </h2>
         </motion.div>
 
-        {/* Stats — large format row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-x divide-white/[.04] border border-white/[.04] rounded-2xl overflow-hidden mb-8">
+        {/* Stats grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/[.05] rounded-xl overflow-hidden">
           {stats.map(({ n, sfx, label, sub, desc }, i) => (
             <motion.div
-              key={i}
-              initial={{ opacity:0, y:32 }} whileInView={{ opacity:1, y:0 }}
-              viewport={{ once:true }} transition={{ delay: i * .1, duration:.8, ease }}
-              className="relative px-8 md:px-10 py-14 flex flex-col group cursor-default overflow-hidden"
-              style={{ background: '#0B0E15' }}
+              key={label}
+              initial={{ opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: .75, ease, delay: i * .1 }}
+              className="bg-[#0B1F3A] p-8 xl:p-10 group hover:bg-[#0F2847] transition-colors duration-500 relative overflow-hidden"
             >
-              {/* Hover fill */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-600"
-                style={{ background:'linear-gradient(135deg,rgba(227,81,15,.055) 0%,transparent 65%)' }}/>
-              {/* Top sweep on hover */}
-              <div className="absolute top-0 left-0 right-0 h-[2px] overflow-hidden">
-                <div className="h-full w-full -translate-x-full group-hover:translate-x-0 transition-transform duration-600"
-                  style={{ background:'linear-gradient(90deg,#E3510F,#FF6835)' }}/>
-              </div>
+              {/* Copper accent top */}
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-[#B88746]/0 group-hover:bg-[#B88746]/40 transition-all duration-500" />
 
-              {/* Index mark */}
-              <div className="flex items-center justify-between mb-8 relative z-10">
-                <span style={{ fontFamily:'var(--font-mono)', fontSize:'.5rem', letterSpacing:'.3em', color:'#1C2540', textTransform:'uppercase' }}>
-                  {`0${i+1}`}
-                </span>
-                <div className="w-1.5 h-1.5 rounded-full bg-[#1C2540] group-hover:bg-[#E3510F] transition-colors duration-400"/>
+              <div className="metric text-[#F7F5F0] mb-1">
+                <AnimCounter end={parseInt(n)} suffix={sfx} />
               </div>
-
-              {/* Big number */}
-              <div
-                className="relative z-10 transition-colors duration-400 mb-2"
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(4rem,7vw,6rem)',
-                  lineHeight: 1,
-                  letterSpacing: '.01em',
-                  color: '#EDF0F5',
-                }}
-              >
-                <AnimCounter end={n} suffix={sfx} duration={1800 + i * 150}/>
-              </div>
-
-              <div className="text-[.65rem] uppercase tracking-[.24em] text-[#E3510F] font-medium mb-3 relative z-10"
-                style={{ fontFamily:'var(--font-mono)' }}>
-                {label}
-              </div>
-              <div className="text-[#B8C2D0] text-[.75rem] font-bold mb-6 relative z-10 hidden md:block">{sub}</div>
-
-              {/* Description — revealed on hover */}
-              <div className="mt-auto text-[#D6DDE8] text-[.85rem] font-bold leading-relaxed relative z-10 opacity-0 group-hover:opacity-100 max-h-0 group-hover:max-h-24 transition-all duration-500 overflow-hidden hidden lg:block font-light">
-                {desc}
-              </div>
-
-              {/* Bottom accent */}
-              <div className="mt-5 h-px w-0 group-hover:w-16 bg-gradient-to-r from-[#E3510F] to-[#FF6835] transition-all duration-600 rounded-full relative z-10"/>
+              <div className="text-[#B88746] text-sm font-semibold mb-1">{label}</div>
+              <div className="text-white/40 text-[.7rem] uppercase tracking-wider mb-4" style={{ fontFamily: 'Barlow Condensed, sans-serif', letterSpacing: '.1em' }}>{sub}</div>
+              <p className="text-white/35 text-[.8rem] leading-relaxed hidden group-hover:block transition-all">{desc}</p>
             </motion.div>
           ))}
         </div>
 
-        {/* Trust certification band */}
+        {/* Bottom trust strip */}
         <motion.div
-          initial={{ opacity:0, y:18 }} whileInView={{ opacity:1, y:0 }}
-          viewport={{ once:true }} transition={{ delay:.45, duration:.7, ease }}
-          className="flex flex-col sm:flex-row items-center justify-between gap-5 px-8 py-5 rounded-2xl border border-white/[.04]"
-          style={{ background: '#080A0F' }}
+          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
+          viewport={{ once: true }} transition={{ duration: .8, delay: .4 }}
+          className="mt-12 pt-8 border-t border-white/[.06] flex flex-wrap items-center justify-center gap-8 text-white/30 text-[.72rem] uppercase tracking-widest"
+          style={{ fontFamily: 'Barlow Condensed, sans-serif' }}
         >
-          <div className="flex items-center gap-4">
-            <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0"/>
-            <span className="text-[#4E5A6E] text-[.85rem] font-light">
-              All metrics verified through third-party audits and RDSO certification processes
+          {['Indian Railways Vendor', 'Metro Rail Projects', 'Vande Bharat Ecosystem', 'RDSO Approved', 'ISO 9001:2015', 'Make in India'].map(t => (
+            <span key={t} className="flex items-center gap-2">
+              <span className="w-1 h-1 rounded-full bg-[#B88746]/50" />{t}
             </span>
-          </div>
-          <div className="flex items-center gap-6 flex-shrink-0 flex-wrap"
-            style={{ fontFamily:'var(--font-mono)', fontSize:'.56rem', letterSpacing:'.2em' }}>
-            {['ISO 9001','ISO 14001','RDSO','Make in India'].map((c, i) => (
-              <span key={i} className="text-[#1C2540] uppercase hover:text-[#3D4A5C] transition-colors cursor-default">{c}</span>
-            ))}
-          </div>
+          ))}
         </motion.div>
       </div>
     </section>
