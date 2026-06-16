@@ -2,7 +2,7 @@
 import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
-import { ArrowRight, ChevronDown } from 'lucide-react';
+import { ArrowRight, ChevronDown, ShieldCheck, Award, MapPin } from 'lucide-react';
 import { getAbsoluteURL } from '@/utils/url';
 
 const ease = [.22, 1, .36, 1];
@@ -59,14 +59,10 @@ function TrainSVG({ isMoving }) {
           <feComposite in="SourceGraphic" in2="blur" operator="over" />
         </filter>
       </defs>
-
-      {/* Roof equipment */}
       <rect x="130" y="7" width="935" height="10" fill="#1A2235" rx="3" />
       <rect x="285" y="3" width="72" height="9" fill="#0F1420" rx="3" />
       <rect x="545" y="3" width="72" height="9" fill="#0F1420" rx="3" />
       <rect x="805" y="3" width="72" height="9" fill="#0F1420" rx="3" />
-
-      {/* Pantograph */}
       <g stroke="#8C98AA" strokeLinecap="round" fill="none">
         <line x1="405" y1="7" x2="378" y2="-16" strokeWidth="1.8" />
         <line x1="405" y1="7" x2="432" y2="-16" strokeWidth="1.8" />
@@ -75,46 +71,27 @@ function TrainSVG({ isMoving }) {
         <line x1="425" y1="-16" x2="428" y2="-25" strokeWidth="1.4" />
         <line x1="382" y1="-25" x2="428" y2="-25" strokeWidth="2.2" />
       </g>
-
-      {/* Locomotive nose */}
       <path d="M 148,18 L 90,18 C 64,18 40,28 22,52 C 11,65 10,77 15,84 C 20,91 34,94 56,94 L 148,94 Z" fill="url(#tBodyG)" />
       <path d="M 142,24 L 84,24 C 60,24 42,34 26,54 L 32,54 C 46,38 62,30 82,30 L 142,28 Z" fill="url(#tCabG)" />
       <path d="M 142,52 L 32,52 L 34,59 L 142,59 Z" fill="rgba(0,0,0,.42)" />
-
-      {/* Body */}
       <rect x="148" y="18" width="912" height="76" fill="url(#tBodyG)" />
-
-      {/* Tail */}
       <path d="M 1060,18 L 1145,18 C 1175,18 1188,30 1190,54 C 1192,70 1180,84 1163,90 C 1152,93 1140,94 1124,94 L 1060,94 Z" fill="url(#tBodyG)" />
-      <path d="M 1163,90 C 1152,93 1140,94 1124,94" stroke="#E3510F" strokeWidth="4.5" fill="none" strokeLinecap="round" opacity="0.6" />
-      <circle cx="1180" cy="73" r="5.5" fill="#E3510F" opacity="0.6" filter="url(#tGlow)" />
-      <circle cx="1180" cy="73" r="10" fill="none" stroke="#E3510F" strokeWidth="1" opacity="0.2" />
-
-      {/* Orange stripe */}
       <rect x="28" y="62" width="1155" height="15" fill="url(#tStripeG)" />
       <path d="M 28,62 L 22,64 L 22,77 L 28,77 Z" fill="url(#tStripeG)" />
       <rect x="28" y="62" width="1155" height="2" fill="rgba(255,255,255,.16)" />
-
-      {/* Windows */}
       {[155, 212, 264, 316, 368, 420].map(x => (
         <rect key={x} x={x} y="24" width="44" height="32" rx="3" fill="url(#tWinG)" stroke="rgba(255,255,255,.1)" strokeWidth="0.5" />
       ))}
       <rect x="475" y="18" width="5" height="76" fill="#06080E" rx="1" />
-      <rect x="462" y="90" width="32" height="6" fill="#1C2538" rx="2" />
       {[492, 544, 596, 648, 700].map(x => (
         <rect key={x} x={x} y="24" width="44" height="32" rx="3" fill="url(#tWinG)" stroke="rgba(255,255,255,.1)" strokeWidth="0.5" />
       ))}
       <rect x="756" y="18" width="5" height="76" fill="#06080E" rx="1" />
-      <rect x="743" y="90" width="32" height="6" fill="#1C2538" rx="2" />
       {[774, 826, 878, 930, 982, 1034].map(x => (
         <rect key={x} x={x} y="24" width="42" height="32" rx="3" fill="url(#tWinG)" stroke="rgba(255,255,255,.1)" strokeWidth="0.5" />
       ))}
-
-      {/* Underframe */}
       <rect x="28" y="94" width="1155" height="9" fill="#1C2538" rx="2" />
       <rect x="148" y="92" width="910" height="11" fill="#0F1420" />
-
-      {/* Bogies */}
       {[222, 472, 757, 1022].map(cx => (
         <g key={cx} transform={`translate(${cx},103)`}>
           <rect x="-54" y="0" width="108" height="9" fill="#2E3A4E" rx="2" />
@@ -136,20 +113,15 @@ function TrainSVG({ isMoving }) {
           <line x1="-16" y1="23" x2="16" y2="23" stroke="#3D4A5C" strokeWidth="2.2" />
         </g>
       ))}
-
-      {/* Headlights */}
       <circle cx="15" cy="44" r="9" fill="url(#tHeadG)" filter="url(#tGlow)" />
       <circle cx="15" cy="44" r="5.5" fill="#FFFCE0" />
       <circle cx="15" cy="44" r="11" fill="none" stroke="rgba(255,210,80,.28)" strokeWidth="2.5" />
       <circle cx="18" cy="73" r="4.5" fill="#E3510F" opacity="0.75" filter="url(#tGlow)" />
-
-      {/* Sheen */}
       <rect x="28" y="19" width="1158" height="12" fill="rgba(255,255,255,.036)" rx="2" />
     </svg>
   );
 }
 
-/* ─── TRACK ── */
 function TrackSVG() {
   return (
     <svg style={{ position: 'absolute', bottom: 0, left: '-20%', width: '140%', height: '48px' }}
@@ -175,7 +147,13 @@ function TrackSVG() {
   );
 }
 
-/* ─── HERO ── */
+/* ─── TRUST BADGES ──────────────────────────────────────── */
+const TRUST_BADGES = [
+  { Icon: ShieldCheck, label: 'ISO 9001:2015', sub: 'Quality Certified' },
+  { Icon: Award, label: 'RDSO Approved', sub: 'Govt. of India' },
+  { Icon: MapPin, label: 'New Delhi, India', sub: 'Pan-India Operations' },
+];
+
 export default function Hero({ initialData }) {
   const [banner, setBanner] = useState(initialData || null);
   const [ready, setReady] = useState(false);
@@ -184,16 +162,11 @@ export default function Hero({ initialData }) {
   const vidRef = useRef(null);
   const videoRef = useRef(null);
   const trainRef = useRef(null);
-  const scrollRef = useRef(null);
 
   const scrollToContent = () => {
-    window.scrollTo({
-      top: window.innerHeight,
-      behavior: 'smooth'
-    });
+    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
   };
 
-  /* Video section parallax */
   const { scrollYProgress: videoProgress } = useScroll({
     target: videoRef,
     offset: ['start start', 'end start'],
@@ -203,7 +176,6 @@ export default function Hero({ initialData }) {
   const yBg = useTransform(videoProgress, [0, 1], ['0%', '30%']);
   const scale = useTransform(videoProgress, [0, 1], [1, 1.1]);
 
-  /* Train scroll section */
   const { scrollYProgress: trainProgress } = useScroll({
     target: trainRef,
     offset: ['start start', 'end end'],
@@ -219,7 +191,7 @@ export default function Hero({ initialData }) {
 
   useEffect(() => {
     const v = vidRef.current;
-    if (v) { v.load(); v.play().catch(() => { }); }
+    if (v) { v.load(); v.play().catch(() => {}); }
     const t = setTimeout(() => setReady(true), 1600);
     return () => clearTimeout(t);
   }, [banner]);
@@ -229,7 +201,7 @@ export default function Hero({ initialData }) {
     fetch('/api/proxy/home-banner')
       .then(r => r.json())
       .then(d => { if (d.results?.[0]) setBanner(d.results[0]); })
-      .catch(() => { });
+      .catch(() => {});
   }, []);
 
   const headline = banner?.title || 'ENGINEERING<br/>MOTION FOR<br/><em>MODERN RAILWAYS</em>';
@@ -237,7 +209,6 @@ export default function Hero({ initialData }) {
   const btnText = banner?.button_text || 'Explore Solutions';
   let btnLink = banner?.button_link || '/products';
 
-  // Force relative contact link for "Explore Now" button or any contact-related link
   if (banner?.button_text?.trim().toLowerCase() === 'explore now' || btnLink.includes('contact')) {
     btnLink = '/contact';
   }
@@ -267,46 +238,15 @@ export default function Hero({ initialData }) {
               type="video/mp4"
             />
           </video>
-          {/* Multi-layer gradients */}
-          {/* Multi-layer gradients */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                'linear-gradient(110deg,#030405 10%,rgba(3,4,5,.75) 50%,rgba(3,4,5,.25) 100%)'
-            }}
-          />
-
-          <div
-            className="absolute inset-0"
-            style={{  
-              background:
-                'linear-gradient(to top,#030405 0%,transparent 70%,rgba(3,4,5,.35) 100%)'
-            }}
-          />
-
-          {/* Vignette */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                'radial-gradient(ellipse at center,transparent 30%,rgba(3,4,5,.6) 100%)'
-            }}
-          />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(110deg,#030405 10%,rgba(3,4,5,.75) 50%,rgba(3,4,5,.25) 100%)' }} />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to top,#030405 0%,transparent 70%,rgba(3,4,5,.35) 100%)' }} />
+          <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at center,transparent 30%,rgba(3,4,5,.6) 100%)' }} />
         </motion.div>
 
-        {/* Engineering grid */}
         <div className="absolute inset-0 z-[1] bg-grid pointer-events-none opacity-50" />
-
-        {/* Vertical accent rules */}
-        <div className="absolute inset-y-0 w-px z-[2] hidden xl:block"
-          style={{ left: '63%', background: 'linear-gradient(to bottom,transparent,rgba(255,255,255,.05),transparent)' }} />
-        <div className="absolute inset-y-0 w-px z-[2] hidden xl:block"
-          style={{ left: '77%', background: 'linear-gradient(to bottom,transparent,rgba(227,81,15,.12),transparent)' }} />
-
-        {/* Atmospheric glow */}
-        <div className="absolute bottom-0 left-0 z-[1] w-[65vw] h-[55vh] pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at bottom left,rgba(227,81,15,.1) 0%,transparent 65%)' }} />
+        <div className="absolute inset-y-0 w-px z-[2] hidden xl:block" style={{ left: '63%', background: 'linear-gradient(to bottom,transparent,rgba(255,255,255,.05),transparent)' }} />
+        <div className="absolute inset-y-0 w-px z-[2] hidden xl:block" style={{ left: '77%', background: 'linear-gradient(to bottom,transparent,rgba(227,81,15,.12),transparent)' }} />
+        <div className="absolute bottom-0 left-0 z-[1] w-[65vw] h-[55vh] pointer-events-none" style={{ background: 'radial-gradient(ellipse at bottom left,rgba(227,81,15,.1) 0%,transparent 65%)' }} />
 
         {/* Main content */}
         <motion.div
@@ -318,6 +258,21 @@ export default function Hero({ initialData }) {
             variants={{ hidden: {}, show: { transition: { staggerChildren: .12, delayChildren: .2 } } }}
             className="max-w-[960px]"
           >
+            {/* Trust badges row — above headline */}
+            <motion.div
+              variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: .6, ease } } }}
+              className="flex flex-wrap items-center gap-3 mb-8"
+            >
+              {TRUST_BADGES.map(({ Icon, label, sub }) => (
+                <div key={label} className="flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/[.08]"
+                  style={{ background: 'rgba(255,255,255,.04)' }}>
+                  <Icon size={11} className="text-[#E3510F]" />
+                  <span className="text-[#EDF0F5] text-[.62rem]" style={{ fontFamily: 'var(--font-mono)', letterSpacing: '.12em' }}>{label}</span>
+                  <span className="text-[#2E3848] text-[.58rem]" style={{ fontFamily: 'var(--font-mono)' }}>— {sub}</span>
+                </div>
+              ))}
+            </motion.div>
+
             <motion.div variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: .75, ease } } }}>
               <span className="eyebrow mb-8 block">Engineering the Future of Rail</span>
             </motion.div>
@@ -351,34 +306,39 @@ export default function Hero({ initialData }) {
               <Link href="/about-us" className="btn-wire group">
                 <span>Our Story</span>
               </Link>
+              <Link href="/infrastructure" className="btn-ghost group">
+                <span className="text-[#EDF0F5]">View Facilities</span>
+                <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform text-[#E3510F]" />
+              </Link>
             </motion.div>
           </motion.div>
 
-          {/* System status panel */}
-          {/* <motion.div
-            initial={{ opacity:0, x:40 }} animate={{ opacity:1, x:0 }}
-            transition={{ delay:1.4, duration:.9, ease }}
-            className="absolute right-10 bottom-36 hidden xl:block"
+          {/* System status panel — top right */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 1.4, duration: .9, ease }}
+            className="absolute right-10 top-36 hidden xl:block"
           >
-            <div className="glass p-7 w-[280px]" style={{ borderTopColor:'rgba(227,81,15,.3)', borderTopWidth:'1px' }}>
-              <p style={{ fontFamily:'var(--font-mono)', fontSize:'.52rem', letterSpacing:'.3em', textTransform:'uppercase', color:'#1C2540' }} className="mb-6">
-                AHIL · System Status
+            <div className="glass p-6 w-[260px]" style={{ borderTopColor: 'rgba(227,81,15,.3)', borderTopWidth: '1px' }}>
+              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '.48rem', letterSpacing: '.3em', textTransform: 'uppercase', color: '#1C2540' }} className="mb-5">
+                AHIL · Quality Status
               </p>
               {[
-                { l:'Quality Certified', v:'ISO 9001:2015' },
-                { l:'RDSO Approved',     v:'Active'        },
-                { l:'R&D Projects',      v:'Running'       },
+                { l: 'Quality Certified', v: 'ISO 9001:2015' },
+                { l: 'RDSO Approved', v: 'Active' },
+                { l: 'ISO 14001', v: 'Certified' },
+                { l: 'Delivery Record', v: '500+ Projects' },
               ].map(({ l, v }) => (
-                <div key={l} className="flex items-center justify-between mb-4">
-                  <span style={{ color:'#3D4A5C', fontSize:'.68rem', fontFamily:'var(--font-mono)' }}>{l}</span>
+                <div key={l} className="flex items-center justify-between mb-3.5">
+                  <span style={{ color: '#3D4A5C', fontSize: '.64rem', fontFamily: 'var(--font-mono)' }}>{l}</span>
                   <div className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"/>
-                    <span style={{ color:'#EDF0F5', fontSize:'.68rem', fontFamily:'var(--font-mono)' }}>{v}</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span style={{ color: '#EDF0F5', fontSize: '.64rem', fontFamily: 'var(--font-mono)' }}>{v}</span>
                   </div>
                 </div>
               ))}
             </div>
-          </motion.div> */}
+          </motion.div>
         </motion.div>
 
         {/* Bottom stats strip */}
@@ -386,11 +346,17 @@ export default function Hero({ initialData }) {
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.8, duration: 1.1 }}
           className="absolute bottom-0 inset-x-0 z-10 border-t border-white/[.04]"
         >
-          <div className="max-w-screen-xl mx-auto grid grid-cols-3 divide-x divide-white/[.04]">
-            {[['10+', 'Years of Innovation'], ['500+', 'Projects Delivered'], ['100%', 'Client Satisfaction']].map(([n, l], i) => (
-              <div key={i} className="px-10 py-6 hidden md:block text-center group cursor-default">
-                <div className="text-[2rem] font-bold text-[#EDF0F5] mb-0.5 group-hover:text-[#E3510F] transition-colors duration-400" style={{ fontFamily: 'var(--font-display)' }}>{n}</div>
-                <div className="text-[.6rem] text-[#A5AFBD] uppercase tracking-[.25em]" style={{ fontFamily: 'var(--font-mono)' }}>{l}</div>
+          <div className="max-w-screen-xl mx-auto grid grid-cols-4 divide-x divide-white/[.04]">
+            {[
+              ['10+', 'Years of Innovation', 'Est. 2013'],
+              ['500+', 'Projects Delivered', 'Pan-India'],
+              ['100%', 'RDSO Compliant', 'Certified'],
+              ['100+', 'Engineers', 'In-house'],
+            ].map(([n, l, sub], i) => (
+              <div key={i} className="px-8 py-5 hidden md:block text-center group cursor-default">
+                <div className="text-[1.8rem] font-bold text-[#EDF0F5] mb-0 group-hover:text-[#E3510F] transition-colors duration-400" style={{ fontFamily: 'var(--font-display)', lineHeight: 1 }}>{n}</div>
+                <div className="text-[.58rem] text-[#A5AFBD] uppercase tracking-[.22em] mt-1" style={{ fontFamily: 'var(--font-mono)' }}>{l}</div>
+                <div className="text-[.52rem] text-[#2E3848] uppercase tracking-[.18em] mt-0.5" style={{ fontFamily: 'var(--font-mono)' }}>{sub}</div>
               </div>
             ))}
           </div>
@@ -413,13 +379,9 @@ export default function Hero({ initialData }) {
       {/* ══════════════════════════════════════════════════════ */}
       <div ref={trainRef} style={{ height: '240vh', position: 'relative' }}>
         <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden', background: '#030405' }}>
-
-          {/* Backgrounds */}
           <div className="absolute inset-0 bg-grid opacity-30 pointer-events-none" />
           <div className="absolute inset-0 pointer-events-none"
             style={{ background: 'radial-gradient(ellipse 90vw 65vh at 50% 58%,rgba(227,81,15,.055),transparent 65%)' }} />
-
-          {/* Perspective floor grid */}
           <div className="absolute bottom-0 left-0 right-0 pointer-events-none" style={{
             height: '42%',
             backgroundImage: 'linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px)',
@@ -427,20 +389,10 @@ export default function Hero({ initialData }) {
             WebkitMaskImage: 'linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.7) 100%)',
             maskImage: 'linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.7) 100%)',
           }} />
-
-          {/* Vertical rules */}
-          <div className="absolute inset-y-0 w-px hidden xl:block pointer-events-none"
-            style={{ left: '16%', background: 'linear-gradient(to bottom,transparent,rgba(255,255,255,.03),transparent)' }} />
-          <div className="absolute inset-y-0 w-px hidden xl:block pointer-events-none"
-            style={{ left: '84%', background: 'linear-gradient(to bottom,transparent,rgba(255,255,255,.03),transparent)' }} />
-
-          {/* Section rules */}
           <div className="absolute inset-x-0 top-0 h-px"
             style={{ background: 'linear-gradient(90deg,transparent,rgba(227,81,15,.2),transparent)' }} />
-          <div className="absolute inset-x-0 bottom-0 h-px"
-            style={{ background: 'linear-gradient(90deg,transparent,rgba(255,255,255,.04),transparent)' }} />
 
-          {/* Light beam ahead of train */}
+          {/* Light beam */}
           <motion.div
             className="absolute pointer-events-none"
             style={{
@@ -474,7 +426,6 @@ export default function Hero({ initialData }) {
             >
               AND Hitech Industries · Since 2013
             </motion.p>
-
             <h2
               className="text-center px-6"
               style={{
@@ -488,14 +439,12 @@ export default function Hero({ initialData }) {
               BUILT TO LAST.<br />
               <span style={{ color: '#E3510F' }}>ENGINEERED</span> TO MOVE.
             </h2>
-
             <p
               className="mt-9 text-center max-w-[440px] px-6 leading-relaxed font-light"
               style={{ color: '#AAB4C3', fontSize: 'clamp(.82rem,1.4vw,1rem)' }}
             >
               Precision-manufactured railway components trusted by Indian Railways, Metro networks, and critical infrastructure across India.
             </p>
-
             <div className="mt-12 w-16 h-px" style={{ background: 'linear-gradient(90deg,rgba(227,81,15,.6),transparent)' }} />
           </motion.div>
 
@@ -511,14 +460,13 @@ export default function Hero({ initialData }) {
             <p style={{ fontFamily: 'var(--font-mono)', marginTop: 8, fontSize: '.42rem', letterSpacing: '.22em', textTransform: 'uppercase', color: '#1C2540' }}>New Delhi, India</p>
           </div>
 
-          {/* Keep scrolling */}
           <div className="absolute bottom-5 left-1/2 -translate-x-1/2 pointer-events-auto flex flex-col items-center gap-2 cursor-pointer group" onClick={scrollToContent}>
             <motion.div
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               className="flex flex-col items-center gap-1"
             >
-              <div style={{ width: '1px', height: '32px', background: 'linear-gradient(to bottom,rgba(227,81,15,.6),rgba(227,81,15,0))' }} className="group-hover:height-40 transition-all" />
+              <div style={{ width: '1px', height: '32px', background: 'linear-gradient(to bottom,rgba(227,81,15,.6),rgba(227,81,15,0))' }} />
               <ChevronDown size={14} className="text-[#E3510F]/60 group-hover:text-[#E3510F] transition-colors" />
             </motion.div>
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.44rem', letterSpacing: '.28em', textTransform: 'uppercase', color: '#1C2540' }} className="group-hover:text-[#E3510F]/60 transition-colors">Keep Scrolling</span>

@@ -1,6 +1,6 @@
 /*
  * AND HITECH — GLOBALS.CSS
- * Enhanced for premium industrial redesign v5
+ * Enterprise Redesign v6 — Railway Industry Grade
  */
 
 /* ── SWIPER OVERRIDES ────────────────────────────── */
@@ -198,58 +198,65 @@ html {
 
 /* ── CUSTOM SCROLLBAR (webkit) ──────────────────── */
 ::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: #030405; }
-::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, #E3510F, rgba(227,81,15,.3)); border-radius: 3px; }
+::-webkit-scrollbar-track { background: #050608; }
+::-webkit-scrollbar-thumb { background: #E3510F; border-radius: 2px; }
 
-/* ── ANIMATE ON SCROLL OVERRIDE ─────────────────── */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
-  }
+/* ── BADGE COMPONENT ────────────────────────────── */
+/* Already defined in tailwind.css, but ensure fallback */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: .56rem;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,.1);
+  color: #8C98AA;
+  background: rgba(255,255,255,.04);
 }
 
-/* ── STAT COUNTER TYPOGRAPHY ────────────────────── */
-.stat-number {
-  font-feature-settings: 'tnum', 'tabular-nums';
-  font-variant-numeric: tabular-nums;
+/* ── NAV MEGA-DROPDOWN OVERLAY ──────────────────── */
+.mega-dropdown-enter {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+.mega-dropdown-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity .22s ease, transform .22s cubic-bezier(.22,1,.36,1);
+}
+.mega-dropdown-exit {
+  opacity: 1;
+}
+.mega-dropdown-exit-active {
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity .16s ease;
 }
 
-/* ── HOVER LIGHT SWEEP UTILITY ───────────────────── */
-.hover-sweep {
-  position: relative;
-  overflow: hidden;
+/* ── PRODUCT CARD HOVER LIFT ────────────────────── */
+.product-card-lift {
+  transition: transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s ease;
 }
-.hover-sweep::before {
-  content: '';
-  position: absolute;
-  top: 0; left: -100%;
-  width: 50%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.04), transparent);
-  transition: left .5s ease;
-}
-.hover-sweep:hover::before { left: 150%; }
-
-/* ── PERFORMANCE: GPU COMPOSITING HINTS ──────────── */
-/* Promote animated elements to their own compositor layer */
-[data-reveal],
-.hover-sweep::before,
-.swiper-wrapper,
-.swiper-slide,
-.train-svg {
-  will-change: transform, opacity;
-  transform: translateZ(0);
-  backface-visibility: hidden;
+.product-card-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 28px 70px rgba(0,0,0,.6), 0 0 0 1px rgba(227,81,15,.12);
 }
 
-/* Contain layout thrashing on card grids */
-.product-card,
-.team-box,
-.cus-jobs .team-box {
-  contain: layout style;
-}
+/* ── SECTOR BADGE COLORS ─────────────────────────── */
+.sector-badge-lhb { color:#E3510F; border-color:rgba(227,81,15,.25); background:rgba(227,81,15,.08); }
+.sector-badge-vb  { color:#2563EB; border-color:rgba(37,99,235,.25);  background:rgba(37,99,235,.08);  }
+.sector-badge-metro { color:#7C3AED; border-color:rgba(124,58,237,.25); background:rgba(124,58,237,.08); }
+.sector-badge-brake { color:#DC2626; border-color:rgba(220,38,38,.25);  background:rgba(220,38,38,.08);  }
+.sector-badge-track { color:#D97706; border-color:rgba(217,119,6,.25);  background:rgba(217,119,6,.08);  }
 
-/* Use font-display: swap to avoid invisible text flash */
-@font-face {
-  font-display: swap;
+/* ── COMPLIANCE STRIP ───────────────────────────── */
+.compliance-strip {
+  background: linear-gradient(90deg, transparent, rgba(227,81,15,.04), transparent);
+  border-top: 1px solid rgba(227,81,15,.12);
+  border-bottom: 1px solid rgba(227,81,15,.08);
 }
