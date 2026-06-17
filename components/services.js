@@ -135,7 +135,7 @@ function ProductRow({ p, idx }) {
           background: '#0F2847',
         }}
       >
-        <motion.div style={{ y: imgY }} className="absolute inset-0" style={{ position: 'absolute', inset: 0, scale: 1.08 }}>
+        <motion.div style={{ y: imgY, position: 'absolute', inset: 0 }} className="absolute inset-0 scale-[1.08]">
           <Image
             src={imgSrc}
             alt={p.title}

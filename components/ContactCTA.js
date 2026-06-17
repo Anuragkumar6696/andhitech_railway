@@ -136,12 +136,6 @@ export default function ContactCTA() {
         </div>
       </div>
 
-      <style jsx global>{`
-        @keyframes pulse-anim {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50%       { opacity: .4; transform: scale(.75); }
-        }
-      `}</style>
     </section>
   );
 }
