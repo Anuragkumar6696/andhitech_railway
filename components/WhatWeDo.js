@@ -1,122 +1,177 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Cpu, ShieldCheck, Settings2, Wrench, ArrowRight, Layers, TrendingUp, Wind } from 'lucide-react';
-import { useRef } from 'react';
+import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
+
+/*
+ * WhatWeDo — Core Capabilities
+ * Layout: section header (2-col) + 4 image-led cards
+ * Replaces: text-heavy feature list + image mosaic
+ */
 
 const caps = [
-  { Icon: Wind,       title: 'HVAC & Climate Systems', desc: 'Roof-mounted package units (RMPU) and HVAC systems engineered for Vande Bharat, LHB coaches, and Metro rolling stock — meeting all RDSO specifications.' },
-  { Icon: ShieldCheck, title: 'Brake Components', desc: 'Axle-mounted and wheel-mounted brake discs, brake pads, and braking system components manufactured to exacting railway safety standards.' },
-  { Icon: Layers,     title: 'Suspension Systems', desc: 'Air springs and suspension components for smooth, safe ride quality across Indian Railways and Metro applications — designed for decades of service life.' },
-  { Icon: Wrench,     title: 'Precision Engineering', desc: 'CNC-machined rolling stock components, couplers, and specialized railway parts manufactured on DN Solutions machinery to sub-millimeter tolerances.' },
+  {
+    title: 'HVAC & Climate Systems',
+    desc: 'Roof-mounted package units for Vande Bharat, LHB coaches, and Metro — meeting all RDSO specifications.',
+    img: '/images/products/rmpu-25.jpg',
+    tag: 'LHB · Vande Bharat',
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B88746" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93 4.93 19.07"/>
+      </svg>
+    ),
+  },
+  {
+    title: 'Brake Components',
+    desc: 'Axle-mounted and wheel-mounted brake discs and pads certified to railway safety standards.',
+    img: '/images/products/axle-brake-v2/br-1.jpg',
+    tag: 'Indian Railways · Metro',
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B88746" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/>
+        <path d="m12 2 0 3M12 19l0 3M2 12l3 0M19 12l3 0"/>
+      </svg>
+    ),
+  },
+  {
+    title: 'Suspension Systems',
+    desc: 'Air springs and suspension components for smooth, safe ride quality across all rail applications.',
+    img: '/images/products/air-suspension-v2/as-1.jpg',
+    tag: 'All Rolling Stock',
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B88746" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M7 3h10l2 9H5L7 3z"/><path d="M12 12v9M9 21h6"/>
+      </svg>
+    ),
+  },
+  {
+    title: 'Precision Engineering',
+    desc: 'CNC-machined rolling stock components on DN Solutions machinery at sub-millimeter tolerances.',
+    img: '/images/production-unit-final.jpg',
+    tag: 'Custom Manufacturing',
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B88746" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+      </svg>
+    ),
+  },
 ];
 
 const ease = [.22, 1, .36, 1];
 
 export default function WhatWeDo() {
-  const sectionRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start end', 'end start'] });
-  const imgY = useTransform(scrollYProgress, [0, 1], [30, -30]);
-
   return (
-    <section ref={sectionRef} className="relative overflow-hidden" style={{ background: '#F7F5F0' }}>
-      <div className="absolute inset-0 bg-dots opacity-60 pointer-events-none" />
+    <section className="relative overflow-hidden" style={{ background: '#F7F5F0' }} aria-label="Core capabilities">
+      <div className="absolute inset-0 bg-dots opacity-50 pointer-events-none" />
       <div className="absolute inset-x-0 top-0 h-px divider-light pointer-events-none" />
 
       <div className="max-w-screen-xl mx-auto px-6 md:px-10 py-24 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 xl:gap-24 items-center">
 
-          {/* Left: content */}
+        {/* ── Section header ── */}
+        <div className="flex items-end justify-between gap-8 flex-wrap mb-14">
           <motion.div
-            initial={{ opacity: 0, x: -28 }} whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }} transition={{ duration: .9, ease }}
+            initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: .8, ease }}
           >
             <div className="label-dark mb-4">Core Capabilities</div>
-            <h2 className="display-lg-dark mb-4 leading-tight">
+            <h2 className="display-lg-dark leading-tight">
               Engineering Solutions<br />
               <span className="text-copper">Across Rail Systems</span>
             </h2>
-            <div className="accent mb-6" />
-            <p className="text-[#4A5568] leading-relaxed mb-8 text-[.95rem]">
-              And Hitech Industries manufactures a comprehensive range of railway components that serve Indian Railways, Metro networks, and modern high-speed rail applications. Our engineering capability spans HVAC systems, braking components, suspension systems, and precision rolling stock parts.
-            </p>
-
-            {/* Capabilities list */}
-            <div className="space-y-0 mb-10">
-              {caps.map(({ Icon, title, desc }, i) => (
-                <motion.div
-                  key={title}
-                  initial={{ opacity: 0, x: -16 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: .65, ease, delay: i * .1 }}
-                  className="feature-item group"
-                >
-                  <div className="flex items-start gap-4 flex-1">
-                    <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors duration-300"
-                      style={{ background: 'rgba(11,31,58,.06)' }}>
-                      <Icon size={16} className="text-[#B88746]" />
-                    </div>
-                    <div>
-                      <div className="text-[#0B1F3A] font-semibold text-[.88rem] mb-0.5">{title}</div>
-                      <div className="text-[#6B7A8E] text-[.8rem] leading-relaxed">{desc}</div>
-                    </div>
-                  </div>
-                  <span className="feature-num">{String(i+1).padStart(2,'0')}</span>
-                </motion.div>
-              ))}
-            </div>
-
-            <Link href="/products" className="btn-copper inline-flex items-center gap-2 group">
-              <span>View All Products</span>
-              <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
+            <div className="accent mt-4" />
           </motion.div>
 
-          {/* Right: image mosaic */}
           <motion.div
-            initial={{ opacity: 0, x: 28 }} whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }} transition={{ duration: .9, ease }}
-            className="relative"
+            initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: .75, ease, delay: .15 }}
+            style={{ maxWidth: '380px' }}
           >
-            {/* Main image */}
-            <div className="rounded-xl overflow-hidden relative group" style={{ height: 460 }}>
-              <motion.div style={{ y: imgY }} className="absolute inset-0 scale-[1.08]">
-                <Image
-                  src="/images/production-unit-final.jpg"
-                  alt="AND Hitech Manufacturing Facility"
-                  fill className="object-cover"
-                />
-              </motion.div>
-              <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(11,31,58,.5) 0%, transparent 45%)' }} />
-              {/* Corner frames */}
-              <div className="absolute top-0 left-0 w-10 h-10 border-l-2 border-t-2 border-[#B88746]/60 rounded-tl-xl" />
-              <div className="absolute bottom-0 right-0 w-10 h-10 border-r-2 border-b-2 border-[#B88746]/40 rounded-br-xl" />
-            </div>
-
-            {/* Floating stat card */}
-            <motion.div
-              initial={{ opacity: 0, scale: .9 }} whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }} transition={{ duration: .7, ease, delay: .3 }}
-              className="absolute -bottom-8 -left-8 p-6 rounded-xl shadow-2xl"
-              style={{ background: '#0B1F3A', border: '1px solid rgba(184,135,70,.2)' }}
-            >
-              <div className="text-[#B88746] text-3xl font-bold mb-1" style={{ fontFamily: 'Cormorant Garamond, serif' }}>500+</div>
-              <div className="text-white/80 text-[.78rem] font-medium">Components Supplied</div>
-              <div className="text-white/40 text-[.68rem] mt-1">To Indian Railways & Metro</div>
-            </motion.div>
-
-            {/* Second small image */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }} transition={{ duration: .7, ease, delay: .2 }}
-              className="absolute -top-6 -right-6 w-36 h-36 rounded-xl overflow-hidden border-2 border-white/80 shadow-xl hidden lg:block"
-            >
-              <Image src="/images/ourfeatures.jpg" alt="Engineering Quality" fill className="object-cover" />
-            </motion.div>
+            <p style={{ color: '#6B7A8E', fontSize: '.88rem', lineHeight: 1.8 }}>
+              From HVAC climate control to precision braking — our product portfolio spans the critical systems that keep Indian Railways running safely and efficiently.
+            </p>
           </motion.div>
         </div>
+
+        {/* ── 4-card capabilities grid ── */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {caps.map(({ title, desc, img, tag, icon }, i) => (
+            <motion.div
+              key={title}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: .7, ease, delay: i * .1 }}
+              className="group"
+              style={{
+                background: '#fff',
+                border: '1px solid rgba(11,31,58,.08)',
+                borderRadius: '4px',
+                overflow: 'hidden',
+                transition: 'border-color .35s, transform .35s, box-shadow .35s',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.borderColor = 'rgba(184,135,70,.35)';
+                e.currentTarget.style.transform = 'translateY(-6px)';
+                e.currentTarget.style.boxShadow = '0 24px 64px rgba(11,31,58,.1)';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.borderColor = 'rgba(11,31,58,.08)';
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              {/* Image */}
+              <div style={{ height: 200, overflow: 'hidden', position: 'relative', background: '#0B1F3A' }}>
+                <Image
+                  src={img}
+                  alt={title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-[1.06]"
+                  sizes="(max-width: 768px) 100vw, 25vw"
+                />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(11,31,58,.5) 0%, transparent 60%)' }} />
+                {/* Tag overlay */}
+                <div style={{
+                  position: 'absolute', bottom: 12, left: 14,
+                  fontFamily: 'Barlow Condensed, sans-serif',
+                  fontSize: '.58rem', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase',
+                  color: 'rgba(247,245,240,.55)',
+                }}>
+                  {tag}
+                </div>
+              </div>
+
+              {/* Body */}
+              <div style={{ padding: '24px' }}>
+                <div style={{
+                  width: '40px', height: '40px', borderRadius: '6px',
+                  background: 'rgba(184,135,70,.08)', border: '1px solid rgba(184,135,70,.2)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  marginBottom: '14px',
+                }}>
+                  {icon}
+                </div>
+                <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '.95rem', fontWeight: 600, color: '#0B1F3A', marginBottom: '8px' }}>
+                  {title}
+                </div>
+                <p style={{ fontSize: '.8rem', color: '#6B7A8E', lineHeight: 1.7 }}>{desc}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* ── CTA ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: .7, ease, delay: .2 }}
+          className="text-center mt-12"
+        >
+          <Link href="/products" className="btn-primary group inline-flex items-center gap-2">
+            <span>View All Products</span>
+            <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </motion.div>
       </div>
     </section>
   );

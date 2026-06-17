@@ -1,6 +1,7 @@
 /*
  * AND HITECH INDUSTRIES — GLOBALS.CSS
- * Premium Railway Engineering · Navy × Copper × Ivory v6
+ * Premium Railway Engineering · Navy × Copper × Ivory
+ * Complete file — replace styles/globals.css with this
  */
 
 /* ── SWIPER OVERRIDES ── */
@@ -113,9 +114,11 @@ a.readmorebtn:hover { background:#0F766E; }
 /* ── CERTIFICATE LIGHTBOX ── */
 .cert-lightbox { position:fixed; inset:0; z-index:9999; background:rgba(11,31,58,.96); backdrop-filter:blur(20px); display:flex; align-items:center; justify-content:center; }
 
-/* ── LOADER OVERRIDE ── */
+/* ── LOADER ── */
 .loader-ring { stroke:#B88746; }
 
-/* ── LEGACY COLOUR COMPAT ── */
-/* Old: #E3510F (flame) → #B88746 (copper) */
-/* Old: #050608 (void) → #0B1F3A (navy) */
+/* ── PULSE ANIMATION (for status dots) ── */
+@keyframes pulse-anim {
+  0%, 100% { opacity:1; transform:scale(1); }
+  50%       { opacity:.4; transform:scale(.75); }
+}

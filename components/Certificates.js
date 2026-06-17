@@ -2,40 +2,43 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShieldCheck, CheckCircle2, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ShieldCheck, X, ChevronLeft, ChevronRight } from 'lucide-react';
+
+/*
+ * Certificates — Quality & Compliance section
+ * Layout: 2-col header, 4 cert cards (dark), quality process strip, lightbox
+ * Background: navy (#0B1F3A)
+ */
 
 const certs = [
-  { src:'/images/certificate1.png',  title:'ISO 9001:2015',   subtitle:'Quality Management',      tag:'Certified' },
-  { src:'/images/certificate2.png',  title:'ISO 14001:2015',  subtitle:'Environmental Management', tag:'Compliant' },
-  { src:'/images/certificate3.png',  title:'RDSO Approved',   subtitle:'Railway Standards Body',   tag:'Govt. India' },
-  { src:'/images/rocertificate.png', title:'Industry Award',  subtitle:'Excellence in Manufacturing', tag:'Awarded 2023' },
+  { src: '/images/certificate1.png',  title: 'ISO 9001:2015',   subtitle: 'Quality Management System',    tag: 'Certified' },
+  { src: '/images/certificate2.png',  title: 'ISO 14001:2015',  subtitle: 'Environmental Management',     tag: 'Compliant' },
+  { src: '/images/certificate3.png',  title: 'RDSO Approved',   subtitle: 'Railway Standards Body · Govt. India', tag: 'Approved Vendor' },
+  { src: '/images/rocertificate.png', title: 'Excellence Award', subtitle: 'Manufacturing & Innovation',  tag: 'Awarded 2023' },
 ];
 
 const qualities = [
-  'Rigorous incoming material inspection at every delivery',
-  'In-process quality checkpoints throughout manufacturing',
-  'Final product testing against RDSO & ISO standards',
-  'Fully traceable documentation for every component',
+  'Rigorous incoming material inspection — chemical composition, mechanical properties, and dimensional checks at every delivery.',
+  'In-process quality checkpoints throughout manufacturing with real-time monitoring on CNC machining centres.',
+  'Final product testing against RDSO & ISO standards before dispatch, with comprehensive test reports provided.',
+  'Fully traceable documentation for every component, from raw material batch to certified final delivery.',
 ];
 
-const ease = [.22,1,.36,1];
+const ease = [.22, 1, .36, 1];
 
-/* ─── Certificate Lightbox ─────────────────────────────────────────── */
+/* ── Lightbox ── */
 function CertLightbox({ startIndex, onClose }) {
   const [current, setCurrent] = useState(startIndex);
   const [direction, setDirection] = useState(0);
   const touchStartX = useRef(null);
-  const touchStartY = useRef(null);
   const total = certs.length;
 
-  /* Prevent background scroll */
   useEffect(() => {
     const prev = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     return () => { document.body.style.overflow = prev; };
   }, []);
 
-  /* Keyboard navigation */
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === 'ArrowRight') goNext();
@@ -47,135 +50,127 @@ function CertLightbox({ startIndex, onClose }) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [current]);
 
-  const goPrev = useCallback(() => {
-    setDirection(-1);
-    setCurrent((c) => (c - 1 + total) % total);
-  }, [total]);
+  const goPrev = useCallback(() => { setDirection(-1); setCurrent(c => (c - 1 + total) % total); }, [total]);
+  const goNext = useCallback(() => { setDirection(1);  setCurrent(c => (c + 1) % total); }, [total]);
 
-  const goNext = useCallback(() => {
-    setDirection(1);
-    setCurrent((c) => (c + 1) % total);
-  }, [total]);
-
-  /* Swipe support */
-  const onTouchStart = (e) => {
-    touchStartX.current = e.touches[0].clientX;
-    touchStartY.current = e.touches[0].clientY;
-  };
-  const onTouchEnd = (e) => {
+  const onTouchStart = e => { touchStartX.current = e.touches[0].clientX; };
+  const onTouchEnd   = e => {
     if (touchStartX.current === null) return;
     const dx = e.changedTouches[0].clientX - touchStartX.current;
-    const dy = e.changedTouches[0].clientY - touchStartY.current;
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
-      dx < 0 ? goNext() : goPrev();
-    }
+    if (Math.abs(dx) > 40) dx < 0 ? goNext() : goPrev();
     touchStartX.current = null;
-    touchStartY.current = null;
   };
 
   const variants = {
-    enter: (dir) => ({ opacity: 0, x: dir > 0 ? 60 : -60 }),
+    enter:  dir => ({ opacity: 0, x: dir > 0 ? 60 : -60 }),
     center: { opacity: 1, x: 0 },
-    exit: (dir) => ({ opacity: 0, x: dir > 0 ? -60 : 60 }),
+    exit:   dir => ({ opacity: 0, x: dir > 0 ? -60 : 60 }),
   };
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.22 }}
-      className="fixed inset-0 z-[9999] flex items-center justify-center"
-      style={{ background: 'rgba(3,4,5,0.97)', backdropFilter: 'blur(12px)' }}
+      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+      transition={{ duration: .22 }}
+      style={{
+        position: 'fixed', inset: 0, zIndex: 9999,
+        background: 'rgba(3,4,5,.97)', backdropFilter: 'blur(12px)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+      }}
       data-lenis-prevent
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
       onClick={onClose}
     >
-      {/* Close button */}
+      {/* Close */}
       <button
-        aria-label="Close lightbox"
-        onClick={onClose}
-        className="absolute top-5 right-5 z-10 flex items-center justify-center w-10 h-10 rounded-full border border-white/10 text-white/60 hover:text-[#B88746] hover:border-[#B88746] transition-all duration-200"
-        style={{ background: 'rgba(0,0,0,0.5)' }}
+        aria-label="Close lightbox" onClick={onClose}
+        style={{
+          position: 'absolute', top: 20, right: 20, zIndex: 10,
+          width: '44px', height: '44px', borderRadius: '50%',
+          border: '1px solid rgba(255,255,255,.1)',
+          background: 'rgba(0,0,0,.5)',
+          color: 'rgba(255,255,255,.6)', fontSize: '18px',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          cursor: 'pointer', transition: 'color .2s, border-color .2s',
+        }}
       >
-        <X size={20} />
+        <X size={18} />
       </button>
 
       {/* Counter */}
-      <div
-        className="absolute top-5 left-1/2 -translate-x-1/2 z-10 px-4 py-1.5 rounded-full text-sm font-mono text-white/50 border border-white/8"
-        style={{ background: 'rgba(0,0,0,0.5)', letterSpacing: '0.08em' }}
-      >
+      <div style={{
+        position: 'absolute', top: 20, left: '50%', transform: 'translateX(-50%)',
+        padding: '6px 16px', borderRadius: '20px',
+        background: 'rgba(0,0,0,.5)', border: '1px solid rgba(255,255,255,.08)',
+        color: 'rgba(255,255,255,.5)', fontSize: '13px', fontFamily: 'monospace', letterSpacing: '.08em',
+        zIndex: 10,
+      }}>
         {current + 1} / {total}
       </div>
 
-      {/* Prev arrow */}
+      {/* Prev */}
       <button
         aria-label="Previous certificate"
-        onClick={(e) => { e.stopPropagation(); goPrev(); }}
-        className="absolute left-4 md:left-8 z-10 flex items-center justify-center w-11 h-11 rounded-full border border-white/10 text-white/60 hover:text-[#B88746] hover:border-[#B88746] transition-all duration-200"
-        style={{ background: 'rgba(0,0,0,0.5)' }}
+        onClick={e => { e.stopPropagation(); goPrev(); }}
+        style={{
+          position: 'absolute', left: '20px', zIndex: 10,
+          width: '44px', height: '44px', borderRadius: '50%',
+          border: '1px solid rgba(255,255,255,.1)', background: 'rgba(0,0,0,.5)',
+          color: 'rgba(255,255,255,.6)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+          cursor: 'pointer',
+        }}
       >
         <ChevronLeft size={22} />
       </button>
 
-      {/* Next arrow */}
+      {/* Next */}
       <button
         aria-label="Next certificate"
-        onClick={(e) => { e.stopPropagation(); goNext(); }}
-        className="absolute right-4 md:right-8 z-10 flex items-center justify-center w-11 h-11 rounded-full border border-white/10 text-white/60 hover:text-[#B88746] hover:border-[#B88746] transition-all duration-200"
-        style={{ background: 'rgba(0,0,0,0.5)' }}
+        onClick={e => { e.stopPropagation(); goNext(); }}
+        style={{
+          position: 'absolute', right: '20px', zIndex: 10,
+          width: '44px', height: '44px', borderRadius: '50%',
+          border: '1px solid rgba(255,255,255,.1)', background: 'rgba(0,0,0,.5)',
+          color: 'rgba(255,255,255,.6)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+          cursor: 'pointer',
+        }}
       >
         <ChevronRight size={22} />
       </button>
 
-      {/* Image container */}
+      {/* Image */}
       <div
-        className="relative w-full h-full flex items-center justify-center px-20"
-        onClick={(e) => e.stopPropagation()}
-        style={{ maxWidth: '1400px', margin: '0 auto' }}
+        style={{ position: 'relative', width: '100%', height: '100%', maxWidth: '1400px', padding: '80px' }}
+        onClick={e => e.stopPropagation()}
       >
         <AnimatePresence initial={false} custom={direction} mode="wait">
           <motion.div
-            key={current}
-            custom={direction}
-            variants={variants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            className="relative w-full"
-            style={{ height: 'calc(100vh - 120px)' }}
+            key={current} custom={direction} variants={variants}
+            initial="enter" animate="center" exit="exit"
+            transition={{ duration: .28, ease }}
+            style={{ position: 'relative', width: '100%', height: '100%' }}
           >
             <Image
-              src={certs[current].src}
-              alt={certs[current].title}
-              fill
-              className="object-contain"
-              unoptimized
-              priority
+              src={certs[current].src} alt={certs[current].title}
+              fill className="object-contain"
+              unoptimized priority
             />
           </motion.div>
         </AnimatePresence>
       </div>
 
-      {/* Dot indicators */}
-      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+      {/* Dots */}
+      <div style={{ position: 'absolute', bottom: 20, left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '6px', zIndex: 10 }}>
         {certs.map((_, i) => (
           <button
             key={i}
             aria-label={`Go to certificate ${i + 1}`}
-            onClick={(e) => { e.stopPropagation(); setDirection(i > current ? 1 : -1); setCurrent(i); }}
+            onClick={e => { e.stopPropagation(); setDirection(i > current ? 1 : -1); setCurrent(i); }}
             style={{
-              width: i === current ? 20 : 6,
-              height: 6,
+              width: i === current ? 20 : 6, height: 6,
               borderRadius: i === current ? 3 : '50%',
-              background: i === current ? '#B88746' : 'rgba(255,255,255,0.2)',
-              transition: 'all 0.3s ease',
-              border: 'none',
-              cursor: 'pointer',
-              padding: 0,
+              background: i === current ? '#B88746' : 'rgba(255,255,255,.2)',
+              transition: 'all .3s', border: 'none', cursor: 'pointer', padding: 0,
             }}
           />
         ))}
@@ -184,131 +179,226 @@ function CertLightbox({ startIndex, onClose }) {
   );
 }
 
-/* ─── Main Component ─────────────────────────────────────────────────── */
+/* ── Main ── */
 export default function Certificates() {
   const [lightboxIndex, setLightboxIndex] = useState(null);
 
   return (
-    <section className="relative overflow-hidden section-gap" style={{ background:'#0B1F3A' }}>
-      {/* Backgrounds */}
-      <div className="absolute inset-0 bg-grid pointer-events-none opacity-40"/>
-      <div className="absolute inset-0 pointer-events-none"
-        style={{ background:'radial-gradient(ellipse 800px 600px at 50% -5%,rgba(184,135,70,.05),transparent 68%)' }}/>
-      <div className="absolute inset-x-0 top-0 h-px" style={{ background:'linear-gradient(90deg,transparent,rgba(184,135,70,.2),transparent)' }}/>
-      <div className="absolute inset-x-0 bottom-0 h-px divider pointer-events-none"/>
+    <section
+      className="relative overflow-hidden section-gap"
+      style={{ background: '#0B1F3A' }}
+      aria-label="Certifications and quality"
+    >
+      <div className="absolute inset-0 bg-grid opacity-35 pointer-events-none" />
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse 800px 600px at 50% -5%,rgba(184,135,70,.05),transparent 68%)' }}
+      />
+      <div
+        className="absolute inset-x-0 top-0 h-px"
+        style={{ background: 'linear-gradient(90deg,transparent,rgba(184,135,70,.18),transparent)' }}
+      />
 
       <div className="max-w-screen-xl mx-auto px-6 md:px-10 relative z-10">
 
         {/* ── Header ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20 items-end">
+        <div className="grid lg:grid-cols-2 gap-16 items-end mb-20">
           <motion.div
-            initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }}
-            viewport={{ once:true }} transition={{ duration:.75, ease }}
+            initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: .8, ease }}
           >
-            <span className="eyebrow mb-7 block">Trust & Compliance</span>
-            <h2 className="display-md">Certified for<br/><span style={{ color:'#B88746' }}>Excellence</span></h2>
+            <div style={{
+              fontFamily: 'Barlow Condensed, sans-serif', fontSize: '.65rem', fontWeight: 600,
+              letterSpacing: '.28em', textTransform: 'uppercase',
+              color: 'rgba(184,135,70,.6)', marginBottom: '16px',
+            }}>
+              Trust & Compliance
+            </div>
+            <h2 style={{
+              fontFamily: 'Cormorant Garamond, Georgia, serif',
+              fontSize: 'clamp(2.4rem,4.5vw,5rem)',
+              fontWeight: 700, lineHeight: .95,
+              letterSpacing: '-.015em', color: '#F7F5F0',
+            }}>
+              Enterprise-Grade<br />
+              <span style={{ color: '#B88746' }}>Quality Assurance</span>
+            </h2>
+            <div style={{ width: '40px', height: '2px', background: 'linear-gradient(90deg,#B88746,transparent)', marginTop: '20px' }} />
           </motion.div>
 
           <motion.div
-            initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }}
-            viewport={{ once:true }} transition={{ delay:.14, duration:.75, ease }}
-            className="space-y-5"
+            initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ delay: .15, duration: .8, ease }}
           >
-            <p className="text-[#6B7A8E] text-[.95rem] leading-relaxed">
-              Our quality assurance processes adhere to the most stringent international standards, ensuring every component we deliver is reliable, safe, and fully compliant with railway regulations.
+            <p style={{ color: 'rgba(255,255,255,.4)', fontSize: '.88rem', lineHeight: 1.8, marginBottom: '24px' }}>
+              Every component leaves our facility with full certification documentation, traceable manufacturing records, and compliance to RDSO, ISO, and international railway safety standards.
             </p>
-            <ul className="space-y-3 mt-2">
-              {qualities.map((q, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full bg-[#B88746]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <CheckCircle2 size={11} className="text-[#B88746]"/>
+            {/* Quality points */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              {qualities.slice(0, 2).map((q, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                  <div style={{
+                    width: '20px', height: '20px', borderRadius: '50%', flexShrink: 0,
+                    background: 'rgba(184,135,70,.1)', border: '1px solid rgba(184,135,70,.3)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '2px',
+                  }}>
+                    <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#B88746' }} />
                   </div>
-                  <span className="text-[#6B7A8E] text-[.83rem] leading-relaxed">{q}</span>
-                </li>
+                  <span style={{ color: 'rgba(255,255,255,.45)', fontSize: '.82rem', lineHeight: 1.7 }}>{q}</span>
+                </div>
               ))}
-            </ul>
+            </div>
           </motion.div>
         </div>
 
         {/* ── Certificate cards ── */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
           {certs.map((c, i) => (
             <motion.div
               key={i}
-              initial={{ opacity:0, y:30 }} whileInView={{ opacity:1, y:0 }}
-              viewport={{ once:true }} transition={{ delay:i*.1, duration:.65, ease }}
-              className="story-card group flex flex-col items-center p-7 text-center cursor-pointer"
+              initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ delay: i * .1, duration: .65, ease }}
+              className="group"
               onClick={() => setLightboxIndex(i)}
+              style={{
+                border: '1px solid rgba(184,135,70,.14)',
+                borderRadius: '4px', padding: '28px 20px',
+                textAlign: 'center', cursor: 'pointer',
+                background: 'rgba(255,255,255,.02)',
+                transition: 'border-color .35s, background .35s',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.borderColor = 'rgba(184,135,70,.4)';
+                e.currentTarget.style.background = 'rgba(184,135,70,.04)';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.borderColor = 'rgba(184,135,70,.14)';
+                e.currentTarget.style.background = 'rgba(255,255,255,.02)';
+              }}
             >
-              {/* Badge tag */}
-              <div className="badge mb-5 self-center">{c.tag}</div>
+              {/* Tag */}
+              <span style={{
+                display: 'inline-block', marginBottom: '20px',
+                padding: '4px 10px',
+                background: 'rgba(184,135,70,.1)', border: '1px solid rgba(184,135,70,.25)',
+                borderRadius: '2px',
+                fontFamily: 'Barlow Condensed, sans-serif',
+                fontSize: '.58rem', fontWeight: 600, letterSpacing: '.15em', textTransform: 'uppercase',
+                color: '#B88746',
+              }}>
+                {c.tag}
+              </span>
 
               {/* Certificate image */}
-              <div className="relative w-full rounded-xl overflow-hidden bg-[#0B1F3A] border border-white/[.05] mb-6"
-                style={{ aspectRatio:'3/4' }}>
+              <div style={{
+                position: 'relative', width: '100%', aspectRatio: '3/4',
+                borderRadius: '4px', overflow: 'hidden',
+                background: '#0B1F3A', border: '1px solid rgba(255,255,255,.05)',
+                marginBottom: '20px',
+              }}>
                 <Image
                   src={c.src} alt={c.title} fill
-                  className="object-contain p-5 group-hover:scale-[1.05] transition-transform duration-600"
+                  className="object-contain p-4 transition-transform duration-500 group-hover:scale-[1.05]"
+                  style={{ filter: 'brightness(0) invert(1)', opacity: 0.65 }}
+                  onMouseEnter={e => e.currentTarget.style.opacity = '0.9'}
+                  onMouseLeave={e => e.currentTarget.style.opacity = '0.65'}
                   unoptimized
                 />
-                {/* Glow on hover */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{ background:'linear-gradient(135deg,rgba(184,135,70,.07) 0%,transparent 55%)' }}/>
               </div>
 
-              <div className="text-[#0B1F3A] font-semibold text-[.92rem] mb-1 group-hover:text-[#B88746] transition-colors duration-300">
+              <div style={{
+                fontFamily: 'Outfit, sans-serif', fontSize: '.9rem', fontWeight: 600,
+                color: '#F7F5F0', marginBottom: '4px',
+                transition: 'color .3s',
+              }}
+                className="group-hover:text-[#B88746]"
+              >
                 {c.title}
               </div>
-              <div className="text-[#6B7A8E] text-[.74rem]">{c.subtitle}</div>
-
-              {/* Bottom accent bar */}
-              <div className="mt-5 h-[1px] w-0 group-hover:w-12 bg-gradient-to-r from-[#B88746] to-[#D4A054] transition-all duration-500 rounded-full"/>
+              <div style={{ fontSize: '.72rem', color: 'rgba(255,255,255,.3)' }}>{c.subtitle}</div>
             </motion.div>
           ))}
         </div>
 
-        {/* ── Bottom trust banner ── */}
+        {/* ── Quality process strip ── */}
         <motion.div
-          initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }}
-          viewport={{ once:true }} transition={{ delay:.35, duration:.75, ease }}
-          className="relative rounded-2xl overflow-hidden border border-white/[.05]"
-          style={{ background:'linear-gradient(135deg,#0B1F3A 0%,#0F2847 50%,#0B1F3A 100%)' }}
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ delay: .3, duration: .75, ease }}
+          style={{
+            display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1px',
+            background: 'rgba(255,255,255,.04)',
+            border: '1px solid rgba(255,255,255,.05)', borderRadius: '4px', overflow: 'hidden',
+          }}
         >
-          {/* Top accent line */}
-          <div className="absolute top-0 left-0 right-0 h-[1.5px]"
-            style={{ background:'linear-gradient(90deg,transparent,#B88746,rgba(184,135,70,.2),transparent)' }}/>
-
-          <div className="px-8 py-7 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div className="flex items-center gap-5">
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-                style={{ background:'rgba(184,135,70,.1)', border:'1px solid rgba(184,135,70,.2)' }}>
-                <ShieldCheck size={20} className="text-[#B88746]"/>
+          {qualities.map((q, i) => (
+            <div key={i} style={{
+              background: '#0B1F3A', padding: '24px 28px',
+              display: 'flex', alignItems: 'flex-start', gap: '14px',
+            }}>
+              <div style={{
+                width: '20px', height: '20px', borderRadius: '50%', flexShrink: 0, marginTop: '2px',
+                background: 'rgba(184,135,70,.1)', border: '1px solid rgba(184,135,70,.3)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
+                <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#B88746' }} />
               </div>
-              <div>
-                <div className="text-[#0B1F3A] font-semibold text-[.94rem]">Certified & RDSO Approved Manufacturer</div>
-                <div className="text-[#6B7A8E] text-[.78rem] mt-0.5">Trusted by Indian Railways and Metro networks across India since 2013</div>
-              </div>
+              <span style={{ fontSize: '.82rem', color: 'rgba(255,255,255,.45)', lineHeight: 1.7 }}>{q}</span>
             </div>
-            <div className="flex items-center gap-6 flex-shrink-0 flex-wrap">
-              {['ISO 9001','ISO 14001','RDSO','Make in India'].map((label, i) => (
-                <div key={i} className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-400"/>
-                  <span className="text-[#6B7A8E] text-[.64rem] uppercase tracking-widest" style={{ fontFamily:'var(--font-mono)' }}>{label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+          ))}
         </motion.div>
 
+        {/* ── Bottom trust banner ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ delay: .4, duration: .75, ease }}
+          style={{
+            position: 'relative', marginTop: '24px', borderRadius: '4px', overflow: 'hidden',
+            border: '1px solid rgba(255,255,255,.05)',
+            background: 'linear-gradient(135deg,#0F2847 0%,#0B1F3A 100%)',
+            padding: '28px 32px',
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            gap: '24px', flexWrap: 'wrap',
+          }}
+        >
+          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '1.5px', background: 'linear-gradient(90deg,transparent,#B88746,rgba(184,135,70,.2),transparent)' }} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <div style={{
+              width: '48px', height: '48px', borderRadius: '6px', flexShrink: 0,
+              background: 'rgba(184,135,70,.1)', border: '1px solid rgba(184,135,70,.2)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}>
+              <ShieldCheck size={20} color="#B88746" />
+            </div>
+            <div>
+              <div style={{ color: '#F7F5F0', fontWeight: 600, fontSize: '.92rem' }}>
+                Certified & RDSO Approved Manufacturer
+              </div>
+              <div style={{ color: 'rgba(255,255,255,.35)', fontSize: '.76rem', marginTop: '3px' }}>
+                Trusted by Indian Railways and Metro networks since 2013
+              </div>
+            </div>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '24px', flexWrap: 'wrap' }}>
+            {['ISO 9001', 'ISO 14001', 'RDSO', 'Make in India'].map(label => (
+              <div key={label} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#0F766E' }} />
+                <span style={{
+                  fontFamily: 'Barlow Condensed, sans-serif',
+                  fontSize: '.62rem', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase',
+                  color: 'rgba(255,255,255,.35)',
+                }}>
+                  {label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
 
-      {/* Certificate Lightbox */}
+      {/* Lightbox */}
       <AnimatePresence>
         {lightboxIndex !== null && (
-          <CertLightbox
-            startIndex={lightboxIndex}
-            onClose={() => setLightboxIndex(null)}
-          />
+          <CertLightbox startIndex={lightboxIndex} onClose={() => setLightboxIndex(null)} />
         )}
       </AnimatePresence>
     </section>
